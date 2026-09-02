@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 """
-Antigravity 2.0 Dynamic Boxed Theme Synchronizer (Bright Primary Borders)
+Antigravity 2.0 Dynamic Boxed Theme Synchronizer (1:1 Spotify Matching Engine)
 Reads Material 3 color tokens from ~/.config/noctalia/colors.json,
-generates Antigravity 2.0 Modular Boxed Terminal stylesheet with vibrant
-primary-colored borders (matching Spotify and Kitty terminal), seamless
-cutout legends (Sidebar, Main, Prompt), floating split divider, 16px rounded
-Settings modal, compact sidebar proportions, fluid flex layout, and live-injects
-CSS into running Antigravity Electron instances via DevTools CDP with Promise-awaited
-WebSocket completion.
+generates Antigravity 2.0 Modular Boxed Terminal stylesheet with 1:1 Spotify
+color hierarchy (solid primary pills, crisp foreground typography, notch legends,
+interactive hover border glows, 16px rounded Settings modal with inset floating
+divider), and live-injects CSS into running Antigravity Electron instances via
+DevTools CDP with Promise-awaited WebSocket completion.
 
 Usage:
     python3 sync_antigravity_theme.py           # Sync & inject live
@@ -65,14 +64,14 @@ def generate_css(colors: dict) -> str:
 
     return f"""
         :root, .dark, body {{
-            /* 1:1 Pure Spotify Color Engine */
+            /* 1:1 Spotify Color Engine */
             --background: {surface} !important;
             --sidebar: {surface} !important;
             --sidebar-secondary: {surface_variant} !important;
             --sidebar-muted: {surface} !important;
             --card: {surface_variant} !important;
-            --card-border: {primary} !important;
-            --border: {primary} !important;
+            --card-border: {outline} !important;
+            --border: {outline} !important;
             --primary: {primary} !important;
             --primary-foreground: #101010 !important;
             --foreground: {on_surface} !important;
@@ -116,7 +115,7 @@ def generate_css(colors: dict) -> str:
             overflow: hidden !important;
         }}
 
-        /* ===== Settings Modal Dialog: 16px Radius & Inset Floating Divider ===== */
+        /* ===== Settings Modal Dialog ===== */
         .settings-modal-backdrop,
         div[class*="settings-modal-backdrop"] {{
             display: flex !important;
@@ -144,7 +143,7 @@ def generate_css(colors: dict) -> str:
             min-height: 520px !important;
             max-height: 85vh !important;
             background-color: {surface} !important;
-            border: 1px solid {primary} !important;
+            border: 1px solid {outline} !important;
             border-radius: 16px !important;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
             overflow: hidden !important;
@@ -152,6 +151,10 @@ def generate_css(colors: dict) -> str:
             visibility: visible !important;
             opacity: 1 !important;
             pointer-events: auto !important;
+            transition: border-color 0.15s ease !important;
+        }}
+        .settings-modal-container:hover {{
+            border-color: {primary} !important;
         }}
 
         .settings-modal-container > div.flex-1,
@@ -164,14 +167,10 @@ def generate_css(colors: dict) -> str:
             border: none !important;
         }}
 
-        /* Inset Floating Vertical Divider Line with 16px Top & Bottom Margin */
         .settings-modal-container div.relative.flex.w-full.h-full.outline-none > div:first-child,
         .settings-modal-container div[style*="width: 200px"],
         .settings-modal-container div.flex:has(> div.h-full.w-full.flex.flex-col.bg-sidebar) {{
             border-right: none !important;
-            border-top: none !important;
-            border-bottom: none !important;
-            border-left: none !important;
             position: relative !important;
         }}
 
@@ -183,8 +182,7 @@ def generate_css(colors: dict) -> str:
             bottom: 16px !important;
             right: 0 !important;
             width: 1px !important;
-            background-color: {primary} !important;
-            opacity: 0.6 !important;
+            background-color: {outline} !important;
             pointer-events: none !important;
             z-index: 20 !important;
         }}
@@ -198,7 +196,7 @@ def generate_css(colors: dict) -> str:
             min-width: 0 !important;
         }}
 
-        /* Position Absolute Floating Top-Left Buttons (Toggle + Nav) INSIDE the Sidebar Box */
+        /* Position Absolute Floating Top-Left Buttons (Toggle + Nav) */
         div.absolute.top-0.left-0.flex.items-center.shrink-0.z-50,
         div[class*="absolute top-0 left-0"][class*="z-50"] {{
             top: 20px !important;
@@ -208,14 +206,12 @@ def generate_css(colors: dict) -> str:
             pointer-events: auto !important;
         }}
 
-        /* Remove Extra 1px Divider Line between Outer Sidebar and Main */
         div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full > div[class*="w-[1px]"],
         div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full > div.bg-border {{
             display: none !important;
             width: 0 !important;
         }}
 
-        /* Ensure Sidebar Parent Columns Do Not Clip Badges */
         div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full > div.flex,
         div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full > div.flex > div.h-full.w-full,
         div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full > div:last-child {{
@@ -226,7 +222,7 @@ def generate_css(colors: dict) -> str:
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar {{
             position: relative !important;
             background-color: {surface} !important;
-            border: 1px solid {primary} !important;
+            border: 1px solid {outline} !important;
             border-radius: 8px !important;
             margin: 0 !important;
             height: 100% !important;
@@ -237,7 +233,7 @@ def generate_css(colors: dict) -> str:
             transition: border-color 0.15s ease !important;
         }}
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar:hover {{
-            border-color: {primary_hover} !important;
+            border-color: {primary} !important;
         }}
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar::before {{
             content: "Sidebar" !important;
@@ -260,43 +256,29 @@ def generate_css(colors: dict) -> str:
             border: none !important;
         }}
 
-        /* When Sidebar is Collapsed */
-        div.flex[style*="width: 0px"] > div > div.bg-sidebar,
-        div.flex[style*="width: 0%"] > div > div.bg-sidebar,
-        div.flex[style*="display: none"] > div > div.bg-sidebar,
-        div.bg-sidebar[style*="width: 0px"],
-        div.bg-sidebar:empty {{
-            border: none !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            display: none !important;
+        /* Solid Bright Pill for "+ New Conversation" Button (Matching Spotify "All" Pill) */
+        div.bg-sidebar a[href*="/chat"],
+        div.bg-sidebar button:has-text("+ New Conversation"),
+        div.bg-sidebar a:has(svg) {{
+            background-color: {primary} !important;
+            color: #101010 !important;
+            font-weight: 700 !important;
+            border-radius: 6px !important;
+            transition: opacity 0.15s ease, transform 0.1s ease !important;
         }}
-        div.flex[style*="width: 0px"] > div > div.bg-sidebar::before,
-        div.flex[style*="width: 0%"] > div > div.bg-sidebar::before,
-        div.bg-sidebar[style*="width: 0px"]::before {{
-            display: none !important;
-            content: none !important;
+        div.bg-sidebar a[href*="/chat"]:hover {{
+            opacity: 0.9 !important;
+            transform: translateY(-1px) !important;
         }}
-
-        /* Inner Sidebar Resets */
-        div.bg-sidebar div:not(.settings-modal-container *),
-        div.bg-sidebar section:not(.settings-modal-container *),
-        div.bg-sidebar button:not(.settings-modal-container *),
-        div.bg-sidebar a:not(.settings-modal-container *) {{
-            border: none !important;
-        }}
-        div.bg-sidebar div::before,
-        div.bg-sidebar section::before {{
-            content: none !important;
-        }}
-        div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar::before {{
-            content: "Sidebar" !important;
+        div.bg-sidebar a[href*="/chat"] * {{
+            color: #101010 !important;
+            font-weight: 700 !important;
         }}
 
-        /* Sidebar Section Titles */
+        /* Sidebar Section Titles & Crisp Text */
         div.bg-sidebar div.flex.items-center.justify-between.py-1.px-2 {{
             background-color: transparent !important;
-            color: {on_surface_variant} !important;
+            color: {primary} !important;
             font-size: 11px !important;
             font-weight: 700 !important;
             text-transform: uppercase !important;
@@ -305,14 +287,15 @@ def generate_css(colors: dict) -> str:
             padding-bottom: 4px !important;
             padding-left: 6px !important;
             padding-right: 6px !important;
-            opacity: 0.85 !important;
+            opacity: 0.9 !important;
         }}
 
-        /* Sidebar Item Rows & Settings Button */
+        /* Sidebar Item Rows */
         div.bg-sidebar div.cursor-pointer.rounded-lg,
         div.bg-sidebar button.group\\/headerbtn,
         div.bg-sidebar button {{
             background-color: transparent !important;
+            color: {on_surface} !important;
             border-radius: 6px !important;
             margin-bottom: 2px !important;
             transition: background-color 0.1s ease, color 0.1s ease !important;
@@ -323,7 +306,7 @@ def generate_css(colors: dict) -> str:
         div.bg-sidebar button.group\\/headerbtn:hover,
         div.bg-sidebar button:hover {{
             background-color: {surface_variant} !important;
-            color: {on_surface} !important;
+            color: {primary} !important;
         }}
 
         /* Sidebar Scroll Container */
@@ -343,7 +326,7 @@ def generate_css(colors: dict) -> str:
         div[class*="border-t border-border"][class*="flex-1"] {{
             position: relative !important;
             background-color: {surface} !important;
-            border: 1px solid {primary} !important;
+            border: 1px solid {outline} !important;
             border-radius: 8px !important;
             margin: 0 !important;
             height: 100% !important;
@@ -356,7 +339,7 @@ def generate_css(colors: dict) -> str:
         }}
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border:hover,
         div[class*="border-t border-border"][class*="flex-1"]:hover {{
-            border-color: {primary_hover} !important;
+            border-color: {primary} !important;
         }}
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border::before,
         div[class*="border-t border-border"][class*="flex-1"]::before {{
@@ -378,16 +361,24 @@ def generate_css(colors: dict) -> str:
             border: none !important;
         }}
 
-        /* ===== Main Workspace Internal Pane Divider (Chat vs Artifact / Side Pane) ===== */
+        /* Top Workspace Title Bar (e.g. "Arch Linux Maintainance / Hyprland ricing") */
+        div.relative.z-0.flex-1 button.rounded-full,
+        div.relative.z-0.flex-1 .truncate.flex-1.min-w-0,
+        div.relative.z-0.flex-1 div.shrink-0 span {{
+            color: {on_surface} !important;
+            font-weight: 600 !important;
+        }}
+
+        /* Main Workspace Split Divider */
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border div.relative.flex.w-full.h-full > div.bg-border,
         div[class*="border-t border-border"] div.relative.flex.w-full.h-full > div.bg-border {{
             display: block !important;
             width: 1px !important;
-            background-color: {primary} !important;
-            opacity: 0.6 !important;
+            background-color: {outline} !important;
             margin: 16px 8px !important;
             height: calc(100% - 32px) !important;
             align-self: center !important;
+            opacity: 0.8 !important;
             transition: background-color 0.15s ease, opacity 0.15s ease !important;
         }}
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border div.relative.flex.w-full.h-full > div.bg-border:hover,
@@ -401,7 +392,7 @@ def generate_css(colors: dict) -> str:
             position: relative !important;
             background: transparent !important;
             background-color: transparent !important;
-            border: 1px solid {primary} !important;
+            border: 1px solid {outline} !important;
             border-radius: 8px !important;
             padding: 0 !important;
             overflow: visible !important;
@@ -410,10 +401,10 @@ def generate_css(colors: dict) -> str:
         }}
         div[class*="bg-card-border"]:hover,
         div[class*="bg-card-border"]:focus-within {{
-            border-color: {primary_hover} !important;
+            border-color: {primary} !important;
         }}
 
-        /* Clean Notch Mask: Solid surface background erases the border line behind the text */
+        /* Clean Notch Mask */
         div[class*="bg-card-border"]::before {{
             content: "Prompt" !important;
             position: absolute !important;
@@ -434,7 +425,6 @@ def generate_css(colors: dict) -> str:
             border: none !important;
         }}
 
-        /* Inner Structure Resets: Clean Transparent Container */
         div[class*="bg-card-border"] div.bg-card,
         div[class*="bg-card-border"] > div:first-child {{
             background: transparent !important;
@@ -444,22 +434,30 @@ def generate_css(colors: dict) -> str:
             padding: 4px 6px !important;
         }}
 
-        /* Prompt Footer Divider Line (Local v status bar) */
         div[class*="bg-card-border"] > div.grid,
         div[class*="bg-card-border"] > div:last-child:not(:first-child) {{
             background: transparent !important;
             background-color: transparent !important;
-            border-top: 1px solid {primary} !important;
-            opacity: 0.8 !important;
+            border-top: 1px solid {outline} !important;
             border-radius: 0 0 7px 7px !important;
         }}
 
-        /* Textarea Typography & Color */
         div[class*="bg-card-border"] [contenteditable],
         div[class*="bg-card-border"] textarea {{
             color: {on_surface} !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             background: transparent !important;
+        }}
+
+        /* Send Button Accent Pill */
+        button[title*="Send message"]:not(:disabled),
+        div[class*="bg-card-border"] button:has(svg):last-child:not(:disabled) {{
+            background-color: {primary} !important;
+            color: #101010 !important;
+        }}
+        button[title*="Send message"]:not(:disabled) svg {{
+            color: #101010 !important;
+            fill: #101010 !important;
         }}
 
         /* ===== 5. Scrollbars ===== */
@@ -590,7 +588,7 @@ def apply_theme():
             f.write(css)
 
     inject_cdp(css)
-    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (Vibrant Primary Borders) (Primary: {primary})")
+    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (1:1 Spotify Match) (Primary: {primary})")
 
 
 def main():
