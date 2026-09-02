@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-Antigravity 2.0 Dynamic Boxed Theme Synchronizer (1:1 Spotify Hyprland Match)
+Antigravity 2.0 Dynamic Boxed Theme Synchronizer (Seamless Translucent Glass)
 Reads Material 3 color tokens from ~/.config/noctalia/colors.json,
-generates Antigravity 2.0 Modular Boxed Terminal stylesheet with translucent
-frosted glass surfaces (rgba(surface, 0.55) + blur(12px)) matching Spotify,
-seamless cutout legends (Sidebar, Main, Prompt), bright primary borders matching
-Kitty and Spotify, high-contrast typography, 16px rounded Settings modal with
-inset floating divider, compact sidebar proportions, fluid flex layout, and live-injects
-CSS into running Antigravity Electron instances via DevTools CDP with Promise-awaited
-WebSocket completion.
+generates Antigravity 2.0 Modular Boxed Terminal stylesheet with 100% unified
+frosted glass surfaces (all nested prompt boxes and message bubbles made transparent
+to eliminate dark color patches), seamless cutout legends (Sidebar, Main, Prompt),
+bright primary borders matching Kitty and Spotify, high-contrast typography,
+16px rounded Settings modal with inset floating divider, compact sidebar
+proportions, fluid flex layout, and live-injects CSS into running Antigravity
+Electron instances via DevTools CDP with Promise-awaited WebSocket completion.
 
 Usage:
     python3 sync_antigravity_theme.py           # Sync & inject live
@@ -68,12 +68,13 @@ def generate_css(colors: dict) -> str:
 
     return f"""
         :root, .dark, body {{
-            /* 1:1 Spotify Color Engine */
-            --background: {surface} !important;
-            --sidebar: {surface} !important;
+            /* 1:1 Unified Pure Color Engine */
+            --background: transparent !important;
+            --sidebar: transparent !important;
             --sidebar-secondary: {surface_variant} !important;
-            --sidebar-muted: {surface} !important;
-            --card: {surface_variant} !important;
+            --sidebar-muted: transparent !important;
+            --card: transparent !important;
+            --muted: transparent !important;
             --card-border: {primary} !important;
             --border: {primary} !important;
             --primary: {primary} !important;
@@ -117,6 +118,20 @@ def generate_css(colors: dict) -> str:
             padding: 0 !important;
             margin: 0 !important;
             overflow: hidden !important;
+        }}
+
+        /* ===== All Inner Containers & Helpers Transparent (Eliminating Dark Patches) ===== */
+        .bg-background,
+        .bg-sidebar,
+        .bg-sidebar-muted,
+        .bg-card,
+        .bg-muted:not(pre):not(code),
+        div[class*="bg-background"],
+        div[class*="bg-sidebar"]:not(.h-full.w-full.flex.flex-col.pb-2.bg-sidebar),
+        div[class*="bg-card"]:not([class*="bg-card-border"]),
+        div[class*="bg-muted"]:not(pre):not(code) {{
+            background-color: transparent !important;
+            background: transparent !important;
         }}
 
         /* ===== Settings Modal Dialog ===== */
@@ -418,8 +433,9 @@ def generate_css(colors: dict) -> str:
             opacity: 1 !important;
         }}
 
-        /* ===== 4. Prompt Container (.Prompt.) ===== */
-        div[class*="bg-card-border"] {{
+        /* ===== 4. Prompt Containers & Bubbles (.Prompt.) ===== */
+        div[class*="bg-card-border"],
+        div.relative.whitespace-pre-wrap.word-break-all.rounded-xl.border {{
             position: relative !important;
             background: transparent !important;
             background-color: transparent !important;
@@ -431,12 +447,14 @@ def generate_css(colors: dict) -> str:
             transition: border-color 0.15s ease !important;
         }}
         div[class*="bg-card-border"]:hover,
-        div[class*="bg-card-border"]:focus-within {{
+        div[class*="bg-card-border"]:focus-within,
+        div.relative.whitespace-pre-wrap.word-break-all.rounded-xl.border:hover {{
             border-color: {primary_hover} !important;
         }}
 
-        /* Clean Notch Mask */
-        div[class*="bg-card-border"]::before {{
+        /* Clean Notch Mask on Prompt Box */
+        div[class*="bg-card-border"]::before,
+        div.relative.whitespace-pre-wrap.word-break-all.rounded-xl.border::before {{
             content: "Prompt" !important;
             position: absolute !important;
             top: 0 !important;
@@ -456,22 +474,17 @@ def generate_css(colors: dict) -> str:
             border: none !important;
         }}
 
-        div[class*="bg-card-border"] div.bg-card,
-        div[class*="bg-card-border"] > div:first-child {{
+        div[class*="bg-card-border"] div,
+        div[class*="bg-card-border"] section,
+        div.relative.whitespace-pre-wrap.word-break-all.rounded-xl.border div {{
             background: transparent !important;
             background-color: transparent !important;
-            border: none !important;
-            border-radius: 8px 8px 0 0 !important;
-            padding: 4px 6px !important;
         }}
 
         div[class*="bg-card-border"] > div.grid,
         div[class*="bg-card-border"] > div:last-child:not(:first-child) {{
-            background: transparent !important;
-            background-color: transparent !important;
             border-top: 1px solid {primary} !important;
             opacity: 0.8 !important;
-            border-radius: 0 0 7px 7px !important;
         }}
 
         div[class*="bg-card-border"] [contenteditable],
@@ -561,7 +574,7 @@ def inject_cdp(css: str):
                                                 (document.head || document.documentElement).appendChild(el);
                                             }}
                                             el.textContent = ${{JSON.stringify({escaped_css})}};
-                                            return "Perfect Translucency Restored!";
+                                            return "Seamless Translucent Theme Injected!";
                                         }})()
                                     `,
                                     returnByValue: true
@@ -606,7 +619,7 @@ def apply_theme():
             f.write(css)
 
     inject_cdp(css)
-    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (Hyprland Translucency Restored) (Primary: {primary})")
+    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (Seamless Glass) (Primary: {primary})")
 
 
 def main():
