@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Antigravity 2.0 Dynamic Boxed Theme Synchronizer (1:1 Spotify Hyprland Translucency)
+Antigravity 2.0 Dynamic Boxed Theme Synchronizer (Frosted Glass UI)
 Reads Material 3 color tokens from ~/.config/noctalia/colors.json,
-generates Antigravity 2.0 Modular Boxed Terminal stylesheet with translucent
-frosted glass surfaces (rgba(surface, 0.55) + blur(12px)) matching Spotify,
-seamless cutout legends (Sidebar, Main, Prompt), bright primary borders matching
-Kitty and Spotify, high-contrast typography, 16px rounded Settings modal with
-inset floating divider, compact sidebar proportions, fluid flex layout, and live-injects
+generates Antigravity 2.0 Modular Boxed Terminal stylesheet with airy
+frosted glass surfaces (rgba(surface, 0.38) + blur(14px)), seamless cutout
+legends (Sidebar, Main, Prompt), bright primary borders matching Kitty and
+Spotify, high-contrast typography, 16px rounded Settings modal with inset
+floating divider, compact sidebar proportions, fluid flex layout, and live-injects
 CSS into running Antigravity Electron instances via DevTools CDP with Promise-awaited
 WebSocket completion.
 
@@ -68,7 +68,7 @@ def generate_css(colors: dict) -> str:
 
     return f"""
         :root, .dark, body {{
-            /* 1:1 Pure Spotify Color Engine */
+            /* Pure Color Engine */
             --background: {surface} !important;
             --sidebar: {surface} !important;
             --sidebar-secondary: {surface_variant} !important;
@@ -91,7 +91,7 @@ def generate_css(colors: dict) -> str:
             box-sizing: border-box !important;
         }}
 
-        /* ===== 1. Master Root Window Surface (Translucent Glass matching Spotify) ===== */
+        /* ===== 1. Master Root Window Surface (Transparent Canvas) ===== */
         html,
         body,
         #root,
@@ -146,7 +146,7 @@ def generate_css(colors: dict) -> str:
             height: 75vh !important;
             min-height: 520px !important;
             max-height: 85vh !important;
-            background-color: rgba({surface_rgb}, 0.85) !important;
+            background-color: rgba({surface_rgb}, 0.75) !important;
             backdrop-filter: blur(16px) !important;
             border: 1px solid {primary} !important;
             border-radius: 16px !important;
@@ -228,8 +228,8 @@ def generate_css(colors: dict) -> str:
         /* ===== 2. Left Sidebar Pane (.Sidebar.) ===== */
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar {{
             position: relative !important;
-            background-color: rgba({surface_rgb}, 0.55) !important;
-            backdrop-filter: blur(12px) !important;
+            background-color: rgba({surface_rgb}, 0.38) !important;
+            backdrop-filter: blur(14px) !important;
             border: 1px solid {primary} !important;
             border-radius: 8px !important;
             margin: 0 !important;
@@ -356,8 +356,8 @@ def generate_css(colors: dict) -> str:
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border,
         div[class*="border-t border-border"][class*="flex-1"] {{
             position: relative !important;
-            background-color: rgba({surface_rgb}, 0.55) !important;
-            backdrop-filter: blur(12px) !important;
+            background-color: rgba({surface_rgb}, 0.38) !important;
+            backdrop-filter: blur(14px) !important;
             border: 1px solid {primary} !important;
             border-radius: 8px !important;
             margin: 0 !important;
@@ -561,7 +561,7 @@ def inject_cdp(css: str):
                                                 (document.head || document.documentElement).appendChild(el);
                                             }}
                                             el.textContent = ${{JSON.stringify({escaped_css})}};
-                                            return "1:1 Spotify Hyprland Translucent Theme Injected!";
+                                            return "Lower Opacity Frosted Glass Injected!";
                                         }})()
                                     `,
                                     returnByValue: true
@@ -606,7 +606,7 @@ def apply_theme():
             f.write(css)
 
     inject_cdp(css)
-    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (1:1 Spotify Hyprland) (Primary: {primary})")
+    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (Lower Opacity Glass) (Primary: {primary})")
 
 
 def main():
