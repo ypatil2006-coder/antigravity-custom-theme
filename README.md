@@ -4,14 +4,27 @@
 [![Antigravity](https://img.shields.io/badge/Antigravity-2.0%2B-blue.svg)](https://antigravity.google)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![Linux / Hyprland](https://img.shields.io/badge/Platform-Linux%20%7C%20Hyprland%20%7C%20Wayland-black.svg?logo=arch-linux)](https://archlinux.org)
-[![Aesthetics](https://img.shields.io/badge/Style-Boxed%20Terminal%20%26%20Notched%20Legends-orange.svg)]()
+[![Aesthetics](https://img.shields.io/badge/Style-Frosted%20Glass%20%26%20Notched%20Legends-orange.svg)]()
 
 > **The ultimate real-time dynamic theming engine and modular boxed terminal aesthetic for Google Antigravity (Antigravity 2.0 / Antigravity IDE).**  
 > Seamlessly synchronize your Antigravity IDE colors with your desktop wallpaper (Material 3, Pywal, Matugen, Noctalia) with zero restarts via live Chrome DevTools Protocol (CDP) CSS injection.
 
 ---
 
-## 📸 Overview & Visual Architecture
+## 📸 Visual Showcase
+
+### 🔴 Crimson Theme & Split Walkthrough Workspace
+![Crimson Split Preview](assets/preview-crimson-split.png)
+
+### 🟠 Amber Autumn Theme & Modular Boxed Workspace
+![Amber Workspace Preview](assets/preview-amber-main.png)
+
+### 🔵 Blue Theme & Frosted Glass Settings Modal
+![Blue Settings Modal Preview](assets/preview-blue-settings.png)
+
+---
+
+## 📸 Architecture & Layout
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
@@ -40,15 +53,16 @@
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
-- **🔲 Modular Boxed Terminal Aesthetics:** Transform Antigravity 2.0 into a unified, clean terminal suite interface with crisp 1px borders, custom padding, and JetBrains Mono typography.
-- **🏷️ Flawless Notched Cutout Legends:** Custom simulated notched badges (`Sidebar`, `Main`, `Prompt`) with solid background masking that prevents border lines from cutting through text.
-- **⚡ Real-Time Live Hot-Reloading:** Injects CSS dynamically into running Electron instances via Chrome DevTools Protocol (CDP) WebSocket without closing or reloading your active tabs.
-- **🎨 Material 3 / Dynamic Wallpaper Sync:** Auto-detects palette changes from Matugen, Noctalia, Pywal, or custom `colors.json` files and syncs colors across all UI components instantly.
-- **⚙️ Redesigned Settings Modal:** Features a sleek `16px` border-radius container, frosted glass backdrop blur, and an inset floating vertical divider with top/bottom breathing room.
-- **📏 Workspace Split Pane Divider:** Clean `1px` floating separator between the chat and artifact/walkthrough views with interactive hover accent glow.
-- **🚀 Persistent App Launcher Integration:** Includes a launcher wrapper so `Super+D` (Rofi / Wofi / App Launchers) automatically runs Antigravity with DevTools enabled.
+- **🪟 Frosted Glass Translucency (1:1 with Spotify):** Unified translucent glass surfaces (`rgba(surface, 0.55)` + `backdrop-filter: blur(12px)`) with Hyprland wallpaper pass-through.
+- **🏷️ Seamless Notched Cutout Legends:** Custom simulated notched badges (`SIDEBAR`, `MAIN`, `PROMPT`) with surface masking that prevents borders from cutting through label text.
+- **⚡ Real-Time Live Hot-Reloading:** Injects CSS dynamically into running Electron instances via Chrome DevTools Protocol (CDP) WebSocket without closing or reloading your active session.
+- **🎨 Material 3 / Dynamic Wallpaper Sync:** Auto-detects palette changes from Noctalia, Matugen, Pywal, or custom `colors.json` files and syncs colors across all UI components instantly.
+- **🧼 Zero Dark Patches:** Nested containers, prompt boxes, and message bubbles render with 100% unified transparency.
+- **⚙️ Redesigned Settings Modal:** Features a sleek `16px` border-radius container, frosted glass backdrop blur, and an inset floating vertical divider.
+- **📏 Floating Split Pane Divider:** Clean `1px` floating separator between chat and artifact/walkthrough views with interactive hover accent glow.
+- **🚀 Automated 1-Click Installer:** Includes launcher wrapper, desktop menu integration, systemd user daemon, and Hyprland compositor rule setup.
 
 ---
 
@@ -86,7 +100,13 @@ chmod +x install.sh sync_antigravity_theme.py
    update-desktop-database ~/.local/share/applications
    ```
 
-4. **Run the theme synchronizer:**
+4. **Configure Hyprland Translucency (Optional):**
+   Add this to your `~/.config/hypr/windowrules.conf`:
+   ```ini
+   windowrule = opacity 0.75 0.70, class:^(antigravity|Antigravity)$
+   ```
+
+5. **Run the theme synchronizer:**
    ```bash
    python3 sync_antigravity_theme.py --watch
    ```
@@ -98,55 +118,42 @@ chmod +x install.sh sync_antigravity_theme.py
 ### Custom Colors File
 By default, the script checks for Material 3 palettes in:
 1. `~/.config/noctalia/colors.json`
-2. `~/.config/matugen/colors.json`
-3. `~/.cache/wal/colors.json`
+2. `~/.config/hypr/colors.json`
+3. Fallback default colors
 
-You can also specify a custom JSON color palette directly:
-```bash
-python3 sync_antigravity_theme.py --colors /path/to/my-palette.json --watch
-```
-
-#### Sample `colors.json` Schema:
+Sample `colors.json` schema:
 ```json
 {
-  "mPrimary": "#f96553",
-  "mSurface": "#291614",
+  "mPrimary": "#f5f0c9",
+  "mSurface": "#292714",
   "mSurfaceVariant": "#452521",
-  "mOnSurface": "#f3f2f2",
+  "mOnSurface": "#f3f3f2",
   "mOnSurfaceVariant": "#b6b0af",
-  "mOutline": "#746260",
-  "mError": "#d91f08"
+  "mOutline": "#72705d",
+  "mError": "#fd4663"
 }
 ```
 
 ---
 
-## 🛠️ How It Works Under the Hood
+## 🛠️ CLI Usage & Flags
 
-1. **Electron CDP Remote Debugging:** Antigravity launches with `--remote-debugging-port=41013`.
-2. **WebSocket CSS Injection:** `sync_antigravity_theme.py` queries `http://127.0.0.1:41013/json` and establishes a WebSocket connection to the renderer process.
-3. **Live DOM Mutation:** Injects a `<style id="antigravity-boxed-theme-style">` and registers a `MutationObserver` + `Page.addScriptToEvaluateOnNewDocument` so the theme persists across reloads and new windows.
-4. **Background Daemon:** A systemd user unit (`antigravity-theme-sync.service`) watches for palette modifications using file MD5 hashing, enabling instant wallpaper-to-IDE color updates.
+```bash
+# Sync active colors and live-inject into running Antigravity instances once
+python3 sync_antigravity_theme.py
+
+# Run in background daemon mode (watches for palette changes)
+python3 sync_antigravity_theme.py --watch
+```
 
 ---
 
 ## 🤝 Contributing
 
-Contributions, feature requests, and theme variations are warmly welcomed!
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AwesomeTheme`)
-3. Commit your Changes (`git commit -m 'feat: add neon glow variant'`)
-4. Push to the Branch (`git push origin feature/AwesomeTheme`)
-5. Open a Pull Request
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/ypatil20066/antigravity-custom-theme/issues).
 
 ---
 
 ## 📜 License
 
-Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for details.
-
----
-
-<p align="center">
-  Crafted with ❤️ for the Linux Ricing & AI Developer Community.
-</p>
+Distributed under the [MIT License](LICENSE).

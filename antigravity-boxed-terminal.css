@@ -3,17 +3,17 @@
             /* 1:1 Unified Pure Color Engine */
             --background: transparent !important;
             --sidebar: transparent !important;
-            --sidebar-secondary: #0f3457 !important;
+            --sidebar-secondary: #203046 !important;
             --sidebar-muted: transparent !important;
             --card: transparent !important;
             --muted: transparent !important;
-            --card-border: #77bbfc !important;
-            --border: #77bbfc !important;
-            --primary: #77bbfc !important;
+            --card-border: #c9ddf6 !important;
+            --border: #c9ddf6 !important;
+            --primary: #c9ddf6 !important;
             --primary-foreground: #101010 !important;
             --foreground: #f2f2f3 !important;
-            --muted-foreground: #afb3b6 !important;
-            --secondary: #0f3457 !important;
+            --muted-foreground: #afb2b6 !important;
+            --secondary: #203046 !important;
             --secondary-foreground: #f2f2f3 !important;
             --font-sans: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace !important;
             --font-mono: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace !important;
@@ -93,9 +93,9 @@
             height: 75vh !important;
             min-height: 520px !important;
             max-height: 85vh !important;
-            background-color: rgba(3, 31, 58, 0.85) !important;
+            background-color: rgba(19, 29, 42, 0.85) !important;
             backdrop-filter: blur(16px) !important;
-            border: 1px solid #77bbfc !important;
+            border: 1px solid #c9ddf6 !important;
             border-radius: 16px !important;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
             overflow: hidden !important;
@@ -106,7 +106,7 @@
             transition: border-color 0.15s ease !important;
         }
         .settings-modal-container:hover {
-            border-color: #8bc5fc !important;
+            border-color: #d1e2f7 !important;
         }
 
         .settings-modal-container > div.flex-1,
@@ -134,7 +134,7 @@
             bottom: 16px !important;
             right: 0 !important;
             width: 1px !important;
-            background-color: #77bbfc !important;
+            background-color: #c9ddf6 !important;
             opacity: 0.6 !important;
             pointer-events: none !important;
             z-index: 20 !important;
@@ -175,9 +175,9 @@
         /* ===== 2. Left Sidebar Pane (.Sidebar.) ===== */
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar {
             position: relative !important;
-            background-color: rgba(3, 31, 58, 0.55) !important;
+            background-color: rgba(19, 29, 42, 0.55) !important;
             backdrop-filter: blur(12px) !important;
-            border: 1px solid #77bbfc !important;
+            border: 1px solid #c9ddf6 !important;
             border-radius: 8px !important;
             margin: 0 !important;
             height: 100% !important;
@@ -188,7 +188,7 @@
             transition: border-color 0.15s ease !important;
         }
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar:hover {
-            border-color: #8bc5fc !important;
+            border-color: #d1e2f7 !important;
         }
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar::before {
             content: "Sidebar" !important;
@@ -198,8 +198,8 @@
             left: auto !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: #031f3a !important;
-            color: #77bbfc !important;
+            background-color: #131d2a !important;
+            color: #c9ddf6 !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             font-size: 11px !important;
             font-weight: 700 !important;
@@ -247,7 +247,7 @@
         /* Sidebar Section Titles */
         div.bg-sidebar div.flex.items-center.justify-between.py-1.px-2 {
             background-color: transparent !important;
-            color: #afb3b6 !important;
+            color: #afb2b6 !important;
             font-size: 11px !important;
             font-weight: 700 !important;
             text-transform: uppercase !important;
@@ -273,7 +273,7 @@
         div.bg-sidebar div.cursor-pointer.rounded-lg:hover,
         div.bg-sidebar button.group\/headerbtn:hover,
         div.bg-sidebar button:hover {
-            background-color: #0f3457 !important;
+            background-color: #203046 !important;
         }
 
         div.bg-sidebar .truncate,
@@ -283,7 +283,7 @@
             opacity: 0.95 !important;
         }
         div.bg-sidebar span.text-xs {
-            color: #afb3b6 !important;
+            color: #afb2b6 !important;
             opacity: 0.75 !important;
         }
 
@@ -303,9 +303,9 @@
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border,
         div[class*="border-t border-border"][class*="flex-1"] {
             position: relative !important;
-            background-color: rgba(3, 31, 58, 0.55) !important;
+            background-color: rgba(19, 29, 42, 0.55) !important;
             backdrop-filter: blur(12px) !important;
-            border: 1px solid #77bbfc !important;
+            border: 1px solid #c9ddf6 !important;
             border-radius: 8px !important;
             margin: 0 !important;
             height: 100% !important;
@@ -318,7 +318,7 @@
         }
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border:hover,
         div[class*="border-t border-border"][class*="flex-1"]:hover {
-            border-color: #8bc5fc !important;
+            border-color: #d1e2f7 !important;
         }
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border::before,
         div[class*="border-t border-border"][class*="flex-1"]::before {
@@ -328,8 +328,8 @@
             left: 20px !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: #031f3a !important;
-            color: #77bbfc !important;
+            background-color: #131d2a !important;
+            color: #c9ddf6 !important;
             font-size: 11px !important;
             font-weight: 700 !important;
             text-transform: uppercase !important;
@@ -352,7 +352,7 @@
         div[class*="border-t border-border"] div.relative.flex.w-full.h-full > div.bg-border {
             display: block !important;
             width: 1px !important;
-            background-color: #77bbfc !important;
+            background-color: #c9ddf6 !important;
             opacity: 0.6 !important;
             margin: 16px 8px !important;
             height: calc(100% - 32px) !important;
@@ -361,7 +361,7 @@
         }
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border div.relative.flex.w-full.h-full > div.bg-border:hover,
         div[class*="border-t border-border"] div.relative.flex.w-full.h-full > div.bg-border:hover {
-            background-color: #77bbfc !important;
+            background-color: #c9ddf6 !important;
             opacity: 1 !important;
         }
 
@@ -371,7 +371,7 @@
             position: relative !important;
             background: transparent !important;
             background-color: transparent !important;
-            border: 1px solid #77bbfc !important;
+            border: 1px solid #c9ddf6 !important;
             border-radius: 8px !important;
             padding: 0 !important;
             overflow: visible !important;
@@ -381,7 +381,7 @@
         div[class*="bg-card-border"]:hover,
         div[class*="bg-card-border"]:focus-within,
         div.relative.whitespace-pre-wrap.word-break-all.rounded-xl.border:hover {
-            border-color: #8bc5fc !important;
+            border-color: #d1e2f7 !important;
         }
 
         /* Clean Notch Mask on Prompt Box */
@@ -393,8 +393,8 @@
             left: 14px !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: #031f3a !important;
-            color: #77bbfc !important;
+            background-color: #131d2a !important;
+            color: #c9ddf6 !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             font-size: 11px !important;
             font-weight: 700 !important;
@@ -415,7 +415,7 @@
 
         div[class*="bg-card-border"] > div.grid,
         div[class*="bg-card-border"] > div:last-child:not(:first-child) {
-            border-top: 1px solid #77bbfc !important;
+            border-top: 1px solid #c9ddf6 !important;
             opacity: 0.8 !important;
         }
 
@@ -432,10 +432,10 @@
             height: 4px !important;
         }
         ::-webkit-scrollbar-thumb {
-            background: #5f6a74 !important;
+            background: #5f6873 !important;
             border-radius: 4px !important;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #77bbfc !important;
+            background: #c9ddf6 !important;
         }
     
