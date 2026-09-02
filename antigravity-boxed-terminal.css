@@ -3,18 +3,18 @@
             /* 1:1 Unified Pure Color Engine */
             --background: transparent !important;
             --sidebar: transparent !important;
-            --sidebar-secondary: #454121 !important;
+            --sidebar-secondary: #0f3457 !important;
             --sidebar-muted: transparent !important;
             --card: transparent !important;
             --muted: transparent !important;
-            --card-border: #f5f0c9 !important;
-            --border: #f5f0c9 !important;
-            --primary: #f5f0c9 !important;
+            --card-border: #77bbfc !important;
+            --border: #77bbfc !important;
+            --primary: #77bbfc !important;
             --primary-foreground: #101010 !important;
-            --foreground: #f3f3f2 !important;
-            --muted-foreground: #b6b5af !important;
-            --secondary: #454121 !important;
-            --secondary-foreground: #f3f3f2 !important;
+            --foreground: #f2f2f3 !important;
+            --muted-foreground: #afb3b6 !important;
+            --secondary: #0f3457 !important;
+            --secondary-foreground: #f2f2f3 !important;
             --font-sans: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace !important;
             --font-mono: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace !important;
         }
@@ -93,9 +93,9 @@
             height: 75vh !important;
             min-height: 520px !important;
             max-height: 85vh !important;
-            background-color: rgba(41, 39, 20, 0.85) !important;
+            background-color: rgba(3, 31, 58, 0.85) !important;
             backdrop-filter: blur(16px) !important;
-            border: 1px solid #f5f0c9 !important;
+            border: 1px solid #77bbfc !important;
             border-radius: 16px !important;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
             overflow: hidden !important;
@@ -106,7 +106,7 @@
             transition: border-color 0.15s ease !important;
         }
         .settings-modal-container:hover {
-            border-color: #f6f2d1 !important;
+            border-color: #8bc5fc !important;
         }
 
         .settings-modal-container > div.flex-1,
@@ -134,7 +134,7 @@
             bottom: 16px !important;
             right: 0 !important;
             width: 1px !important;
-            background-color: #f5f0c9 !important;
+            background-color: #77bbfc !important;
             opacity: 0.6 !important;
             pointer-events: none !important;
             z-index: 20 !important;
@@ -175,9 +175,9 @@
         /* ===== 2. Left Sidebar Pane (.Sidebar.) ===== */
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar {
             position: relative !important;
-            background-color: rgba(41, 39, 20, 0.55) !important;
+            background-color: rgba(3, 31, 58, 0.55) !important;
             backdrop-filter: blur(12px) !important;
-            border: 1px solid #f5f0c9 !important;
+            border: 1px solid #77bbfc !important;
             border-radius: 8px !important;
             margin: 0 !important;
             height: 100% !important;
@@ -188,7 +188,7 @@
             transition: border-color 0.15s ease !important;
         }
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar:hover {
-            border-color: #f6f2d1 !important;
+            border-color: #8bc5fc !important;
         }
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar::before {
             content: "Sidebar" !important;
@@ -198,8 +198,8 @@
             left: auto !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: #292714 !important;
-            color: #f5f0c9 !important;
+            background-color: #031f3a !important;
+            color: #77bbfc !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             font-size: 11px !important;
             font-weight: 700 !important;
@@ -247,7 +247,7 @@
         /* Sidebar Section Titles */
         div.bg-sidebar div.flex.items-center.justify-between.py-1.px-2 {
             background-color: transparent !important;
-            color: #b6b5af !important;
+            color: #afb3b6 !important;
             font-size: 11px !important;
             font-weight: 700 !important;
             text-transform: uppercase !important;
@@ -273,17 +273,17 @@
         div.bg-sidebar div.cursor-pointer.rounded-lg:hover,
         div.bg-sidebar button.group\/headerbtn:hover,
         div.bg-sidebar button:hover {
-            background-color: #454121 !important;
+            background-color: #0f3457 !important;
         }
 
         div.bg-sidebar .truncate,
         div.bg-sidebar span,
         div.bg-sidebar a {
-            color: #f3f3f2 !important;
+            color: #f2f2f3 !important;
             opacity: 0.95 !important;
         }
         div.bg-sidebar span.text-xs {
-            color: #b6b5af !important;
+            color: #afb3b6 !important;
             opacity: 0.75 !important;
         }
 
@@ -303,9 +303,9 @@
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border,
         div[class*="border-t border-border"][class*="flex-1"] {
             position: relative !important;
-            background-color: rgba(41, 39, 20, 0.55) !important;
+            background-color: rgba(3, 31, 58, 0.55) !important;
             backdrop-filter: blur(12px) !important;
-            border: 1px solid #f5f0c9 !important;
+            border: 1px solid #77bbfc !important;
             border-radius: 8px !important;
             margin: 0 !important;
             height: 100% !important;
@@ -318,7 +318,7 @@
         }
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border:hover,
         div[class*="border-t border-border"][class*="flex-1"]:hover {
-            border-color: #f6f2d1 !important;
+            border-color: #8bc5fc !important;
         }
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border::before,
         div[class*="border-t border-border"][class*="flex-1"]::before {
@@ -328,8 +328,8 @@
             left: 20px !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: #292714 !important;
-            color: #f5f0c9 !important;
+            background-color: #031f3a !important;
+            color: #77bbfc !important;
             font-size: 11px !important;
             font-weight: 700 !important;
             text-transform: uppercase !important;
@@ -343,7 +343,7 @@
         /* Workspace Header Title Typography */
         div.relative.z-0.flex-1 button.rounded-full span,
         div.relative.z-0.flex-1 .truncate {
-            color: #f3f3f2 !important;
+            color: #f2f2f3 !important;
             opacity: 0.95 !important;
         }
 
@@ -352,7 +352,7 @@
         div[class*="border-t border-border"] div.relative.flex.w-full.h-full > div.bg-border {
             display: block !important;
             width: 1px !important;
-            background-color: #f5f0c9 !important;
+            background-color: #77bbfc !important;
             opacity: 0.6 !important;
             margin: 16px 8px !important;
             height: calc(100% - 32px) !important;
@@ -361,7 +361,7 @@
         }
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border div.relative.flex.w-full.h-full > div.bg-border:hover,
         div[class*="border-t border-border"] div.relative.flex.w-full.h-full > div.bg-border:hover {
-            background-color: #f5f0c9 !important;
+            background-color: #77bbfc !important;
             opacity: 1 !important;
         }
 
@@ -371,7 +371,7 @@
             position: relative !important;
             background: transparent !important;
             background-color: transparent !important;
-            border: 1px solid #f5f0c9 !important;
+            border: 1px solid #77bbfc !important;
             border-radius: 8px !important;
             padding: 0 !important;
             overflow: visible !important;
@@ -381,7 +381,7 @@
         div[class*="bg-card-border"]:hover,
         div[class*="bg-card-border"]:focus-within,
         div.relative.whitespace-pre-wrap.word-break-all.rounded-xl.border:hover {
-            border-color: #f6f2d1 !important;
+            border-color: #8bc5fc !important;
         }
 
         /* Clean Notch Mask on Prompt Box */
@@ -393,8 +393,8 @@
             left: 14px !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: #292714 !important;
-            color: #f5f0c9 !important;
+            background-color: #031f3a !important;
+            color: #77bbfc !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             font-size: 11px !important;
             font-weight: 700 !important;
@@ -415,13 +415,13 @@
 
         div[class*="bg-card-border"] > div.grid,
         div[class*="bg-card-border"] > div:last-child:not(:first-child) {
-            border-top: 1px solid #f5f0c9 !important;
+            border-top: 1px solid #77bbfc !important;
             opacity: 0.8 !important;
         }
 
         div[class*="bg-card-border"] [contenteditable],
         div[class*="bg-card-border"] textarea {
-            color: #f3f3f2 !important;
+            color: #f2f2f3 !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             background: transparent !important;
         }
@@ -432,10 +432,10 @@
             height: 4px !important;
         }
         ::-webkit-scrollbar-thumb {
-            background: #72705d !important;
+            background: #5f6a74 !important;
             border-radius: 4px !important;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #f5f0c9 !important;
+            background: #77bbfc !important;
         }
     
