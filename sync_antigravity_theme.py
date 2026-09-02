@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 """
-Antigravity 2.0 Dynamic Boxed Theme Synchronizer (In-App Frosted Glass Engine)
+Antigravity 2.0 Dynamic Boxed Theme Synchronizer (1:1 Spotify Hyprland Match)
 Reads Material 3 color tokens from ~/.config/noctalia/colors.json,
-generates Antigravity 2.0 Modular Boxed Terminal stylesheet with in-app
-frosted glass surfaces (rgba(surface, 0.38) + blur(14px)), CDP native
-transparent backing override (no Hyprland window rule required), seamless
-cutout legends (Sidebar, Main, Prompt), bright primary borders matching Kitty
-and Spotify, high-contrast typography, 16px rounded Settings modal with inset
-floating divider, compact sidebar proportions, fluid flex layout, and live-injects
+generates Antigravity 2.0 Modular Boxed Terminal stylesheet with translucent
+frosted glass surfaces (rgba(surface, 0.55) + blur(12px)) matching Spotify,
+seamless cutout legends (Sidebar, Main, Prompt), bright primary borders matching
+Kitty and Spotify, high-contrast typography, 16px rounded Settings modal with
+inset floating divider, compact sidebar proportions, fluid flex layout, and live-injects
 CSS into running Antigravity Electron instances via DevTools CDP with Promise-awaited
 WebSocket completion.
 
@@ -69,7 +68,7 @@ def generate_css(colors: dict) -> str:
 
     return f"""
         :root, .dark, body {{
-            /* In-App Pure Glass Color Engine */
+            /* 1:1 Spotify Color Engine */
             --background: {surface} !important;
             --sidebar: {surface} !important;
             --sidebar-secondary: {surface_variant} !important;
@@ -92,7 +91,7 @@ def generate_css(colors: dict) -> str:
             box-sizing: border-box !important;
         }}
 
-        /* ===== 1. Master Root Window Surface (In-App Transparent Canvas) ===== */
+        /* ===== 1. Master Root Window Surface ===== */
         html,
         body,
         #root,
@@ -147,7 +146,7 @@ def generate_css(colors: dict) -> str:
             height: 75vh !important;
             min-height: 520px !important;
             max-height: 85vh !important;
-            background-color: rgba({surface_rgb}, 0.75) !important;
+            background-color: rgba({surface_rgb}, 0.85) !important;
             backdrop-filter: blur(16px) !important;
             border: 1px solid {primary} !important;
             border-radius: 16px !important;
@@ -229,8 +228,8 @@ def generate_css(colors: dict) -> str:
         /* ===== 2. Left Sidebar Pane (.Sidebar.) ===== */
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar {{
             position: relative !important;
-            background-color: rgba({surface_rgb}, 0.38) !important;
-            backdrop-filter: blur(14px) !important;
+            background-color: rgba({surface_rgb}, 0.55) !important;
+            backdrop-filter: blur(12px) !important;
             border: 1px solid {primary} !important;
             border-radius: 8px !important;
             margin: 0 !important;
@@ -357,8 +356,8 @@ def generate_css(colors: dict) -> str:
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border,
         div[class*="border-t border-border"][class*="flex-1"] {{
             position: relative !important;
-            background-color: rgba({surface_rgb}, 0.38) !important;
-            backdrop-filter: blur(14px) !important;
+            background-color: rgba({surface_rgb}, 0.55) !important;
+            backdrop-filter: blur(12px) !important;
             border: 1px solid {primary} !important;
             border-radius: 8px !important;
             margin: 0 !important;
@@ -498,7 +497,7 @@ def generate_css(colors: dict) -> str:
 
 
 def inject_cdp(css: str):
-    """Live inject CSS into running Antigravity Electron via CDP with in-app transparent backing."""
+    """Live inject CSS into running Antigravity Electron via CDP with permanent reload persistence."""
     if not os.path.exists(DEVTOOLS_PORT_FILE):
         return
 
@@ -520,13 +519,6 @@ def inject_cdp(css: str):
                             ws.send(JSON.stringify({{ id: 1, method: "Page.enable" }}));
                             ws.send(JSON.stringify({{
                                 id: 2,
-                                method: "Emulation.setDefaultBackgroundColorOverride",
-                                params: {{
-                                    color: {{ r: 0, g: 0, b: 0, a: 0 }}
-                                }}
-                            }}));
-                            ws.send(JSON.stringify({{
-                                id: 3,
                                 method: "Page.addScriptToEvaluateOnNewDocument",
                                 params: {{
                                     source: `
@@ -557,7 +549,7 @@ def inject_cdp(css: str):
                                 }}
                             }}));
                             ws.send(JSON.stringify({{
-                                id: 4,
+                                id: 3,
                                 method: "Runtime.evaluate",
                                 params: {{
                                     expression: `
@@ -569,7 +561,7 @@ def inject_cdp(css: str):
                                                 (document.head || document.documentElement).appendChild(el);
                                             }}
                                             el.textContent = ${{JSON.stringify({escaped_css})}};
-                                            return "In-App Frosted Glass Applied!";
+                                            return "Perfect Translucency Restored!";
                                         }})()
                                     `,
                                     returnByValue: true
@@ -578,7 +570,7 @@ def inject_cdp(css: str):
                         }};
                         ws.onmessage = (e) => {{
                             const data = JSON.parse(e.data);
-                            if (data.id === 4) {{
+                            if (data.id === 3) {{
                                 ws.close();
                                 resolve();
                             }}
@@ -614,7 +606,7 @@ def apply_theme():
             f.write(css)
 
     inject_cdp(css)
-    print(f"✓ Generated & Live-Injected Antigravity 2.0 In-App Frosted Glass Theme (Primary: {primary})")
+    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (Hyprland Translucency Restored) (Primary: {primary})")
 
 
 def main():
