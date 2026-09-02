@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-Antigravity 2.0 Dynamic Boxed Theme Synchronizer (1:1 Kitty & Spotify Match)
+Antigravity 2.0 Dynamic Boxed Theme Synchronizer (1:1 Spotify Hyprland Translucency)
 Reads Material 3 color tokens from ~/.config/noctalia/colors.json,
-generates Antigravity 2.0 Modular Boxed Terminal stylesheet with seamless
-cutout legends (Sidebar, Main, Prompt), bright primary borders matching Kitty
-and Spotify, high-contrast typography, 16px rounded Settings modal with inset
-floating divider, compact sidebar proportions, fluid flex layout, and live-injects
+generates Antigravity 2.0 Modular Boxed Terminal stylesheet with translucent
+frosted glass surfaces (rgba(surface, 0.55) + blur(12px)) matching Spotify,
+seamless cutout legends (Sidebar, Main, Prompt), bright primary borders matching
+Kitty and Spotify, high-contrast typography, 16px rounded Settings modal with
+inset floating divider, compact sidebar proportions, fluid flex layout, and live-injects
 CSS into running Antigravity Electron instances via DevTools CDP with Promise-awaited
 WebSocket completion.
 
@@ -62,15 +63,17 @@ def generate_css(colors: dict) -> str:
     outline = colors.get("mOutline", "#72705d")
     error = colors.get("mError", "#fd4663")
     primary_hover = lighten(primary, 0.15)
+    r, g, b = hex_to_rgb(surface)
+    surface_rgb = f"{r}, {g}, {b}"
 
     return f"""
         :root, .dark, body {{
-            /* 1:1 Pure Kitty & Spotify Color Engine */
+            /* 1:1 Pure Spotify Color Engine */
             --background: {surface} !important;
             --sidebar: {surface} !important;
             --sidebar-secondary: {surface_variant} !important;
             --sidebar-muted: {surface} !important;
-            --card: {surface} !important;
+            --card: {surface_variant} !important;
             --card-border: {primary} !important;
             --border: {primary} !important;
             --primary: {primary} !important;
@@ -88,15 +91,15 @@ def generate_css(colors: dict) -> str:
             box-sizing: border-box !important;
         }}
 
-        /* ===== 1. Master Root Window Surface (Seamless Uniform Tone) ===== */
+        /* ===== 1. Master Root Window Surface (Translucent Glass matching Spotify) ===== */
         html,
         body,
         #root,
         div[class*="h-screen"][class*="w-screen"],
         div[class*="relative w-screen"],
         div.h-full.w-full {{
-            background-color: {surface} !important;
-            background: {surface} !important;
+            background-color: transparent !important;
+            background: transparent !important;
             border: none !important;
             outline: none !important;
             box-shadow: none !important;
@@ -143,7 +146,8 @@ def generate_css(colors: dict) -> str:
             height: 75vh !important;
             min-height: 520px !important;
             max-height: 85vh !important;
-            background-color: {surface} !important;
+            background-color: rgba({surface_rgb}, 0.85) !important;
+            backdrop-filter: blur(16px) !important;
             border: 1px solid {primary} !important;
             border-radius: 16px !important;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
@@ -193,7 +197,8 @@ def generate_css(colors: dict) -> str:
         div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full {{
             padding: 14px 10px 10px 10px !important;
             gap: 10px !important;
-            background-color: {surface} !important;
+            background-color: transparent !important;
+            background: transparent !important;
             box-sizing: border-box !important;
             min-width: 0 !important;
         }}
@@ -223,7 +228,8 @@ def generate_css(colors: dict) -> str:
         /* ===== 2. Left Sidebar Pane (.Sidebar.) ===== */
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar {{
             position: relative !important;
-            background-color: {surface} !important;
+            background-color: rgba({surface_rgb}, 0.55) !important;
+            backdrop-filter: blur(12px) !important;
             border: 1px solid {primary} !important;
             border-radius: 8px !important;
             margin: 0 !important;
@@ -306,7 +312,7 @@ def generate_css(colors: dict) -> str:
             opacity: 0.85 !important;
         }}
 
-        /* Sidebar Item Rows */
+        /* Sidebar Item Rows & High-Contrast Typography */
         div.bg-sidebar div.cursor-pointer.rounded-lg,
         div.bg-sidebar button.group\\/headerbtn,
         div.bg-sidebar button {{
@@ -350,7 +356,8 @@ def generate_css(colors: dict) -> str:
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border,
         div[class*="border-t border-border"][class*="flex-1"] {{
             position: relative !important;
-            background-color: {surface} !important;
+            background-color: rgba({surface_rgb}, 0.55) !important;
+            backdrop-filter: blur(12px) !important;
             border: 1px solid {primary} !important;
             border-radius: 8px !important;
             margin: 0 !important;
@@ -554,7 +561,7 @@ def inject_cdp(css: str):
                                                 (document.head || document.documentElement).appendChild(el);
                                             }}
                                             el.textContent = ${{JSON.stringify({escaped_css})}};
-                                            return "Theme Applied Cleanly!";
+                                            return "1:1 Spotify Hyprland Translucent Theme Injected!";
                                         }})()
                                     `,
                                     returnByValue: true
@@ -599,7 +606,7 @@ def apply_theme():
             f.write(css)
 
     inject_cdp(css)
-    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (1:1 Match) (Primary: {primary})")
+    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (1:1 Spotify Hyprland) (Primary: {primary})")
 
 
 def main():

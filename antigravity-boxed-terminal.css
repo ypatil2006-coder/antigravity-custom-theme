@@ -1,11 +1,11 @@
 
         :root, .dark, body {
-            /* 1:1 Pure Kitty & Spotify Color Engine */
+            /* 1:1 Pure Spotify Color Engine */
             --background: #292714 !important;
             --sidebar: #292714 !important;
             --sidebar-secondary: #454121 !important;
             --sidebar-muted: #292714 !important;
-            --card: #292714 !important;
+            --card: #454121 !important;
             --card-border: #f5f0c9 !important;
             --border: #f5f0c9 !important;
             --primary: #f5f0c9 !important;
@@ -23,15 +23,15 @@
             box-sizing: border-box !important;
         }
 
-        /* ===== 1. Master Root Window Surface (Seamless Uniform Tone) ===== */
+        /* ===== 1. Master Root Window Surface (Translucent Glass matching Spotify) ===== */
         html,
         body,
         #root,
         div[class*="h-screen"][class*="w-screen"],
         div[class*="relative w-screen"],
         div.h-full.w-full {
-            background-color: #292714 !important;
-            background: #292714 !important;
+            background-color: transparent !important;
+            background: transparent !important;
             border: none !important;
             outline: none !important;
             box-shadow: none !important;
@@ -78,7 +78,8 @@
             height: 75vh !important;
             min-height: 520px !important;
             max-height: 85vh !important;
-            background-color: #292714 !important;
+            background-color: rgba(41, 39, 20, 0.85) !important;
+            backdrop-filter: blur(16px) !important;
             border: 1px solid #f5f0c9 !important;
             border-radius: 16px !important;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
@@ -128,7 +129,8 @@
         div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full {
             padding: 14px 10px 10px 10px !important;
             gap: 10px !important;
-            background-color: #292714 !important;
+            background-color: transparent !important;
+            background: transparent !important;
             box-sizing: border-box !important;
             min-width: 0 !important;
         }
@@ -158,7 +160,8 @@
         /* ===== 2. Left Sidebar Pane (.Sidebar.) ===== */
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar {
             position: relative !important;
-            background-color: #292714 !important;
+            background-color: rgba(41, 39, 20, 0.55) !important;
+            backdrop-filter: blur(12px) !important;
             border: 1px solid #f5f0c9 !important;
             border-radius: 8px !important;
             margin: 0 !important;
@@ -241,7 +244,7 @@
             opacity: 0.85 !important;
         }
 
-        /* Sidebar Item Rows */
+        /* Sidebar Item Rows & High-Contrast Typography */
         div.bg-sidebar div.cursor-pointer.rounded-lg,
         div.bg-sidebar button.group\/headerbtn,
         div.bg-sidebar button {
@@ -285,7 +288,8 @@
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border,
         div[class*="border-t border-border"][class*="flex-1"] {
             position: relative !important;
-            background-color: #292714 !important;
+            background-color: rgba(41, 39, 20, 0.55) !important;
+            backdrop-filter: blur(12px) !important;
             border: 1px solid #f5f0c9 !important;
             border-radius: 8px !important;
             margin: 0 !important;
