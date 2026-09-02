@@ -1,19 +1,19 @@
 
         :root, .dark, body {
-            /* 1:1 Spotify Luminous Color Engine */
-            --background: #1e201d !important;
-            --sidebar: #313630 !important;
-            --sidebar-secondary: #454a44 !important;
-            --sidebar-muted: #1e201d !important;
-            --card: #313630 !important;
-            --card-border: #636c61 !important;
-            --border: #636c61 !important;
-            --primary: #7ae467 !important;
+            /* 1:1 Pure Kitty & Spotify Color Engine */
+            --background: #292714 !important;
+            --sidebar: #292714 !important;
+            --sidebar-secondary: #454121 !important;
+            --sidebar-muted: #292714 !important;
+            --card: #292714 !important;
+            --card-border: #f5f0c9 !important;
+            --border: #f5f0c9 !important;
+            --primary: #f5f0c9 !important;
             --primary-foreground: #101010 !important;
-            --foreground: #f2f3f2 !important;
-            --muted-foreground: #b0b6af !important;
-            --secondary: #313630 !important;
-            --secondary-foreground: #f2f3f2 !important;
+            --foreground: #f3f3f2 !important;
+            --muted-foreground: #b6b5af !important;
+            --secondary: #454121 !important;
+            --secondary-foreground: #f3f3f2 !important;
             --font-sans: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace !important;
             --font-mono: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace !important;
         }
@@ -23,15 +23,15 @@
             box-sizing: border-box !important;
         }
 
-        /* ===== 1. Master Root Window Surface ===== */
+        /* ===== 1. Master Root Window Surface (Seamless Uniform Tone) ===== */
         html,
         body,
         #root,
         div[class*="h-screen"][class*="w-screen"],
         div[class*="relative w-screen"],
         div.h-full.w-full {
-            background-color: #1e201d !important;
-            background: #1e201d !important;
+            background-color: #292714 !important;
+            background: #292714 !important;
             border: none !important;
             outline: none !important;
             box-shadow: none !important;
@@ -78,8 +78,8 @@
             height: 75vh !important;
             min-height: 520px !important;
             max-height: 85vh !important;
-            background-color: #313630 !important;
-            border: 1px solid #636c61 !important;
+            background-color: #292714 !important;
+            border: 1px solid #f5f0c9 !important;
             border-radius: 16px !important;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
             overflow: hidden !important;
@@ -90,7 +90,7 @@
             transition: border-color 0.15s ease !important;
         }
         .settings-modal-container:hover {
-            border-color: #7ae467 !important;
+            border-color: #f6f2d1 !important;
         }
 
         .settings-modal-container > div.flex-1,
@@ -118,7 +118,8 @@
             bottom: 16px !important;
             right: 0 !important;
             width: 1px !important;
-            background-color: #636c61 !important;
+            background-color: #f5f0c9 !important;
+            opacity: 0.6 !important;
             pointer-events: none !important;
             z-index: 20 !important;
         }
@@ -127,7 +128,7 @@
         div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full {
             padding: 14px 10px 10px 10px !important;
             gap: 10px !important;
-            background-color: #1e201d !important;
+            background-color: #292714 !important;
             box-sizing: border-box !important;
             min-width: 0 !important;
         }
@@ -157,8 +158,8 @@
         /* ===== 2. Left Sidebar Pane (.Sidebar.) ===== */
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar {
             position: relative !important;
-            background-color: #313630 !important;
-            border: 1px solid #636c61 !important;
+            background-color: #292714 !important;
+            border: 1px solid #f5f0c9 !important;
             border-radius: 8px !important;
             margin: 0 !important;
             height: 100% !important;
@@ -169,7 +170,7 @@
             transition: border-color 0.15s ease !important;
         }
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar:hover {
-            border-color: #7ae467 !important;
+            border-color: #f6f2d1 !important;
         }
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar::before {
             content: "Sidebar" !important;
@@ -179,8 +180,8 @@
             left: auto !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: #313630 !important;
-            color: #7ae467 !important;
+            background-color: #292714 !important;
+            color: #f5f0c9 !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             font-size: 11px !important;
             font-weight: 700 !important;
@@ -228,7 +229,7 @@
         /* Sidebar Section Titles */
         div.bg-sidebar div.flex.items-center.justify-between.py-1.px-2 {
             background-color: transparent !important;
-            color: #b0b6af !important;
+            color: #b6b5af !important;
             font-size: 11px !important;
             font-weight: 700 !important;
             text-transform: uppercase !important;
@@ -240,7 +241,7 @@
             opacity: 0.85 !important;
         }
 
-        /* Sidebar Item Rows & High-Contrast Typography */
+        /* Sidebar Item Rows */
         div.bg-sidebar div.cursor-pointer.rounded-lg,
         div.bg-sidebar button.group\/headerbtn,
         div.bg-sidebar button {
@@ -254,17 +255,17 @@
         div.bg-sidebar div.cursor-pointer.rounded-lg:hover,
         div.bg-sidebar button.group\/headerbtn:hover,
         div.bg-sidebar button:hover {
-            background-color: #414640 !important;
+            background-color: #454121 !important;
         }
 
         div.bg-sidebar .truncate,
         div.bg-sidebar span,
         div.bg-sidebar a {
-            color: #f2f3f2 !important;
+            color: #f3f3f2 !important;
             opacity: 0.95 !important;
         }
         div.bg-sidebar span.text-xs {
-            color: #b0b6af !important;
+            color: #b6b5af !important;
             opacity: 0.75 !important;
         }
 
@@ -284,8 +285,8 @@
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border,
         div[class*="border-t border-border"][class*="flex-1"] {
             position: relative !important;
-            background-color: #313630 !important;
-            border: 1px solid #636c61 !important;
+            background-color: #292714 !important;
+            border: 1px solid #f5f0c9 !important;
             border-radius: 8px !important;
             margin: 0 !important;
             height: 100% !important;
@@ -298,7 +299,7 @@
         }
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border:hover,
         div[class*="border-t border-border"][class*="flex-1"]:hover {
-            border-color: #7ae467 !important;
+            border-color: #f6f2d1 !important;
         }
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border::before,
         div[class*="border-t border-border"][class*="flex-1"]::before {
@@ -308,8 +309,8 @@
             left: 20px !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: #313630 !important;
-            color: #7ae467 !important;
+            background-color: #292714 !important;
+            color: #f5f0c9 !important;
             font-size: 11px !important;
             font-weight: 700 !important;
             text-transform: uppercase !important;
@@ -323,7 +324,7 @@
         /* Workspace Header Title Typography */
         div.relative.z-0.flex-1 button.rounded-full span,
         div.relative.z-0.flex-1 .truncate {
-            color: #f2f3f2 !important;
+            color: #f3f3f2 !important;
             opacity: 0.95 !important;
         }
 
@@ -332,16 +333,16 @@
         div[class*="border-t border-border"] div.relative.flex.w-full.h-full > div.bg-border {
             display: block !important;
             width: 1px !important;
-            background-color: #636c61 !important;
+            background-color: #f5f0c9 !important;
+            opacity: 0.6 !important;
             margin: 16px 8px !important;
             height: calc(100% - 32px) !important;
             align-self: center !important;
-            opacity: 0.8 !important;
             transition: background-color 0.15s ease, opacity 0.15s ease !important;
         }
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border div.relative.flex.w-full.h-full > div.bg-border:hover,
         div[class*="border-t border-border"] div.relative.flex.w-full.h-full > div.bg-border:hover {
-            background-color: #7ae467 !important;
+            background-color: #f5f0c9 !important;
             opacity: 1 !important;
         }
 
@@ -350,7 +351,7 @@
             position: relative !important;
             background: transparent !important;
             background-color: transparent !important;
-            border: 1px solid #636c61 !important;
+            border: 1px solid #f5f0c9 !important;
             border-radius: 8px !important;
             padding: 0 !important;
             overflow: visible !important;
@@ -359,7 +360,7 @@
         }
         div[class*="bg-card-border"]:hover,
         div[class*="bg-card-border"]:focus-within {
-            border-color: #7ae467 !important;
+            border-color: #f6f2d1 !important;
         }
 
         /* Clean Notch Mask */
@@ -370,8 +371,8 @@
             left: 14px !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: #313630 !important;
-            color: #7ae467 !important;
+            background-color: #292714 !important;
+            color: #f5f0c9 !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             font-size: 11px !important;
             font-weight: 700 !important;
@@ -396,13 +397,14 @@
         div[class*="bg-card-border"] > div:last-child:not(:first-child) {
             background: transparent !important;
             background-color: transparent !important;
-            border-top: 1px solid #636c61 !important;
+            border-top: 1px solid #f5f0c9 !important;
+            opacity: 0.8 !important;
             border-radius: 0 0 7px 7px !important;
         }
 
         div[class*="bg-card-border"] [contenteditable],
         div[class*="bg-card-border"] textarea {
-            color: #f2f3f2 !important;
+            color: #f3f3f2 !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             background: transparent !important;
         }
@@ -413,10 +415,10 @@
             height: 4px !important;
         }
         ::-webkit-scrollbar-thumb {
-            background: #636c61 !important;
+            background: #72705d !important;
             border-radius: 4px !important;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #7ae467 !important;
+            background: #f5f0c9 !important;
         }
     

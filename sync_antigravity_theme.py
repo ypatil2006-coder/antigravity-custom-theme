@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Antigravity 2.0 Dynamic Boxed Theme Synchronizer (Luminous Surface Engine)
+Antigravity 2.0 Dynamic Boxed Theme Synchronizer (1:1 Kitty & Spotify Match)
 Reads Material 3 color tokens from ~/.config/noctalia/colors.json,
-generates Antigravity 2.0 Modular Boxed Terminal stylesheet with warm,
-luminous surface hierarchy matching Spotify cards, seamless cutout legends
-(Sidebar, Main, Prompt), high-contrast typography, 16px rounded Settings modal
-with inset floating divider, compact sidebar proportions, fluid flex layout,
-and live-injects CSS into running Antigravity Electron instances via DevTools CDP
-with Promise-awaited WebSocket completion.
+generates Antigravity 2.0 Modular Boxed Terminal stylesheet with seamless
+cutout legends (Sidebar, Main, Prompt), bright primary borders matching Kitty
+and Spotify, high-contrast typography, 16px rounded Settings modal with inset
+floating divider, compact sidebar proportions, fluid flex layout, and live-injects
+CSS into running Antigravity Electron instances via DevTools CDP with Promise-awaited
+WebSocket completion.
 
 Usage:
     python3 sync_antigravity_theme.py           # Sync & inject live
@@ -54,33 +54,30 @@ def lighten(hex_color: str, amount: float) -> str:
 
 
 def generate_css(colors: dict) -> str:
-    primary = colors.get("mPrimary", "#f96553")
-    surface = colors.get("mSurface", "#291614")
+    primary = colors.get("mPrimary", "#f5f0c9")
+    surface = colors.get("mSurface", "#292714")
     surface_variant = colors.get("mSurfaceVariant", "#452521")
-    on_surface = colors.get("mOnSurface", "#f3f2f2")
+    on_surface = colors.get("mOnSurface", "#f3f3f2")
     on_surface_variant = colors.get("mOnSurfaceVariant", "#b6b0af")
-    outline = colors.get("mOutline", "#746260")
-    error = colors.get("mError", "#d91f08")
+    outline = colors.get("mOutline", "#72705d")
+    error = colors.get("mError", "#fd4663")
     primary_hover = lighten(primary, 0.15)
-
-    pane_bg = surface_variant
-    window_bg = surface
 
     return f"""
         :root, .dark, body {{
-            /* 1:1 Spotify Luminous Color Engine */
-            --background: {window_bg} !important;
-            --sidebar: {pane_bg} !important;
-            --sidebar-secondary: {lighten(pane_bg, 0.1)} !important;
-            --sidebar-muted: {window_bg} !important;
-            --card: {pane_bg} !important;
-            --card-border: {outline} !important;
-            --border: {outline} !important;
+            /* 1:1 Pure Kitty & Spotify Color Engine */
+            --background: {surface} !important;
+            --sidebar: {surface} !important;
+            --sidebar-secondary: {surface_variant} !important;
+            --sidebar-muted: {surface} !important;
+            --card: {surface} !important;
+            --card-border: {primary} !important;
+            --border: {primary} !important;
             --primary: {primary} !important;
             --primary-foreground: #101010 !important;
             --foreground: {on_surface} !important;
             --muted-foreground: {on_surface_variant} !important;
-            --secondary: {pane_bg} !important;
+            --secondary: {surface_variant} !important;
             --secondary-foreground: {on_surface} !important;
             --font-sans: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace !important;
             --font-mono: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace !important;
@@ -91,15 +88,15 @@ def generate_css(colors: dict) -> str:
             box-sizing: border-box !important;
         }}
 
-        /* ===== 1. Master Root Window Surface ===== */
+        /* ===== 1. Master Root Window Surface (Seamless Uniform Tone) ===== */
         html,
         body,
         #root,
         div[class*="h-screen"][class*="w-screen"],
         div[class*="relative w-screen"],
         div.h-full.w-full {{
-            background-color: {window_bg} !important;
-            background: {window_bg} !important;
+            background-color: {surface} !important;
+            background: {surface} !important;
             border: none !important;
             outline: none !important;
             box-shadow: none !important;
@@ -146,8 +143,8 @@ def generate_css(colors: dict) -> str:
             height: 75vh !important;
             min-height: 520px !important;
             max-height: 85vh !important;
-            background-color: {pane_bg} !important;
-            border: 1px solid {outline} !important;
+            background-color: {surface} !important;
+            border: 1px solid {primary} !important;
             border-radius: 16px !important;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
             overflow: hidden !important;
@@ -158,7 +155,7 @@ def generate_css(colors: dict) -> str:
             transition: border-color 0.15s ease !important;
         }}
         .settings-modal-container:hover {{
-            border-color: {primary} !important;
+            border-color: {primary_hover} !important;
         }}
 
         .settings-modal-container > div.flex-1,
@@ -186,7 +183,8 @@ def generate_css(colors: dict) -> str:
             bottom: 16px !important;
             right: 0 !important;
             width: 1px !important;
-            background-color: {outline} !important;
+            background-color: {primary} !important;
+            opacity: 0.6 !important;
             pointer-events: none !important;
             z-index: 20 !important;
         }}
@@ -195,7 +193,7 @@ def generate_css(colors: dict) -> str:
         div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full {{
             padding: 14px 10px 10px 10px !important;
             gap: 10px !important;
-            background-color: {window_bg} !important;
+            background-color: {surface} !important;
             box-sizing: border-box !important;
             min-width: 0 !important;
         }}
@@ -225,8 +223,8 @@ def generate_css(colors: dict) -> str:
         /* ===== 2. Left Sidebar Pane (.Sidebar.) ===== */
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar {{
             position: relative !important;
-            background-color: {pane_bg} !important;
-            border: 1px solid {outline} !important;
+            background-color: {surface} !important;
+            border: 1px solid {primary} !important;
             border-radius: 8px !important;
             margin: 0 !important;
             height: 100% !important;
@@ -237,7 +235,7 @@ def generate_css(colors: dict) -> str:
             transition: border-color 0.15s ease !important;
         }}
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar:hover {{
-            border-color: {primary} !important;
+            border-color: {primary_hover} !important;
         }}
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar::before {{
             content: "Sidebar" !important;
@@ -247,7 +245,7 @@ def generate_css(colors: dict) -> str:
             left: auto !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: {pane_bg} !important;
+            background-color: {surface} !important;
             color: {primary} !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             font-size: 11px !important;
@@ -308,7 +306,7 @@ def generate_css(colors: dict) -> str:
             opacity: 0.85 !important;
         }}
 
-        /* Sidebar Item Rows & High-Contrast Typography */
+        /* Sidebar Item Rows */
         div.bg-sidebar div.cursor-pointer.rounded-lg,
         div.bg-sidebar button.group\\/headerbtn,
         div.bg-sidebar button {{
@@ -322,7 +320,7 @@ def generate_css(colors: dict) -> str:
         div.bg-sidebar div.cursor-pointer.rounded-lg:hover,
         div.bg-sidebar button.group\\/headerbtn:hover,
         div.bg-sidebar button:hover {{
-            background-color: {lighten(pane_bg, 0.08)} !important;
+            background-color: {surface_variant} !important;
         }}
 
         div.bg-sidebar .truncate,
@@ -352,8 +350,8 @@ def generate_css(colors: dict) -> str:
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border,
         div[class*="border-t border-border"][class*="flex-1"] {{
             position: relative !important;
-            background-color: {pane_bg} !important;
-            border: 1px solid {outline} !important;
+            background-color: {surface} !important;
+            border: 1px solid {primary} !important;
             border-radius: 8px !important;
             margin: 0 !important;
             height: 100% !important;
@@ -366,7 +364,7 @@ def generate_css(colors: dict) -> str:
         }}
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border:hover,
         div[class*="border-t border-border"][class*="flex-1"]:hover {{
-            border-color: {primary} !important;
+            border-color: {primary_hover} !important;
         }}
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border::before,
         div[class*="border-t border-border"][class*="flex-1"]::before {{
@@ -376,7 +374,7 @@ def generate_css(colors: dict) -> str:
             left: 20px !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: {pane_bg} !important;
+            background-color: {surface} !important;
             color: {primary} !important;
             font-size: 11px !important;
             font-weight: 700 !important;
@@ -400,11 +398,11 @@ def generate_css(colors: dict) -> str:
         div[class*="border-t border-border"] div.relative.flex.w-full.h-full > div.bg-border {{
             display: block !important;
             width: 1px !important;
-            background-color: {outline} !important;
+            background-color: {primary} !important;
+            opacity: 0.6 !important;
             margin: 16px 8px !important;
             height: calc(100% - 32px) !important;
             align-self: center !important;
-            opacity: 0.8 !important;
             transition: background-color 0.15s ease, opacity 0.15s ease !important;
         }}
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border div.relative.flex.w-full.h-full > div.bg-border:hover,
@@ -418,7 +416,7 @@ def generate_css(colors: dict) -> str:
             position: relative !important;
             background: transparent !important;
             background-color: transparent !important;
-            border: 1px solid {outline} !important;
+            border: 1px solid {primary} !important;
             border-radius: 8px !important;
             padding: 0 !important;
             overflow: visible !important;
@@ -427,7 +425,7 @@ def generate_css(colors: dict) -> str:
         }}
         div[class*="bg-card-border"]:hover,
         div[class*="bg-card-border"]:focus-within {{
-            border-color: {primary} !important;
+            border-color: {primary_hover} !important;
         }}
 
         /* Clean Notch Mask */
@@ -438,7 +436,7 @@ def generate_css(colors: dict) -> str:
             left: 14px !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: {pane_bg} !important;
+            background-color: {surface} !important;
             color: {primary} !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             font-size: 11px !important;
@@ -464,7 +462,8 @@ def generate_css(colors: dict) -> str:
         div[class*="bg-card-border"] > div:last-child:not(:first-child) {{
             background: transparent !important;
             background-color: transparent !important;
-            border-top: 1px solid {outline} !important;
+            border-top: 1px solid {primary} !important;
+            opacity: 0.8 !important;
             border-radius: 0 0 7px 7px !important;
         }}
 
@@ -555,7 +554,7 @@ def inject_cdp(css: str):
                                                 (document.head || document.documentElement).appendChild(el);
                                             }}
                                             el.textContent = ${{JSON.stringify({escaped_css})}};
-                                            return "Luminous Surface Applied!";
+                                            return "Theme Applied Cleanly!";
                                         }})()
                                     `,
                                     returnByValue: true
@@ -591,7 +590,7 @@ def apply_theme():
         colors = json.load(f)
 
     css = generate_css(colors)
-    primary = colors.get("mPrimary", "#f96553")
+    primary = colors.get("mPrimary", "#f5f0c9")
 
     for out_dir in OUTPUT_DIRS:
         os.makedirs(out_dir, exist_ok=True)
@@ -600,7 +599,7 @@ def apply_theme():
             f.write(css)
 
     inject_cdp(css)
-    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (Luminous Surface) (Primary: {primary})")
+    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (1:1 Match) (Primary: {primary})")
 
 
 def main():
