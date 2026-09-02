@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-Antigravity 2.0 Dynamic Boxed Theme Synchronizer (1:1 Spotify Matching Engine)
+Antigravity 2.0 Dynamic Boxed Theme Synchronizer (Pristine Clean UI)
 Reads Material 3 color tokens from ~/.config/noctalia/colors.json,
-generates Antigravity 2.0 Modular Boxed Terminal stylesheet with 1:1 Spotify
-color hierarchy (solid primary pills, crisp foreground typography, notch legends,
-interactive hover border glows, 16px rounded Settings modal with inset floating
-divider), and live-injects CSS into running Antigravity Electron instances via
-DevTools CDP with Promise-awaited WebSocket completion.
+generates Antigravity 2.0 Modular Boxed Terminal stylesheet with seamless
+cutout legends (Sidebar, Main, Prompt), perfectly clean prompt controls with
+no button overrides, 16px rounded Settings modal with inset floating divider,
+compact sidebar proportions, fluid flex layout, and live-injects CSS into
+running Antigravity Electron instances via DevTools CDP with Promise-awaited
+WebSocket completion.
 
 Usage:
     python3 sync_antigravity_theme.py           # Sync & inject live
@@ -64,7 +65,7 @@ def generate_css(colors: dict) -> str:
 
     return f"""
         :root, .dark, body {{
-            /* 1:1 Spotify Color Engine */
+            /* Pure Boxed Color Engine */
             --background: {surface} !important;
             --sidebar: {surface} !important;
             --sidebar-secondary: {surface_variant} !important;
@@ -256,29 +257,43 @@ def generate_css(colors: dict) -> str:
             border: none !important;
         }}
 
-        /* Solid Bright Pill for "+ New Conversation" Button (Matching Spotify "All" Pill) */
-        div.bg-sidebar a[href*="/chat"],
-        div.bg-sidebar button:has-text("+ New Conversation"),
-        div.bg-sidebar a:has(svg) {{
-            background-color: {primary} !important;
-            color: #101010 !important;
-            font-weight: 700 !important;
-            border-radius: 6px !important;
-            transition: opacity 0.15s ease, transform 0.1s ease !important;
+        /* When Sidebar is Collapsed */
+        div.flex[style*="width: 0px"] > div > div.bg-sidebar,
+        div.flex[style*="width: 0%"] > div > div.bg-sidebar,
+        div.flex[style*="display: none"] > div > div.bg-sidebar,
+        div.bg-sidebar[style*="width: 0px"],
+        div.bg-sidebar:empty {{
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            display: none !important;
         }}
-        div.bg-sidebar a[href*="/chat"]:hover {{
-            opacity: 0.9 !important;
-            transform: translateY(-1px) !important;
-        }}
-        div.bg-sidebar a[href*="/chat"] * {{
-            color: #101010 !important;
-            font-weight: 700 !important;
+        div.flex[style*="width: 0px"] > div > div.bg-sidebar::before,
+        div.flex[style*="width: 0%"] > div > div.bg-sidebar::before,
+        div.bg-sidebar[style*="width: 0px"]::before {{
+            display: none !important;
+            content: none !important;
         }}
 
-        /* Sidebar Section Titles & Crisp Text */
+        /* Inner Sidebar Resets */
+        div.bg-sidebar div:not(.settings-modal-container *),
+        div.bg-sidebar section:not(.settings-modal-container *),
+        div.bg-sidebar button:not(.settings-modal-container *),
+        div.bg-sidebar a:not(.settings-modal-container *) {{
+            border: none !important;
+        }}
+        div.bg-sidebar div::before,
+        div.bg-sidebar section::before {{
+            content: none !important;
+        }}
+        div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar::before {{
+            content: "Sidebar" !important;
+        }}
+
+        /* Sidebar Section Titles */
         div.bg-sidebar div.flex.items-center.justify-between.py-1.px-2 {{
             background-color: transparent !important;
-            color: {primary} !important;
+            color: {on_surface_variant} !important;
             font-size: 11px !important;
             font-weight: 700 !important;
             text-transform: uppercase !important;
@@ -287,7 +302,7 @@ def generate_css(colors: dict) -> str:
             padding-bottom: 4px !important;
             padding-left: 6px !important;
             padding-right: 6px !important;
-            opacity: 0.9 !important;
+            opacity: 0.85 !important;
         }}
 
         /* Sidebar Item Rows */
@@ -295,7 +310,6 @@ def generate_css(colors: dict) -> str:
         div.bg-sidebar button.group\\/headerbtn,
         div.bg-sidebar button {{
             background-color: transparent !important;
-            color: {on_surface} !important;
             border-radius: 6px !important;
             margin-bottom: 2px !important;
             transition: background-color 0.1s ease, color 0.1s ease !important;
@@ -306,7 +320,7 @@ def generate_css(colors: dict) -> str:
         div.bg-sidebar button.group\\/headerbtn:hover,
         div.bg-sidebar button:hover {{
             background-color: {surface_variant} !important;
-            color: {primary} !important;
+            color: {on_surface} !important;
         }}
 
         /* Sidebar Scroll Container */
@@ -359,14 +373,6 @@ def generate_css(colors: dict) -> str:
             z-index: 50 !important;
             pointer-events: none !important;
             border: none !important;
-        }}
-
-        /* Top Workspace Title Bar (e.g. "Arch Linux Maintainance / Hyprland ricing") */
-        div.relative.z-0.flex-1 button.rounded-full,
-        div.relative.z-0.flex-1 .truncate.flex-1.min-w-0,
-        div.relative.z-0.flex-1 div.shrink-0 span {{
-            color: {on_surface} !important;
-            font-weight: 600 !important;
         }}
 
         /* Main Workspace Split Divider */
@@ -449,17 +455,6 @@ def generate_css(colors: dict) -> str:
             background: transparent !important;
         }}
 
-        /* Send Button Accent Pill */
-        button[title*="Send message"]:not(:disabled),
-        div[class*="bg-card-border"] button:has(svg):last-child:not(:disabled) {{
-            background-color: {primary} !important;
-            color: #101010 !important;
-        }}
-        button[title*="Send message"]:not(:disabled) svg {{
-            color: #101010 !important;
-            fill: #101010 !important;
-        }}
-
         /* ===== 5. Scrollbars ===== */
         ::-webkit-scrollbar {{
             width: 4px !important;
@@ -509,9 +504,7 @@ def inject_cdp(css: str):
                                                     el.id = "antigravity-boxed-theme-style";
                                                     (document.head || document.documentElement).appendChild(el);
                                                 }}
-                                                if (el.textContent !== ${{JSON.stringify({escaped_css})}}) {{
-                                                    el.textContent = ${{JSON.stringify({escaped_css})}};
-                                                }}
+                                                el.textContent = ${{JSON.stringify({escaped_css})}};
                                             }}
                                             if (document.readyState === "loading") {{
                                                 document.addEventListener("DOMContentLoaded", applyTheme);
@@ -519,7 +512,8 @@ def inject_cdp(css: str):
                                                 applyTheme();
                                             }}
                                             const observer = new MutationObserver(() => {{
-                                                if (!document.getElementById("antigravity-boxed-theme-style")) {{
+                                                let el = document.getElementById("antigravity-boxed-theme-style");
+                                                if (!el || el.textContent !== ${{JSON.stringify({escaped_css})}}) {{
                                                     applyTheme();
                                                 }}
                                             }});
@@ -540,10 +534,8 @@ def inject_cdp(css: str):
                                                 el.id = "antigravity-boxed-theme-style";
                                                 (document.head || document.documentElement).appendChild(el);
                                             }}
-                                            if (el.textContent !== ${{JSON.stringify({escaped_css})}}) {{
-                                                el.textContent = ${{JSON.stringify({escaped_css})}};
-                                            }}
-                                            return "Live Injected!";
+                                            el.textContent = ${{JSON.stringify({escaped_css})}};
+                                            return "Clean Theme Applied!";
                                         }})()
                                     `,
                                     returnByValue: true
@@ -588,7 +580,7 @@ def apply_theme():
             f.write(css)
 
     inject_cdp(css)
-    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (1:1 Spotify Match) (Primary: {primary})")
+    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (Pristine Clean) (Primary: {primary})")
 
 
 def main():

@@ -1,6 +1,6 @@
 
         :root, .dark, body {
-            /* 1:1 Spotify Color Engine */
+            /* Pure Boxed Color Engine */
             --background: #292714 !important;
             --sidebar: #292714 !important;
             --sidebar-secondary: #454121 !important;
@@ -192,29 +192,43 @@
             border: none !important;
         }
 
-        /* Solid Bright Pill for "+ New Conversation" Button (Matching Spotify "All" Pill) */
-        div.bg-sidebar a[href*="/chat"],
-        div.bg-sidebar button:has-text("+ New Conversation"),
-        div.bg-sidebar a:has(svg) {
-            background-color: #f5f0c9 !important;
-            color: #101010 !important;
-            font-weight: 700 !important;
-            border-radius: 6px !important;
-            transition: opacity 0.15s ease, transform 0.1s ease !important;
+        /* When Sidebar is Collapsed */
+        div.flex[style*="width: 0px"] > div > div.bg-sidebar,
+        div.flex[style*="width: 0%"] > div > div.bg-sidebar,
+        div.flex[style*="display: none"] > div > div.bg-sidebar,
+        div.bg-sidebar[style*="width: 0px"],
+        div.bg-sidebar:empty {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            display: none !important;
         }
-        div.bg-sidebar a[href*="/chat"]:hover {
-            opacity: 0.9 !important;
-            transform: translateY(-1px) !important;
-        }
-        div.bg-sidebar a[href*="/chat"] * {
-            color: #101010 !important;
-            font-weight: 700 !important;
+        div.flex[style*="width: 0px"] > div > div.bg-sidebar::before,
+        div.flex[style*="width: 0%"] > div > div.bg-sidebar::before,
+        div.bg-sidebar[style*="width: 0px"]::before {
+            display: none !important;
+            content: none !important;
         }
 
-        /* Sidebar Section Titles & Crisp Text */
+        /* Inner Sidebar Resets */
+        div.bg-sidebar div:not(.settings-modal-container *),
+        div.bg-sidebar section:not(.settings-modal-container *),
+        div.bg-sidebar button:not(.settings-modal-container *),
+        div.bg-sidebar a:not(.settings-modal-container *) {
+            border: none !important;
+        }
+        div.bg-sidebar div::before,
+        div.bg-sidebar section::before {
+            content: none !important;
+        }
+        div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar::before {
+            content: "Sidebar" !important;
+        }
+
+        /* Sidebar Section Titles */
         div.bg-sidebar div.flex.items-center.justify-between.py-1.px-2 {
             background-color: transparent !important;
-            color: #f5f0c9 !important;
+            color: #b6b5af !important;
             font-size: 11px !important;
             font-weight: 700 !important;
             text-transform: uppercase !important;
@@ -223,7 +237,7 @@
             padding-bottom: 4px !important;
             padding-left: 6px !important;
             padding-right: 6px !important;
-            opacity: 0.9 !important;
+            opacity: 0.85 !important;
         }
 
         /* Sidebar Item Rows */
@@ -231,7 +245,6 @@
         div.bg-sidebar button.group\/headerbtn,
         div.bg-sidebar button {
             background-color: transparent !important;
-            color: #f3f3f2 !important;
             border-radius: 6px !important;
             margin-bottom: 2px !important;
             transition: background-color 0.1s ease, color 0.1s ease !important;
@@ -242,7 +255,7 @@
         div.bg-sidebar button.group\/headerbtn:hover,
         div.bg-sidebar button:hover {
             background-color: #454121 !important;
-            color: #f5f0c9 !important;
+            color: #f3f3f2 !important;
         }
 
         /* Sidebar Scroll Container */
@@ -295,14 +308,6 @@
             z-index: 50 !important;
             pointer-events: none !important;
             border: none !important;
-        }
-
-        /* Top Workspace Title Bar (e.g. "Arch Linux Maintainance / Hyprland ricing") */
-        div.relative.z-0.flex-1 button.rounded-full,
-        div.relative.z-0.flex-1 .truncate.flex-1.min-w-0,
-        div.relative.z-0.flex-1 div.shrink-0 span {
-            color: #f3f3f2 !important;
-            font-weight: 600 !important;
         }
 
         /* Main Workspace Split Divider */
@@ -383,17 +388,6 @@
             color: #f3f3f2 !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             background: transparent !important;
-        }
-
-        /* Send Button Accent Pill */
-        button[title*="Send message"]:not(:disabled),
-        div[class*="bg-card-border"] button:has(svg):last-child:not(:disabled) {
-            background-color: #f5f0c9 !important;
-            color: #101010 !important;
-        }
-        button[title*="Send message"]:not(:disabled) svg {
-            color: #101010 !important;
-            fill: #101010 !important;
         }
 
         /* ===== 5. Scrollbars ===== */
