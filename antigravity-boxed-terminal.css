@@ -1,6 +1,6 @@
 
         :root, .dark, body {
-            /* Pure Boxed Color Engine */
+            /* 1:1 Pure Boxed Color Engine */
             --background: #292714 !important;
             --sidebar: #292714 !important;
             --sidebar-secondary: #454121 !important;
@@ -23,15 +23,15 @@
             box-sizing: border-box !important;
         }
 
-        /* ===== 1. Master Root Window Surface ===== */
+        /* ===== 1. Master Root Window Surface (Translucent Glass matching Spotify) ===== */
         html,
         body,
         #root,
         div[class*="h-screen"][class*="w-screen"],
         div[class*="relative w-screen"],
         div.h-full.w-full {
-            background-color: #292714 !important;
-            background: #292714 !important;
+            background-color: transparent !important;
+            background: transparent !important;
             border: none !important;
             outline: none !important;
             box-shadow: none !important;
@@ -78,7 +78,8 @@
             height: 75vh !important;
             min-height: 520px !important;
             max-height: 85vh !important;
-            background-color: #292714 !important;
+            background-color: rgba(41, 39, 20, 0.85) !important;
+            backdrop-filter: blur(12px) !important;
             border: 1px solid #72705d !important;
             border-radius: 16px !important;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
@@ -127,7 +128,8 @@
         div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full {
             padding: 14px 10px 10px 10px !important;
             gap: 10px !important;
-            background-color: #292714 !important;
+            background-color: transparent !important;
+            background: transparent !important;
             box-sizing: border-box !important;
             min-width: 0 !important;
         }
@@ -157,7 +159,8 @@
         /* ===== 2. Left Sidebar Pane (.Sidebar.) ===== */
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar {
             position: relative !important;
-            background-color: #292714 !important;
+            background-color: rgba(41, 39, 20, 0.55) !important;
+            backdrop-filter: blur(8px) !important;
             border: 1px solid #72705d !important;
             border-radius: 8px !important;
             margin: 0 !important;
@@ -284,7 +287,8 @@
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border,
         div[class*="border-t border-border"][class*="flex-1"] {
             position: relative !important;
-            background-color: #292714 !important;
+            background-color: rgba(41, 39, 20, 0.55) !important;
+            backdrop-filter: blur(8px) !important;
             border: 1px solid #72705d !important;
             border-radius: 8px !important;
             margin: 0 !important;
