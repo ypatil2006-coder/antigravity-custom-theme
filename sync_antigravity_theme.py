@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-Antigravity 2.0 Dynamic Boxed Theme Synchronizer (Frosted Glass UI)
+Antigravity 2.0 Dynamic Boxed Theme Synchronizer (In-App Frosted Glass Engine)
 Reads Material 3 color tokens from ~/.config/noctalia/colors.json,
-generates Antigravity 2.0 Modular Boxed Terminal stylesheet with airy
-frosted glass surfaces (rgba(surface, 0.38) + blur(14px)), seamless cutout
-legends (Sidebar, Main, Prompt), bright primary borders matching Kitty and
-Spotify, high-contrast typography, 16px rounded Settings modal with inset
+generates Antigravity 2.0 Modular Boxed Terminal stylesheet with in-app
+frosted glass surfaces (rgba(surface, 0.38) + blur(14px)), CDP native
+transparent backing override (no Hyprland window rule required), seamless
+cutout legends (Sidebar, Main, Prompt), bright primary borders matching Kitty
+and Spotify, high-contrast typography, 16px rounded Settings modal with inset
 floating divider, compact sidebar proportions, fluid flex layout, and live-injects
 CSS into running Antigravity Electron instances via DevTools CDP with Promise-awaited
 WebSocket completion.
@@ -68,7 +69,7 @@ def generate_css(colors: dict) -> str:
 
     return f"""
         :root, .dark, body {{
-            /* Pure Color Engine */
+            /* In-App Pure Glass Color Engine */
             --background: {surface} !important;
             --sidebar: {surface} !important;
             --sidebar-secondary: {surface_variant} !important;
@@ -91,7 +92,7 @@ def generate_css(colors: dict) -> str:
             box-sizing: border-box !important;
         }}
 
-        /* ===== 1. Master Root Window Surface (Transparent Canvas) ===== */
+        /* ===== 1. Master Root Window Surface (In-App Transparent Canvas) ===== */
         html,
         body,
         #root,
@@ -497,7 +498,7 @@ def generate_css(colors: dict) -> str:
 
 
 def inject_cdp(css: str):
-    """Live inject CSS into running Antigravity Electron via CDP with permanent reload persistence."""
+    """Live inject CSS into running Antigravity Electron via CDP with in-app transparent backing."""
     if not os.path.exists(DEVTOOLS_PORT_FILE):
         return
 
@@ -519,6 +520,13 @@ def inject_cdp(css: str):
                             ws.send(JSON.stringify({{ id: 1, method: "Page.enable" }}));
                             ws.send(JSON.stringify({{
                                 id: 2,
+                                method: "Emulation.setDefaultBackgroundColorOverride",
+                                params: {{
+                                    color: {{ r: 0, g: 0, b: 0, a: 0 }}
+                                }}
+                            }}));
+                            ws.send(JSON.stringify({{
+                                id: 3,
                                 method: "Page.addScriptToEvaluateOnNewDocument",
                                 params: {{
                                     source: `
@@ -549,7 +557,7 @@ def inject_cdp(css: str):
                                 }}
                             }}));
                             ws.send(JSON.stringify({{
-                                id: 3,
+                                id: 4,
                                 method: "Runtime.evaluate",
                                 params: {{
                                     expression: `
@@ -561,7 +569,7 @@ def inject_cdp(css: str):
                                                 (document.head || document.documentElement).appendChild(el);
                                             }}
                                             el.textContent = ${{JSON.stringify({escaped_css})}};
-                                            return "Lower Opacity Frosted Glass Injected!";
+                                            return "In-App Frosted Glass Applied!";
                                         }})()
                                     `,
                                     returnByValue: true
@@ -570,7 +578,7 @@ def inject_cdp(css: str):
                         }};
                         ws.onmessage = (e) => {{
                             const data = JSON.parse(e.data);
-                            if (data.id === 3) {{
+                            if (data.id === 4) {{
                                 ws.close();
                                 resolve();
                             }}
@@ -606,7 +614,7 @@ def apply_theme():
             f.write(css)
 
     inject_cdp(css)
-    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (Lower Opacity Glass) (Primary: {primary})")
+    print(f"✓ Generated & Live-Injected Antigravity 2.0 In-App Frosted Glass Theme (Primary: {primary})")
 
 
 def main():
