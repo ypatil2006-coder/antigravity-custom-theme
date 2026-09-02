@@ -71,7 +71,7 @@
 ### Option 1: One-Line Automatic Install (Recommended)
 
 ```bash
-git clone https://github.com/ypatil20066/antigravity-custom-theme.git ~/.config/antigravity-custom-theme
+git clone https://github.com/ypatil2006-coder/antigravity-custom-theme.git ~/.config/antigravity-custom-theme
 cd ~/.config/antigravity-custom-theme
 chmod +x install.sh sync_antigravity_theme.py
 ./install.sh
@@ -81,7 +81,7 @@ chmod +x install.sh sync_antigravity_theme.py
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/ypatil20066/antigravity-custom-theme.git
+   git clone https://github.com/ypatil2006-coder/antigravity-custom-theme.git
    cd antigravity-custom-theme
    ```
 
@@ -150,7 +150,7 @@ python3 sync_antigravity_theme.py --watch
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/ypatil20066/antigravity-custom-theme/issues).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/ypatil2006-coder/antigravity-custom-theme/issues).
 
 ---
 

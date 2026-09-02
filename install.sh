@@ -3,7 +3,7 @@
 # Google Antigravity 2.0 Dynamic Boxed Terminal Theme Installer
 # ==============================================================================
 # Automated installer for Antigravity custom theme & live-reloading engine.
-# Repository: https://github.com/ypatil20066/antigravity-custom-theme
+# Repository: https://github.com/ypatil2006-coder/antigravity-custom-theme
 # ==============================================================================
 
 set -e
