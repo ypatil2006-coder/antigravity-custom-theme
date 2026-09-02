@@ -1,0 +1,410 @@
+
+        :root, .dark, body {
+            /* 1:1 Pure Spotify Color Engine */
+            --background: #292714 !important;
+            --sidebar: #292714 !important;
+            --sidebar-secondary: #454121 !important;
+            --sidebar-muted: #292714 !important;
+            --card: #454121 !important;
+            --card-border: #72705d !important;
+            --border: #72705d !important;
+            --primary: #f5f0c9 !important;
+            --primary-foreground: #101010 !important;
+            --foreground: #f3f3f2 !important;
+            --muted-foreground: #b6b5af !important;
+            --secondary: #454121 !important;
+            --secondary-foreground: #f3f3f2 !important;
+            --font-sans: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace !important;
+            --font-mono: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace !important;
+        }
+
+        * {
+            font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace !important;
+            box-sizing: border-box !important;
+        }
+
+        /* ===== 1. Master Root Window Surface ===== */
+        html,
+        body,
+        #root,
+        div[class*="h-screen"][class*="w-screen"],
+        div[class*="relative w-screen"],
+        div.h-full.w-full {
+            background-color: #292714 !important;
+            background: #292714 !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Remove Top Title / Nav Menu Bar */
+        div.shrink-0:has([data-testid="title-menu-bar"]),
+        [data-testid="title-menu-bar"],
+        div.shrink-0[style*="35px"],
+        div.flex.items-center.gap-1.px-2.h-full.bg-sidebar.w-full,
+        div.flex.items-center.justify-end.shrink-0 {
+            display: none !important;
+            height: 0 !important;
+            min-height: 0 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            overflow: hidden !important;
+        }
+
+        /* ===== Settings Modal Dialog: 16px Radius & Inset Floating Divider ===== */
+        .settings-modal-backdrop,
+        div[class*="settings-modal-backdrop"] {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            position: fixed !important;
+            inset: 0 !important;
+            z-index: 5000 !important;
+            background: rgba(0, 0, 0, 0.65) !important;
+            backdrop-filter: blur(8px) !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        .settings-modal-container,
+        div.settings-modal-container,
+        div[class*="settings-modal-container"],
+        div[class*="settings-modal"] > div {
+            display: flex !important;
+            flex-direction: column !important;
+            width: 950px !important;
+            max-width: 90vw !important;
+            height: 75vh !important;
+            min-height: 520px !important;
+            max-height: 85vh !important;
+            background-color: #292714 !important;
+            border: 1px solid #72705d !important;
+            border-radius: 16px !important;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
+            overflow: hidden !important;
+            position: relative !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        .settings-modal-container > div.flex-1,
+        div[class*="settings-modal-container"] > div.flex-1 {
+            height: 100% !important;
+            min-height: 0 !important;
+            flex: 1 1 0% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            border: none !important;
+        }
+
+        /* Inset Floating Vertical Divider Line with 16px Top & Bottom Margin */
+        .settings-modal-container div.relative.flex.w-full.h-full.outline-none > div:first-child,
+        .settings-modal-container div[style*="width: 200px"],
+        .settings-modal-container div.flex:has(> div.h-full.w-full.flex.flex-col.bg-sidebar) {
+            border-right: none !important;
+            border-top: none !important;
+            border-bottom: none !important;
+            border-left: none !important;
+            position: relative !important;
+        }
+
+        .settings-modal-container div.relative.flex.w-full.h-full.outline-none > div:first-child::after,
+        .settings-modal-container div[style*="width: 200px"]::after {
+            content: "" !important;
+            position: absolute !important;
+            top: 16px !important;
+            bottom: 16px !important;
+            right: 0 !important;
+            width: 1px !important;
+            background-color: #72705d !important;
+            pointer-events: none !important;
+            z-index: 20 !important;
+        }
+
+        /* Fluid Layout Container */
+        div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full {
+            padding: 14px 10px 10px 10px !important;
+            gap: 10px !important;
+            background-color: #292714 !important;
+            box-sizing: border-box !important;
+            min-width: 0 !important;
+        }
+
+        /* Position Absolute Floating Top-Left Buttons (Toggle + Nav) INSIDE the Sidebar Box */
+        div.absolute.top-0.left-0.flex.items-center.shrink-0.z-50,
+        div[class*="absolute top-0 left-0"][class*="z-50"] {
+            top: 20px !important;
+            left: 16px !important;
+            height: 26px !important;
+            z-index: 50 !important;
+            pointer-events: auto !important;
+        }
+
+        /* Remove Extra 1px Divider Line between Outer Sidebar and Main */
+        div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full > div[class*="w-[1px]"],
+        div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full > div.bg-border {
+            display: none !important;
+            width: 0 !important;
+        }
+
+        /* Ensure Sidebar Parent Columns Do Not Clip Badges */
+        div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full > div.flex,
+        div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full > div.flex > div.h-full.w-full,
+        div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full > div:last-child {
+            overflow: visible !important;
+        }
+
+        /* ===== 2. Left Sidebar Pane (.Sidebar.) ===== */
+        div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar {
+            position: relative !important;
+            background-color: #292714 !important;
+            border: 1px solid #72705d !important;
+            border-radius: 8px !important;
+            margin: 0 !important;
+            height: 100% !important;
+            padding: 30px 6px 6px 6px !important;
+            overflow: visible !important;
+            box-sizing: border-box !important;
+            min-width: 0 !important;
+            transition: border-color 0.15s ease !important;
+        }
+        div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar:hover {
+            border-color: #f5f0c9 !important;
+        }
+        div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar::before {
+            content: "Sidebar" !important;
+            position: absolute !important;
+            top: 0 !important;
+            right: 20px !important;
+            left: auto !important;
+            transform: translateY(-50%) !important;
+            padding: 0 6px !important;
+            background-color: #292714 !important;
+            color: #f5f0c9 !important;
+            font-family: "JetBrainsMono Nerd Font", monospace !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            line-height: 1 !important;
+            z-index: 50 !important;
+            pointer-events: none !important;
+            border: none !important;
+        }
+
+        /* When Sidebar is Collapsed */
+        div.flex[style*="width: 0px"] > div > div.bg-sidebar,
+        div.flex[style*="width: 0%"] > div > div.bg-sidebar,
+        div.flex[style*="display: none"] > div > div.bg-sidebar,
+        div.bg-sidebar[style*="width: 0px"],
+        div.bg-sidebar:empty {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            display: none !important;
+        }
+        div.flex[style*="width: 0px"] > div > div.bg-sidebar::before,
+        div.flex[style*="width: 0%"] > div > div.bg-sidebar::before,
+        div.bg-sidebar[style*="width: 0px"]::before {
+            display: none !important;
+            content: none !important;
+        }
+
+        /* Inner Sidebar Resets */
+        div.bg-sidebar div:not(.settings-modal-container *),
+        div.bg-sidebar section:not(.settings-modal-container *),
+        div.bg-sidebar button:not(.settings-modal-container *),
+        div.bg-sidebar a:not(.settings-modal-container *) {
+            border: none !important;
+        }
+        div.bg-sidebar div::before,
+        div.bg-sidebar section::before {
+            content: none !important;
+        }
+        div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar::before {
+            content: "Sidebar" !important;
+        }
+
+        /* Sidebar Section Titles */
+        div.bg-sidebar div.flex.items-center.justify-between.py-1.px-2 {
+            background-color: transparent !important;
+            color: #b6b5af !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            padding-top: 10px !important;
+            padding-bottom: 4px !important;
+            padding-left: 6px !important;
+            padding-right: 6px !important;
+            opacity: 0.85 !important;
+        }
+
+        /* Sidebar Item Rows & Settings Button */
+        div.bg-sidebar div.cursor-pointer.rounded-lg,
+        div.bg-sidebar button.group\/headerbtn,
+        div.bg-sidebar button {
+            background-color: transparent !important;
+            border-radius: 6px !important;
+            margin-bottom: 2px !important;
+            transition: background-color 0.1s ease, color 0.1s ease !important;
+            cursor: pointer !important;
+            pointer-events: auto !important;
+        }
+        div.bg-sidebar div.cursor-pointer.rounded-lg:hover,
+        div.bg-sidebar button.group\/headerbtn:hover,
+        div.bg-sidebar button:hover {
+            background-color: #454121 !important;
+            color: #f3f3f2 !important;
+        }
+
+        /* Sidebar Scroll Container */
+        div.bg-sidebar .overflow-y-auto {
+            display: flex !important;
+            flex-direction: column !important;
+            height: 100% !important;
+            max-height: 100% !important;
+            padding-left: 4px !important;
+            padding-right: 4px !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+        }
+
+        /* ===== 3. Right Main Workspace Pane (.Main.) ===== */
+        div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border,
+        div[class*="border-t border-border"][class*="flex-1"] {
+            position: relative !important;
+            background-color: #292714 !important;
+            border: 1px solid #72705d !important;
+            border-radius: 8px !important;
+            margin: 0 !important;
+            height: 100% !important;
+            min-width: 0 !important;
+            flex: 1 1 0% !important;
+            padding: 16px 14px 14px 14px !important;
+            overflow: visible !important;
+            box-sizing: border-box !important;
+            transition: border-color 0.15s ease !important;
+        }
+        div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border:hover,
+        div[class*="border-t border-border"][class*="flex-1"]:hover {
+            border-color: #f5f0c9 !important;
+        }
+        div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border::before,
+        div[class*="border-t border-border"][class*="flex-1"]::before {
+            content: "Main" !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 20px !important;
+            transform: translateY(-50%) !important;
+            padding: 0 6px !important;
+            background-color: #292714 !important;
+            color: #f5f0c9 !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            line-height: 1 !important;
+            z-index: 50 !important;
+            pointer-events: none !important;
+            border: none !important;
+        }
+
+        /* ===== Main Workspace Internal Pane Divider (Chat vs Artifact / Side Pane) ===== */
+        div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border div.relative.flex.w-full.h-full > div.bg-border,
+        div[class*="border-t border-border"] div.relative.flex.w-full.h-full > div.bg-border {
+            display: block !important;
+            width: 1px !important;
+            background-color: #72705d !important;
+            margin: 16px 8px !important;
+            height: calc(100% - 32px) !important;
+            align-self: center !important;
+            opacity: 0.9 !important;
+            transition: background-color 0.15s ease, opacity 0.15s ease !important;
+        }
+        div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border div.relative.flex.w-full.h-full > div.bg-border:hover,
+        div[class*="border-t border-border"] div.relative.flex.w-full.h-full > div.bg-border:hover {
+            background-color: #f5f0c9 !important;
+            opacity: 1 !important;
+        }
+
+        /* ===== 4. Prompt Container (.Prompt.) ===== */
+        div[class*="bg-card-border"] {
+            position: relative !important;
+            background: transparent !important;
+            background-color: transparent !important;
+            border: 1px solid #72705d !important;
+            border-radius: 8px !important;
+            padding: 0 !important;
+            overflow: visible !important;
+            box-shadow: none !important;
+            transition: border-color 0.15s ease !important;
+        }
+        div[class*="bg-card-border"]:hover,
+        div[class*="bg-card-border"]:focus-within {
+            border-color: #f5f0c9 !important;
+        }
+
+        /* Clean Notch Mask: Solid surface background erases the border line behind the text */
+        div[class*="bg-card-border"]::before {
+            content: "Prompt" !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 14px !important;
+            transform: translateY(-50%) !important;
+            padding: 0 6px !important;
+            background-color: #292714 !important;
+            color: #f5f0c9 !important;
+            font-family: "JetBrainsMono Nerd Font", monospace !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            line-height: 1 !important;
+            z-index: 50 !important;
+            pointer-events: none !important;
+            border: none !important;
+        }
+
+        /* Inner Structure Resets: Clean Transparent Container */
+        div[class*="bg-card-border"] div.bg-card,
+        div[class*="bg-card-border"] > div:first-child {
+            background: transparent !important;
+            background-color: transparent !important;
+            border: none !important;
+            border-radius: 8px 8px 0 0 !important;
+            padding: 4px 6px !important;
+        }
+
+        /* Prompt Footer Divider Line (Local v status bar) */
+        div[class*="bg-card-border"] > div.grid,
+        div[class*="bg-card-border"] > div:last-child:not(:first-child) {
+            background: transparent !important;
+            background-color: transparent !important;
+            border-top: 1px solid #72705d !important;
+            border-radius: 0 0 7px 7px !important;
+        }
+
+        /* Textarea Typography & Color */
+        div[class*="bg-card-border"] [contenteditable],
+        div[class*="bg-card-border"] textarea {
+            color: #f3f3f2 !important;
+            font-family: "JetBrainsMono Nerd Font", monospace !important;
+            background: transparent !important;
+        }
+
+        /* ===== 5. Scrollbars ===== */
+        ::-webkit-scrollbar {
+            width: 4px !important;
+            height: 4px !important;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #72705d !important;
+            border-radius: 4px !important;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f5f0c9 !important;
+        }
+    
