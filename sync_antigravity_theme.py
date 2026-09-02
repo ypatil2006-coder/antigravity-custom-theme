@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 """
-Google Antigravity 2.0 Dynamic Boxed Terminal Theme & Styling Synchronizer
-==========================================================================
-Reads Material 3 color tokens (e.g. from Matugen / Noctalia / Wallust / Pywal)
-or CLI arguments, generates the modular Boxed Terminal stylesheet with seamless
-notched legends, and live-injects CSS into running Antigravity Electron instances
-via DevTools CDP with reload persistence.
+Antigravity 2.0 Dynamic Boxed Theme Synchronizer (Bright Primary Borders)
+Reads Material 3 color tokens from ~/.config/noctalia/colors.json,
+generates Antigravity 2.0 Modular Boxed Terminal stylesheet with vibrant
+primary-colored borders (matching Spotify and Kitty terminal), seamless
+cutout legends (Sidebar, Main, Prompt), floating split divider, 16px rounded
+Settings modal, compact sidebar proportions, fluid flex layout, and live-injects
+CSS into running Antigravity Electron instances via DevTools CDP with Promise-awaited
+WebSocket completion.
 
-Repository: https://github.com/ypatil20066/antigravity-custom-theme
-License: MIT
+Usage:
+    python3 sync_antigravity_theme.py           # Sync & inject live
+    python3 sync_antigravity_theme.py --watch   # Watch & sync on change
 """
 
 import json
@@ -19,18 +22,19 @@ import hashlib
 import argparse
 import subprocess
 
-DEFAULT_COLORS_PATHS = [
-    os.path.expanduser("~/.config/noctalia/colors.json"),
-    os.path.expanduser("~/.config/matugen/colors.json"),
-    os.path.expanduser("~/.cache/wal/colors.json"),
-]
+COLORS_PATH = (
+    "/home/yash/.config/noctalia/colors.json"
+    if os.path.exists("/home/yash/.config/noctalia/colors.json")
+    else os.path.expanduser("~/.config/noctalia/colors.json")
+)
 
 DEVTOOLS_PORT_FILE = os.path.expanduser("~/.config/Antigravity/DevToolsActivePort")
 
 OUTPUT_DIRS = [
     os.path.expanduser("~/.gemini/antigravity"),
     os.path.expanduser("~/.gemini/antigravity-cli"),
-    os.path.dirname(os.path.abspath(__file__))
+    os.path.expanduser("~/Projects/boxed-terminal-theme-suite/antigravity"),
+    os.path.expanduser("~/Projects/antigravity-custom-theme")
 ]
 
 
@@ -49,33 +53,26 @@ def lighten(hex_color: str, amount: float) -> str:
     return f"#{r:02x}{g:02x}{b:02x}"
 
 
-def get_active_colors_path():
-    for p in DEFAULT_COLORS_PATHS:
-        if os.path.exists(p):
-            return p
-    return None
-
-
 def generate_css(colors: dict) -> str:
-    primary = colors.get("mPrimary") or colors.get("primary", "#f96553")
-    surface = colors.get("mSurface") or colors.get("surface", "#291614")
-    surface_variant = colors.get("mSurfaceVariant") or colors.get("surface_variant", "#452521")
-    on_surface = colors.get("mOnSurface") or colors.get("on_surface", "#f3f2f2")
-    on_surface_variant = colors.get("mOnSurfaceVariant") or colors.get("on_surface_variant", "#b6b0af")
-    outline = colors.get("mOutline") or colors.get("outline", "#746260")
-    error = colors.get("mError") or colors.get("error", "#d91f08")
+    primary = colors.get("mPrimary", "#f96553")
+    surface = colors.get("mSurface", "#291614")
+    surface_variant = colors.get("mSurfaceVariant", "#452521")
+    on_surface = colors.get("mOnSurface", "#f3f2f2")
+    on_surface_variant = colors.get("mOnSurfaceVariant", "#b6b0af")
+    outline = colors.get("mOutline", "#746260")
+    error = colors.get("mError", "#d91f08")
     primary_hover = lighten(primary, 0.15)
 
     return f"""
         :root, .dark, body {{
-            /* 1:1 Pure Boxed Color Engine */
+            /* 1:1 Pure Spotify Color Engine */
             --background: {surface} !important;
             --sidebar: {surface} !important;
             --sidebar-secondary: {surface_variant} !important;
             --sidebar-muted: {surface} !important;
             --card: {surface_variant} !important;
-            --card-border: {outline} !important;
-            --border: {outline} !important;
+            --card-border: {primary} !important;
+            --border: {primary} !important;
             --primary: {primary} !important;
             --primary-foreground: #101010 !important;
             --foreground: {on_surface} !important;
@@ -147,7 +144,7 @@ def generate_css(colors: dict) -> str:
             min-height: 520px !important;
             max-height: 85vh !important;
             background-color: {surface} !important;
-            border: 1px solid {outline} !important;
+            border: 1px solid {primary} !important;
             border-radius: 16px !important;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
             overflow: hidden !important;
@@ -186,7 +183,8 @@ def generate_css(colors: dict) -> str:
             bottom: 16px !important;
             right: 0 !important;
             width: 1px !important;
-            background-color: {outline} !important;
+            background-color: {primary} !important;
+            opacity: 0.6 !important;
             pointer-events: none !important;
             z-index: 20 !important;
         }}
@@ -228,7 +226,7 @@ def generate_css(colors: dict) -> str:
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar {{
             position: relative !important;
             background-color: {surface} !important;
-            border: 1px solid {outline} !important;
+            border: 1px solid {primary} !important;
             border-radius: 8px !important;
             margin: 0 !important;
             height: 100% !important;
@@ -239,7 +237,7 @@ def generate_css(colors: dict) -> str:
             transition: border-color 0.15s ease !important;
         }}
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar:hover {{
-            border-color: {primary} !important;
+            border-color: {primary_hover} !important;
         }}
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar::before {{
             content: "Sidebar" !important;
@@ -345,7 +343,7 @@ def generate_css(colors: dict) -> str:
         div[class*="border-t border-border"][class*="flex-1"] {{
             position: relative !important;
             background-color: {surface} !important;
-            border: 1px solid {outline} !important;
+            border: 1px solid {primary} !important;
             border-radius: 8px !important;
             margin: 0 !important;
             height: 100% !important;
@@ -358,7 +356,7 @@ def generate_css(colors: dict) -> str:
         }}
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border:hover,
         div[class*="border-t border-border"][class*="flex-1"]:hover {{
-            border-color: {primary} !important;
+            border-color: {primary_hover} !important;
         }}
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border::before,
         div[class*="border-t border-border"][class*="flex-1"]::before {{
@@ -385,11 +383,11 @@ def generate_css(colors: dict) -> str:
         div[class*="border-t border-border"] div.relative.flex.w-full.h-full > div.bg-border {{
             display: block !important;
             width: 1px !important;
-            background-color: {outline} !important;
+            background-color: {primary} !important;
+            opacity: 0.6 !important;
             margin: 16px 8px !important;
             height: calc(100% - 32px) !important;
             align-self: center !important;
-            opacity: 0.9 !important;
             transition: background-color 0.15s ease, opacity 0.15s ease !important;
         }}
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border div.relative.flex.w-full.h-full > div.bg-border:hover,
@@ -403,7 +401,7 @@ def generate_css(colors: dict) -> str:
             position: relative !important;
             background: transparent !important;
             background-color: transparent !important;
-            border: 1px solid {outline} !important;
+            border: 1px solid {primary} !important;
             border-radius: 8px !important;
             padding: 0 !important;
             overflow: visible !important;
@@ -412,7 +410,7 @@ def generate_css(colors: dict) -> str:
         }}
         div[class*="bg-card-border"]:hover,
         div[class*="bg-card-border"]:focus-within {{
-            border-color: {primary} !important;
+            border-color: {primary_hover} !important;
         }}
 
         /* Clean Notch Mask: Solid surface background erases the border line behind the text */
@@ -451,7 +449,8 @@ def generate_css(colors: dict) -> str:
         div[class*="bg-card-border"] > div:last-child:not(:first-child) {{
             background: transparent !important;
             background-color: transparent !important;
-            border-top: 1px solid {outline} !important;
+            border-top: 1px solid {primary} !important;
+            opacity: 0.8 !important;
             border-radius: 0 0 7px 7px !important;
         }}
 
@@ -573,25 +572,16 @@ def inject_cdp(css: str):
         pass
 
 
-def apply_theme(custom_colors_path=None):
-    colors_file = custom_colors_path or get_active_colors_path()
-    if not colors_file or not os.path.exists(colors_file):
-        # Fallback default dark palette
-        colors = {
-            "mPrimary": "#f96553",
-            "mSurface": "#291614",
-            "mSurfaceVariant": "#452521",
-            "mOnSurface": "#f3f2f2",
-            "mOnSurfaceVariant": "#b6b0af",
-            "mOutline": "#746260",
-            "mError": "#d91f08"
-        }
-    else:
-        with open(colors_file, "r") as f:
-            colors = json.load(f)
+def apply_theme():
+    if not os.path.exists(COLORS_PATH):
+        print(f"Palette not found at {COLORS_PATH}")
+        return
+
+    with open(COLORS_PATH, "r") as f:
+        colors = json.load(f)
 
     css = generate_css(colors)
-    primary = colors.get("mPrimary") or colors.get("primary", "#f96553")
+    primary = colors.get("mPrimary", "#f96553")
 
     for out_dir in OUTPUT_DIRS:
         os.makedirs(out_dir, exist_ok=True)
@@ -600,28 +590,26 @@ def apply_theme(custom_colors_path=None):
             f.write(css)
 
     inject_cdp(css)
-    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (Primary: {primary})")
+    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (Vibrant Primary Borders) (Primary: {primary})")
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Google Antigravity 2.0 Dynamic Boxed Theme Synchronizer")
+    parser = argparse.ArgumentParser(description="Antigravity 2.0 Boxed Theme Synchronizer")
     parser.add_argument("--watch", action="store_true", help="Watch for color palette changes")
-    parser.add_argument("--colors", type=str, help="Path to custom colors.json palette")
     args = parser.parse_args()
 
-    colors_path = args.colors or get_active_colors_path()
-    apply_theme(colors_path)
+    apply_theme()
 
-    if args.watch and colors_path:
-        print(f"👁 Watching {colors_path} for Antigravity theme updates...")
+    if args.watch:
+        print("👁 Watching colors.json for Antigravity theme updates...")
         last_hash = ""
         while True:
             try:
-                with open(colors_path, "rb") as f:
+                with open(COLORS_PATH, "rb") as f:
                     cur_hash = hashlib.md5(f.read()).hexdigest()
                 if cur_hash != last_hash:
                     last_hash = cur_hash
-                    apply_theme(colors_path)
+                    apply_theme()
                 time.sleep(1.0)
             except KeyboardInterrupt:
                 break

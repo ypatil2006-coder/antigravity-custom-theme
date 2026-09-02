@@ -6,8 +6,8 @@
             --sidebar-secondary: #454121 !important;
             --sidebar-muted: #292714 !important;
             --card: #454121 !important;
-            --card-border: #72705d !important;
-            --border: #72705d !important;
+            --card-border: #f5f0c9 !important;
+            --border: #f5f0c9 !important;
             --primary: #f5f0c9 !important;
             --primary-foreground: #101010 !important;
             --foreground: #f3f3f2 !important;
@@ -79,7 +79,7 @@
             min-height: 520px !important;
             max-height: 85vh !important;
             background-color: #292714 !important;
-            border: 1px solid #72705d !important;
+            border: 1px solid #f5f0c9 !important;
             border-radius: 16px !important;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
             overflow: hidden !important;
@@ -118,7 +118,8 @@
             bottom: 16px !important;
             right: 0 !important;
             width: 1px !important;
-            background-color: #72705d !important;
+            background-color: #f5f0c9 !important;
+            opacity: 0.6 !important;
             pointer-events: none !important;
             z-index: 20 !important;
         }
@@ -160,7 +161,7 @@
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar {
             position: relative !important;
             background-color: #292714 !important;
-            border: 1px solid #72705d !important;
+            border: 1px solid #f5f0c9 !important;
             border-radius: 8px !important;
             margin: 0 !important;
             height: 100% !important;
@@ -171,7 +172,7 @@
             transition: border-color 0.15s ease !important;
         }
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar:hover {
-            border-color: #f5f0c9 !important;
+            border-color: #f6f2d1 !important;
         }
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar::before {
             content: "Sidebar" !important;
@@ -277,7 +278,7 @@
         div[class*="border-t border-border"][class*="flex-1"] {
             position: relative !important;
             background-color: #292714 !important;
-            border: 1px solid #72705d !important;
+            border: 1px solid #f5f0c9 !important;
             border-radius: 8px !important;
             margin: 0 !important;
             height: 100% !important;
@@ -290,7 +291,7 @@
         }
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border:hover,
         div[class*="border-t border-border"][class*="flex-1"]:hover {
-            border-color: #f5f0c9 !important;
+            border-color: #f6f2d1 !important;
         }
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border::before,
         div[class*="border-t border-border"][class*="flex-1"]::before {
@@ -317,11 +318,11 @@
         div[class*="border-t border-border"] div.relative.flex.w-full.h-full > div.bg-border {
             display: block !important;
             width: 1px !important;
-            background-color: #72705d !important;
+            background-color: #f5f0c9 !important;
+            opacity: 0.6 !important;
             margin: 16px 8px !important;
             height: calc(100% - 32px) !important;
             align-self: center !important;
-            opacity: 0.9 !important;
             transition: background-color 0.15s ease, opacity 0.15s ease !important;
         }
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border div.relative.flex.w-full.h-full > div.bg-border:hover,
@@ -335,7 +336,7 @@
             position: relative !important;
             background: transparent !important;
             background-color: transparent !important;
-            border: 1px solid #72705d !important;
+            border: 1px solid #f5f0c9 !important;
             border-radius: 8px !important;
             padding: 0 !important;
             overflow: visible !important;
@@ -344,7 +345,7 @@
         }
         div[class*="bg-card-border"]:hover,
         div[class*="bg-card-border"]:focus-within {
-            border-color: #f5f0c9 !important;
+            border-color: #f6f2d1 !important;
         }
 
         /* Clean Notch Mask: Solid surface background erases the border line behind the text */
@@ -383,7 +384,8 @@
         div[class*="bg-card-border"] > div:last-child:not(:first-child) {
             background: transparent !important;
             background-color: transparent !important;
-            border-top: 1px solid #72705d !important;
+            border-top: 1px solid #f5f0c9 !important;
+            opacity: 0.8 !important;
             border-radius: 0 0 7px 7px !important;
         }
 
