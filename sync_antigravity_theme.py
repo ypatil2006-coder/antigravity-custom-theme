@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Antigravity 2.0 Dynamic Boxed Theme Synchronizer (Translucent Glass UI)
+Antigravity 2.0 Dynamic Boxed Theme Synchronizer (Luminous Surface Engine)
 Reads Material 3 color tokens from ~/.config/noctalia/colors.json,
-generates Antigravity 2.0 Modular Boxed Terminal stylesheet with translucent
-glass surface matching Spotify, seamless cutout legends (Sidebar, Main, Prompt),
-high-contrast typography, 16px rounded Settings modal with inset floating divider,
-compact sidebar proportions, fluid flex layout, and live-injects CSS into
-running Antigravity Electron instances via DevTools CDP with Promise-awaited
-WebSocket completion.
+generates Antigravity 2.0 Modular Boxed Terminal stylesheet with warm,
+luminous surface hierarchy matching Spotify cards, seamless cutout legends
+(Sidebar, Main, Prompt), high-contrast typography, 16px rounded Settings modal
+with inset floating divider, compact sidebar proportions, fluid flex layout,
+and live-injects CSS into running Antigravity Electron instances via DevTools CDP
+with Promise-awaited WebSocket completion.
 
 Usage:
     python3 sync_antigravity_theme.py           # Sync & inject live
@@ -62,24 +62,25 @@ def generate_css(colors: dict) -> str:
     outline = colors.get("mOutline", "#746260")
     error = colors.get("mError", "#d91f08")
     primary_hover = lighten(primary, 0.15)
-    r, g, b = hex_to_rgb(surface)
-    surface_rgb = f"{r}, {g}, {b}"
+
+    pane_bg = surface_variant
+    window_bg = surface
 
     return f"""
         :root, .dark, body {{
-            /* 1:1 Pure Boxed Color Engine */
-            --background: {surface} !important;
-            --sidebar: {surface} !important;
-            --sidebar-secondary: {surface_variant} !important;
-            --sidebar-muted: {surface} !important;
-            --card: {surface_variant} !important;
+            /* 1:1 Spotify Luminous Color Engine */
+            --background: {window_bg} !important;
+            --sidebar: {pane_bg} !important;
+            --sidebar-secondary: {lighten(pane_bg, 0.1)} !important;
+            --sidebar-muted: {window_bg} !important;
+            --card: {pane_bg} !important;
             --card-border: {outline} !important;
             --border: {outline} !important;
             --primary: {primary} !important;
             --primary-foreground: #101010 !important;
             --foreground: {on_surface} !important;
             --muted-foreground: {on_surface_variant} !important;
-            --secondary: {surface_variant} !important;
+            --secondary: {pane_bg} !important;
             --secondary-foreground: {on_surface} !important;
             --font-sans: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace !important;
             --font-mono: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace !important;
@@ -90,15 +91,15 @@ def generate_css(colors: dict) -> str:
             box-sizing: border-box !important;
         }}
 
-        /* ===== 1. Master Root Window Surface (Translucent Glass matching Spotify) ===== */
+        /* ===== 1. Master Root Window Surface ===== */
         html,
         body,
         #root,
         div[class*="h-screen"][class*="w-screen"],
         div[class*="relative w-screen"],
         div.h-full.w-full {{
-            background-color: transparent !important;
-            background: transparent !important;
+            background-color: {window_bg} !important;
+            background: {window_bg} !important;
             border: none !important;
             outline: none !important;
             box-shadow: none !important;
@@ -145,8 +146,7 @@ def generate_css(colors: dict) -> str:
             height: 75vh !important;
             min-height: 520px !important;
             max-height: 85vh !important;
-            background-color: rgba({surface_rgb}, 0.85) !important;
-            backdrop-filter: blur(12px) !important;
+            background-color: {pane_bg} !important;
             border: 1px solid {outline} !important;
             border-radius: 16px !important;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
@@ -195,8 +195,7 @@ def generate_css(colors: dict) -> str:
         div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full {{
             padding: 14px 10px 10px 10px !important;
             gap: 10px !important;
-            background-color: transparent !important;
-            background: transparent !important;
+            background-color: {window_bg} !important;
             box-sizing: border-box !important;
             min-width: 0 !important;
         }}
@@ -226,8 +225,7 @@ def generate_css(colors: dict) -> str:
         /* ===== 2. Left Sidebar Pane (.Sidebar.) ===== */
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar {{
             position: relative !important;
-            background-color: rgba({surface_rgb}, 0.55) !important;
-            backdrop-filter: blur(8px) !important;
+            background-color: {pane_bg} !important;
             border: 1px solid {outline} !important;
             border-radius: 8px !important;
             margin: 0 !important;
@@ -249,7 +247,7 @@ def generate_css(colors: dict) -> str:
             left: auto !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: {surface} !important;
+            background-color: {pane_bg} !important;
             color: {primary} !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             font-size: 11px !important;
@@ -324,7 +322,7 @@ def generate_css(colors: dict) -> str:
         div.bg-sidebar div.cursor-pointer.rounded-lg:hover,
         div.bg-sidebar button.group\\/headerbtn:hover,
         div.bg-sidebar button:hover {{
-            background-color: {surface_variant} !important;
+            background-color: {lighten(pane_bg, 0.08)} !important;
         }}
 
         div.bg-sidebar .truncate,
@@ -354,8 +352,7 @@ def generate_css(colors: dict) -> str:
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border,
         div[class*="border-t border-border"][class*="flex-1"] {{
             position: relative !important;
-            background-color: rgba({surface_rgb}, 0.55) !important;
-            backdrop-filter: blur(8px) !important;
+            background-color: {pane_bg} !important;
             border: 1px solid {outline} !important;
             border-radius: 8px !important;
             margin: 0 !important;
@@ -379,7 +376,7 @@ def generate_css(colors: dict) -> str:
             left: 20px !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: {surface} !important;
+            background-color: {pane_bg} !important;
             color: {primary} !important;
             font-size: 11px !important;
             font-weight: 700 !important;
@@ -441,7 +438,7 @@ def generate_css(colors: dict) -> str:
             left: 14px !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: {surface} !important;
+            background-color: {pane_bg} !important;
             color: {primary} !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             font-size: 11px !important;
@@ -558,7 +555,7 @@ def inject_cdp(css: str):
                                                 (document.head || document.documentElement).appendChild(el);
                                             }}
                                             el.textContent = ${{JSON.stringify({escaped_css})}};
-                                            return "Translucent Glass Theme Applied!";
+                                            return "Luminous Surface Applied!";
                                         }})()
                                     `,
                                     returnByValue: true
@@ -603,7 +600,7 @@ def apply_theme():
             f.write(css)
 
     inject_cdp(css)
-    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (Translucent Glass UI) (Primary: {primary})")
+    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (Luminous Surface) (Primary: {primary})")
 
 
 def main():

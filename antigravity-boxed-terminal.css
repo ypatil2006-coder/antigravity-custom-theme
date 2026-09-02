@@ -1,19 +1,19 @@
 
         :root, .dark, body {
-            /* 1:1 Pure Boxed Color Engine */
-            --background: #292714 !important;
-            --sidebar: #292714 !important;
-            --sidebar-secondary: #454121 !important;
-            --sidebar-muted: #292714 !important;
-            --card: #454121 !important;
-            --card-border: #72705d !important;
-            --border: #72705d !important;
-            --primary: #f5f0c9 !important;
+            /* 1:1 Spotify Luminous Color Engine */
+            --background: #1e201d !important;
+            --sidebar: #313630 !important;
+            --sidebar-secondary: #454a44 !important;
+            --sidebar-muted: #1e201d !important;
+            --card: #313630 !important;
+            --card-border: #636c61 !important;
+            --border: #636c61 !important;
+            --primary: #7ae467 !important;
             --primary-foreground: #101010 !important;
-            --foreground: #f3f3f2 !important;
-            --muted-foreground: #b6b5af !important;
-            --secondary: #454121 !important;
-            --secondary-foreground: #f3f3f2 !important;
+            --foreground: #f2f3f2 !important;
+            --muted-foreground: #b0b6af !important;
+            --secondary: #313630 !important;
+            --secondary-foreground: #f2f3f2 !important;
             --font-sans: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace !important;
             --font-mono: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace !important;
         }
@@ -23,15 +23,15 @@
             box-sizing: border-box !important;
         }
 
-        /* ===== 1. Master Root Window Surface (Translucent Glass matching Spotify) ===== */
+        /* ===== 1. Master Root Window Surface ===== */
         html,
         body,
         #root,
         div[class*="h-screen"][class*="w-screen"],
         div[class*="relative w-screen"],
         div.h-full.w-full {
-            background-color: transparent !important;
-            background: transparent !important;
+            background-color: #1e201d !important;
+            background: #1e201d !important;
             border: none !important;
             outline: none !important;
             box-shadow: none !important;
@@ -78,9 +78,8 @@
             height: 75vh !important;
             min-height: 520px !important;
             max-height: 85vh !important;
-            background-color: rgba(41, 39, 20, 0.85) !important;
-            backdrop-filter: blur(12px) !important;
-            border: 1px solid #72705d !important;
+            background-color: #313630 !important;
+            border: 1px solid #636c61 !important;
             border-radius: 16px !important;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
             overflow: hidden !important;
@@ -91,7 +90,7 @@
             transition: border-color 0.15s ease !important;
         }
         .settings-modal-container:hover {
-            border-color: #f5f0c9 !important;
+            border-color: #7ae467 !important;
         }
 
         .settings-modal-container > div.flex-1,
@@ -119,7 +118,7 @@
             bottom: 16px !important;
             right: 0 !important;
             width: 1px !important;
-            background-color: #72705d !important;
+            background-color: #636c61 !important;
             pointer-events: none !important;
             z-index: 20 !important;
         }
@@ -128,8 +127,7 @@
         div.flex-1.flex.min-h-0.relative > div.relative.flex.w-full.h-full {
             padding: 14px 10px 10px 10px !important;
             gap: 10px !important;
-            background-color: transparent !important;
-            background: transparent !important;
+            background-color: #1e201d !important;
             box-sizing: border-box !important;
             min-width: 0 !important;
         }
@@ -159,9 +157,8 @@
         /* ===== 2. Left Sidebar Pane (.Sidebar.) ===== */
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar {
             position: relative !important;
-            background-color: rgba(41, 39, 20, 0.55) !important;
-            backdrop-filter: blur(8px) !important;
-            border: 1px solid #72705d !important;
+            background-color: #313630 !important;
+            border: 1px solid #636c61 !important;
             border-radius: 8px !important;
             margin: 0 !important;
             height: 100% !important;
@@ -172,7 +169,7 @@
             transition: border-color 0.15s ease !important;
         }
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar:hover {
-            border-color: #f5f0c9 !important;
+            border-color: #7ae467 !important;
         }
         div.flex > div.h-full.w-full > div.h-full.w-full.flex.flex-col.pb-2.bg-sidebar::before {
             content: "Sidebar" !important;
@@ -182,8 +179,8 @@
             left: auto !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: #292714 !important;
-            color: #f5f0c9 !important;
+            background-color: #313630 !important;
+            color: #7ae467 !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             font-size: 11px !important;
             font-weight: 700 !important;
@@ -231,7 +228,7 @@
         /* Sidebar Section Titles */
         div.bg-sidebar div.flex.items-center.justify-between.py-1.px-2 {
             background-color: transparent !important;
-            color: #b6b5af !important;
+            color: #b0b6af !important;
             font-size: 11px !important;
             font-weight: 700 !important;
             text-transform: uppercase !important;
@@ -257,17 +254,17 @@
         div.bg-sidebar div.cursor-pointer.rounded-lg:hover,
         div.bg-sidebar button.group\/headerbtn:hover,
         div.bg-sidebar button:hover {
-            background-color: #454121 !important;
+            background-color: #414640 !important;
         }
 
         div.bg-sidebar .truncate,
         div.bg-sidebar span,
         div.bg-sidebar a {
-            color: #f3f3f2 !important;
+            color: #f2f3f2 !important;
             opacity: 0.95 !important;
         }
         div.bg-sidebar span.text-xs {
-            color: #b6b5af !important;
+            color: #b0b6af !important;
             opacity: 0.75 !important;
         }
 
@@ -287,9 +284,8 @@
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border,
         div[class*="border-t border-border"][class*="flex-1"] {
             position: relative !important;
-            background-color: rgba(41, 39, 20, 0.55) !important;
-            backdrop-filter: blur(8px) !important;
-            border: 1px solid #72705d !important;
+            background-color: #313630 !important;
+            border: 1px solid #636c61 !important;
             border-radius: 8px !important;
             margin: 0 !important;
             height: 100% !important;
@@ -302,7 +298,7 @@
         }
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border:hover,
         div[class*="border-t border-border"][class*="flex-1"]:hover {
-            border-color: #f5f0c9 !important;
+            border-color: #7ae467 !important;
         }
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border::before,
         div[class*="border-t border-border"][class*="flex-1"]::before {
@@ -312,8 +308,8 @@
             left: 20px !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: #292714 !important;
-            color: #f5f0c9 !important;
+            background-color: #313630 !important;
+            color: #7ae467 !important;
             font-size: 11px !important;
             font-weight: 700 !important;
             text-transform: uppercase !important;
@@ -327,7 +323,7 @@
         /* Workspace Header Title Typography */
         div.relative.z-0.flex-1 button.rounded-full span,
         div.relative.z-0.flex-1 .truncate {
-            color: #f3f3f2 !important;
+            color: #f2f3f2 !important;
             opacity: 0.95 !important;
         }
 
@@ -336,7 +332,7 @@
         div[class*="border-t border-border"] div.relative.flex.w-full.h-full > div.bg-border {
             display: block !important;
             width: 1px !important;
-            background-color: #72705d !important;
+            background-color: #636c61 !important;
             margin: 16px 8px !important;
             height: calc(100% - 32px) !important;
             align-self: center !important;
@@ -345,7 +341,7 @@
         }
         div.relative.z-0.flex-1.flex.min-h-0.h-full.border-t.border-border div.relative.flex.w-full.h-full > div.bg-border:hover,
         div[class*="border-t border-border"] div.relative.flex.w-full.h-full > div.bg-border:hover {
-            background-color: #f5f0c9 !important;
+            background-color: #7ae467 !important;
             opacity: 1 !important;
         }
 
@@ -354,7 +350,7 @@
             position: relative !important;
             background: transparent !important;
             background-color: transparent !important;
-            border: 1px solid #72705d !important;
+            border: 1px solid #636c61 !important;
             border-radius: 8px !important;
             padding: 0 !important;
             overflow: visible !important;
@@ -363,7 +359,7 @@
         }
         div[class*="bg-card-border"]:hover,
         div[class*="bg-card-border"]:focus-within {
-            border-color: #f5f0c9 !important;
+            border-color: #7ae467 !important;
         }
 
         /* Clean Notch Mask */
@@ -374,8 +370,8 @@
             left: 14px !important;
             transform: translateY(-50%) !important;
             padding: 0 6px !important;
-            background-color: #292714 !important;
-            color: #f5f0c9 !important;
+            background-color: #313630 !important;
+            color: #7ae467 !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             font-size: 11px !important;
             font-weight: 700 !important;
@@ -400,13 +396,13 @@
         div[class*="bg-card-border"] > div:last-child:not(:first-child) {
             background: transparent !important;
             background-color: transparent !important;
-            border-top: 1px solid #72705d !important;
+            border-top: 1px solid #636c61 !important;
             border-radius: 0 0 7px 7px !important;
         }
 
         div[class*="bg-card-border"] [contenteditable],
         div[class*="bg-card-border"] textarea {
-            color: #f3f3f2 !important;
+            color: #f2f3f2 !important;
             font-family: "JetBrainsMono Nerd Font", monospace !important;
             background: transparent !important;
         }
@@ -417,10 +413,10 @@
             height: 4px !important;
         }
         ::-webkit-scrollbar-thumb {
-            background: #72705d !important;
+            background: #636c61 !important;
             border-radius: 4px !important;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #f5f0c9 !important;
+            background: #7ae467 !important;
         }
     
