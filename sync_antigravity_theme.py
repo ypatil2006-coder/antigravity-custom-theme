@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 """
-Antigravity 2.0 Dynamic Boxed Theme Synchronizer (Pristine Clean UI)
+Antigravity 2.0 Dynamic Boxed Theme Synchronizer (High-Contrast & Clean UI)
 Reads Material 3 color tokens from ~/.config/noctalia/colors.json,
 generates Antigravity 2.0 Modular Boxed Terminal stylesheet with seamless
-cutout legends (Sidebar, Main, Prompt), perfectly clean prompt controls with
-no button overrides, 16px rounded Settings modal with inset floating divider,
-compact sidebar proportions, fluid flex layout, and live-injects CSS into
-running Antigravity Electron instances via DevTools CDP with Promise-awaited
-WebSocket completion.
+cutout legends (Sidebar, Main, Prompt), bright readable text matching Spotify,
+16px rounded Settings modal with inset floating divider, compact sidebar
+proportions, fluid flex layout, and live-injects CSS into running Antigravity
+Electron instances via DevTools CDP with Promise-awaited WebSocket completion.
 
 Usage:
     python3 sync_antigravity_theme.py           # Sync & inject live
@@ -305,7 +304,7 @@ def generate_css(colors: dict) -> str:
             opacity: 0.85 !important;
         }}
 
-        /* Sidebar Item Rows */
+        /* Sidebar Item Rows & High-Contrast Typography */
         div.bg-sidebar div.cursor-pointer.rounded-lg,
         div.bg-sidebar button.group\\/headerbtn,
         div.bg-sidebar button {{
@@ -320,7 +319,17 @@ def generate_css(colors: dict) -> str:
         div.bg-sidebar button.group\\/headerbtn:hover,
         div.bg-sidebar button:hover {{
             background-color: {surface_variant} !important;
+        }}
+
+        div.bg-sidebar .truncate,
+        div.bg-sidebar span,
+        div.bg-sidebar a {{
             color: {on_surface} !important;
+            opacity: 0.95 !important;
+        }}
+        div.bg-sidebar span.text-xs {{
+            color: {on_surface_variant} !important;
+            opacity: 0.75 !important;
         }}
 
         /* Sidebar Scroll Container */
@@ -373,6 +382,13 @@ def generate_css(colors: dict) -> str:
             z-index: 50 !important;
             pointer-events: none !important;
             border: none !important;
+        }}
+
+        /* Workspace Header Title Typography */
+        div.relative.z-0.flex-1 button.rounded-full span,
+        div.relative.z-0.flex-1 .truncate {{
+            color: {on_surface} !important;
+            opacity: 0.95 !important;
         }}
 
         /* Main Workspace Split Divider */
@@ -535,7 +551,7 @@ def inject_cdp(css: str):
                                                 (document.head || document.documentElement).appendChild(el);
                                             }}
                                             el.textContent = ${{JSON.stringify({escaped_css})}};
-                                            return "Clean Theme Applied!";
+                                            return "Live Injected!";
                                         }})()
                                     `,
                                     returnByValue: true
@@ -580,7 +596,7 @@ def apply_theme():
             f.write(css)
 
     inject_cdp(css)
-    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (Pristine Clean) (Primary: {primary})")
+    print(f"✓ Generated & Live-Injected Antigravity 2.0 Boxed Terminal Theme (High Contrast Clean) (Primary: {primary})")
 
 
 def main():

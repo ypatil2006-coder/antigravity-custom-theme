@@ -240,7 +240,7 @@
             opacity: 0.85 !important;
         }
 
-        /* Sidebar Item Rows */
+        /* Sidebar Item Rows & High-Contrast Typography */
         div.bg-sidebar div.cursor-pointer.rounded-lg,
         div.bg-sidebar button.group\/headerbtn,
         div.bg-sidebar button {
@@ -255,7 +255,17 @@
         div.bg-sidebar button.group\/headerbtn:hover,
         div.bg-sidebar button:hover {
             background-color: #454121 !important;
+        }
+
+        div.bg-sidebar .truncate,
+        div.bg-sidebar span,
+        div.bg-sidebar a {
             color: #f3f3f2 !important;
+            opacity: 0.95 !important;
+        }
+        div.bg-sidebar span.text-xs {
+            color: #b6b5af !important;
+            opacity: 0.75 !important;
         }
 
         /* Sidebar Scroll Container */
@@ -308,6 +318,13 @@
             z-index: 50 !important;
             pointer-events: none !important;
             border: none !important;
+        }
+
+        /* Workspace Header Title Typography */
+        div.relative.z-0.flex-1 button.rounded-full span,
+        div.relative.z-0.flex-1 .truncate {
+            color: #f3f3f2 !important;
+            opacity: 0.95 !important;
         }
 
         /* Main Workspace Split Divider */
