@@ -62,6 +62,8 @@
 - **🧼 Zero Dark Patches:** Nested containers, prompt boxes, and message bubbles render with 100% unified transparency.
 - **⚙️ Redesigned Settings Modal:** Features a sleek `16px` border-radius container, frosted glass backdrop blur, and an inset floating vertical divider.
 - **📏 Floating Split Pane Divider:** Clean `1px` floating separator between chat and artifact/walkthrough views with interactive hover accent glow.
+- **🗂️ Built-in Skills & Commands Hub:** Integrated slide-out drawer accessible right from the sidebar (`Skills Hub [/cmd]`) with searchable categorised skills, collapsible accordions, and 1-click clipboard copy & prompt insertion.
+- **🛠️ Automated Electron Patcher (`patch_app_asar.py`):** Replaces the startup white screen flash with a dark theme-matched loading overlay, hides the top window bar cleanly in tiling window managers (Hyprland/Sway), and fixes sidebar scrolling.
 - **🚀 Automated 1-Click Installer:** Includes launcher wrapper, desktop menu integration, systemd user daemon, and Hyprland compositor rule setup.
 
 ---
@@ -138,6 +140,7 @@ Sample `colors.json` schema:
 
 ## 🛠️ CLI Usage & Flags
 
+### 1. Dynamic Theme Synchronizer
 ```bash
 # Sync active colors and live-inject into running Antigravity instances once
 python3 sync_antigravity_theme.py
@@ -145,6 +148,13 @@ python3 sync_antigravity_theme.py
 # Run in background daemon mode (watches for palette changes)
 python3 sync_antigravity_theme.py --watch
 ```
+
+### 2. Standalone App Patcher (Skills Hub & UI Polish)
+```bash
+# Patches app.asar to install the Skills Hub drawer, hide the top bar, and theme the startup screen
+python3 patch_app_asar.py
+```
+*Note: Requires `npx` / `@electron/asar` installed to unpack and repack Electron archives.*
 
 ---
 
