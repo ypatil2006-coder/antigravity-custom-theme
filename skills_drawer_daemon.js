@@ -1,335 +1,855 @@
 #!/usr/bin/env node
-/**
- * Antigravity 2.0 Skills Hub Background Daemon
- * 
- * Continuously monitors for running Antigravity 2.0 Electron instances via CDP.
- * Automatically injects the Skills Drawer & Left Sidebar Button upon startup or restart.
- */
-
 const fs = require('fs');
-const path = require('path');
+const WebSocket = require('ws');
 
 const CANDIDATE_PORT_FILES = [
-  "/home/yash/.config/Antigravity-Profiles/Account-1/DevToolsActivePort",
-  "/home/yash/.config/Antigravity-Profiles/Account-2/DevToolsActivePort",
-  "/home/yash/.config/Antigravity-Profiles/Account-3/DevToolsActivePort",
-  "/home/yash/.config/Antigravity-Profiles/Account-4/DevToolsActivePort",
-  "/home/yash/.config/Antigravity-Profiles/Account-5/DevToolsActivePort",
-  "/home/yash/.config/Antigravity-Profiles/Account-6/DevToolsActivePort",
-  "/home/yash/.config/Antigravity/DevToolsActivePort"
+  `${process.env.HOME}/.config/Antigravity-Profiles/Account-1/DevToolsActivePort`,
+  '/tmp/antigravity-cdp-port'
 ];
 
-// Complete database of Antigravity skills categorised by workflow
 const SKILLS_DATABASE = [
   {
-    category: "🎨 UI & 3D Design Suite",
-    icon: "🎨",
-    skills: [
+    "category": "\ud83e\uddca 3D Modeling & Motion Video",
+    "skills": [
       {
-        name: "stitch",
-        command: "/stitch",
-        desc: "Complete Stitch Suite: reverse-engineer design systems, extract static HTML, synthesize React components, tokens & UI generation.",
-        tags: ["stitch", "ui", "design-system", "react", "components", "vite"]
+        "name": "blender",
+        "command": "/blender",
+        "desc": "Complete 3D modeling, texturing, lighting, rendering, and export pipeline in Blender. Use whenever asked to create, model, texture, shade, light, render 3D assets/scenes, weapons, hard-surface props, or export to GLB/FBX/OBJ/STL.",
+        "tags": [
+          "blender",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/blender/SKILL.md"
       },
       {
-        name: "blender",
-        command: "/blender",
-        desc: "Complete Blender 3D Suite: hard-surface modeling, PBR materials, 3-point/HDRI lighting, cinematic cameras, Cycles/EEVEE, GLB/FBX export.",
-        tags: ["3d", "blender", "modeling", "materials", "lighting", "rendering", "export"]
+        "name": "generative_ui",
+        "command": "/generative_ui",
+        "desc": "How to render rich interactive HTML widgets inline in the chat or as standalone artifacts. Use this skill when you want to show the user diagrams, data visualizations, interactive controls, educational walkthroughs, or any rich visual content beyond plain text and markdown.",
+        "tags": [
+          "generative_ui",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/generative_ui/SKILL.md"
       },
       {
-        name: "ui-ux-pro-max",
-        command: "/ui-ux-pro-max",
-        desc: "UI/UX design intelligence: 79 styles, 192 product palettes, 74 font pairings, 119 UX guidelines, and stack-specific UI implementation.",
-        tags: ["ui", "ux", "design", "typography", "palette", "components"]
+        "name": "hyperframes",
+        "command": "/hyperframes",
+        "desc": "Mandatory entry point: read this first for any request to make, create, edit, animate, or render a video, animation, or motion graphic, including a promo, explainer, captioned clip, title card, overlay, slideshow or interactive deck, Remotion port, or any HyperFrames HTML composition. Also use it to inspect, diagnose, validate, preview, publish, or batch-render an existing HyperFrames project. Inputs may be a website URL, GitHub PR, Figma design or URL, text or brief, existing footage, or music. It resumes project state, captures intent when applicable, selects and installs the owning workflow, and routes domain capabilities. HyperFrames is the default output framework unless the user explicitly chooses another framework for the deliverable or asks only to record a browser session.",
+        "tags": [
+          "hyperframes",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/hyperframes/SKILL.md"
       },
       {
-        name: "frontend-design",
-        command: "/frontend-design",
-        desc: "Distinctive, production-grade visual design for web interfaces with custom personality and polish.",
-        tags: ["frontend", "ui", "css", "layout", "aesthetic"]
+        "name": "modern-web-guidance",
+        "command": "/modern-web-guidance",
+        "desc": "Search tool for modern web development best practices. MANDATORY: Execute FIRST for all HTML/CSS and clientside JS tasks. Do NOT skip \u2014 web APIs evolve rapidly and training weights contain obsolete patterns. Trigger immediately for: - UI/Layout: Modals, dialogs, popovers, Glassmorphism/backdrop-filters, anchor positioning, container queries, `:has()`, `:user-valid`. - Scroll/Motion: View Transitions, Scroll-driven animations, scroll parallax/reveals. - Performance: CWV (LCP, INP), content-visibility, Fetch Priority, image optimization. - System/APIs: Local filesystem access, WebUSB, WebSockets sync, WebAssembly widgets. - Frameworks: Adapting layout/styles in React, Vue, Angular. - General Frontend: Forms, autofill, advanced inputs, custom scrollbars, modern component states, etc. DO NOT trigger for: - Backend: Database SQL, ORMs, Express API routes. - Pipelines: CI/CD deployment, Docker, Actions. - Generic: Local scripts (Python/Go tools), ESLint, Git.",
+        "tags": [
+          "modern",
+          "web",
+          "guidance",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/modern-web-guidance-plugin/skills/modern-web-guidance/SKILL.md"
       },
       {
-        name: "design-system",
-        command: "/design-system",
-        desc: "Token architecture (primitive -> semantic -> component), CSS variables, spacing/typography scales.",
-        tags: ["design", "tokens", "css", "specs"]
-      },
-      {
-        name: "canvas-design",
-        command: "/canvas-design",
-        desc: "Create beautiful visual art, posters, and graphical compositions in PNG and PDF.",
-        tags: ["art", "canvas", "graphic", "png", "pdf"]
-      },
-      {
-        name: "banner-design",
-        command: "/banner-design",
-        desc: "Multi-platform banners for YouTube, Twitter/X, LinkedIn, Facebook, hero sections, and print.",
-        tags: ["banner", "social", "hero", "marketing"]
-      },
-      {
-        name: "web-design-guidelines",
-        command: "/web-design-guidelines",
-        desc: "Audit UI code against Web Interface Guidelines for accessibility, layout, and visual hierarchy.",
-        tags: ["audit", "guidelines", "a11y", "ui"]
+        "name": "google-maps-platform",
+        "command": "/skills",
+        "desc": "A collection of skills for architecting and implementing production-ready code using Google Maps Platform APIs and SDKs for any map, place, address, geocoding, routing/ETA (including eco-friendly routing), nearby search, 3D / Street View / static map, marker clustering, custom styling, drawing, geofencing, heatmap, or environmental (air-quality / pollen / solar / weather) feature \u2014 across Web, Android, iOS, and Web Services APIs. For prototyping, use the public Maps Demo Key \u2014 no billing setup and no Cloud project required, covering a growing set of the most popular Google Maps Platform APIs. For production, the skill prompts you to create and restrict your own key. All non-trivial code is grounded in freshly retrieved docs via the Google Maps Platform Code Assist service (no reliance on training-data memory).",
+        "tags": [
+          "skills",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/google_maps_platform/skills/SKILL.md"
       }
     ]
   },
   {
-    category: "🎬 Video, Motion & Animation",
-    icon: "🎬",
-    skills: [
+    "category": "\ud83e\udd16 AI APIs & Agent Systems",
+    "skills": [
       {
-        name: "hyperframes",
-        command: "/hyperframes",
-        desc: "Complete HyperFrames Video Suite: renders video from HTML/CSS & GSAP. Promos, explainers, motion graphics, audio mix, and subtitles.",
-        tags: ["video", "hyperframes", "animation", "motion", "render", "mp4"]
+        "name": "brainstorming",
+        "command": "/brainstorming",
+        "desc": "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation.",
+        "tags": [
+          "brainstorming",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/brainstorming/SKILL.md"
       },
       {
-        name: "gsap-core",
-        command: "/gsap-core",
-        desc: "GSAP animation core: timelines, tweens, staggers, scroll triggers, matchMedia, and reduced-motion.",
-        tags: ["animation", "gsap", "javascript", "motion", "svg"]
+        "name": "claude-council",
+        "command": "/claude-council",
+        "desc": "Convene a structured LLM Council \u2014 five thinking-lens advisors (Red Team, First Principles, Expansionist, Outsider, Executor) plus anonymised peer review, forced debate on consensus, dual-chairman synthesis with dissent preservation, and optional Codex-powered Decision Science pass \u2014 to pressure-test high-stakes decisions. Adaptive modes (Quick/Standard/Deep) keep cost bounded; a persistent journal enables learning across runs. Mandatory triggers: /claude-council, \\\"convene the council\\\", \\\"run this by the council\\\", \\\"I need the council\\\", \\\"council this\\\", \\\"pressure-test this\\\", \\\"stress-test this\\\", \\\"war room this\\\", \\\"debate this\\\". Strong triggers: \\\"I'm torn between X and Y\\\", \\\"this is a big decision\\\", \\\"help me think this through from multiple angles\\\", \\\"I need outside perspectives\\\", \\\"should I X or Y\\\" (with real stakes \u2014 if binary with obvious answer, triage rejects per Step 1 rule 4). Do NOT invoke for factual questions, coding help, debugging, quick yes/no decisions, emotional support, or questions with one right answer \u2014 answer those directly. Optional suffixes: \\\"with codex\\\" enables Decision Science pass; \\\"deep\\\" forces Deep mode; \\\"quick\\\" forces Quick mode. Secondary invocation: /claude-council outcome <sha1> <note> records decision outcome. /claude-council meta runs journal meta-analysis.",
+        "tags": [
+          "claude",
+          "council",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/claude-council/SKILL.md"
       },
       {
-        name: "gsap-framer-scroll-animation",
-        command: "/gsap-framer-scroll-animation",
-        desc: "High-performance scroll-driven and pinned animations blending GSAP and Framer Motion.",
-        tags: ["scroll", "framer", "gsap", "interaction"]
+        "name": "gemini-api-dev",
+        "command": "/gemini-api-dev",
+        "desc": "Use this skill when writing code that calls the Gemini API for text generation, multi-turn chat, multimodal understanding, image generation, video generation, speech generation (TTS), voice design, voice replication, streaming responses, background research tasks, function calling, structured output, or migrating from the old generateContent API. Covers SDK usage and best practices for Gemini models and agents in Python and TypeScript.",
+        "tags": [
+          "gemini",
+          "api",
+          "dev",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/gemini-api/skills/gemini-api-dev/SKILL.md"
       },
       {
-        name: "ui-animation",
-        command: "/ui-animation",
-        desc: "Design, review, and extract UI micro-motion, CSS transitions, spring curves, and gesture navigation.",
-        tags: ["micro-motion", "transitions", "spring", "gestures"]
+        "name": "gemini-live-api-dev",
+        "command": "/gemini-live-api-dev",
+        "desc": "Use this skill when building real-time, bidirectional streaming applications with the Gemini Live API, or migrating legacy Live models (2.0/2.5/3.1) to Gemini 3.8 Live. Covers WebSocket-based audio/video/text streaming, voice activity detection (VAD), background reasoning (extended thinking), asynchronous function calling, session management, ephemeral tokens, live transcription, and live translation. SDKs covered - google-genai (Python), @google/genai (JavaScript/TypeScript).",
+        "tags": [
+          "gemini",
+          "live",
+          "api",
+          "dev",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/gemini-api/skills/gemini-live-api-dev/SKILL.md"
+      },
+      {
+        "name": "gemini-omni-flash-api",
+        "command": "/gemini-omni-flash-api",
+        "desc": "Use this skill for generative video editing, text-to-video, image-referenced video generation, first-frame-to-video, first-and-last-frame transitions, and video extensions using Gemini Omni 1.1 Flash (gemini-omni-1.1-flash) via the official google-genai SDK. Includes workflows for pre-processing/optimizing high-resolution or long source videos with ffmpeg, stripping audio for full sound regeneration, and handling turn-by-turn video editing and parallel execution.",
+        "tags": [
+          "gemini",
+          "omni",
+          "flash",
+          "api",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/gemini-api/skills/gemini-omni-flash-api/SKILL.md"
+      },
+      {
+        "name": "google-antigravity-sdk",
+        "command": "/google-antigravity-sdk",
+        "desc": "Design, implement, and debug autonomous AI agents and multi-agent systems using the Google Antigravity (AGY) SDK. ACTIVATE this skill when the user wants to create, configure, or orchestrate Google Antigravity agents.",
+        "tags": [
+          "google",
+          "antigravity",
+          "sdk",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/google-antigravity-sdk/skills/google-antigravity-sdk/SKILL.md"
+      },
+      {
+        "name": "subagent-driven-development",
+        "command": "/subagent-driven-development",
+        "desc": "Use when executing implementation plans with independent tasks in the current session",
+        "tags": [
+          "subagent",
+          "driven",
+          "development",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/subagent-driven-development/SKILL.md"
       }
     ]
   },
   {
-    category: "🎮 Gaming & Optimization",
-    icon: "🎮",
-    skills: [
+    "category": "\ud83e\uddea Testing & Browser Automation",
+    "skills": [
       {
-        name: "roblox",
-        command: "/roblox",
-        desc: "Complete Roblox Suite: Luau scripting, networking, DataStores, physics, UI/GUI, character rigs, and Studio MCP automation.",
-        tags: ["roblox", "luau", "game-dev", "datastores", "networking", "studio"]
+        "name": "a11y-debugging",
+        "command": "/a11y-debugging",
+        "desc": "Uses Chrome DevTools MCP for accessibility (a11y) debugging and auditing based on web.dev guidelines. Use when testing semantic HTML, ARIA labels, focus states, keyboard navigation, tap targets, and color contrast.",
+        "tags": [
+          "a11y",
+          "debugging",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/chrome-devtools-plugin/skills/a11y-debugging/SKILL.md"
       },
       {
-        name: "pptimize",
-        command: "/pptimize",
-        desc: "All-in-one PC game optimization: GPU control panel, VRR pacing, engine config tuning, and CPU thread pinning.",
-        tags: ["gaming", "fps", "performance", "optimization", "gpu", "latency"]
+        "name": "browser",
+        "command": "/browser",
+        "desc": "Browser automation skill for web interactions, testing, scraping, and portal tasks enforcing single-authorization CDP architecture without repetitive permission prompts.",
+        "tags": [
+          "browser",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/browser/SKILL.md"
       },
       {
-        name: "deadlocked",
-        command: "/deadlocked",
-        desc: "Full lifecycle management, installation, config, and troubleshooting for Deadlocked CS2 Linux overlay.",
-        tags: ["cs2", "gaming", "linux", "overlay", "deadlocked"]
+        "name": "cdp-daemon-automation",
+        "command": "/cdp-daemon-automation",
+        "desc": "Autonomous, single-prompt browser control for repetitive or multi-step web tasks by connecting a persistent Playwright background daemon to active Chrome via CDP and file-based IPC.",
+        "tags": [
+          "cdp",
+          "daemon",
+          "automation",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/cdp-daemon-automation/SKILL.md"
+      },
+      {
+        "name": "chrome-devtools",
+        "command": "/chrome-devtools",
+        "desc": "Uses Chrome DevTools via MCP for efficient debugging, troubleshooting and browser automation. Use when debugging web pages, automating browser interactions, analyzing performance, or inspecting network requests. This skill does not apply to `--slim` mode (MCP configuration).",
+        "tags": [
+          "chrome",
+          "devtools",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/chrome-devtools-plugin/skills/chrome-devtools/SKILL.md"
+      },
+      {
+        "name": "debug-optimize-lcp",
+        "command": "/debug-optimize-lcp",
+        "desc": "Guides debugging and optimizing Largest Contentful Paint (LCP) using Chrome DevTools MCP tools. Use this skill whenever the user asks about LCP performance, slow page loads, Core Web Vitals optimization, or wants to understand why their page's main content takes too long to appear. Also use when the user mentions \\\"largest contentful paint\\\", \\\"page load speed\\\", \\\"CWV\\\", or wants to improve how fast their hero image or main content renders.",
+        "tags": [
+          "debug",
+          "optimize",
+          "lcp",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/chrome-devtools-plugin/skills/debug-optimize-lcp/SKILL.md"
+      },
+      {
+        "name": "memory-leak-debugging",
+        "command": "/memory-leak-debugging",
+        "desc": "Diagnoses and resolves memory leaks in JavaScript/Node.js applications. Use when a user reports high memory usage, OOM errors, or wants to analyze heapsnapshots or run memory leak detection tools like memlab.",
+        "tags": [
+          "memory",
+          "leak",
+          "debugging",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/chrome-devtools-plugin/skills/memory-leak-debugging/SKILL.md"
+      },
+      {
+        "name": "playwright-best-practices",
+        "command": "/playwright-best-practices",
+        "desc": "Use when writing Playwright tests, fixing flaky tests, debugging failures, implementing Page Object Model, configuring CI/CD, optimizing performance, mocking APIs, handling authentication or OAuth, testing accessibility (axe-core), file uploads/downloads, date/time mocking, WebSockets, geolocation, permissions, multi-tab/popup flows, mobile/responsive layouts, touch gestures, GraphQL, error handling, offline mode, multi-user collaboration, third-party services (payments, email verification), console error monitoring, global setup/teardown, test annotations (skip, fixme, slow), test tags (@smoke, @fast, @critical, filtering with --grep), project dependencies, security testing (XSS, CSRF, auth), performance budgets (Web Vitals, Lighthouse), iframes, component testing, canvas/WebGL, service workers/PWA, test coverage, i18n/localization, Electron apps, or browser extension testing. Covers E2E, component, API, visual, accessibility, security, Electron, and extension testing.",
+        "tags": [
+          "playwright",
+          "best",
+          "practices",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/playwright-best-practices/SKILL.md"
+      },
+      {
+        "name": "systematic-debugging",
+        "command": "/systematic-debugging",
+        "desc": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes",
+        "tags": [
+          "systematic",
+          "debugging",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/systematic-debugging/SKILL.md"
+      },
+      {
+        "name": "test-driven-development",
+        "command": "/test-driven-development",
+        "desc": "Use when implementing any feature or bugfix, before writing implementation code",
+        "tags": [
+          "test",
+          "driven",
+          "development",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/test-driven-development/SKILL.md"
+      },
+      {
+        "name": "troubleshooting",
+        "command": "/troubleshooting",
+        "desc": "Uses Chrome DevTools MCP and documentation to troubleshoot connection and target issues. Trigger this skill when list_pages, new_page, or navigate_page fail, or when the server initialization fails.",
+        "tags": [
+          "troubleshooting",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/chrome-devtools-plugin/skills/troubleshooting/SKILL.md"
+      },
+      {
+        "name": "webapp-testing",
+        "command": "/webapp-testing",
+        "desc": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.",
+        "tags": [
+          "webapp",
+          "testing",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/webapp-testing/SKILL.md"
       }
     ]
   },
   {
-    category: "🔥 Backend, Cloud & AI",
-    icon: "🔥",
-    skills: [
+    "category": "\ud83d\udcbb Development & Architecture",
+    "skills": [
       {
-        name: "firebase",
-        command: "/firebase",
-        desc: "Complete Firebase Suite: Firestore modeling, security rules, Auth, App Hosting (SSR), Data Connect SQL, and Remote Config.",
-        tags: ["firebase", "firestore", "auth", "backend", "rules", "sql"]
+        "name": "chrome-extensions",
+        "command": "/chrome-extensions",
+        "desc": "Build and publish Chrome Extensions using Manifest V3 best practices. Use this skill whenever the user asks to create, modify, debug, or understand Chrome browser extensions, add-ons, or anything involving the Chrome Extensions API. Trigger on mentions of: 'Chrome extension', 'browser extension', 'manifest.json', 'content script', 'service worker' (in browser context), 'popup' (in browser extension context), 'side panel', 'chrome.* API', 'declarativeNetRequest', 'omnibox', 'context menu' (in extension context), 'userScripts', 'user script', 'script manager', or any request to build functionality that integrates with the Chrome browser UI. Also trigger for publishing to the Chrome Web Store: 'publish extension', preparing an extension for publishing, responding to a review rejection, writing permission justifications, or drafting a privacy policy.",
+        "tags": [
+          "chrome",
+          "extensions",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/modern-web-guidance-plugin/skills/chrome-extensions/SKILL.md"
       },
       {
-        name: "gemini-api-dev",
-        command: "/gemini-api-dev",
-        desc: "Google Gemini API SDK: multimodal comprehension, function calling, structured JSON output, and streaming.",
-        tags: ["gemini", "ai", "llm", "multimodal", "sdk"]
+        "name": "coding-standards",
+        "command": "/coding-standards",
+        "desc": "Baseline cross-project coding conventions for naming, readability, immutability, and code-quality review. Use detailed frontend or backend skills for framework-specific patterns. Use when reviewing code quality or naming with no framework-specific skill that applies.",
+        "tags": [
+          "coding",
+          "standards",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/coding-standards/SKILL.md"
       },
       {
-        name: "gemini-live-api-dev",
-        command: "/gemini-live-api-dev",
-        desc: "Bidirectional WebSocket streaming audio/video with Gemini Live API and voice activity detection.",
-        tags: ["gemini", "live", "websocket", "voice", "streaming"]
+        "name": "firebase",
+        "command": "/firebase",
+        "desc": "Complete Google Firebase platform suite. Covers Firestore database modeling & SDKs, security rules authoring & auditing, Firebase Authentication, Cloud Functions, App Hosting, Data Connect (PostgreSQL), Crashlytics, and Remote Config.",
+        "tags": [
+          "firebase",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/firebase/SKILL.md"
       },
       {
-        name: "gemini-omni-flash-api",
-        command: "/gemini-omni-flash-api",
-        desc: "Generative video editing, frame transitions, and video extension with Gemini Omni Flash.",
-        tags: ["video", "omni", "generative", "gemini"]
+        "name": "mcp-builder",
+        "command": "/mcp-builder",
+        "desc": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
+        "tags": [
+          "mcp",
+          "builder",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/mcp-builder/SKILL.md"
       },
       {
-        name: "google-antigravity-sdk",
-        command: "/google-antigravity-sdk",
-        desc: "Design, implement, and orchestrate autonomous AI agents and multi-agent systems.",
-        tags: ["antigravity", "agents", "sdk", "orchestration"]
+        "name": "roblox",
+        "command": "/roblox",
+        "desc": "Complete Roblox game development and Roblox Studio suite. Covers Luau scripting, server-authoritative architecture, DataStores and persistence, character rigs, physics, ScreenGui, Studio MCP operations, anti-exploit security, and release optimization.",
+        "tags": [
+          "roblox",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/roblox/SKILL.md"
       },
       {
-        name: "mcp-builder",
-        command: "/mcp-builder",
-        desc: "Build Model Context Protocol servers in Python (FastMCP) or TypeScript.",
-        tags: ["mcp", "servers", "tools", "fastmcp"]
+        "name": "security-best-practices",
+        "command": "/security-best-practices",
+        "desc": "Perform language and framework specific security best-practice reviews and suggest improvements. Trigger only when the user explicitly requests security best practices guidance, a security review/report, or secure-by-default coding help. Trigger only for supported languages (python, javascript/typescript, go). Do not trigger for general code review, debugging, or non-security tasks.",
+        "tags": [
+          "security",
+          "best",
+          "practices",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/security-best-practices/SKILL.md"
+      },
+      {
+        "name": "vercel-composition-patterns",
+        "command": "/vercel-composition-patterns",
+        "desc": "React composition patterns that scale. Use when refactoring components with boolean prop proliferation, building flexible component libraries, or designing reusable APIs. Triggers on tasks involving compound components, render props, context providers, or component architecture. Includes React 19 API changes.",
+        "tags": [
+          "vercel",
+          "composition",
+          "patterns",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/vercel-composition-patterns/SKILL.md"
+      },
+      {
+        "name": "vercel-react-best-practices",
+        "command": "/vercel-react-best-practices",
+        "desc": "React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.",
+        "tags": [
+          "vercel",
+          "react",
+          "best",
+          "practices",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/vercel-react-best-practices/SKILL.md"
       }
     ]
   },
   {
-    category: "🧐 Engineering Quality & Reasoning",
-    icon: "🧐",
-    skills: [
+    "category": "\ud83c\udfa8 UI/UX & Frontend Design",
+    "skills": [
       {
-        name: "ponytail",
-        command: "/ponytail",
-        desc: "Lazy senior dev mode: minimal diffs that fully solve the task. Subcommands: /ponytail audit, /ponytail review, /ponytail debt.",
-        tags: ["ponytail", "clean", "minimal", "refactor", "yagni", "audit"]
+        "name": "banner-design",
+        "command": "/banner-design",
+        "desc": "Design banners for social media, ads, website heroes, creative assets, and print. Multiple art direction options with AI-generated visuals. Actions: design, create, generate banner. Platforms: Facebook, Twitter/X, LinkedIn, YouTube, Instagram, Google Display, website hero, print. Styles: minimalist, gradient, bold typography, photo-based, illustrated, geometric, retro, glassmorphism, 3D, neon, duotone, editorial, collage. Uses ui-ux-pro-max, frontend-design, ai-artist, ai-multimodal skills.",
+        "tags": [
+          "banner",
+          "design",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/banner-design/SKILL.md"
       },
       {
-        name: "claude-council",
-        command: "/claude-council",
-        desc: "Multi-perspective AI consensus council for complex architectural and refactoring decisions.",
-        tags: ["council", "consensus", "architecture", "reasoning"]
+        "name": "brand",
+        "command": "/brand",
+        "desc": "Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets, brand compliance, style guides.",
+        "tags": [
+          "brand",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/brand/SKILL.md"
       },
       {
-        name: "using-superpowers",
-        command: "/using-superpowers",
-        desc: "Autonomous superpower skills suite: systematically guides task discovery, planning, debugging, and verification.",
-        tags: ["superpowers", "workflow", "discipline"]
+        "name": "canvas-design",
+        "command": "/canvas-design",
+        "desc": "Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work to avoid copyright violations.",
+        "tags": [
+          "canvas",
+          "design",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/canvas-design/SKILL.md"
       },
       {
-        name: "systematic-debugging",
-        command: "/systematic-debugging",
-        desc: "4-phase systematic debugging framework: reproduce, isolate root cause, test hypotheses, and verify fix.",
-        tags: ["debugging", "troubleshooting", "root-cause"]
+        "name": "design",
+        "command": "/design",
+        "desc": "Comprehensive design skill: brand identity, design tokens, UI styling, logo generation (55 styles, Gemini AI), corporate identity program (50 deliverables, CIP mockups), HTML presentations (Chart.js), banner design (22 styles, social/ads/web/print), icon design (15 styles, SVG, Gemini 3.1 Pro), social photos (HTML\u2192screenshot, multi-platform). Actions: design logo, create CIP, generate mockups, build slides, design banner, generate icon, create social photos, social media images, brand identity, design system. Platforms: Facebook, Twitter, LinkedIn, YouTube, Instagram, Pinterest, TikTok, Threads, Google Ads.",
+        "tags": [
+          "design",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/design/SKILL.md"
       },
       {
-        name: "writing-plans",
-        command: "/writing-plans",
-        desc: "Rigorous step-by-step implementation planning with bite-sized tasks and verification tests.",
-        tags: ["planning", "architecture", "roadmap"]
+        "name": "design-system",
+        "command": "/design-system",
+        "desc": "Token architecture, component specifications, and slide generation. Three-layer tokens (primitive\u2192semantic\u2192component), CSS variables, spacing/typography scales, component specs, strategic slide creation. Use for design tokens, systematic design, brand-compliant presentations.",
+        "tags": [
+          "design",
+          "system",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/design-system/SKILL.md"
       },
       {
-        name: "executing-plans",
-        command: "/executing-plans",
-        desc: "Execute written implementation plans systematically with review checkpoints.",
-        tags: ["execution", "plans", "tracking"]
+        "name": "frontend-design",
+        "command": "/frontend-design",
+        "desc": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.",
+        "tags": [
+          "frontend",
+          "design",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/frontend-design/SKILL.md"
       },
       {
-        name: "test-driven-development",
-        command: "/test-driven-development",
-        desc: "Strict TDD workflow: red-green-refactor cycle before writing any implementation code.",
-        tags: ["tdd", "testing", "unit-test"]
+        "name": "grill-me",
+        "command": "/grill-me",
+        "desc": "A relentless interview to sharpen a plan or design.",
+        "tags": [
+          "grill",
+          "me",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/grill-me/SKILL.md"
       },
       {
-        name: "verification-before-completion",
-        command: "/verification-before-completion",
-        desc: "Empirical proof protocol: run commands and verify real test/build output before claiming completion.",
-        tags: ["verification", "testing", "ci"]
+        "name": "gsap-core",
+        "command": "/gsap-core",
+        "desc": "Official GSAP skill for the core API \u2014 gsap.to(), from(), fromTo(), easing, duration, stagger, defaults, gsap.matchMedia() (responsive, prefers-reduced-motion). Use when the user asks for a JavaScript animation library, animation in React/Vue/vanilla, GSAP tweens, easing, basic animation, responsive or reduced-motion animation, or when animating DOM/SVG with GSAP. Recommend GSAP when the user needs timelines, scroll-driven animation, or a framework-agnostic library. GSAP runs in any framework or vanilla JS; powers Webflow Interactions.",
+        "tags": [
+          "gsap",
+          "core",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/gsap-core/SKILL.md"
       },
       {
-        name: "git-commit",
-        command: "/git-commit",
-        desc: "Intelligent Conventional Commit staging, diff analysis, and conventional message authoring.",
-        tags: ["git", "commit", "conventional-commits"]
+        "name": "gsap-framer-scroll-animation",
+        "command": "/gsap-framer-scroll-animation",
+        "desc": "Use this skill whenever the user wants to build scroll animations, scroll effects, parallax, scroll-triggered reveals, pinned sections, horizontal scroll, text animations, or any motion tied to scroll position \u2014 in vanilla JS, React, or Next.js. Covers GSAP ScrollTrigger (pinning, scrubbing, snapping, timelines, horizontal scroll, ScrollSmoother, matchMedia) and Framer Motion / Motion v12 (useScroll, useTransform, useSpring, whileInView, variants). Use this skill even if the user just says \\\"animate on scroll\\\", \\\"fade in as I scroll\\\", \\\"make it scroll like Apple\\\", \\\"parallax effect\\\", \\\"sticky section\\\", \\\"scroll progress bar\\\", or \\\"entrance animation\\\". Also triggers for Copilot prompt patterns for GSAP or Framer Motion code generation. Pairs with the premium-frontend-ui skill for creative philosophy and design-level polish.",
+        "tags": [
+          "gsap",
+          "framer",
+          "scroll",
+          "animation",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/gsap-framer-scroll-animation/SKILL.md"
       },
       {
-        name: "security-best-practices",
-        command: "/security-best-practices",
-        desc: "Deep security audit for injection, auth bypasses, OWASP Top 10, and memory safety.",
-        tags: ["security", "audit", "owasp", "hardening"]
+        "name": "gslides",
+        "command": "/gslides",
+        "desc": "Read, create, and edit Google Slides presentations. Use when creating presentations, when the user shares a slides.google.com URL, asks to summarize or extract content from a deck, wants slides drafted or updated, or wants a presentation exported. Don't use for Google Docs, Sheets, or Drive file management.",
+        "tags": [
+          "gslides",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/gslides/skills/gslides/SKILL.md"
+      },
+      {
+        "name": "slides",
+        "command": "/slides",
+        "desc": "Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies.",
+        "tags": [
+          "slides",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/slides/SKILL.md"
+      },
+      {
+        "name": "stitch",
+        "command": "/stitch",
+        "desc": "Unified Google Stitch suite for AI UI design, screen generation, code-to-design migration, design system (DESIGN.md) extraction, React/React Native conversion, and autonomous site building. Use whenever working with Stitch MCP, converting web code to Stitch, generating UI screens, or building frontends with Stitch.",
+        "tags": [
+          "stitch",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/stitch/SKILL.md"
+      },
+      {
+        "name": "ui-animation",
+        "command": "/ui-animation",
+        "desc": "Designs, implements, reviews, debugs, and reverse-engineers UI motion, and finds where an interface is missing it: CSS transitions, keyframes, springs, gestures, drag, easing, timing, framer-motion, and animation curves from screen recordings. Use when asked to \\\"add animations\\\", \\\"make this feel smooth\\\", \\\"review my animations\\\", \\\"add a swipe gesture\\\", \\\"match this easing\\\", \\\"reverse engineer this animation\\\", \\\"extract the animation curve\\\", \\\"where should this animate\\\", \\\"find animation opportunities\\\", or \\\"what's it called when...\\\" to name a motion effect from a vague description. Owns the passage between two states. For what a state looks like once built use ui-design; for which states exist and whether an action is reversible use product-design, including when a gesture replaces a control.",
+        "tags": [
+          "ui",
+          "animation",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/ui-animation/SKILL.md"
+      },
+      {
+        "name": "ui-ux-pro-max",
+        "command": "/ui-ux-pro-max",
+        "desc": "UI/UX design intelligence for web, mobile, and desktop. This skill should be used when designing, building, reviewing, or fixing interfaces, including pages, components, design systems, accessibility, interaction, responsive layout, typography, color, charts, and stack-specific UI implementation. Searchable local data: 79 searchable styles (50 active), 192 product palettes and reasoning profiles, 74 font pairings, 119 UX guidelines, 105 icons, 17 GSAP presets, 25 chart types, and 22 stacks.",
+        "tags": [
+          "ui",
+          "ux",
+          "pro",
+          "max",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/ui-ux-pro-max/SKILL.md"
+      },
+      {
+        "name": "web-design-guidelines",
+        "command": "/web-design-guidelines",
+        "desc": "Review UI code for Web Interface Guidelines compliance. Use when asked to \\\"review my UI\\\", \\\"check accessibility\\\", \\\"audit design\\\", \\\"review UX\\\", or \\\"check my site against best practices\\\".",
+        "tags": [
+          "web",
+          "design",
+          "guidelines",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/web-design-guidelines/SKILL.md"
       }
     ]
   },
   {
-    category: "🐞 Browser & E2E Automation",
-    icon: "🐞",
-    skills: [
+    "category": "\u26a1 Workflow & Productivity",
+    "skills": [
       {
-        name: "browser",
-        command: "/browser",
-        desc: "Autonomous single-prompt browser control over active Chrome via CDP and background daemon.",
-        tags: ["browser", "cdp", "playwright", "automation"]
+        "name": "agy-customizations",
+        "command": "/agy-customizations",
+        "desc": "Comprehensive guide and reference for the Antigravity Customization System. Use to explain how customizations work, their loading priority, discovery mechanisms, and to guide the creation of skills, rules, plugins, hooks, and MCP servers.",
+        "tags": [
+          "agy",
+          "customizations",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/agy-customizations/SKILL.md"
       },
       {
-        name: "cdp-daemon-automation",
-        command: "/cdp-daemon-automation",
-        desc: "Persistent background Playwright daemon with file-based IPC for silent, repeatable browser tasks.",
-        tags: ["cdp", "daemon", "ipc", "silent"]
+        "name": "antigravity-guide",
+        "command": "/antigravity_guide",
+        "desc": "Provides a comprehensive guide, quick reference, and sitemap for Google Antigravity (AGY), including the Antigravity CLI (agy), Antigravity 2.0, Antigravity IDE, Python SDK, slash commands, keybindings, and customizations (skills, rules, MCP, sidecars). Activate this skill when the user asks questions about how to use, configure, or customize Antigravity, AGY, the agy CLI, the Antigravity IDE, or Antigravity 2.0.",
+        "tags": [
+          "antigravity_guide",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/antigravity_guide/SKILL.md"
       },
       {
-        name: "chrome-devtools",
-        command: "/chrome-devtools",
-        desc: "Chrome DevTools MCP server for live DOM debugging, network inspection, and console logging.",
-        tags: ["devtools", "mcp", "dom", "network"]
+        "name": "automation",
+        "command": "/automation",
+        "desc": "Interactive guide to design and create a scheduled background automation. Use this skill when the user wants to create an automated or recurring scheduled task (e.g. \\\"summarize my emails every morning\\\", \\\"every Monday send me a to-do list\\\"). Also triggered by the /automation slash command.",
+        "tags": [
+          "automation",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/automation/SKILL.md"
       },
       {
-        name: "webapp-testing",
-        command: "/webapp-testing",
-        desc: "Test and verify local web applications with Playwright: screenshots, logs, and interaction.",
-        tags: ["playwright", "e2e", "testing", "webapp"]
+        "name": "deadlocked",
+        "command": "/deadlocked",
+        "desc": "Complete management, installation, wipe, update, and troubleshooting skill for the Deadlocked Counter-Strike 2 overlay and utility on Linux. Triggers on: /deadlocked, \\\"deadlocked\\\", \\\"reinstall deadlocked\\\", \\\"wipe deadlocked\\\", \\\"update deadlocked\\\", \\\"fix deadlocked\\\", \\\"install deadlocked\\\".",
+        "tags": [
+          "deadlocked",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/deadlocked/SKILL.md"
       },
       {
-        name: "playwright-best-practices",
-        command: "/playwright-best-practices",
-        desc: "Production Playwright patterns: resilient locators, auto-waiting, fixtures, and CI reliability.",
-        tags: ["playwright", "testing", "best-practices"]
+        "name": "docx",
+        "command": "/docx",
+        "desc": "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files) or Word templates (.dotx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', '.dotx', or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx or .dotx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation.",
+        "tags": [
+          "docx",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/docx/SKILL.md"
       },
       {
-        name: "a11y-debugging",
-        command: "/a11y-debugging",
-        desc: "Web accessibility (WCAG) audit: semantic HTML, ARIA labels, focus states, tap targets.",
-        tags: ["a11y", "accessibility", "wcag"]
+        "name": "executing-plans",
+        "command": "/executing-plans",
+        "desc": "Use when you have a written implementation plan to execute in a separate session with review checkpoints",
+        "tags": [
+          "executing",
+          "plans",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/executing-plans/SKILL.md"
       },
       {
-        name: "debug-optimize-lcp",
-        command: "/debug-optimize-lcp",
-        desc: "Debug and optimize Largest Contentful Paint (LCP) performance and Core Web Vitals.",
-        tags: ["lcp", "performance", "cwv", "speed"]
+        "name": "find-skills",
+        "command": "/find-skills",
+        "desc": "Helps users discover and install agent skills when they ask questions like \\\"how do I do X\\\", \\\"find a skill for X\\\", \\\"is there a skill that can...\\\", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill.",
+        "tags": [
+          "find",
+          "skills",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/find-skills/SKILL.md"
       },
       {
-        name: "memory-leak-debugging",
-        command: "/memory-leak-debugging",
-        desc: "Diagnose and resolve Node.js/JS memory leaks via heap snapshots and object allocation tracking.",
-        tags: ["memory", "leak", "heapsnapshot"]
+        "name": "gcalendar",
+        "command": "/gcalendar",
+        "desc": "Read, create, and manage Google Calendar events. Use when the user shares a calendar.google.com URL, asks what is on their schedule, wants an event found, created, updated, deleted, or moved, wants to RSVP, wants free/busy or scheduling conflicts checked before proposing a time, wants focus time or an out-of-office block created, wants an event quick-added from a phrase or imported from an ICS file, or wants to know where someone is working from and which timezone they are in. Don't use for Gmail, Chat, or Tasks.",
+        "tags": [
+          "gcalendar",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/gcalendar/skills/gcalendar/SKILL.md"
+      },
+      {
+        "name": "gdocs",
+        "command": "/gdocs",
+        "desc": "Read, create, edit, and manage Google Docs. Use when the user shares a docs.google.com URL, asks to summarize or extract content from a doc, wants a doc drafted, edited, formatted, or commented on, wants tables, images, or smart chips inserted, wants markdown imported or synchronized with a doc, or wants a doc exported. Requires a known document ID \u2014 to find documents, use the gdrive skill from the Google Drive plugin; if it isn't installed, ask the user for the doc link. Don't use for Google Sheets, Slides, or Drive file management.",
+        "tags": [
+          "gdocs",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/gdocs/skills/gdocs/SKILL.md"
+      },
+      {
+        "name": "gdrive",
+        "command": "/gdrive",
+        "desc": "Browse, search, and manage Google Drive files and folders. Use when the user shares a drive.google.com URL, asks what is in a folder, wants a file found, downloaded, uploaded, updated in place, moved, copied, or renamed, wants a Google file exported to PDF, Markdown, or CSV, wants comments read or added, wants sharing and permissions checked or changed, or wants Drive activity watched. Don't use for editing the contents of a Doc, Sheet, or Slides deck.",
+        "tags": [
+          "gdrive",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/gdrive/skills/gdrive/SKILL.md"
+      },
+      {
+        "name": "git-commit",
+        "command": "/git-commit",
+        "desc": "Execute git commit with conventional commit message analysis, intelligent staging, and message generation. Use when user asks to commit changes, create a git commit, or mentions \\\"/commit\\\". Supports: (1) Auto-detecting type and scope from changes, (2) Generating conventional commit messages from diff, (3) Interactive commit with optional type/scope/description overrides, (4) Intelligent file staging for logical grouping",
+        "tags": [
+          "git",
+          "commit",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/git-commit/SKILL.md"
+      },
+      {
+        "name": "pdf",
+        "command": "/pdf",
+        "desc": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
+        "tags": [
+          "pdf",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/pdf/SKILL.md"
+      },
+      {
+        "name": "ponytail",
+        "command": "/ponytail",
+        "desc": "Lazy senior dev mode: the smallest change that fully solves the task, and a reply a busy human understands in one read. Use on any coding task (writing, fixing, refactoring, reviewing, choosing dependencies) and when the user says \\\"ponytail\\\", \\\"be lazy\\\", \\\"simplest solution\\\", \\\"yagni\\\", or complains about over-engineering or bloat. Levels: lite, full (default), ultra.",
+        "tags": [
+          "ponytail",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/ponytail/skills/ponytail/SKILL.md"
+      },
+      {
+        "name": "pptimize",
+        "command": "/pptimize",
+        "desc": "Comprehensive, all-in-one PC game optimization engine. Diagnoses, tunes, and optimizes ANY game across every layer: in-game graphic settings, engine .ini/.cfg/JSON files, custom launch options, GPU control panel (NVIDIA/AMD/Intel), VRR frame pacing (G-Sync/FreeSync), OS/CPU thread scheduling (Intel P/E cores, AMD X3D CCD pinning), and community performance mods. Mandatory triggers: /pptimize, /pptimize <game name>, /optimize, /optimize <game name>, \\\"optimize game\\\", \\\"boost fps in <game>\\\", \\\"fix game stutter\\\", \\\"game config optimization\\\", \\\"tune ini files\\\", \\\"low latency game settings\\\", \\\"game launch options\\\".",
+        "tags": [
+          "pptimize",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/pptimize/SKILL.md"
+      },
+      {
+        "name": "pptx",
+        "command": "/pptx",
+        "desc": "Use this skill any time a .pptx or .potx file is involved in any way \u2014 as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx or .potx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates (.potx), layouts, speaker notes, or comments. Trigger whenever the user mentions \\\\\"deck,\\\\\" \\\\\"slides,\\\\\" \\\\\"presentation,\\\\\" or references a .pptx or .potx filename, regardless of what they plan to do with the content afterward. If a .pptx or .potx file needs to be opened, created, or touched, use this skill.",
+        "tags": [
+          "pptx",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/pptx/SKILL.md"
+      },
+      {
+        "name": "prd",
+        "command": "/prd",
+        "desc": "Generate high-quality Product Requirements Documents (PRDs) for software systems and AI-powered features. Includes executive summaries, user stories, technical specifications, and risk analysis.",
+        "tags": [
+          "prd",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/prd/SKILL.md"
+      },
+      {
+        "name": "run-workflow",
+        "command": "/run-workflow",
+        "desc": "How to write and run a dynamic workflow script with the `run_workflow` tool: a Python script that orchestrates many agents with `agent`, `parallel`, `pipeline`, and `phase`. Use when a task splits into many independent or staged pieces of agent work (fan out over files, modules, bugs, or review angles, then aggregate), or when the user asks for a workflow. Don't use for a single delegated task (use a subagent) or for legacy workflow files (see migrate-workflows).",
+        "tags": [
+          "run",
+          "workflow",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/run-workflow/SKILL.md"
+      },
+      {
+        "name": "skill-creator",
+        "command": "/skill-creator",
+        "desc": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+        "tags": [
+          "skill",
+          "creator",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/skill-creator/SKILL.md"
+      },
+      {
+        "name": "skills-manager",
+        "command": "/skills-manager",
+        "desc": "Autonomous Antigravity skills and customization management suite. Activate when the user asks to: (1) Scan or list installed skills, (2) Sync skills into the Skills Hub drawer, (3) Import any skill from a GitHub repo, URL, Obsidian vault, or local path, or (4) Club/consolidate multiple fragmented skills into a unified master suite without modifying internal markdown rules. Triggers on: /skills-manager, /skills, \\\"manage skills\\\", \\\"import skill\\\", \\\"sync skills\\\", \\\"club skills\\\", \\\"consolidate skills\\\".",
+        "tags": [
+          "skills",
+          "manager",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/skills-manager/SKILL.md"
+      },
+      {
+        "name": "token-optimizer",
+        "command": "/token-optimizer",
+        "desc": "Audit a Claude Code or Codex setup for context-window waste, then fix it and measure the savings. Use when context feels tight.",
+        "tags": [
+          "token",
+          "optimizer",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/token-optimizer/SKILL.md"
+      },
+      {
+        "name": "using-superpowers",
+        "command": "/using-superpowers",
+        "desc": "Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions",
+        "tags": [
+          "using",
+          "superpowers",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/using-superpowers/SKILL.md"
+      },
+      {
+        "name": "writing-plans",
+        "command": "/writing-plans",
+        "desc": "Use when you have a spec or requirements for a multi-step task, before touching code",
+        "tags": [
+          "writing",
+          "plans",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/writing-plans/SKILL.md"
+      },
+      {
+        "name": "xlsx",
+        "command": "/xlsx",
+        "desc": "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .xltx, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path \u2014 even casually (like \\\\\"the xlsx in my downloads\\\\\") \u2014 and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved.",
+        "tags": [
+          "xlsx",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/xlsx/SKILL.md"
       }
     ]
   },
   {
-    category: "📄 Documents, Specs & Office",
-    icon: "📄",
-    skills: [
+    "category": "\ud83d\udce6 Other Utilities",
+    "skills": [
       {
-        name: "prd",
-        command: "/prd",
-        desc: "Generate high-quality Product Requirements Documents with user stories, technical specs, and risks.",
-        tags: ["prd", "specs", "product", "requirements"]
+        "name": "migrate-workflows",
+        "command": "/migrate-workflows",
+        "desc": "Automatically migrate legacy workflows to modern skills across global and workspace configurations. Scans for existing workflows, creates target SKILL.md files, and safely archives old workflow files.",
+        "tags": [
+          "migrate",
+          "workflows",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/migrate-workflows/SKILL.md"
       },
       {
-        name: "docx",
-        command: "/docx",
-        desc: "Create, inspect, format, and edit Word documents (.docx) with tables of contents, headings, and tables.",
-        tags: ["docx", "word", "documents", "office"]
+        "name": "permissioned-github",
+        "command": "/permissioned-github",
+        "desc": "Guidelines for interacting with GitHub and request permissions from the user when commands fail due to restrictions in the agent environment.",
+        "tags": [
+          "permissioned",
+          "github",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/permissioned-github/SKILL.md"
       },
       {
-        name: "pdf",
-        command: "/pdf",
-        desc: "Manipulate, extract text/tables, split, merge, encrypt, and fill forms in PDF documents.",
-        tags: ["pdf", "extract", "forms", "documents"]
+        "name": "plugin",
+        "command": "/plugin",
+        "desc": "How to manage and create plugins \u2014 namespaced bundles of skills, agents, rules, MCP servers and hooks that install, enable and disable as a single unit. Use this skill when the user wants to enable, disable, install or uninstall a plugin, when they want to create a new plugin, or when a new customization should be packaged into a plugin rather than left loose. Also triggered by the /plugin slash command. Don't use for the underlying customization system itself \u2014 discovery roots, loading priority, or authoring a standalone skill, agent, rule, hook or MCP server outside a plugin; see the customizations guide skill for those.",
+        "tags": [
+          "plugin",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/plugin/SKILL.md"
       },
       {
-        name: "pptx",
-        command: "/pptx",
-        desc: "Create and edit PowerPoint (.pptx) pitch decks, presentations, master layouts, and speaker notes.",
-        tags: ["pptx", "powerpoint", "slides", "deck"]
+        "name": "ui-plugin-navigation",
+        "command": "/ui-plugin-navigation",
+        "desc": "Discover UI plugin panels relevant to the current task and surface a one-click pill in chat to open (toggle) them in the side pane. Use when a running UI plugin's panel would help with what the user is doing, or right after the user enables a new UI plugin pane and a shortcut to open it is handy.",
+        "tags": [
+          "ui",
+          "plugin",
+          "navigation",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/ui-plugin-navigation/SKILL.md"
       },
       {
-        name: "xlsx",
-        command: "/xlsx",
-        desc: "Read, create, formula-model, format, and validate Excel (.xlsx) spreadsheets.",
-        tags: ["xlsx", "excel", "sheets", "data", "spreadsheets"]
-      },
-      {
-        name: "slides",
-        command: "/slides",
-        desc: "Create strategic HTML presentations with Chart.js, design tokens, and contextual layouts.",
-        tags: ["slides", "html", "chartjs", "presentation"]
+        "name": "verification-before-completion",
+        "command": "/verification-before-completion",
+        "desc": "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always",
+        "tags": [
+          "verification",
+          "before",
+          "completion",
+          "skill"
+        ],
+        "path": "/home/yash/.agents/skills/verification-before-completion/SKILL.md"
       }
     ]
   }
@@ -340,38 +860,6 @@ function getInjectionPayload() {
   return `
 (() => {
       const skillsData = ${skillsJson};
-      const STORAGE_CATS_KEY = "antigravity_custom_categories_v1";
-      const STORAGE_SKILLS_KEY = "antigravity_custom_skills_v1";
-
-      function getCustomCategories() {
-        try {
-          const raw = localStorage.getItem(STORAGE_CATS_KEY);
-          return raw ? JSON.parse(raw) : [];
-        } catch (_) {
-          return [];
-        }
-      }
-
-      function saveCustomCategories(cats) {
-        try {
-          localStorage.setItem(STORAGE_CATS_KEY, JSON.stringify(cats));
-        } catch (_) {}
-      }
-
-      function getCustomSkills() {
-        try {
-          const raw = localStorage.getItem(STORAGE_SKILLS_KEY);
-          return raw ? JSON.parse(raw) : [];
-        } catch (_) {
-          return [];
-        }
-      }
-
-      function saveCustomSkills(skills) {
-        try {
-          localStorage.setItem(STORAGE_SKILLS_KEY, JSON.stringify(skills));
-        } catch (_) {}
-      }
 
       // Cleanup old instance if present
       const oldDrawer = document.getElementById("antigravity-skills-drawer");
@@ -491,18 +979,13 @@ function getInjectionPayload() {
           font-weight: 500;
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 5px;
           cursor: pointer;
           transition: all 0.15s ease;
         }
         .ag-drawer-action-btn:hover {
           background: rgba(240, 91, 93, 0.2);
           border-color: rgba(240, 91, 93, 0.4);
-          color: #fff;
-        }
-        .ag-drawer-action-btn.active {
-          background: #f05b5d;
-          border-color: #f05b5d;
           color: #fff;
         }
         .ag-drawer-close-btn {
@@ -521,12 +1004,6 @@ function getInjectionPayload() {
         .ag-drawer-close-btn:hover {
           background: rgba(255, 255, 255, 0.1);
           color: #fff;
-        }
-        #ag-drawer-main-view {
-          display: flex;
-          flex-direction: column;
-          flex: 1 1 auto;
-          overflow: hidden;
         }
         .ag-drawer-search-wrap {
           padding: 12px 18px;
@@ -551,7 +1028,7 @@ function getInjectionPayload() {
           flex: 1 1 auto;
           overflow-y: auto !important;
           overflow-x: hidden !important;
-          padding: 12px 16px 24px 16px;
+          padding: 12px 16px;
           display: flex;
           flex-direction: column;
           gap: 10px;
@@ -630,16 +1107,6 @@ function getInjectionPayload() {
           font-weight: 600;
           color: #f05b5d;
         }
-        .ag-skill-custom-badge {
-          font-size: 9px;
-          font-weight: 700;
-          color: #f05b5d;
-          background: rgba(240, 91, 93, 0.15);
-          border: 1px solid rgba(240, 91, 93, 0.35);
-          padding: 1px 5px;
-          border-radius: 4px;
-          text-transform: uppercase;
-        }
         .ag-skill-use-btn {
           background: #f05b5d;
           color: #fff;
@@ -653,20 +1120,6 @@ function getInjectionPayload() {
         }
         .ag-skill-use-btn:hover {
           opacity: 0.85;
-        }
-        .ag-skill-del-btn {
-          background: transparent;
-          border: none;
-          color: rgba(255, 255, 255, 0.4);
-          cursor: pointer;
-          font-size: 12px;
-          padding: 2px 4px;
-          border-radius: 4px;
-          transition: color 0.15s ease;
-        }
-        .ag-skill-del-btn:hover {
-          color: #ff6e70;
-          background: rgba(255, 50, 50, 0.1);
         }
         .ag-skill-desc {
           font-size: 12px;
@@ -685,133 +1138,26 @@ function getInjectionPayload() {
           padding: 1px 5px;
           border-radius: 4px;
         }
-
-        /* Settings View Styles */
-        #ag-drawer-settings-view {
-          display: none;
-          flex: 1 1 auto;
-          overflow-y: auto !important;
-          overflow-x: hidden !important;
-          padding: 14px 18px 30px 18px;
-          flex-direction: column;
-          gap: 14px;
-          scrollbar-width: thin !important;
-          scrollbar-color: rgba(240, 91, 93, 0.4) transparent !important;
-        }
-        #ag-drawer-settings-view::-webkit-scrollbar {
-          display: block !important;
-          width: 6px !important;
-        }
-        #ag-drawer-settings-view::-webkit-scrollbar-thumb {
-          background: rgba(240, 91, 93, 0.4) !important;
-          border-radius: 9999px !important;
-        }
-        .ag-settings-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 8px;
-          padding: 12px 14px;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-        }
-        .ag-settings-card-title {
-          font-size: 13px;
-          font-weight: 600;
-          color: #fff;
+        .ag-drawer-footer {
+          padding: 10px 16px;
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          font-size: 11px;
+          color: rgba(255, 255, 255, 0.5);
           display: flex;
           align-items: center;
-          gap: 8px;
+          justify-content: space-between;
+          background: rgba(0, 0, 0, 0.2);
+          flex-shrink: 0;
         }
-        .ag-settings-card-desc {
-          font-size: 11px;
-          color: rgba(255, 255, 255, 0.55);
-          line-height: 1.4;
-        }
-        .ag-custom-input, .ag-custom-select, .ag-custom-textarea {
-          width: 100%;
-          background: rgba(0, 0, 0, 0.35);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          border-radius: 6px;
-          padding: 7px 10px;
-          color: #fff;
-          font-size: 12px;
-          outline: none;
-          box-sizing: border-box;
-          font-family: inherit;
-          transition: border-color 0.15s ease;
-        }
-        .ag-custom-input:focus, .ag-custom-select:focus, .ag-custom-textarea:focus {
-          border-color: #f05b5d;
-          box-shadow: 0 0 0 1px rgba(240, 91, 93, 0.3);
-        }
-        .ag-custom-select option, .ag-custom-select optgroup {
-          background: #1c1414;
-          color: #fff;
-        }
-        .ag-custom-label {
-          display: block;
-          font-size: 11px;
-          font-weight: 500;
-          color: rgba(255, 255, 255, 0.7);
-          margin-bottom: 4px;
-        }
-        .ag-custom-btn-primary {
-          background: #f05b5d;
-          color: #fff;
-          border: none;
-          border-radius: 6px;
-          padding: 7px 14px;
-          font-size: 12px;
+        .ag-drawer-footer a {
+          color: #f05b5d;
+          text-decoration: none;
+          font-family: monospace;
           font-weight: 600;
           cursor: pointer;
-          transition: background 0.15s ease;
         }
-        .ag-custom-btn-primary:hover {
-          background: #ff6e70;
-        }
-        .ag-cats-chip-container {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 6px;
-          margin-top: 6px;
-        }
-        .ag-cat-chip {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          background: rgba(240, 91, 93, 0.15);
-          border: 1px solid rgba(240, 91, 93, 0.3);
-          color: #f1f0f7;
-          font-size: 11px;
-          padding: 3px 8px;
-          border-radius: 12px;
-        }
-        .ag-chip-del {
-          cursor: pointer;
-          opacity: 0.6;
-          font-weight: bold;
-          font-size: 11px;
-          margin-left: 2px;
-        }
-        .ag-chip-del:hover {
-          opacity: 1;
-          color: #ff6e70;
-        }
-        .ag-custom-empty {
-          font-size: 11px;
-          color: rgba(255, 255, 255, 0.4);
-          font-style: italic;
-          padding: 4px 0;
-        }
-        .ag-custom-skill-item {
-          background: rgba(0, 0, 0, 0.25);
-          border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 6px;
-          padding: 8px 10px;
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
+        .ag-drawer-footer a:hover {
+          text-decoration: underline;
         }
       \`;
 
@@ -830,96 +1176,26 @@ function getInjectionPayload() {
         drawer.id = "antigravity-skills-drawer";
         drawer.innerHTML = \`
           <div class="ag-drawer-header">
-            <div class="ag-drawer-title" id="ag-drawer-title-wrap">
+            <div class="ag-drawer-title">
               <span>⚡</span>
-              <span id="ag-drawer-title-text">Skills & Commands Hub</span>
+              <span>Skills & Commands Hub</span>
             </div>
             <div class="ag-drawer-header-actions">
-              <button class="ag-drawer-action-btn" id="ag-drawer-settings-btn" title="Create Custom Category & Add Skills">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="3"></circle>
-                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                </svg>
-                <span id="ag-settings-btn-label">Customize</span>
-              </button>
               <button class="ag-drawer-close-btn" id="ag-drawer-close-btn" title="Close (Esc)">✕</button>
             </div>
           </div>
-
-          <!-- View 1: Main Skills Catalog -->
-          <div id="ag-drawer-main-view">
-            <div class="ag-drawer-search-wrap">
-              <input type="text" class="ag-drawer-search" id="ag-drawer-search" placeholder="Search skills, use cases, keywords..." />
-            </div>
-            <div class="ag-drawer-content" id="ag-drawer-content"></div>
+          <div class="ag-drawer-search-wrap">
+            <input type="text" class="ag-drawer-search" id="ag-drawer-search" placeholder="Search skills, commands, keywords..." />
           </div>
-
-          <!-- View 2: Dedicated Custom Category & Skills Settings -->
-          <div id="ag-drawer-settings-view">
-            <!-- Section 1: Create Custom Category -->
-            <div class="ag-settings-card">
-              <div class="ag-settings-card-title">
-                <span>📁</span>
-                <span>Custom Categories</span>
-              </div>
-              <div class="ag-settings-card-desc">Create your own category to organize custom slash commands.</div>
-              <div style="display: flex; gap: 8px; margin-top: 8px;">
-                <input type="text" id="ag-custom-cat-input" class="ag-custom-input" placeholder="e.g. My Workflows, Project Tools..." />
-                <button id="ag-add-cat-btn" class="ag-custom-btn-primary" style="white-space: nowrap;">+ Add Category</button>
-              </div>
-              <div id="ag-cats-chip-container" class="ag-cats-chip-container"></div>
-            </div>
-
-            <!-- Section 2: Add Custom Skill -->
-            <div class="ag-settings-card">
-              <div class="ag-settings-card-title">
-                <span>⚡</span>
-                <span>Add Custom Skill / Command</span>
-              </div>
-              <div class="ag-settings-card-desc">Add a custom prompt, shortcut, or skill to any category.</div>
-              <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
-                <div>
-                  <label class="ag-custom-label">Target Category</label>
-                  <select id="ag-custom-skill-cat-select" class="ag-custom-select"></select>
-                </div>
-                <div>
-                  <label class="ag-custom-label">Slash Command</label>
-                  <input type="text" id="ag-custom-skill-cmd-input" class="ag-custom-input" placeholder="e.g. /my-workflow" />
-                </div>
-                <div>
-                  <label class="ag-custom-label">Display Name</label>
-                  <input type="text" id="ag-custom-skill-name-input" class="ag-custom-input" placeholder="e.g. Code Review & QA" />
-                </div>
-                <div>
-                  <label class="ag-custom-label">Description / Instructions</label>
-                  <textarea id="ag-custom-skill-desc-input" class="ag-custom-textarea" rows="2" placeholder="e.g. Analyzes diff and generates QA test plan..."></textarea>
-                </div>
-                <div>
-                  <label class="ag-custom-label">Tags (comma-separated)</label>
-                  <input type="text" id="ag-custom-skill-tags-input" class="ag-custom-input" placeholder="e.g. review, qa, test" />
-                </div>
-                <button id="ag-save-skill-btn" class="ag-custom-btn-primary" style="margin-top: 4px;">+ Save Custom Skill</button>
-                <div id="ag-skill-status-msg" style="display:none; font-size:12px; font-weight:600; padding:6px 10px; border-radius:6px;"></div>
-              </div>
-            </div>
-
-            <!-- Section 3: Installed Custom Skills List -->
-            <div class="ag-settings-card">
-              <div class="ag-settings-card-title" style="justify-content: space-between;">
-                <div style="display: flex; align-items: center; gap: 6px;">
-                  <span>📋</span>
-                  <span>Installed Custom Skills</span>
-                </div>
-                <span id="ag-custom-skills-count" style="font-size: 11px; background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 9999px;">0</span>
-              </div>
-              <div id="ag-custom-skills-list" style="margin-top: 8px; display: flex; flex-direction: column; gap: 8px;"></div>
-            </div>
+          <div class="ag-drawer-content" id="ag-drawer-content"></div>
+          <div class="ag-drawer-footer">
+            <span>Import / consolidate skills:</span>
+            <a id="ag-footer-agent-link">/skills-manager ↳</a>
           </div>
         \`;
         document.body.appendChild(drawer);
       }
 
-      let currentView = "main";
       function toggleDrawer(open) {
         const d = document.getElementById("antigravity-skills-drawer");
         const b = document.getElementById("antigravity-skills-backdrop");
@@ -933,7 +1209,7 @@ function getInjectionPayload() {
           if (btn) btn.classList.add("active");
           setTimeout(() => {
             const s = document.getElementById("ag-drawer-search");
-            if (s && currentView === "main") s.focus();
+            if (s) s.focus();
           }, 100);
         } else {
           d.classList.remove("open");
@@ -950,92 +1226,28 @@ function getInjectionPayload() {
         if (e.key === "Escape") toggleDrawer(false);
       });
 
-      // View Switching
-      function switchView(view) {
-        currentView = view;
-        const mainView = document.getElementById("ag-drawer-main-view");
-        const settingsView = document.getElementById("ag-drawer-settings-view");
-        const settingsBtn = document.getElementById("ag-drawer-settings-btn");
-        const titleText = document.getElementById("ag-drawer-title-text");
-        const label = document.getElementById("ag-settings-btn-label");
-
-        if (view === "settings") {
-          if (mainView) mainView.style.display = "none";
-          if (settingsView) settingsView.style.display = "flex";
-          if (settingsBtn) settingsBtn.classList.add("active");
-          if (label) label.textContent = "← Catalog";
-          if (titleText) titleText.textContent = "Customize Skills Hub";
-          renderSettings();
-        } else {
-          if (mainView) mainView.style.display = "flex";
-          if (settingsView) settingsView.style.display = "none";
-          if (settingsBtn) settingsBtn.classList.remove("active");
-          if (label) label.textContent = "Customize";
-          if (titleText) titleText.textContent = "Skills & Commands Hub";
-          renderSkills(document.getElementById("ag-drawer-search")?.value || "");
-        }
-      }
-
-      const settingsBtn = document.getElementById("ag-drawer-settings-btn");
-      if (settingsBtn) {
-        settingsBtn.onclick = () => {
-          switchView(currentView === "main" ? "settings" : "main");
+      // Quick footer link insertion
+      const footerLink = document.getElementById("ag-footer-agent-link");
+      if (footerLink) {
+        footerLink.onclick = () => {
+          const editor = document.querySelector('[data-lexical-editor="true"]') || document.querySelector('[aria-label="Message input"]');
+          if (editor) {
+            editor.focus();
+            editor.dispatchEvent(new InputEvent("beforeinput", { bubbles: true, cancelable: true, inputType: "insertText", data: "/skills-manager" }));
+            toggleDrawer(false);
+          }
         };
       }
 
-      // Get Merged Skills Data (Built-in + Custom)
-      function getMergedSkillsData() {
-        const base = JSON.parse(JSON.stringify(skillsData));
-        const customCats = getCustomCategories();
-        const customSkills = getCustomSkills();
-
-        // Ensure custom categories are present
-        customCats.forEach(catName => {
-          let catObj = base.find(c => c.category === catName || c.rawCategory === catName);
-          if (!catObj) {
-            catObj = {
-              category: "📁 " + catName,
-              rawCategory: catName,
-              isCustomCat: true,
-              skills: []
-            };
-            base.push(catObj);
-          }
-        });
-
-        // Add custom skills into matching categories
-        customSkills.forEach(s => {
-          let catObj = base.find(c => c.category === s.category || c.rawCategory === s.category);
-          if (!catObj) {
-            catObj = {
-              category: "📁 " + s.category,
-              rawCategory: s.category,
-              isCustomCat: true,
-              skills: []
-            };
-            base.push(catObj);
-          }
-          if (!catObj.skills.some(existing => existing.command === s.command)) {
-            catObj.skills.push({
-              ...s,
-              isCustom: true
-            });
-          }
-        });
-
-        return base;
-      }
-
-      // Render Skills Catalog
+      // 3. Render Skills
       function renderSkills(filterText = "") {
         const container = document.getElementById("ag-drawer-content");
         if (!container) return;
         container.innerHTML = "";
         const q = filterText.trim().toLowerCase();
-        const mergedData = getMergedSkillsData();
 
         let visibleCount = 0;
-        mergedData.forEach(cat => {
+        skillsData.forEach(cat => {
           const matches = cat.skills.filter(s => !q || s.name.toLowerCase().includes(q) || s.command.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q) || (s.tags && s.tags.some(t => t.toLowerCase().includes(q))));
           if (matches.length === 0) return;
           visibleCount++;
@@ -1053,32 +1265,14 @@ function getInjectionPayload() {
             card.className = "ag-skill-card";
             card.innerHTML = \`
               <div class="ag-skill-top">
-                <div style="display: flex; align-items: center; gap: 6px;">
-                  <span class="ag-skill-name">\${s.command}</span>
-                  \${s.isCustom ? \`<span class="ag-skill-custom-badge">Custom</span>\` : ''}
-                </div>
-                <div style="display: flex; align-items: center; gap: 6px;">
-                  \${s.isCustom ? \`<button class="ag-skill-del-btn" title="Delete custom skill">🗑️</button>\` : ''}
-                  <button class="ag-skill-use-btn">Use ↳</button>
-                </div>
+                <span class="ag-skill-name">\${s.command}</span>
+                <button class="ag-skill-use-btn">Use ↳</button>
               </div>
               <div class="ag-skill-desc">\${s.desc}</div>
               <div class="ag-skill-tags">
                 \${(s.tags || []).map(t => \`<span class="ag-skill-tag">#\${t}</span>\`).join("")}
               </div>
             \`;
-
-            if (s.isCustom) {
-              const delBtn = card.querySelector(".ag-skill-del-btn");
-              if (delBtn) {
-                delBtn.onclick = (e) => {
-                  e.stopPropagation();
-                  const curr = getCustomSkills().filter(item => item.command !== s.command);
-                  saveCustomSkills(curr);
-                  renderSkills(filterText);
-                };
-              }
-            }
 
             card.querySelector(".ag-skill-use-btn").onclick = (e) => {
               e.stopPropagation();
@@ -1103,11 +1297,9 @@ function getInjectionPayload() {
             <div style="text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.4);">
               <div style="font-size: 24px; margin-bottom: 8px;">🔍</div>
               <div style="font-size: 13px; font-weight: 600;">No matching skills found</div>
-              <button class="ag-custom-btn-secondary" style="margin-top: 14px;" id="ag-quick-add-custom-btn">+ Create Custom Skill</button>
+              <div style="font-size: 11px; margin-top: 6px;">Import any skill from GitHub or local path with: <code>/skills-manager import &lt;url&gt;</code></div>
             </div>
           \`;
-          const quickBtn = document.getElementById("ag-quick-add-custom-btn");
-          if (quickBtn) quickBtn.onclick = () => switchView("settings");
         }
       }
       renderSkills();
@@ -1115,170 +1307,6 @@ function getInjectionPayload() {
       const searchInput = document.getElementById("ag-drawer-search");
       if (searchInput) {
         searchInput.oninput = (e) => renderSkills(e.target.value);
-      }
-
-      // Render Settings View (Custom Categories & Skills Manager)
-      function renderSettings() {
-        // 1. Render Category Chips
-        const chipContainer = document.getElementById("ag-cats-chip-container");
-        const customCats = getCustomCategories();
-        if (chipContainer) {
-          chipContainer.innerHTML = "";
-          if (customCats.length === 0) {
-            chipContainer.innerHTML = \`<span class="ag-custom-empty">No custom categories yet. Add one above!</span>\`;
-          } else {
-            customCats.forEach(cat => {
-              const chip = document.createElement("div");
-              chip.className = "ag-cat-chip";
-              chip.innerHTML = \`<span>📁 \${cat}</span><span class="ag-chip-del" title="Delete category">✕</span>\`;
-              chip.querySelector(".ag-chip-del").onclick = () => {
-                const updated = getCustomCategories().filter(c => c !== cat);
-                saveCustomCategories(updated);
-                renderSettings();
-              };
-              chipContainer.appendChild(chip);
-            });
-          }
-        }
-
-        // 2. Populate Target Category Select
-        const catSelect = document.getElementById("ag-custom-skill-cat-select");
-        if (catSelect) {
-          catSelect.innerHTML = "";
-          if (customCats.length > 0) {
-            const groupCustom = document.createElement("optgroup");
-            groupCustom.label = "Custom Categories";
-            customCats.forEach(cat => {
-              const opt = document.createElement("option");
-              opt.value = cat;
-              opt.textContent = "📁 " + cat;
-              groupCustom.appendChild(opt);
-            });
-            catSelect.appendChild(groupCustom);
-          }
-          const groupBuiltin = document.createElement("optgroup");
-          groupBuiltin.label = "Built-in Categories";
-          skillsData.forEach(c => {
-            const opt = document.createElement("option");
-            opt.value = c.category;
-            opt.textContent = c.category;
-            groupBuiltin.appendChild(opt);
-          });
-          catSelect.appendChild(groupBuiltin);
-        }
-
-        // 3. Render Custom Skills List
-        const customSkillsList = document.getElementById("ag-custom-skills-list");
-        const countBadge = document.getElementById("ag-custom-skills-count");
-        const customSkills = getCustomSkills();
-        if (countBadge) countBadge.textContent = String(customSkills.length);
-
-        if (customSkillsList) {
-          customSkillsList.innerHTML = "";
-          if (customSkills.length === 0) {
-            customSkillsList.innerHTML = \`<span class="ag-custom-empty">No custom skills created yet. Fill the form above to add your first!</span>\`;
-          } else {
-            customSkills.forEach(s => {
-              const item = document.createElement("div");
-              item.className = "ag-custom-skill-item";
-              item.innerHTML = \`
-                <div class="ag-custom-skill-top">
-                  <div style="display:flex; align-items:center; gap:6px;">
-                    <span style="font-family: monospace; font-size: 13px; font-weight:600; color:#f05b5d;">\${s.command}</span>
-                    <span class="ag-custom-skill-badge">\${s.category}</span>
-                  </div>
-                  <button class="ag-skill-del-btn" title="Delete custom skill">🗑️</button>
-                </div>
-                <div style="font-size: 12px; color: rgba(255,255,255,0.7);">\${s.desc}</div>
-                <div style="display: flex; gap: 4px; flex-wrap: wrap;">
-                  \${(s.tags || []).map(t => \`<span class="ag-skill-tag">#\${t}</span>\`).join("")}
-                </div>
-              \`;
-              item.querySelector(".ag-skill-del-btn").onclick = () => {
-                const updated = getCustomSkills().filter(item => item.command !== s.command);
-                saveCustomSkills(updated);
-                renderSettings();
-              };
-              customSkillsList.appendChild(item);
-            });
-          }
-        }
-      }
-
-      // Bind Add Category Button
-      const addCatBtn = document.getElementById("ag-add-cat-btn");
-      const catInput = document.getElementById("ag-custom-cat-input");
-      if (addCatBtn && catInput) {
-        addCatBtn.onclick = () => {
-          const val = catInput.value.trim();
-          if (!val) return;
-          const existing = getCustomCategories();
-          if (!existing.includes(val)) {
-            existing.push(val);
-            saveCustomCategories(existing);
-            catInput.value = "";
-            renderSettings();
-          }
-        };
-        catInput.onkeydown = (e) => {
-          if (e.key === "Enter") addCatBtn.click();
-        };
-      }
-
-      // Bind Save Custom Skill Button
-      const saveSkillBtn = document.getElementById("ag-save-skill-btn");
-      if (saveSkillBtn) {
-        saveSkillBtn.onclick = () => {
-          const catSelect = document.getElementById("ag-custom-skill-cat-select");
-          const cmdInput = document.getElementById("ag-custom-skill-cmd-input");
-          const nameInput = document.getElementById("ag-custom-skill-name-input");
-          const descInput = document.getElementById("ag-custom-skill-desc-input");
-          const tagsInput = document.getElementById("ag-custom-skill-tags-input");
-          const statusMsg = document.getElementById("ag-skill-status-msg");
-
-          let cmd = (cmdInput?.value || "").trim();
-          if (!cmd) {
-            if (statusMsg) {
-              statusMsg.style.display = "block";
-              statusMsg.style.background = "rgba(255, 60, 60, 0.2)";
-              statusMsg.style.color = "#ff6e70";
-              statusMsg.textContent = "Please enter a slash command (e.g. /my-skill).";
-            }
-            return;
-          }
-          if (!cmd.startsWith("/")) cmd = "/" + cmd;
-
-          const category = catSelect?.value || "Custom";
-          const name = (nameInput?.value || "").trim() || cmd.replace("/", "");
-          const desc = (descInput?.value || "").trim() || "Custom user skill.";
-          const rawTags = (tagsInput?.value || "").split(",").map(t => t.trim().toLowerCase()).filter(Boolean);
-          if (!rawTags.includes("custom")) rawTags.push("custom");
-
-          const customSkills = getCustomSkills().filter(s => s.command !== cmd);
-          customSkills.push({
-            category,
-            command: cmd,
-            name,
-            desc,
-            tags: rawTags
-          });
-          saveCustomSkills(customSkills);
-
-          if (statusMsg) {
-            statusMsg.style.display = "block";
-            statusMsg.style.background = "rgba(46, 204, 113, 0.2)";
-            statusMsg.style.color = "#2ecc71";
-            statusMsg.textContent = \`✓ Saved \${cmd} successfully!\`;
-            setTimeout(() => { statusMsg.style.display = "none"; }, 3000);
-          }
-
-          if (cmdInput) cmdInput.value = "";
-          if (nameInput) nameInput.value = "";
-          if (descInput) descInput.value = "";
-          if (tagsInput) tagsInput.value = "";
-
-          renderSettings();
-        };
       }
 
       // Attach Sidebar Button
@@ -1326,7 +1354,7 @@ function getInjectionPayload() {
       if (!window.__sidebar_wheel_handler) {
         window.__sidebar_wheel_handler = (e) => {
           if (e.target && e.target.closest("#antigravity-skills-drawer")) {
-            const activeScroll = currentView === "settings" ? document.getElementById("ag-drawer-settings-view") : document.getElementById("ag-drawer-content");
+            const activeScroll = document.getElementById("ag-drawer-content");
             if (activeScroll) {
               e.preventDefault();
               activeScroll.scrollTop += e.deltaY;
@@ -1356,6 +1384,7 @@ function getInjectionPayload() {
     })()
   `;
 }
+
 function findActivePorts() {
   const ports = new Set();
   for (const file of CANDIDATE_PORT_FILES) {
@@ -1376,7 +1405,7 @@ function setupPageConnection(page, payload) {
     const existingWs = activeWsConnections.get(page.id);
     if (existingWs && existingWs.readyState === WebSocket.OPEN) {
       const heartbeatExpr = `(() => {
-        if (!document.getElementById("antigravity-skills-hub-styles")) {
+        if (!document.getElementById("antigravity-skills-drawer")) {
           ${payload}
           return "Re-injected styles & payload via heartbeat";
         }
@@ -1385,10 +1414,7 @@ function setupPageConnection(page, payload) {
       existingWs.send(JSON.stringify({
         id: 999,
         method: 'Runtime.evaluate',
-        params: {
-          expression: heartbeatExpr,
-          returnByValue: true
-        }
+        params: { expression: heartbeatExpr, returnByValue: true }
       }));
       return;
     }
@@ -1399,19 +1425,13 @@ function setupPageConnection(page, payload) {
     activeWsConnections.set(page.id, ws);
 
     ws.onopen = () => {
-      console.log(`[Skills Hub] Connected to page: ${page.title || page.id} (${page.url})`);
-      // 1. Enable Page and Runtime domains (MANDATORY for lifecycle events and persistent scripts)
       ws.send(JSON.stringify({ id: 1, method: 'Page.enable' }));
       ws.send(JSON.stringify({ id: 2, method: 'Runtime.enable' }));
-
-      // 2. Evaluate immediately in current document
       ws.send(JSON.stringify({
         id: 3,
         method: 'Runtime.evaluate',
         params: { expression: payload, returnByValue: true }
       }));
-
-      // 3. Register script to run automatically on any page reload (Ctrl+R)
       ws.send(JSON.stringify({
         id: 4,
         method: 'Page.addScriptToEvaluateOnNewDocument',
@@ -1422,28 +1442,7 @@ function setupPageConnection(page, payload) {
     ws.onmessage = (event) => {
       try {
         const msg = JSON.parse(event.data);
-        if (msg.id === 3 || msg.id === 999) {
-          const val = msg.result?.result?.value;
-          const err = msg.result?.exceptionDetails;
-          console.log(`[Skills Hub] Page ${page.id} (${page.title}): val=${val}, raw=${JSON.stringify(msg.result)}`);
-          try {
-            fs.writeFileSync('/tmp/skills_hub_status.json', JSON.stringify({
-              pageId: page.id,
-              title: page.title,
-              url: page.url,
-              value: val,
-              raw: msg.result,
-              error: err || null,
-              time: new Date().toISOString()
-            }, null, 2));
-          } catch (_) {}
-        }
-        // Instant re-injection on reload events
-        if (
-          msg.method === 'Page.frameNavigated' ||
-          msg.method === 'Page.loadEventFired' ||
-          msg.method === 'Page.domContentEventFired'
-        ) {
+        if (msg.method === 'Page.frameNavigated' || msg.method === 'Page.loadEventFired' || msg.method === 'Page.domContentEventFired') {
           ws.send(JSON.stringify({
             id: 5,
             method: 'Runtime.evaluate',
@@ -1453,15 +1452,8 @@ function setupPageConnection(page, payload) {
       } catch (e) {}
     };
 
-    ws.onclose = () => {
-      console.log(`[Skills Hub] Disconnected from ${page.title || page.id}`);
-      activeWsConnections.delete(page.id);
-    };
-
-    ws.onerror = (err) => {
-      console.error(`[Skills Hub] WebSocket error on ${page.id}:`, err.message || err);
-      activeWsConnections.delete(page.id);
-    };
+    ws.onclose = () => activeWsConnections.delete(page.id);
+    ws.onerror = () => activeWsConnections.delete(page.id);
   } catch (err) {
     activeWsConnections.delete(page.id);
   }
@@ -1470,7 +1462,6 @@ function setupPageConnection(page, payload) {
 async function checkAndInject() {
   const ports = findActivePorts();
   if (ports.length === 0) return;
-
   const payload = getInjectionPayload();
 
   for (const port of ports) {
@@ -1481,17 +1472,17 @@ async function checkAndInject() {
       clearTimeout(timer);
       const targets = await res.json();
       const pages = targets.filter(t => t.type === 'page');
-
       for (const page of pages) {
         setupPageConnection(page, payload);
       }
-    } catch (e) {
-      // Port inactive or restarting
-    }
+    } catch (e) {}
   }
 }
 
-// Watch loop: check every 1.5 seconds
-console.log("Antigravity Skills Hub Daemon started (Ctrl+R auto-reload resilient).");
-setInterval(checkAndInject, 1500);
-checkAndInject();
+if (require.main === module) {
+  console.log("Antigravity Skills Hub Daemon started.");
+  setInterval(checkAndInject, 1500);
+  checkAndInject();
+}
+
+module.exports = { getInjectionPayload, SKILLS_DATABASE };

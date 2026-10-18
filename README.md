@@ -63,7 +63,7 @@
 - **⚙️ Redesigned Settings Modal:** Features a sleek `16px` border-radius container, frosted glass backdrop blur, and an inset floating vertical divider.
 - **📏 Floating Split Pane Divider:** Clean `1px` floating separator between chat and artifact/walkthrough views with interactive hover accent glow.
 - **🗂️ Built-in Skills & Commands Hub:** Integrated slide-out drawer accessible right from the sidebar (`Skills Hub [/cmd]`) with searchable categorised skills, collapsible accordions, and 1-click clipboard copy & prompt insertion.
-- **⚙️ Dedicated Custom Skills & Categories Manager:** Built-in customization suite within the Skills Hub allowing you to create custom categories, define custom slash commands and prompts, manage installed custom skills with 1-click delete, and persist them across sessions via `localStorage`.
+- **⚡ Autonomous Skills Manager (`/skills-manager` & `manage_skills.py`):** Autonomous agent skill and CLI suite to auto-discover all installed skills, categorize them into domains, import skills from GitHub, Obsidian vaults, or URLs, and consolidate multi-skill suites into modular unified tools without altering markdown rules.
 - **🛠️ Automated Electron Patcher (`patch_app_asar.py`):** Replaces the startup white screen flash with a dark theme-matched loading overlay, hides the top window bar cleanly in tiling window managers (Hyprland/Sway), and fixes sidebar scrolling.
 - **🚀 Automated 1-Click Installer:** Includes launcher wrapper, desktop menu integration, systemd user daemon, and Hyprland compositor rule setup.
 
@@ -156,6 +156,25 @@ python3 sync_antigravity_theme.py --watch
 python3 patch_app_asar.py
 ```
 *Note: Requires `npx` / `@electron/asar` installed to unpack and repack Electron archives.*
+
+### 3. Skills Manager & Importer (`manage_skills.py` & `/skills-manager`)
+```bash
+# Scan and list all installed skills across all paths
+python3 manage_skills.py scan
+
+# Automatically synchronize all skills into catalog and live Antigravity GUI
+python3 manage_skills.py sync
+
+# Import any skill from a GitHub repository
+python3 manage_skills.py import https://github.com/owner/skill-repo --name my-skill
+
+# Import from local directory or Obsidian Vault
+python3 manage_skills.py import "/path/to/Obsidian Vault/Skill" --name my-skill
+
+# Club multiple skills into a unified consolidated suite
+python3 manage_skills.py club suite-name skill1 skill2 skill3
+```
+*💡 Alternatively, simply instruct your Antigravity agent in chat: `/skills-manager` or `"import skill <url>"`.*
 
 ---
 

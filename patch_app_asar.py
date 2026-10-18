@@ -299,38 +299,6 @@ def patch_preload():
                 
                 (() => {{
       const skillsData = {skills_db};
-      const STORAGE_CATS_KEY = "antigravity_custom_categories_v1";
-      const STORAGE_SKILLS_KEY = "antigravity_custom_skills_v1";
-
-      function getCustomCategories() {{
-        try {{
-          const raw = localStorage.getItem(STORAGE_CATS_KEY);
-          return raw ? JSON.parse(raw) : [];
-        }} catch (_) {{
-          return [];
-        }}
-      }}
-
-      function saveCustomCategories(cats) {{
-        try {{
-          localStorage.setItem(STORAGE_CATS_KEY, JSON.stringify(cats));
-        }} catch (_) {{}}
-      }}
-
-      function getCustomSkills() {{
-        try {{
-          const raw = localStorage.getItem(STORAGE_SKILLS_KEY);
-          return raw ? JSON.parse(raw) : [];
-        }} catch (_) {{
-          return [];
-        }}
-      }}
-
-      function saveCustomSkills(skills) {{
-        try {{
-          localStorage.setItem(STORAGE_SKILLS_KEY, JSON.stringify(skills));
-        }} catch (_) {{}}
-      }}
 
       // Cleanup old instance if present
       const oldDrawer = document.getElementById("antigravity-skills-drawer");
@@ -450,18 +418,13 @@ def patch_preload():
           font-weight: 500;
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 5px;
           cursor: pointer;
           transition: all 0.15s ease;
         }}
         .ag-drawer-action-btn:hover {{
           background: rgba(240, 91, 93, 0.2);
           border-color: rgba(240, 91, 93, 0.4);
-          color: #fff;
-        }}
-        .ag-drawer-action-btn.active {{
-          background: #f05b5d;
-          border-color: #f05b5d;
           color: #fff;
         }}
         .ag-drawer-close-btn {{
@@ -480,12 +443,6 @@ def patch_preload():
         .ag-drawer-close-btn:hover {{
           background: rgba(255, 255, 255, 0.1);
           color: #fff;
-        }}
-        #ag-drawer-main-view {{
-          display: flex;
-          flex-direction: column;
-          flex: 1 1 auto;
-          overflow: hidden;
         }}
         .ag-drawer-search-wrap {{
           padding: 12px 18px;
@@ -510,7 +467,7 @@ def patch_preload():
           flex: 1 1 auto;
           overflow-y: auto !important;
           overflow-x: hidden !important;
-          padding: 12px 16px 24px 16px;
+          padding: 12px 16px;
           display: flex;
           flex-direction: column;
           gap: 10px;
@@ -589,16 +546,6 @@ def patch_preload():
           font-weight: 600;
           color: #f05b5d;
         }}
-        .ag-skill-custom-badge {{
-          font-size: 9px;
-          font-weight: 700;
-          color: #f05b5d;
-          background: rgba(240, 91, 93, 0.15);
-          border: 1px solid rgba(240, 91, 93, 0.35);
-          padding: 1px 5px;
-          border-radius: 4px;
-          text-transform: uppercase;
-        }}
         .ag-skill-use-btn {{
           background: #f05b5d;
           color: #fff;
@@ -612,20 +559,6 @@ def patch_preload():
         }}
         .ag-skill-use-btn:hover {{
           opacity: 0.85;
-        }}
-        .ag-skill-del-btn {{
-          background: transparent;
-          border: none;
-          color: rgba(255, 255, 255, 0.4);
-          cursor: pointer;
-          font-size: 12px;
-          padding: 2px 4px;
-          border-radius: 4px;
-          transition: color 0.15s ease;
-        }}
-        .ag-skill-del-btn:hover {{
-          color: #ff6e70;
-          background: rgba(255, 50, 50, 0.1);
         }}
         .ag-skill-desc {{
           font-size: 12px;
@@ -644,133 +577,26 @@ def patch_preload():
           padding: 1px 5px;
           border-radius: 4px;
         }}
-
-        /* Settings View Styles */
-        #ag-drawer-settings-view {{
-          display: none;
-          flex: 1 1 auto;
-          overflow-y: auto !important;
-          overflow-x: hidden !important;
-          padding: 14px 18px 30px 18px;
-          flex-direction: column;
-          gap: 14px;
-          scrollbar-width: thin !important;
-          scrollbar-color: rgba(240, 91, 93, 0.4) transparent !important;
-        }}
-        #ag-drawer-settings-view::-webkit-scrollbar {{
-          display: block !important;
-          width: 6px !important;
-        }}
-        #ag-drawer-settings-view::-webkit-scrollbar-thumb {{
-          background: rgba(240, 91, 93, 0.4) !important;
-          border-radius: 9999px !important;
-        }}
-        .ag-settings-card {{
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 8px;
-          padding: 12px 14px;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-        }}
-        .ag-settings-card-title {{
-          font-size: 13px;
-          font-weight: 600;
-          color: #fff;
+        .ag-drawer-footer {{
+          padding: 10px 16px;
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          font-size: 11px;
+          color: rgba(255, 255, 255, 0.5);
           display: flex;
           align-items: center;
-          gap: 8px;
+          justify-content: space-between;
+          background: rgba(0, 0, 0, 0.2);
+          flex-shrink: 0;
         }}
-        .ag-settings-card-desc {{
-          font-size: 11px;
-          color: rgba(255, 255, 255, 0.55);
-          line-height: 1.4;
-        }}
-        .ag-custom-input, .ag-custom-select, .ag-custom-textarea {{
-          width: 100%;
-          background: rgba(0, 0, 0, 0.35);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          border-radius: 6px;
-          padding: 7px 10px;
-          color: #fff;
-          font-size: 12px;
-          outline: none;
-          box-sizing: border-box;
-          font-family: inherit;
-          transition: border-color 0.15s ease;
-        }}
-        .ag-custom-input:focus, .ag-custom-select:focus, .ag-custom-textarea:focus {{
-          border-color: #f05b5d;
-          box-shadow: 0 0 0 1px rgba(240, 91, 93, 0.3);
-        }}
-        .ag-custom-select option, .ag-custom-select optgroup {{
-          background: #1c1414;
-          color: #fff;
-        }}
-        .ag-custom-label {{
-          display: block;
-          font-size: 11px;
-          font-weight: 500;
-          color: rgba(255, 255, 255, 0.7);
-          margin-bottom: 4px;
-        }}
-        .ag-custom-btn-primary {{
-          background: #f05b5d;
-          color: #fff;
-          border: none;
-          border-radius: 6px;
-          padding: 7px 14px;
-          font-size: 12px;
+        .ag-drawer-footer a {{
+          color: #f05b5d;
+          text-decoration: none;
+          font-family: monospace;
           font-weight: 600;
           cursor: pointer;
-          transition: background 0.15s ease;
         }}
-        .ag-custom-btn-primary:hover {{
-          background: #ff6e70;
-        }}
-        .ag-cats-chip-container {{
-          display: flex;
-          flex-wrap: wrap;
-          gap: 6px;
-          margin-top: 6px;
-        }}
-        .ag-cat-chip {{
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          background: rgba(240, 91, 93, 0.15);
-          border: 1px solid rgba(240, 91, 93, 0.3);
-          color: #f1f0f7;
-          font-size: 11px;
-          padding: 3px 8px;
-          border-radius: 12px;
-        }}
-        .ag-chip-del {{
-          cursor: pointer;
-          opacity: 0.6;
-          font-weight: bold;
-          font-size: 11px;
-          margin-left: 2px;
-        }}
-        .ag-chip-del:hover {{
-          opacity: 1;
-          color: #ff6e70;
-        }}
-        .ag-custom-empty {{
-          font-size: 11px;
-          color: rgba(255, 255, 255, 0.4);
-          font-style: italic;
-          padding: 4px 0;
-        }}
-        .ag-custom-skill-item {{
-          background: rgba(0, 0, 0, 0.25);
-          border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 6px;
-          padding: 8px 10px;
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
+        .ag-drawer-footer a:hover {{
+          text-decoration: underline;
         }}
       `;
 
@@ -789,96 +615,26 @@ def patch_preload():
         drawer.id = "antigravity-skills-drawer";
         drawer.innerHTML = `
           <div class="ag-drawer-header">
-            <div class="ag-drawer-title" id="ag-drawer-title-wrap">
+            <div class="ag-drawer-title">
               <span>⚡</span>
-              <span id="ag-drawer-title-text">Skills & Commands Hub</span>
+              <span>Skills & Commands Hub</span>
             </div>
             <div class="ag-drawer-header-actions">
-              <button class="ag-drawer-action-btn" id="ag-drawer-settings-btn" title="Create Custom Category & Add Skills">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="3"></circle>
-                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                </svg>
-                <span id="ag-settings-btn-label">Customize</span>
-              </button>
               <button class="ag-drawer-close-btn" id="ag-drawer-close-btn" title="Close (Esc)">✕</button>
             </div>
           </div>
-
-          <!-- View 1: Main Skills Catalog -->
-          <div id="ag-drawer-main-view">
-            <div class="ag-drawer-search-wrap">
-              <input type="text" class="ag-drawer-search" id="ag-drawer-search" placeholder="Search skills, use cases, keywords..." />
-            </div>
-            <div class="ag-drawer-content" id="ag-drawer-content"></div>
+          <div class="ag-drawer-search-wrap">
+            <input type="text" class="ag-drawer-search" id="ag-drawer-search" placeholder="Search skills, commands, keywords..." />
           </div>
-
-          <!-- View 2: Dedicated Custom Category & Skills Settings -->
-          <div id="ag-drawer-settings-view">
-            <!-- Section 1: Create Custom Category -->
-            <div class="ag-settings-card">
-              <div class="ag-settings-card-title">
-                <span>📁</span>
-                <span>Custom Categories</span>
-              </div>
-              <div class="ag-settings-card-desc">Create your own category to organize custom slash commands.</div>
-              <div style="display: flex; gap: 8px; margin-top: 8px;">
-                <input type="text" id="ag-custom-cat-input" class="ag-custom-input" placeholder="e.g. My Workflows, Project Tools..." />
-                <button id="ag-add-cat-btn" class="ag-custom-btn-primary" style="white-space: nowrap;">+ Add Category</button>
-              </div>
-              <div id="ag-cats-chip-container" class="ag-cats-chip-container"></div>
-            </div>
-
-            <!-- Section 2: Add Custom Skill -->
-            <div class="ag-settings-card">
-              <div class="ag-settings-card-title">
-                <span>⚡</span>
-                <span>Add Custom Skill / Command</span>
-              </div>
-              <div class="ag-settings-card-desc">Add a custom prompt, shortcut, or skill to any category.</div>
-              <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
-                <div>
-                  <label class="ag-custom-label">Target Category</label>
-                  <select id="ag-custom-skill-cat-select" class="ag-custom-select"></select>
-                </div>
-                <div>
-                  <label class="ag-custom-label">Slash Command</label>
-                  <input type="text" id="ag-custom-skill-cmd-input" class="ag-custom-input" placeholder="e.g. /my-workflow" />
-                </div>
-                <div>
-                  <label class="ag-custom-label">Display Name</label>
-                  <input type="text" id="ag-custom-skill-name-input" class="ag-custom-input" placeholder="e.g. Code Review & QA" />
-                </div>
-                <div>
-                  <label class="ag-custom-label">Description / Instructions</label>
-                  <textarea id="ag-custom-skill-desc-input" class="ag-custom-textarea" rows="2" placeholder="e.g. Analyzes diff and generates QA test plan..."></textarea>
-                </div>
-                <div>
-                  <label class="ag-custom-label">Tags (comma-separated)</label>
-                  <input type="text" id="ag-custom-skill-tags-input" class="ag-custom-input" placeholder="e.g. review, qa, test" />
-                </div>
-                <button id="ag-save-skill-btn" class="ag-custom-btn-primary" style="margin-top: 4px;">+ Save Custom Skill</button>
-                <div id="ag-skill-status-msg" style="display:none; font-size:12px; font-weight:600; padding:6px 10px; border-radius:6px;"></div>
-              </div>
-            </div>
-
-            <!-- Section 3: Installed Custom Skills List -->
-            <div class="ag-settings-card">
-              <div class="ag-settings-card-title" style="justify-content: space-between;">
-                <div style="display: flex; align-items: center; gap: 6px;">
-                  <span>📋</span>
-                  <span>Installed Custom Skills</span>
-                </div>
-                <span id="ag-custom-skills-count" style="font-size: 11px; background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 9999px;">0</span>
-              </div>
-              <div id="ag-custom-skills-list" style="margin-top: 8px; display: flex; flex-direction: column; gap: 8px;"></div>
-            </div>
+          <div class="ag-drawer-content" id="ag-drawer-content"></div>
+          <div class="ag-drawer-footer">
+            <span>Import / consolidate skills:</span>
+            <a id="ag-footer-agent-link">/skills-manager ↳</a>
           </div>
         `;
         document.body.appendChild(drawer);
       }}
 
-      let currentView = "main";
       function toggleDrawer(open) {{
         const d = document.getElementById("antigravity-skills-drawer");
         const b = document.getElementById("antigravity-skills-backdrop");
@@ -892,7 +648,7 @@ def patch_preload():
           if (btn) btn.classList.add("active");
           setTimeout(() => {{
             const s = document.getElementById("ag-drawer-search");
-            if (s && currentView === "main") s.focus();
+            if (s) s.focus();
           }}, 100);
         }} else {{
           d.classList.remove("open");
@@ -909,92 +665,28 @@ def patch_preload():
         if (e.key === "Escape") toggleDrawer(false);
       }});
 
-      // View Switching
-      function switchView(view) {{
-        currentView = view;
-        const mainView = document.getElementById("ag-drawer-main-view");
-        const settingsView = document.getElementById("ag-drawer-settings-view");
-        const settingsBtn = document.getElementById("ag-drawer-settings-btn");
-        const titleText = document.getElementById("ag-drawer-title-text");
-        const label = document.getElementById("ag-settings-btn-label");
-
-        if (view === "settings") {{
-          if (mainView) mainView.style.display = "none";
-          if (settingsView) settingsView.style.display = "flex";
-          if (settingsBtn) settingsBtn.classList.add("active");
-          if (label) label.textContent = "← Catalog";
-          if (titleText) titleText.textContent = "Customize Skills Hub";
-          renderSettings();
-        }} else {{
-          if (mainView) mainView.style.display = "flex";
-          if (settingsView) settingsView.style.display = "none";
-          if (settingsBtn) settingsBtn.classList.remove("active");
-          if (label) label.textContent = "Customize";
-          if (titleText) titleText.textContent = "Skills & Commands Hub";
-          renderSkills(document.getElementById("ag-drawer-search")?.value || "");
-        }}
-      }}
-
-      const settingsBtn = document.getElementById("ag-drawer-settings-btn");
-      if (settingsBtn) {{
-        settingsBtn.onclick = () => {{
-          switchView(currentView === "main" ? "settings" : "main");
+      // Quick footer link insertion
+      const footerLink = document.getElementById("ag-footer-agent-link");
+      if (footerLink) {{
+        footerLink.onclick = () => {{
+          const editor = document.querySelector('[data-lexical-editor="true"]') || document.querySelector('[aria-label="Message input"]');
+          if (editor) {{
+            editor.focus();
+            editor.dispatchEvent(new InputEvent("beforeinput", {{ bubbles: true, cancelable: true, inputType: "insertText", data: "/skills-manager" }}));
+            toggleDrawer(false);
+          }}
         }};
       }}
 
-      // Get Merged Skills Data (Built-in + Custom)
-      function getMergedSkillsData() {{
-        const base = JSON.parse(JSON.stringify(skillsData));
-        const customCats = getCustomCategories();
-        const customSkills = getCustomSkills();
-
-        // Ensure custom categories are present
-        customCats.forEach(catName => {{
-          let catObj = base.find(c => c.category === catName || c.rawCategory === catName);
-          if (!catObj) {{
-            catObj = {{
-              category: "📁 " + catName,
-              rawCategory: catName,
-              isCustomCat: true,
-              skills: []
-            }};
-            base.push(catObj);
-          }}
-        }});
-
-        // Add custom skills into matching categories
-        customSkills.forEach(s => {{
-          let catObj = base.find(c => c.category === s.category || c.rawCategory === s.category);
-          if (!catObj) {{
-            catObj = {{
-              category: "📁 " + s.category,
-              rawCategory: s.category,
-              isCustomCat: true,
-              skills: []
-            }};
-            base.push(catObj);
-          }}
-          if (!catObj.skills.some(existing => existing.command === s.command)) {{
-            catObj.skills.push({{
-              ...s,
-              isCustom: true
-            }});
-          }}
-        }});
-
-        return base;
-      }}
-
-      // Render Skills Catalog
+      // 3. Render Skills
       function renderSkills(filterText = "") {{
         const container = document.getElementById("ag-drawer-content");
         if (!container) return;
         container.innerHTML = "";
         const q = filterText.trim().toLowerCase();
-        const mergedData = getMergedSkillsData();
 
         let visibleCount = 0;
-        mergedData.forEach(cat => {{
+        skillsData.forEach(cat => {{
           const matches = cat.skills.filter(s => !q || s.name.toLowerCase().includes(q) || s.command.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q) || (s.tags && s.tags.some(t => t.toLowerCase().includes(q))));
           if (matches.length === 0) return;
           visibleCount++;
@@ -1012,32 +704,14 @@ def patch_preload():
             card.className = "ag-skill-card";
             card.innerHTML = `
               <div class="ag-skill-top">
-                <div style="display: flex; align-items: center; gap: 6px;">
-                  <span class="ag-skill-name">${{s.command}}</span>
-                  ${{s.isCustom ? `<span class="ag-skill-custom-badge">Custom</span>` : ''}}
-                </div>
-                <div style="display: flex; align-items: center; gap: 6px;">
-                  ${{s.isCustom ? `<button class="ag-skill-del-btn" title="Delete custom skill">🗑️</button>` : ''}}
-                  <button class="ag-skill-use-btn">Use ↳</button>
-                </div>
+                <span class="ag-skill-name">${{s.command}}</span>
+                <button class="ag-skill-use-btn">Use ↳</button>
               </div>
               <div class="ag-skill-desc">${{s.desc}}</div>
               <div class="ag-skill-tags">
                 ${{(s.tags || []).map(t => `<span class="ag-skill-tag">#${{t}}</span>`).join("")}}
               </div>
             `;
-
-            if (s.isCustom) {{
-              const delBtn = card.querySelector(".ag-skill-del-btn");
-              if (delBtn) {{
-                delBtn.onclick = (e) => {{
-                  e.stopPropagation();
-                  const curr = getCustomSkills().filter(item => item.command !== s.command);
-                  saveCustomSkills(curr);
-                  renderSkills(filterText);
-                }};
-              }}
-            }}
 
             card.querySelector(".ag-skill-use-btn").onclick = (e) => {{
               e.stopPropagation();
@@ -1062,11 +736,9 @@ def patch_preload():
             <div style="text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.4);">
               <div style="font-size: 24px; margin-bottom: 8px;">🔍</div>
               <div style="font-size: 13px; font-weight: 600;">No matching skills found</div>
-              <button class="ag-custom-btn-secondary" style="margin-top: 14px;" id="ag-quick-add-custom-btn">+ Create Custom Skill</button>
+              <div style="font-size: 11px; margin-top: 6px;">Import any skill from GitHub or local path with: <code>/skills-manager import &lt;url&gt;</code></div>
             </div>
           `;
-          const quickBtn = document.getElementById("ag-quick-add-custom-btn");
-          if (quickBtn) quickBtn.onclick = () => switchView("settings");
         }}
       }}
       renderSkills();
@@ -1074,170 +746,6 @@ def patch_preload():
       const searchInput = document.getElementById("ag-drawer-search");
       if (searchInput) {{
         searchInput.oninput = (e) => renderSkills(e.target.value);
-      }}
-
-      // Render Settings View (Custom Categories & Skills Manager)
-      function renderSettings() {{
-        // 1. Render Category Chips
-        const chipContainer = document.getElementById("ag-cats-chip-container");
-        const customCats = getCustomCategories();
-        if (chipContainer) {{
-          chipContainer.innerHTML = "";
-          if (customCats.length === 0) {{
-            chipContainer.innerHTML = `<span class="ag-custom-empty">No custom categories yet. Add one above!</span>`;
-          }} else {{
-            customCats.forEach(cat => {{
-              const chip = document.createElement("div");
-              chip.className = "ag-cat-chip";
-              chip.innerHTML = `<span>📁 ${{cat}}</span><span class="ag-chip-del" title="Delete category">✕</span>`;
-              chip.querySelector(".ag-chip-del").onclick = () => {{
-                const updated = getCustomCategories().filter(c => c !== cat);
-                saveCustomCategories(updated);
-                renderSettings();
-              }};
-              chipContainer.appendChild(chip);
-            }});
-          }}
-        }}
-
-        // 2. Populate Target Category Select
-        const catSelect = document.getElementById("ag-custom-skill-cat-select");
-        if (catSelect) {{
-          catSelect.innerHTML = "";
-          if (customCats.length > 0) {{
-            const groupCustom = document.createElement("optgroup");
-            groupCustom.label = "Custom Categories";
-            customCats.forEach(cat => {{
-              const opt = document.createElement("option");
-              opt.value = cat;
-              opt.textContent = "📁 " + cat;
-              groupCustom.appendChild(opt);
-            }});
-            catSelect.appendChild(groupCustom);
-          }}
-          const groupBuiltin = document.createElement("optgroup");
-          groupBuiltin.label = "Built-in Categories";
-          skillsData.forEach(c => {{
-            const opt = document.createElement("option");
-            opt.value = c.category;
-            opt.textContent = c.category;
-            groupBuiltin.appendChild(opt);
-          }});
-          catSelect.appendChild(groupBuiltin);
-        }}
-
-        // 3. Render Custom Skills List
-        const customSkillsList = document.getElementById("ag-custom-skills-list");
-        const countBadge = document.getElementById("ag-custom-skills-count");
-        const customSkills = getCustomSkills();
-        if (countBadge) countBadge.textContent = String(customSkills.length);
-
-        if (customSkillsList) {{
-          customSkillsList.innerHTML = "";
-          if (customSkills.length === 0) {{
-            customSkillsList.innerHTML = `<span class="ag-custom-empty">No custom skills created yet. Fill the form above to add your first!</span>`;
-          }} else {{
-            customSkills.forEach(s => {{
-              const item = document.createElement("div");
-              item.className = "ag-custom-skill-item";
-              item.innerHTML = `
-                <div class="ag-custom-skill-top">
-                  <div style="display:flex; align-items:center; gap:6px;">
-                    <span style="font-family: monospace; font-size: 13px; font-weight:600; color:#f05b5d;">${{s.command}}</span>
-                    <span class="ag-custom-skill-badge">${{s.category}}</span>
-                  </div>
-                  <button class="ag-skill-del-btn" title="Delete custom skill">🗑️</button>
-                </div>
-                <div style="font-size: 12px; color: rgba(255,255,255,0.7);">${{s.desc}}</div>
-                <div style="display: flex; gap: 4px; flex-wrap: wrap;">
-                  ${{(s.tags || []).map(t => `<span class="ag-skill-tag">#${{t}}</span>`).join("")}}
-                </div>
-              `;
-              item.querySelector(".ag-skill-del-btn").onclick = () => {{
-                const updated = getCustomSkills().filter(item => item.command !== s.command);
-                saveCustomSkills(updated);
-                renderSettings();
-              }};
-              customSkillsList.appendChild(item);
-            }});
-          }}
-        }}
-      }}
-
-      // Bind Add Category Button
-      const addCatBtn = document.getElementById("ag-add-cat-btn");
-      const catInput = document.getElementById("ag-custom-cat-input");
-      if (addCatBtn && catInput) {{
-        addCatBtn.onclick = () => {{
-          const val = catInput.value.trim();
-          if (!val) return;
-          const existing = getCustomCategories();
-          if (!existing.includes(val)) {{
-            existing.push(val);
-            saveCustomCategories(existing);
-            catInput.value = "";
-            renderSettings();
-          }}
-        }};
-        catInput.onkeydown = (e) => {{
-          if (e.key === "Enter") addCatBtn.click();
-        }};
-      }}
-
-      // Bind Save Custom Skill Button
-      const saveSkillBtn = document.getElementById("ag-save-skill-btn");
-      if (saveSkillBtn) {{
-        saveSkillBtn.onclick = () => {{
-          const catSelect = document.getElementById("ag-custom-skill-cat-select");
-          const cmdInput = document.getElementById("ag-custom-skill-cmd-input");
-          const nameInput = document.getElementById("ag-custom-skill-name-input");
-          const descInput = document.getElementById("ag-custom-skill-desc-input");
-          const tagsInput = document.getElementById("ag-custom-skill-tags-input");
-          const statusMsg = document.getElementById("ag-skill-status-msg");
-
-          let cmd = (cmdInput?.value || "").trim();
-          if (!cmd) {{
-            if (statusMsg) {{
-              statusMsg.style.display = "block";
-              statusMsg.style.background = "rgba(255, 60, 60, 0.2)";
-              statusMsg.style.color = "#ff6e70";
-              statusMsg.textContent = "Please enter a slash command (e.g. /my-skill).";
-            }}
-            return;
-          }}
-          if (!cmd.startsWith("/")) cmd = "/" + cmd;
-
-          const category = catSelect?.value || "Custom";
-          const name = (nameInput?.value || "").trim() || cmd.replace("/", "");
-          const desc = (descInput?.value || "").trim() || "Custom user skill.";
-          const rawTags = (tagsInput?.value || "").split(",").map(t => t.trim().toLowerCase()).filter(Boolean);
-          if (!rawTags.includes("custom")) rawTags.push("custom");
-
-          const customSkills = getCustomSkills().filter(s => s.command !== cmd);
-          customSkills.push({{
-            category,
-            command: cmd,
-            name,
-            desc,
-            tags: rawTags
-          }});
-          saveCustomSkills(customSkills);
-
-          if (statusMsg) {{
-            statusMsg.style.display = "block";
-            statusMsg.style.background = "rgba(46, 204, 113, 0.2)";
-            statusMsg.style.color = "#2ecc71";
-            statusMsg.textContent = `✓ Saved ${{cmd}} successfully!`;
-            setTimeout(() => {{ statusMsg.style.display = "none"; }}, 3000);
-          }}
-
-          if (cmdInput) cmdInput.value = "";
-          if (nameInput) nameInput.value = "";
-          if (descInput) descInput.value = "";
-          if (tagsInput) tagsInput.value = "";
-
-          renderSettings();
-        }};
       }}
 
       // Attach Sidebar Button
@@ -1285,7 +793,7 @@ def patch_preload():
       if (!window.__sidebar_wheel_handler) {{
         window.__sidebar_wheel_handler = (e) => {{
           if (e.target && e.target.closest("#antigravity-skills-drawer")) {{
-            const activeScroll = currentView === "settings" ? document.getElementById("ag-drawer-settings-view") : document.getElementById("ag-drawer-content");
+            const activeScroll = document.getElementById("ag-drawer-content");
             if (activeScroll) {{
               e.preventDefault();
               activeScroll.scrollTop += e.deltaY;
