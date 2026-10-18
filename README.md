@@ -63,6 +63,7 @@
 - **⚙️ Redesigned Settings Modal:** Features a sleek `16px` border-radius container, frosted glass backdrop blur, and an inset floating vertical divider.
 - **📏 Floating Split Pane Divider:** Clean `1px` floating separator between chat and artifact/walkthrough views with interactive hover accent glow.
 - **🗂️ Built-in Skills & Commands Hub:** Integrated slide-out drawer accessible right from the sidebar (`Skills Hub [/cmd]`) with searchable categorised skills, collapsible accordions, and 1-click clipboard copy & prompt insertion.
+- **⚙️ Dedicated Custom Skills & Categories Manager:** Built-in customization suite within the Skills Hub allowing you to create custom categories, define custom slash commands and prompts, manage installed custom skills with 1-click delete, and persist them across sessions via `localStorage`.
 - **🛠️ Automated Electron Patcher (`patch_app_asar.py`):** Replaces the startup white screen flash with a dark theme-matched loading overlay, hides the top window bar cleanly in tiling window managers (Hyprland/Sway), and fixes sidebar scrolling.
 - **🚀 Automated 1-Click Installer:** Includes launcher wrapper, desktop menu integration, systemd user daemon, and Hyprland compositor rule setup.
 

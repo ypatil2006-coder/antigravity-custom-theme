@@ -338,306 +338,484 @@ const SKILLS_DATABASE = [
 function getInjectionPayload() {
   const skillsJson = JSON.stringify(SKILLS_DATABASE);
   return `
-    (() => {
+(() => {
       const skillsData = ${skillsJson};
+      const STORAGE_CATS_KEY = "antigravity_custom_categories_v1";
+      const STORAGE_SKILLS_KEY = "antigravity_custom_skills_v1";
 
-      // 1. Inject Styles
-      const styleId = "antigravity-skills-hub-styles";
-      let styleEl = document.getElementById(styleId);
-      if (!styleEl) {
-        styleEl = document.createElement("style");
-        styleEl.id = styleId;
-        (document.head || document.documentElement).appendChild(styleEl);
+      function getCustomCategories() {
+        try {
+          const raw = localStorage.getItem(STORAGE_CATS_KEY);
+          return raw ? JSON.parse(raw) : [];
+        } catch (_) {
+          return [];
+        }
       }
-      styleEl.textContent = \`
-          /* Cleanly hide upper title/menu bar without affecting sidebar header */
-          div.shrink-0:has(> [data-testid="title-menu-bar"]),
-          div.shrink-0:has(div[style*="app-region: drag"]) {
-            display: none !important;
-          }
 
-          #antigravity-skills-nav-btn {
-            position: relative;
-            cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-          }
-          #antigravity-skills-nav-btn:hover {
-            transform: translateX(2px);
-          }
-          #antigravity-skills-nav-btn.active {
-            background: color-mix(in srgb, var(--primary, #f05b5d) 15%, transparent) !important;
-            color: var(--primary, #f05b5d) !important;
-          }
+      function saveCustomCategories(cats) {
+        try {
+          localStorage.setItem(STORAGE_CATS_KEY, JSON.stringify(cats));
+        } catch (_) {}
+      }
 
-          #antigravity-skills-backdrop {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.45);
-            backdrop-filter: blur(4px);
-            z-index: 999990;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.25s ease;
-          }
-          #antigravity-skills-backdrop.open {
-            opacity: 1;
-            pointer-events: auto;
-          }
+      function getCustomSkills() {
+        try {
+          const raw = localStorage.getItem(STORAGE_SKILLS_KEY);
+          return raw ? JSON.parse(raw) : [];
+        } catch (_) {
+          return [];
+        }
+      }
 
-          #antigravity-skills-drawer {
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            height: 100vh;
-            max-height: 100vh;
-            width: 440px;
-            max-width: 92vw;
-            background: rgba(26, 14, 14, 0.95);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border-left: 1px solid color-mix(in srgb, var(--primary, #f05b5d) 30%, rgba(255, 255, 255, 0.12));
-            box-shadow: -12px 0 40px rgba(0, 0, 0, 0.65);
-            z-index: 999995;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden !important;
-            transform: translateX(100%);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            color: #f1f0f7;
-            font-family: inherit;
-            box-sizing: border-box;
-          }
-          #antigravity-skills-drawer.open {
-            transform: translateX(0);
-          }
+      function saveCustomSkills(skills) {
+        try {
+          localStorage.setItem(STORAGE_SKILLS_KEY, JSON.stringify(skills));
+        } catch (_) {}
+      }
 
-          .ag-drawer-header {
-            padding: 18px 20px 14px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-shrink: 0;
-          }
-          .ag-drawer-title-group {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-          }
-          .ag-drawer-title {
-            font-size: 16px;
-            font-weight: 700;
-            letter-spacing: -0.2px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #fff;
-          }
-          .ag-drawer-subtitle {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.55);
-          }
-          .ag-drawer-close-btn {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7);
-            border-radius: 8px;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.15s ease;
-          }
-          .ag-drawer-close-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            transform: scale(1.05);
-          }
+      // Cleanup old instance if present
+      const oldDrawer = document.getElementById("antigravity-skills-drawer");
+      if (oldDrawer) oldDrawer.remove();
+      const oldBackdrop = document.getElementById("antigravity-skills-backdrop");
+      if (oldBackdrop) oldBackdrop.remove();
 
-          .ag-drawer-search-wrap {
-            padding: 12px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            flex-shrink: 0;
-          }
-          .ag-drawer-search {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 8px;
-            padding: 8px 12px;
-            color: #fff;
-            font-size: 13px;
-            outline: none;
-            box-sizing: border-box;
-            transition: border-color 0.15s ease, box-shadow 0.15s ease;
-          }
-          .ag-drawer-search:focus {
-            border-color: var(--primary, #f05b5d);
-            box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary, #f05b5d) 20%, transparent);
-          }
-          .ag-drawer-search::placeholder {
-            color: rgba(255, 255, 255, 0.4);
-          }
+      // 1. Inject Style
+      let style = document.getElementById("antigravity-ui-enhancements");
+      if (!style) {
+        style = document.createElement("style");
+        style.id = "antigravity-ui-enhancements";
+        document.head.appendChild(style);
+      }
+      style.textContent = \`
+        div.shrink-0:has(> [data-testid="title-menu-bar"]),
+        div.shrink-0:has(div[style*="app-region: drag"]) {
+          display: none !important;
+        }
+        .flex-1.min-h-0.overflow-y-auto.flex.flex-col.gap-6.py-3 {
+          overflow-y: hidden !important;
+        }
+        .relative.w-full.h-full.overflow-y-auto.overscroll-none.px-2 {
+          scrollbar-width: thin !important;
+          scrollbar-color: rgba(255, 255, 255, 0.25) transparent !important;
+          overscroll-behavior-y: contain !important;
+          overflow-y: scroll !important;
+        }
+        .relative.w-full.h-full.overflow-y-auto.overscroll-none.px-2::-webkit-scrollbar {
+          display: block !important;
+          width: 6px !important;
+        }
+        .relative.w-full.h-full.overflow-y-auto.overscroll-none.px-2::-webkit-scrollbar-track {
+          background: transparent !important;
+        }
+        .relative.w-full.h-full.overflow-y-auto.overscroll-none.px-2::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.25) !important;
+          border-radius: 9999px !important;
+        }
+        .relative.w-full.h-full.overflow-y-auto.overscroll-none.px-2::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.5) !important;
+        }
+        #antigravity-skills-nav-btn {
+          cursor: pointer;
+          transition: all 0.15s ease;
+        }
+        #antigravity-skills-nav-btn.active {
+          background: rgba(255, 255, 255, 0.08) !important;
+          color: #fff !important;
+        }
+        #antigravity-skills-backdrop {
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.5);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
+          z-index: 999990;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.25s ease;
+        }
+        #antigravity-skills-backdrop.open {
+          opacity: 1;
+          pointer-events: auto;
+        }
+        #antigravity-skills-drawer {
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          height: 100vh;
+          width: 450px;
+          max-width: 90vw;
+          background: #1c1414;
+          border-left: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: -10px 0 35px rgba(0, 0, 0, 0.6);
+          z-index: 999995;
+          display: flex;
+          flex-direction: column;
+          transform: translateX(100%);
+          transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+          color: #f1f0f7;
+          font-family: inherit;
+          box-sizing: border-box;
+        }
+        #antigravity-skills-drawer.open {
+          transform: translateX(0);
+        }
+        .ag-drawer-header {
+          padding: 14px 18px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-shrink: 0;
+        }
+        .ag-drawer-title {
+          font-size: 15px;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          color: #fff;
+        }
+        .ag-drawer-header-actions {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .ag-drawer-action-btn {
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          color: rgba(255, 255, 255, 0.85);
+          border-radius: 6px;
+          padding: 4px 10px;
+          font-size: 11px;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          cursor: pointer;
+          transition: all 0.15s ease;
+        }
+        .ag-drawer-action-btn:hover {
+          background: rgba(240, 91, 93, 0.2);
+          border-color: rgba(240, 91, 93, 0.4);
+          color: #fff;
+        }
+        .ag-drawer-action-btn.active {
+          background: #f05b5d;
+          border-color: #f05b5d;
+          color: #fff;
+        }
+        .ag-drawer-close-btn {
+          background: transparent;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          color: rgba(255, 255, 255, 0.7);
+          border-radius: 6px;
+          width: 28px;
+          height: 28px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.15s ease;
+        }
+        .ag-drawer-close-btn:hover {
+          background: rgba(255, 255, 255, 0.1);
+          color: #fff;
+        }
+        #ag-drawer-main-view {
+          display: flex;
+          flex-direction: column;
+          flex: 1 1 auto;
+          overflow: hidden;
+        }
+        .ag-drawer-search-wrap {
+          padding: 12px 18px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+          flex-shrink: 0;
+        }
+        .ag-drawer-search {
+          width: 100%;
+          background: rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 6px;
+          padding: 8px 12px;
+          color: #fff;
+          font-size: 13px;
+          outline: none;
+          box-sizing: border-box;
+        }
+        .ag-drawer-search:focus {
+          border-color: #f05b5d;
+        }
+        .ag-drawer-content {
+          flex: 1 1 auto;
+          overflow-y: auto !important;
+          overflow-x: hidden !important;
+          padding: 12px 16px 24px 16px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          scrollbar-width: thin !important;
+          scrollbar-color: rgba(240, 91, 93, 0.4) transparent !important;
+        }
+        .ag-drawer-content::-webkit-scrollbar {
+          display: block !important;
+          width: 6px !important;
+        }
+        .ag-drawer-content::-webkit-scrollbar-track {
+          background: transparent !important;
+        }
+        .ag-drawer-content::-webkit-scrollbar-thumb {
+          background: rgba(240, 91, 93, 0.4) !important;
+          border-radius: 9999px !important;
+        }
+        .ag-category-box {
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 8px;
+          overflow: hidden;
+          background: rgba(255, 255, 255, 0.02);
+          flex-shrink: 0 !important;
+          min-height: max-content !important;
+        }
+        .ag-category-header {
+          padding: 10px 14px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          cursor: pointer;
+          user-select: none;
+          font-size: 13px;
+          font-weight: 600;
+          color: #eee;
+          background: rgba(255, 255, 255, 0.03);
+        }
+        .ag-category-header:hover {
+          background: rgba(255, 255, 255, 0.06);
+        }
+        .ag-category-chevron {
+          transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          display: inline-block;
+          color: rgba(255, 255, 255, 0.5);
+        }
+        .ag-category-box.open .ag-category-chevron {
+          transform: rotate(180deg);
+        }
+        .ag-category-body {
+          display: none;
+          padding: 8px 10px 12px 10px;
+          flex-direction: column;
+          gap: 8px;
+          background: rgba(0, 0, 0, 0.15);
+        }
+        .ag-category-box.open .ag-category-body {
+          display: flex;
+        }
+        .ag-skill-card {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 6px;
+          padding: 10px 12px;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .ag-skill-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .ag-skill-name {
+          font-family: monospace;
+          font-size: 13px;
+          font-weight: 600;
+          color: #f05b5d;
+        }
+        .ag-skill-custom-badge {
+          font-size: 9px;
+          font-weight: 700;
+          color: #f05b5d;
+          background: rgba(240, 91, 93, 0.15);
+          border: 1px solid rgba(240, 91, 93, 0.35);
+          padding: 1px 5px;
+          border-radius: 4px;
+          text-transform: uppercase;
+        }
+        .ag-skill-use-btn {
+          background: #f05b5d;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          padding: 3px 10px;
+          font-size: 11px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: opacity 0.15s ease;
+        }
+        .ag-skill-use-btn:hover {
+          opacity: 0.85;
+        }
+        .ag-skill-del-btn {
+          background: transparent;
+          border: none;
+          color: rgba(255, 255, 255, 0.4);
+          cursor: pointer;
+          font-size: 12px;
+          padding: 2px 4px;
+          border-radius: 4px;
+          transition: color 0.15s ease;
+        }
+        .ag-skill-del-btn:hover {
+          color: #ff6e70;
+          background: rgba(255, 50, 50, 0.1);
+        }
+        .ag-skill-desc {
+          font-size: 12px;
+          color: rgba(255, 255, 255, 0.7);
+          line-height: 1.4;
+        }
+        .ag-skill-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 4px;
+        }
+        .ag-skill-tag {
+          font-size: 10px;
+          color: rgba(255, 255, 255, 0.45);
+          background: rgba(255, 255, 255, 0.04);
+          padding: 1px 5px;
+          border-radius: 4px;
+        }
 
-          .ag-drawer-content {
-            flex: 1 1 0% !important;
-            min-height: 0 !important;
-            max-height: calc(100vh - 135px) !important;
-            overflow-y: auto !important;
-            overflow-x: hidden !important;
-            padding: 12px 16px 36px 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            overscroll-behavior: contain;
-            scrollbar-width: thin;
-            scrollbar-color: color-mix(in srgb, var(--primary, #f05b5d) 35%, transparent) transparent;
-          }
-          .ag-drawer-content::-webkit-scrollbar {
-            width: 6px;
-          }
-          .ag-drawer-content::-webkit-scrollbar-thumb {
-            background: color-mix(in srgb, var(--primary, #f05b5d) 35%, transparent);
-            border-radius: 9999px;
-          }
-          .ag-drawer-content::-webkit-scrollbar-thumb:hover {
-            background: var(--primary, #f05b5d);
-          }
+        /* Settings View Styles */
+        #ag-drawer-settings-view {
+          display: none;
+          flex: 1 1 auto;
+          overflow-y: auto !important;
+          overflow-x: hidden !important;
+          padding: 14px 18px 30px 18px;
+          flex-direction: column;
+          gap: 14px;
+          scrollbar-width: thin !important;
+          scrollbar-color: rgba(240, 91, 93, 0.4) transparent !important;
+        }
+        #ag-drawer-settings-view::-webkit-scrollbar {
+          display: block !important;
+          width: 6px !important;
+        }
+        #ag-drawer-settings-view::-webkit-scrollbar-thumb {
+          background: rgba(240, 91, 93, 0.4) !important;
+          border-radius: 9999px !important;
+        }
+        .ag-settings-card {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 8px;
+          padding: 12px 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+        .ag-settings-card-title {
+          font-size: 13px;
+          font-weight: 600;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .ag-settings-card-desc {
+          font-size: 11px;
+          color: rgba(255, 255, 255, 0.55);
+          line-height: 1.4;
+        }
+        .ag-custom-input, .ag-custom-select, .ag-custom-textarea {
+          width: 100%;
+          background: rgba(0, 0, 0, 0.35);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 6px;
+          padding: 7px 10px;
+          color: #fff;
+          font-size: 12px;
+          outline: none;
+          box-sizing: border-box;
+          font-family: inherit;
+          transition: border-color 0.15s ease;
+        }
+        .ag-custom-input:focus, .ag-custom-select:focus, .ag-custom-textarea:focus {
+          border-color: #f05b5d;
+          box-shadow: 0 0 0 1px rgba(240, 91, 93, 0.3);
+        }
+        .ag-custom-select option, .ag-custom-select optgroup {
+          background: #1c1414;
+          color: #fff;
+        }
+        .ag-custom-label {
+          display: block;
+          font-size: 11px;
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.7);
+          margin-bottom: 4px;
+        }
+        .ag-custom-btn-primary {
+          background: #f05b5d;
+          color: #fff;
+          border: none;
+          border-radius: 6px;
+          padding: 7px 14px;
+          font-size: 12px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background 0.15s ease;
+        }
+        .ag-custom-btn-primary:hover {
+          background: #ff6e70;
+        }
+        .ag-cats-chip-container {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          margin-top: 6px;
+        }
+        .ag-cat-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: rgba(240, 91, 93, 0.15);
+          border: 1px solid rgba(240, 91, 93, 0.3);
+          color: #f1f0f7;
+          font-size: 11px;
+          padding: 3px 8px;
+          border-radius: 12px;
+        }
+        .ag-chip-del {
+          cursor: pointer;
+          opacity: 0.6;
+          font-weight: bold;
+          font-size: 11px;
+          margin-left: 2px;
+        }
+        .ag-chip-del:hover {
+          opacity: 1;
+          color: #ff6e70;
+        }
+        .ag-custom-empty {
+          font-size: 11px;
+          color: rgba(255, 255, 255, 0.4);
+          font-style: italic;
+          padding: 4px 0;
+        }
+        .ag-custom-skill-item {
+          background: rgba(0, 0, 0, 0.25);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 6px;
+          padding: 8px 10px;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+      \`;
 
-          .ag-category-box {
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
-            overflow: hidden;
-            transition: border-color 0.15s ease;
-          }
-          .ag-category-box:hover {
-            border-color: rgba(255, 255, 255, 0.15);
-          }
-          .ag-category-header {
-            padding: 10px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            user-select: none;
-            background: rgba(255, 255, 255, 0.03);
-            transition: background 0.15s ease;
-          }
-          .ag-category-header:hover {
-            background: rgba(255, 255, 255, 0.06);
-          }
-          .ag-category-title {
-            font-size: 13px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #eee;
-          }
-          .ag-category-badge {
-            font-size: 10px;
-            font-weight: 700;
-            padding: 2px 7px;
-            border-radius: 9999px;
-            background: rgba(255, 255, 255, 0.08);
-            color: rgba(255, 255, 255, 0.7);
-          }
-          .ag-category-chevron {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.4);
-            transition: transform 0.2s ease;
-          }
-          .ag-category-box.open .ag-category-chevron {
-            transform: rotate(180deg);
-          }
-          .ag-category-body {
-            display: none;
-            padding: 10px 10px 12px 10px;
-            flex-direction: column;
-            gap: 8px;
-            background: rgba(0, 0, 0, 0.15);
-          }
-          .ag-category-box.open .ag-category-body {
-            display: flex;
-          }
-
-          .ag-skill-card {
-            background: rgba(255, 255, 255, 0.035);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 8px;
-            padding: 10px 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            transition: all 0.15s ease;
-          }
-          .ag-skill-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: color-mix(in srgb, var(--primary, #f05b5d) 35%, transparent);
-            transform: translateY(-1px);
-          }
-          .ag-skill-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-          }
-          .ag-skill-name {
-            font-family: monospace;
-            font-size: 12.5px;
-            font-weight: 700;
-            color: var(--primary, #f05b5d);
-            background: color-mix(in srgb, var(--primary, #f05b5d) 12%, transparent);
-            padding: 2px 7px;
-            border-radius: 5px;
-            letter-spacing: -0.2px;
-          }
-          .ag-skill-use-btn {
-            background: var(--primary, #f05b5d);
-            color: #101010;
-            border: none;
-            border-radius: 6px;
-            padding: 4px 12px;
-            font-size: 11.5px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-          }
-          .ag-skill-use-btn:hover {
-            opacity: 0.9;
-            transform: scale(1.04);
-            box-shadow: 0 2px 8px color-mix(in srgb, var(--primary, #f05b5d) 30%, transparent);
-          }
-          .ag-skill-use-btn.injected {
-            background: #4ade80 !important;
-            color: #064e3b !important;
-          }
-          .ag-skill-desc {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.72);
-            line-height: 1.4;
-          }
-          .ag-skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            margin-top: 2px;
-          }
-          .ag-skill-tag {
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.45);
-            background: rgba(255, 255, 255, 0.04);
-            padding: 1px 5px;
-            border-radius: 4px;
-        \`;
-
-      // 2. Backdrop
+      // 2. Backdrop & Drawer
       let backdrop = document.getElementById("antigravity-skills-backdrop");
       if (!backdrop) {
         backdrop = document.createElement("div");
@@ -646,116 +824,292 @@ function getInjectionPayload() {
       }
       backdrop.classList.remove("open");
 
-      // 3. Drawer
       let drawer = document.getElementById("antigravity-skills-drawer");
       if (!drawer) {
         drawer = document.createElement("div");
         drawer.id = "antigravity-skills-drawer";
         drawer.innerHTML = \`
           <div class="ag-drawer-header">
-            <div class="ag-drawer-title-group">
-              <div class="ag-drawer-title">
-                <span>⚡</span>
-                <span>Skills & Commands Hub</span>
-              </div>
-              <div class="ag-drawer-subtitle">Browse, filter, and inject workflows into chat</div>
+            <div class="ag-drawer-title" id="ag-drawer-title-wrap">
+              <span>⚡</span>
+              <span id="ag-drawer-title-text">Skills & Commands Hub</span>
             </div>
-            <button class="ag-drawer-close-btn" id="ag-drawer-close-btn" title="Close (Esc)">✕</button>
+            <div class="ag-drawer-header-actions">
+              <button class="ag-drawer-action-btn" id="ag-drawer-settings-btn" title="Create Custom Category & Add Skills">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                <span id="ag-settings-btn-label">Customize</span>
+              </button>
+              <button class="ag-drawer-close-btn" id="ag-drawer-close-btn" title="Close (Esc)">✕</button>
+            </div>
           </div>
-          <div class="ag-drawer-search-wrap">
-            <input type="text" class="ag-drawer-search" id="ag-drawer-search" placeholder="Search skills, use cases, keywords... (e.g. review, stitch, clean)" />
+
+          <!-- View 1: Main Skills Catalog -->
+          <div id="ag-drawer-main-view">
+            <div class="ag-drawer-search-wrap">
+              <input type="text" class="ag-drawer-search" id="ag-drawer-search" placeholder="Search skills, use cases, keywords..." />
+            </div>
+            <div class="ag-drawer-content" id="ag-drawer-content"></div>
           </div>
-          <div class="ag-drawer-content" id="ag-drawer-content"></div>
+
+          <!-- View 2: Dedicated Custom Category & Skills Settings -->
+          <div id="ag-drawer-settings-view">
+            <!-- Section 1: Create Custom Category -->
+            <div class="ag-settings-card">
+              <div class="ag-settings-card-title">
+                <span>📁</span>
+                <span>Custom Categories</span>
+              </div>
+              <div class="ag-settings-card-desc">Create your own category to organize custom slash commands.</div>
+              <div style="display: flex; gap: 8px; margin-top: 8px;">
+                <input type="text" id="ag-custom-cat-input" class="ag-custom-input" placeholder="e.g. My Workflows, Project Tools..." />
+                <button id="ag-add-cat-btn" class="ag-custom-btn-primary" style="white-space: nowrap;">+ Add Category</button>
+              </div>
+              <div id="ag-cats-chip-container" class="ag-cats-chip-container"></div>
+            </div>
+
+            <!-- Section 2: Add Custom Skill -->
+            <div class="ag-settings-card">
+              <div class="ag-settings-card-title">
+                <span>⚡</span>
+                <span>Add Custom Skill / Command</span>
+              </div>
+              <div class="ag-settings-card-desc">Add a custom prompt, shortcut, or skill to any category.</div>
+              <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                <div>
+                  <label class="ag-custom-label">Target Category</label>
+                  <select id="ag-custom-skill-cat-select" class="ag-custom-select"></select>
+                </div>
+                <div>
+                  <label class="ag-custom-label">Slash Command</label>
+                  <input type="text" id="ag-custom-skill-cmd-input" class="ag-custom-input" placeholder="e.g. /my-workflow" />
+                </div>
+                <div>
+                  <label class="ag-custom-label">Display Name</label>
+                  <input type="text" id="ag-custom-skill-name-input" class="ag-custom-input" placeholder="e.g. Code Review & QA" />
+                </div>
+                <div>
+                  <label class="ag-custom-label">Description / Instructions</label>
+                  <textarea id="ag-custom-skill-desc-input" class="ag-custom-textarea" rows="2" placeholder="e.g. Analyzes diff and generates QA test plan..."></textarea>
+                </div>
+                <div>
+                  <label class="ag-custom-label">Tags (comma-separated)</label>
+                  <input type="text" id="ag-custom-skill-tags-input" class="ag-custom-input" placeholder="e.g. review, qa, test" />
+                </div>
+                <button id="ag-save-skill-btn" class="ag-custom-btn-primary" style="margin-top: 4px;">+ Save Custom Skill</button>
+                <div id="ag-skill-status-msg" style="display:none; font-size:12px; font-weight:600; padding:6px 10px; border-radius:6px;"></div>
+              </div>
+            </div>
+
+            <!-- Section 3: Installed Custom Skills List -->
+            <div class="ag-settings-card">
+              <div class="ag-settings-card-title" style="justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span>📋</span>
+                  <span>Installed Custom Skills</span>
+                </div>
+                <span id="ag-custom-skills-count" style="font-size: 11px; background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 9999px;">0</span>
+              </div>
+              <div id="ag-custom-skills-list" style="margin-top: 8px; display: flex; flex-direction: column; gap: 8px;"></div>
+            </div>
+          </div>
         \`;
         document.body.appendChild(drawer);
       }
-      drawer.classList.remove("open");
 
-      // 4. Render Skills
+      let currentView = "main";
+      function toggleDrawer(open) {
+        const d = document.getElementById("antigravity-skills-drawer");
+        const b = document.getElementById("antigravity-skills-backdrop");
+        const btn = document.getElementById("antigravity-skills-nav-btn");
+        if (!d) return;
+        const isCurrentlyOpen = d.classList.contains("open");
+        const shouldOpen = open !== undefined ? open : !isCurrentlyOpen;
+        if (shouldOpen) {
+          d.classList.add("open");
+          if (b) b.classList.add("open");
+          if (btn) btn.classList.add("active");
+          setTimeout(() => {
+            const s = document.getElementById("ag-drawer-search");
+            if (s && currentView === "main") s.focus();
+          }, 100);
+        } else {
+          d.classList.remove("open");
+          if (b) b.classList.remove("open");
+          if (btn) btn.classList.remove("active");
+        }
+      }
+      window.__toggle_skills = toggleDrawer;
+
+      backdrop.onclick = () => toggleDrawer(false);
+      const closeBtn = document.getElementById("ag-drawer-close-btn");
+      if (closeBtn) closeBtn.onclick = () => toggleDrawer(false);
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") toggleDrawer(false);
+      });
+
+      // View Switching
+      function switchView(view) {
+        currentView = view;
+        const mainView = document.getElementById("ag-drawer-main-view");
+        const settingsView = document.getElementById("ag-drawer-settings-view");
+        const settingsBtn = document.getElementById("ag-drawer-settings-btn");
+        const titleText = document.getElementById("ag-drawer-title-text");
+        const label = document.getElementById("ag-settings-btn-label");
+
+        if (view === "settings") {
+          if (mainView) mainView.style.display = "none";
+          if (settingsView) settingsView.style.display = "flex";
+          if (settingsBtn) settingsBtn.classList.add("active");
+          if (label) label.textContent = "← Catalog";
+          if (titleText) titleText.textContent = "Customize Skills Hub";
+          renderSettings();
+        } else {
+          if (mainView) mainView.style.display = "flex";
+          if (settingsView) settingsView.style.display = "none";
+          if (settingsBtn) settingsBtn.classList.remove("active");
+          if (label) label.textContent = "Customize";
+          if (titleText) titleText.textContent = "Skills & Commands Hub";
+          renderSkills(document.getElementById("ag-drawer-search")?.value || "");
+        }
+      }
+
+      const settingsBtn = document.getElementById("ag-drawer-settings-btn");
+      if (settingsBtn) {
+        settingsBtn.onclick = () => {
+          switchView(currentView === "main" ? "settings" : "main");
+        };
+      }
+
+      // Get Merged Skills Data (Built-in + Custom)
+      function getMergedSkillsData() {
+        const base = JSON.parse(JSON.stringify(skillsData));
+        const customCats = getCustomCategories();
+        const customSkills = getCustomSkills();
+
+        // Ensure custom categories are present
+        customCats.forEach(catName => {
+          let catObj = base.find(c => c.category === catName || c.rawCategory === catName);
+          if (!catObj) {
+            catObj = {
+              category: "📁 " + catName,
+              rawCategory: catName,
+              isCustomCat: true,
+              skills: []
+            };
+            base.push(catObj);
+          }
+        });
+
+        // Add custom skills into matching categories
+        customSkills.forEach(s => {
+          let catObj = base.find(c => c.category === s.category || c.rawCategory === s.category);
+          if (!catObj) {
+            catObj = {
+              category: "📁 " + s.category,
+              rawCategory: s.category,
+              isCustomCat: true,
+              skills: []
+            };
+            base.push(catObj);
+          }
+          if (!catObj.skills.some(existing => existing.command === s.command)) {
+            catObj.skills.push({
+              ...s,
+              isCustom: true
+            });
+          }
+        });
+
+        return base;
+      }
+
+      // Render Skills Catalog
       function renderSkills(filterText = "") {
         const container = document.getElementById("ag-drawer-content");
         if (!container) return;
         container.innerHTML = "";
+        const q = filterText.trim().toLowerCase();
+        const mergedData = getMergedSkillsData();
 
-        const query = filterText.trim().toLowerCase();
-        let totalRendered = 0;
+        let visibleCount = 0;
+        mergedData.forEach(cat => {
+          const matches = cat.skills.filter(s => !q || s.name.toLowerCase().includes(q) || s.command.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q) || (s.tags && s.tags.some(t => t.toLowerCase().includes(q))));
+          if (matches.length === 0) return;
+          visibleCount++;
 
-        skillsData.forEach((category, idx) => {
-          const matchingSkills = category.skills.filter(s => {
-            if (!query) return true;
-            return (
-              s.name.toLowerCase().includes(query) ||
-              s.command.toLowerCase().includes(query) ||
-              s.desc.toLowerCase().includes(query) ||
-              s.tags.some(t => t.toLowerCase().includes(query))
-            );
-          });
-
-          if (matchingSkills.length === 0) return;
-          totalRendered += matchingSkills.length;
-
-          const catBox = document.createElement("div");
-          const isOpen = Boolean(query);
-          catBox.className = isOpen ? "ag-category-box open" : "ag-category-box";
-
-          const header = document.createElement("div");
-          header.className = "ag-category-header";
-          header.innerHTML = \`
-            <div class="ag-category-title">
-              <span>\${category.icon}</span>
-              <span>\${category.category}</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:8px;">
-              <span class="ag-category-badge">\${matchingSkills.length}</span>
-              <span class="ag-category-chevron">▼</span>
-            </div>
-          \`;
-          header.onclick = () => catBox.classList.toggle("open");
+          const box = document.createElement("div");
+          const isOpen = Boolean(q);
+          box.className = isOpen ? "ag-category-box open" : "ag-category-box";
+          box.innerHTML = \`<div class="ag-category-header"><span>\${cat.category}</span><span class="ag-category-chevron">▾</span></div>\`;
+          box.querySelector(".ag-category-header").onclick = () => box.classList.toggle("open");
 
           const body = document.createElement("div");
           body.className = "ag-category-body";
-
-          matchingSkills.forEach(s => {
+          matches.forEach(s => {
             const card = document.createElement("div");
             card.className = "ag-skill-card";
             card.innerHTML = \`
               <div class="ag-skill-top">
-                <span class="ag-skill-name">\${s.command}</span>
-                <button class="ag-skill-use-btn" data-command="\${s.command}">
-                  <span>Use</span>
-                  <span>↳</span>
-                </button>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span class="ag-skill-name">\${s.command}</span>
+                  \${s.isCustom ? \`<span class="ag-skill-custom-badge">Custom</span>\` : ''}
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  \${s.isCustom ? \`<button class="ag-skill-del-btn" title="Delete custom skill">🗑️</button>\` : ''}
+                  <button class="ag-skill-use-btn">Use ↳</button>
+                </div>
               </div>
               <div class="ag-skill-desc">\${s.desc}</div>
               <div class="ag-skill-tags">
-                \${s.tags.map(t => \`<span class="ag-skill-tag">#\${t}</span>\`).join("")}
+                \${(s.tags || []).map(t => \`<span class="ag-skill-tag">#\${t}</span>\`).join("")}
               </div>
             \`;
 
-            const useBtn = card.querySelector(".ag-skill-use-btn");
-            useBtn.onclick = (e) => {
-              e.stopPropagation();
-              injectCommand(s.command, useBtn);
-            };
+            if (s.isCustom) {
+              const delBtn = card.querySelector(".ag-skill-del-btn");
+              if (delBtn) {
+                delBtn.onclick = (e) => {
+                  e.stopPropagation();
+                  const curr = getCustomSkills().filter(item => item.command !== s.command);
+                  saveCustomSkills(curr);
+                  renderSkills(filterText);
+                };
+              }
+            }
 
+            card.querySelector(".ag-skill-use-btn").onclick = (e) => {
+              e.stopPropagation();
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(s.command).catch(() => {});
+              }
+              const editor = document.querySelector('[data-lexical-editor="true"]') || document.querySelector('[aria-label="Message input"]');
+              if (editor) {
+                editor.focus();
+                editor.dispatchEvent(new InputEvent("beforeinput", { bubbles: true, cancelable: true, inputType: "insertText", data: s.command }));
+                toggleDrawer(false);
+              }
+            };
             body.appendChild(card);
           });
-
-          catBox.appendChild(header);
-          catBox.appendChild(body);
-          container.appendChild(catBox);
+          box.appendChild(body);
+          container.appendChild(box);
         });
 
-        if (totalRendered === 0) {
+        if (visibleCount === 0) {
           container.innerHTML = \`
-            <div style="text-align:center; padding: 40px 20px; color: rgba(255,255,255,0.4);">
-              <div style="font-size:24px; margin-bottom:8px;">🔍</div>
-              <div style="font-size:13px; font-weight:600;">No matching skills found</div>
+            <div style="text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.4);">
+              <div style="font-size: 24px; margin-bottom: 8px;">🔍</div>
+              <div style="font-size: 13px; font-weight: 600;">No matching skills found</div>
+              <button class="ag-custom-btn-secondary" style="margin-top: 14px;" id="ag-quick-add-custom-btn">+ Create Custom Skill</button>
             </div>
           \`;
+          const quickBtn = document.getElementById("ag-quick-add-custom-btn");
+          if (quickBtn) quickBtn.onclick = () => switchView("settings");
         }
       }
-
       renderSkills();
 
       const searchInput = document.getElementById("ag-drawer-search");
@@ -763,143 +1117,203 @@ function getInjectionPayload() {
         searchInput.oninput = (e) => renderSkills(e.target.value);
       }
 
-      const contentContainer = document.getElementById("ag-drawer-content");
-      if (drawer && contentContainer) {
-        drawer.addEventListener("wheel", (e) => {
-          contentContainer.scrollTop += e.deltaY;
-        }, { passive: true });
-      }
-
-      function toggleDrawer(open) {
-        const drawerEl = document.getElementById("antigravity-skills-drawer");
-        const backdropEl = document.getElementById("antigravity-skills-backdrop");
-        const navBtn = document.getElementById("antigravity-skills-nav-btn");
-        if (!drawerEl) return;
-
-        const isCurrentlyOpen = drawerEl.classList.contains("open");
-        const shouldOpen = open !== undefined ? open : !isCurrentlyOpen;
-
-        if (shouldOpen) {
-          drawerEl.classList.add("open");
-          if (backdropEl) backdropEl.classList.add("open");
-          if (navBtn) navBtn.classList.add("active");
-          setTimeout(() => {
-            const searchEl = document.getElementById("ag-drawer-search");
-            if (searchEl) {
-              searchEl.focus();
-              searchEl.select();
-            }
-          }, 150);
-        } else {
-          drawerEl.classList.remove("open");
-          if (backdropEl) backdropEl.classList.remove("open");
-          if (navBtn) navBtn.classList.remove("active");
+      // Render Settings View (Custom Categories & Skills Manager)
+      function renderSettings() {
+        // 1. Render Category Chips
+        const chipContainer = document.getElementById("ag-cats-chip-container");
+        const customCats = getCustomCategories();
+        if (chipContainer) {
+          chipContainer.innerHTML = "";
+          if (customCats.length === 0) {
+            chipContainer.innerHTML = \`<span class="ag-custom-empty">No custom categories yet. Add one above!</span>\`;
+          } else {
+            customCats.forEach(cat => {
+              const chip = document.createElement("div");
+              chip.className = "ag-cat-chip";
+              chip.innerHTML = \`<span>📁 \${cat}</span><span class="ag-chip-del" title="Delete category">✕</span>\`;
+              chip.querySelector(".ag-chip-del").onclick = () => {
+                const updated = getCustomCategories().filter(c => c !== cat);
+                saveCustomCategories(updated);
+                renderSettings();
+              };
+              chipContainer.appendChild(chip);
+            });
+          }
         }
-      }
-      window.__antigravity_toggle_skills_drawer = toggleDrawer;
 
-      backdrop.onclick = () => toggleDrawer(false);
-      const closeBtn = document.getElementById("ag-drawer-close-btn");
-      if (closeBtn) closeBtn.onclick = () => toggleDrawer(false);
-
-      window.addEventListener("keydown", (e) => {
-        const drawerEl = document.getElementById("antigravity-skills-drawer");
-        if (e.key === "Escape" && drawerEl && drawerEl.classList.contains("open")) {
-          toggleDrawer(false);
-        }
-      });
-
-      function injectCommand(cmd, btnEl) {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(cmd).catch(() => {});
-        }
-        const editor = document.querySelector('[data-lexical-editor="true"]') || document.querySelector('[aria-label="Message input"]');
-        if (editor) {
-          editor.focus();
-          const inputEvent = new InputEvent('beforeinput', {
-            bubbles: true,
-            cancelable: true,
-            inputType: 'insertText',
-            data: cmd
+        // 2. Populate Target Category Select
+        const catSelect = document.getElementById("ag-custom-skill-cat-select");
+        if (catSelect) {
+          catSelect.innerHTML = "";
+          if (customCats.length > 0) {
+            const groupCustom = document.createElement("optgroup");
+            groupCustom.label = "Custom Categories";
+            customCats.forEach(cat => {
+              const opt = document.createElement("option");
+              opt.value = cat;
+              opt.textContent = "📁 " + cat;
+              groupCustom.appendChild(opt);
+            });
+            catSelect.appendChild(groupCustom);
+          }
+          const groupBuiltin = document.createElement("optgroup");
+          groupBuiltin.label = "Built-in Categories";
+          skillsData.forEach(c => {
+            const opt = document.createElement("option");
+            opt.value = c.category;
+            opt.textContent = c.category;
+            groupBuiltin.appendChild(opt);
           });
-          editor.dispatchEvent(inputEvent);
+          catSelect.appendChild(groupBuiltin);
+        }
 
-          setTimeout(() => {
-            const esc = new KeyboardEvent('keydown', { key: 'Escape', code: 'Escape', keyCode: 27, bubbles: true });
-            editor.dispatchEvent(esc);
-            document.dispatchEvent(esc);
-          }, 40);
+        // 3. Render Custom Skills List
+        const customSkillsList = document.getElementById("ag-custom-skills-list");
+        const countBadge = document.getElementById("ag-custom-skills-count");
+        const customSkills = getCustomSkills();
+        if (countBadge) countBadge.textContent = String(customSkills.length);
 
-          if (btnEl) {
-            btnEl.classList.add("injected");
-            btnEl.innerHTML = "<span>✓ Injected!</span>";
-            setTimeout(() => {
-              btnEl.classList.remove("injected");
-              btnEl.innerHTML = "<span>Use</span><span>↳</span>";
-            }, 1200);
+        if (customSkillsList) {
+          customSkillsList.innerHTML = "";
+          if (customSkills.length === 0) {
+            customSkillsList.innerHTML = \`<span class="ag-custom-empty">No custom skills created yet. Fill the form above to add your first!</span>\`;
+          } else {
+            customSkills.forEach(s => {
+              const item = document.createElement("div");
+              item.className = "ag-custom-skill-item";
+              item.innerHTML = \`
+                <div class="ag-custom-skill-top">
+                  <div style="display:flex; align-items:center; gap:6px;">
+                    <span style="font-family: monospace; font-size: 13px; font-weight:600; color:#f05b5d;">\${s.command}</span>
+                    <span class="ag-custom-skill-badge">\${s.category}</span>
+                  </div>
+                  <button class="ag-skill-del-btn" title="Delete custom skill">🗑️</button>
+                </div>
+                <div style="font-size: 12px; color: rgba(255,255,255,0.7);">\${s.desc}</div>
+                <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                  \${(s.tags || []).map(t => \`<span class="ag-skill-tag">#\${t}</span>\`).join("")}
+                </div>
+              \`;
+              item.querySelector(".ag-skill-del-btn").onclick = () => {
+                const updated = getCustomSkills().filter(item => item.command !== s.command);
+                saveCustomSkills(updated);
+                renderSettings();
+              };
+              customSkillsList.appendChild(item);
+            });
+          }
+        }
+      }
+
+      // Bind Add Category Button
+      const addCatBtn = document.getElementById("ag-add-cat-btn");
+      const catInput = document.getElementById("ag-custom-cat-input");
+      if (addCatBtn && catInput) {
+        addCatBtn.onclick = () => {
+          const val = catInput.value.trim();
+          if (!val) return;
+          const existing = getCustomCategories();
+          if (!existing.includes(val)) {
+            existing.push(val);
+            saveCustomCategories(existing);
+            catInput.value = "";
+            renderSettings();
+          }
+        };
+        catInput.onkeydown = (e) => {
+          if (e.key === "Enter") addCatBtn.click();
+        };
+      }
+
+      // Bind Save Custom Skill Button
+      const saveSkillBtn = document.getElementById("ag-save-skill-btn");
+      if (saveSkillBtn) {
+        saveSkillBtn.onclick = () => {
+          const catSelect = document.getElementById("ag-custom-skill-cat-select");
+          const cmdInput = document.getElementById("ag-custom-skill-cmd-input");
+          const nameInput = document.getElementById("ag-custom-skill-name-input");
+          const descInput = document.getElementById("ag-custom-skill-desc-input");
+          const tagsInput = document.getElementById("ag-custom-skill-tags-input");
+          const statusMsg = document.getElementById("ag-skill-status-msg");
+
+          let cmd = (cmdInput?.value || "").trim();
+          if (!cmd) {
+            if (statusMsg) {
+              statusMsg.style.display = "block";
+              statusMsg.style.background = "rgba(255, 60, 60, 0.2)";
+              statusMsg.style.color = "#ff6e70";
+              statusMsg.textContent = "Please enter a slash command (e.g. /my-skill).";
+            }
+            return;
+          }
+          if (!cmd.startsWith("/")) cmd = "/" + cmd;
+
+          const category = catSelect?.value || "Custom";
+          const name = (nameInput?.value || "").trim() || cmd.replace("/", "");
+          const desc = (descInput?.value || "").trim() || "Custom user skill.";
+          const rawTags = (tagsInput?.value || "").split(",").map(t => t.trim().toLowerCase()).filter(Boolean);
+          if (!rawTags.includes("custom")) rawTags.push("custom");
+
+          const customSkills = getCustomSkills().filter(s => s.command !== cmd);
+          customSkills.push({
+            category,
+            command: cmd,
+            name,
+            desc,
+            tags: rawTags
+          });
+          saveCustomSkills(customSkills);
+
+          if (statusMsg) {
+            statusMsg.style.display = "block";
+            statusMsg.style.background = "rgba(46, 204, 113, 0.2)";
+            statusMsg.style.color = "#2ecc71";
+            statusMsg.textContent = \`✓ Saved \${cmd} successfully!\`;
+            setTimeout(() => { statusMsg.style.display = "none"; }, 3000);
           }
 
-          setTimeout(() => toggleDrawer(false), 280);
-        }
+          if (cmdInput) cmdInput.value = "";
+          if (nameInput) nameInput.value = "";
+          if (descInput) descInput.value = "";
+          if (tagsInput) tagsInput.value = "";
+
+          renderSettings();
+        };
       }
 
-      function attachSidebarButton() {
-        if (document.getElementById("antigravity-skills-nav-btn")) {
-          return;
-        }
+      // Attach Sidebar Button
+      function attachBtn() {
+        let b = document.getElementById("antigravity-skills-nav-btn");
+        if (b) return;
         const settingsBtn = document.querySelector('[data-testid="settings-button"]');
         if (settingsBtn && settingsBtn.parentElement) {
-          const btn = document.createElement("div");
-          btn.id = "antigravity-skills-nav-btn";
-          btn.setAttribute("role", "button");
-          btn.tabIndex = 0;
-          btn.className = "flex-grow flex items-center gap-1.5 group px-2 py-1 rounded-lg cursor-pointer h-8 min-w-0 bg-transparent hover:bg-sidebar-muted text-secondary-foreground";
-          btn.innerHTML = `
+          b = document.createElement("div");
+          b.id = "antigravity-skills-nav-btn";
+          b.setAttribute("role", "button");
+          b.tabIndex = 0;
+          b.className = "flex-grow flex items-center gap-1.5 group px-2 py-1 rounded-lg cursor-pointer h-8 min-w-0 bg-transparent hover:bg-sidebar-muted text-secondary-foreground";
+          b.innerHTML = \`
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" style="color: var(--primary, #f05b5d);">
               <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
             </svg>
             <span class="select-none truncate text-sm font-normal">Skills Hub</span>
             <span style="margin-left: auto; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 9999px; background: color-mix(in srgb, var(--primary, #f05b5d) 15%, transparent); color: var(--primary, #f05b5d); border: 1px solid color-mix(in srgb, var(--primary, #f05b5d) 30%, transparent);">/cmd</span>
-          `;
-          btn.onclick = (e) => {
+          \`;
+          b.onclick = (e) => {
             e.preventDefault();
             e.stopPropagation();
             toggleDrawer();
           };
-          settingsBtn.parentElement.insertBefore(btn, settingsBtn);
+          settingsBtn.parentElement.insertBefore(b, settingsBtn);
           return;
         }
-
-        const customLink = document.querySelector('a[href="/customizations"]');
-
-        if (customLink && customLink.parentElement) {
-          const btn = document.createElement("button");
-          btn.id = "antigravity-skills-nav-btn";
-          btn.type = "button";
-          btn.className = "inline-flex items-center font-medium transition-colors select-none outline-none cursor-pointer disabled:opacity-50 flex-grow w-full justify-start select-none font-normal h-8 min-w-0 gap-1.5 px-2 py-1 rounded-lg bg-transparent text-secondary-foreground hover:bg-sidebar-muted hover:text-foreground";
-          btn.innerHTML = \`
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-primary" style="color: var(--primary, #f05b5d);">
-              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-            </svg>
-            <span class="truncate text-sm" style="font-weight: 500;">Skills</span>
-            <span style="margin-left: auto; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 9999px; background: color-mix(in srgb, var(--primary, #f05b5d) 15%, transparent); color: var(--primary, #f05b5d); border: 1px solid color-mix(in srgb, var(--primary, #f05b5d) 30%, transparent);">/cmd</span>
-          \`;
-          btn.onclick = (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleDrawer();
-          };
-          customLink.insertAdjacentElement("afterend", btn);
-        }
       }
-
-      // Initial attach attempt
-      attachSidebarButton();
+      attachBtn();
 
       if (!window.__antigravity_skills_observer) {
         window.__antigravity_skills_observer = new MutationObserver(() => {
           if (!document.getElementById("antigravity-skills-nav-btn")) {
-            attachSidebarButton();
+            attachBtn();
           }
         });
         window.__antigravity_skills_observer.observe(document.body || document.documentElement, {
@@ -908,11 +1322,40 @@ function getInjectionPayload() {
         });
       }
 
+      // Universal mouse wheel forwarder
+      if (!window.__sidebar_wheel_handler) {
+        window.__sidebar_wheel_handler = (e) => {
+          if (e.target && e.target.closest("#antigravity-skills-drawer")) {
+            const activeScroll = currentView === "settings" ? document.getElementById("ag-drawer-settings-view") : document.getElementById("ag-drawer-content");
+            if (activeScroll) {
+              e.preventDefault();
+              activeScroll.scrollTop += e.deltaY;
+            }
+            return;
+          }
+          const scrollEl = document.querySelector(".relative.w-full.h-full.overflow-y-auto.overscroll-none.px-2");
+          if (!scrollEl) return;
+          const sr = scrollEl.getBoundingClientRect();
+          if (e.clientX < 0 || e.clientX > sr.right + 20) return;
+
+          if (e.target && scrollEl.contains(e.target)) {
+            requestAnimationFrame(() => {
+              scrollEl.dispatchEvent(new Event("scroll", { bubbles: true }));
+            });
+            return;
+          }
+
+          e.preventDefault();
+          scrollEl.scrollTop += e.deltaY;
+          scrollEl.dispatchEvent(new Event("scroll", { bubbles: true }));
+        };
+        window.addEventListener("wheel", window.__sidebar_wheel_handler, { passive: false });
+      }
+
       return "Skills Hub successfully mounted!";
     })()
   `;
 }
-
 function findActivePorts() {
   const ports = new Set();
   for (const file of CANDIDATE_PORT_FILES) {
