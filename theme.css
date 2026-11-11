@@ -1,0 +1,1864 @@
+/* ==========================================================================
+   Antigravity 2.0 - Authentic Comic Neubrutalism Theme
+   ==========================================================================
+   Comic Book Neubrutalism Art System:
+   - Ground: Retro Comic Book Paper Cream (#F4EEDD) with Halftone Dot Matrix
+   - Agent Cards & Bubbles: Crisp White (#FFFFFF) with 3.5px Solid Black Borders
+   - Shadows: Hard Tactile Neubrutalist Drop Shadows (4px 4px 0px #000, 6px 6px 0px #000)
+   - Typography: 100% Solid Jet Black (#000000) for Ultra-Crisp >21:1 Contrast
+   - Accents: Electric Comic Yellow (#FFE600), Action Red (#FF3B30), Mint Green (#00D26A)
+   - Navigation: High-Contrast Comic Yellow Active States across Sidebar, Tabs, Modals
+   - Tooltips & Popovers: High-Contrast Electric Comic Yellow & White Badges
+   - Composer: Single Clean Comic Box, 8px Spacing on [+] & Model, Yellow Voice Mode Pill
+   - Eliminates Faux Titlebars, Universal Close Traps & Unreadable Dark Glass Popups
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@500;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root, .dark, body {
+    /* --- Authentic Comic Palette --- */
+    --comic-yellow: #FFE600 !important;
+    --comic-yellow-hover: #FFD000 !important;
+    --comic-red: #FF3B30 !important;
+    --comic-red-dark: #D90429 !important;
+    --comic-green: #00D26A !important;
+    --comic-green-dark: #008037 !important;
+    --comic-blue: #0055FF !important;
+    --comic-cream: #F4EEDD !important;
+    --comic-cream-dark: #EBE5D5 !important;
+    --comic-dark: #141414 !important;
+    --comic-black: #000000 !important;
+    --comic-card: #FFFFFF !important;
+    
+    /* Native App CSS Variable Overrides to Light Comic Neubrutalism */
+    --background: #F4EEDD !important;
+    --foreground: #000000 !important;
+    --card: #FFFFFF !important;
+    --card-foreground: #000000 !important;
+    --popover: #FFFFFF !important;
+    --popover-foreground: #000000 !important;
+    --primary: #FFE600 !important;
+    --primary-foreground: #000000 !important;
+    --secondary: #FFE600 !important;
+    --secondary-foreground: #000000 !important;
+    --muted: #E2DEC9 !important;
+    --muted-foreground: #141414 !important;
+    --accent: #FFE600 !important;
+    --accent-foreground: #000000 !important;
+    --destructive: #FF3B30 !important;
+    --destructive-foreground: #FFFFFF !important;
+    --border: #000000 !important;
+    --input: #F4EEDD !important;
+    --ring: #000000 !important;
+    
+    /* Sidebar Variables: Secondary is active yellow, muted is subtle hover */
+    --sidebar: #EBE5D5 !important;
+    --sidebar-foreground: #000000 !important;
+    --sidebar-primary: #FFE600 !important;
+    --sidebar-primary-foreground: #000000 !important;
+    --sidebar-secondary: #FFE600 !important;
+    --sidebar-secondary-foreground: #000000 !important;
+    --sidebar-accent: #FFE600 !important;
+    --sidebar-accent-foreground: #000000 !important;
+    --sidebar-border: #000000 !important;
+    --sidebar-muted: rgba(255, 230, 0, 0.25) !important;
+
+    /* Font Stacks */
+    --font-comic: 'Bungee', 'Impact', sans-serif !important;
+    --font-display: 'Space Grotesk', -apple-system, sans-serif !important;
+    --font-mono: 'Space Mono', 'JetBrains Mono', monospace !important;
+    --font-sans: 'Space Grotesk', -apple-system, sans-serif !important;
+}
+
+* {
+    box-sizing: border-box !important;
+    -webkit-font-smoothing: antialiased !important;
+}
+
+/* ==========================================================================
+   1. MASTER ROOT WINDOW & GROUND (Comic Cream Paper + Halftone Dots)
+   ========================================================================== */
+html,
+body {
+    background-color: #F4EEDD !important;
+    background-image: radial-gradient(#000000 12%, transparent 13%) !important;
+    background-size: 16px 16px !important;
+    overflow: clip !important;
+    overflow-x: clip !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overscroll-behavior: none !important;
+    color: #000000 !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+}
+
+#root,
+div[class*="relative"][class*="w-screen"],
+div[class*="h-screen"][class*="w-screen"],
+.agy-shell {
+    background-color: #F4EEDD !important;
+    overflow: clip !important;
+    overflow-x: clip !important;
+    color: #000000 !important;
+}
+
+/* Eliminate Faux Titlebars & Universal Close Button Traps */
+div.shrink-0:has([data-testid="title-menu-bar"]),
+[data-testid="title-menu-bar"],
+div.shrink-0[style*="35px"] {
+    display: none !important;
+    height: 0px !important;
+    width: 0px !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+}
+
+/* ==========================================================================
+   2. TOP BREADCRUMB & HEADER BAR
+   ========================================================================== */
+header,
+div.h-14.border-b,
+div[data-testid="app-header"],
+div.shrink-0:has(nav, [aria-label="Breadcrumb"]) {
+    background: #EBE5D5 !important;
+    border-bottom: 3.5px solid #000000 !important;
+    box-shadow: 0 3px 0 #000000 !important;
+    color: #000000 !important;
+}
+
+header *,
+div.h-14.border-b *,
+div.shrink-0:has(nav, [aria-label="Breadcrumb"]) * {
+    color: #000000 !important;
+    font-weight: 800 !important;
+}
+
+/* ==========================================================================
+   3. SIDEBAR NAVIGATION & ACTIVE STATE ARCHITECTURE
+   ========================================================================== */
+aside,
+[data-testid="sidebar"],
+div[data-testid="sidebar-split"] > div:first-child,
+div[class*="group/rail"],
+div[class*="sidebar-container"] {
+    background-color: #EBE5D5 !important;
+    border-right: 1.5px solid #000000 !important;
+    color: #000000 !important;
+}
+
+/* Remove leaked link underlines across all navigation, sidebars & buttons */
+a,
+a:link,
+a:visited,
+aside a,
+nav a,
+header a,
+[data-testid="sidebar-split"] a,
+.bg-sidebar a,
+div[class*="sidebar"] a,
+a.agy-button,
+button {
+    text-decoration: none !important;
+}
+
+/* Base styling for sidebar items */
+aside a,
+aside button,
+div[data-testid="sidebar-split"] a,
+div[data-testid="sidebar-split"] button {
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    transition: all 0.08s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+/* Default / Inactive Navigation Items: subtle, no heavy border */
+[data-testid="new-conversation-button"]:not(.bg-sidebar-secondary),
+[data-testid="automations-button"]:not(.bg-sidebar-secondary),
+a[href*="/customizations"]:not(.bg-sidebar-secondary),
+[data-testid="settings-button"]:not(.bg-sidebar-secondary),
+.agy-sidebar-row:not(.bg-sidebar-secondary) {
+    background-color: transparent !important;
+    border: 2px solid transparent !important;
+    box-shadow: none !important;
+    color: #222222 !important;
+    font-weight: 700 !important;
+}
+
+[data-testid="new-conversation-button"]:not(.bg-sidebar-secondary) *,
+[data-testid="automations-button"]:not(.bg-sidebar-secondary) *,
+a[href*="/customizations"]:not(.bg-sidebar-secondary) *,
+[data-testid="settings-button"]:not(.bg-sidebar-secondary) * {
+    color: #222222 !important;
+}
+
+/* Hover state on inactive items: tactile yellow preview */
+[data-testid="new-conversation-button"]:not(.bg-sidebar-secondary):hover,
+[data-testid="automations-button"]:not(.bg-sidebar-secondary):hover,
+a[href*="/customizations"]:not(.bg-sidebar-secondary):hover,
+[data-testid="settings-button"]:not(.bg-sidebar-secondary):hover,
+.agy-sidebar-row:not(.bg-sidebar-secondary):hover {
+    background-color: rgba(255, 230, 0, 0.4) !important;
+    border: 2px solid #000000 !important;
+    border-radius: 10px !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    color: #000000 !important;
+    transform: translate(1px, 1px) !important;
+}
+
+/* ACTIVE NAVIGATION ITEM (Universal active class: .bg-sidebar-secondary) */
+[data-testid="new-conversation-button"].bg-sidebar-secondary,
+[data-testid="automations-button"].bg-sidebar-secondary,
+a[href*="/customizations"].bg-sidebar-secondary,
+[data-testid="settings-button"].bg-sidebar-secondary,
+.agy-sidebar-row.bg-sidebar-secondary,
+.bg-sidebar-secondary {
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+    border: 2.5px solid #000000 !important;
+    box-shadow: 3px 3px 0px #000000 !important;
+    border-radius: 10px !important;
+    font-weight: 900 !important;
+}
+
+/* Ensure active item text and all icons inside are crisp jet black */
+[data-testid="new-conversation-button"].bg-sidebar-secondary *,
+[data-testid="automations-button"].bg-sidebar-secondary *,
+a[href*="/customizations"].bg-sidebar-secondary *,
+[data-testid="settings-button"].bg-sidebar-secondary *,
+.agy-sidebar-row.bg-sidebar-secondary * {
+    color: #000000 !important;
+    stroke: #000000 !important;
+    font-weight: 800 !important;
+}
+
+/* "Projects" Section Header in Sidebar: Single crisp 1.5px divider */
+[data-testid="section-header"] {
+    border-bottom: none !important;
+}
+
+[data-sidebar-section-drop-id="main-section-header"] {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+}
+
+div.group\/section-header,
+div[class*="group/section-header"] {
+    color: #000000 !important;
+    font-family: 'Space Grotesk', Impact, sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 13px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    border-bottom: 1.5px solid #000000 !important;
+    padding-bottom: 8px !important;
+    margin-top: 4px !important;
+    margin-bottom: 10px !important;
+    opacity: 1 !important;
+}
+
+[data-testid="section-header"] h2,
+div.group\/section-header h2 {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 13px !important;
+    font-weight: 900 !important;
+    border-bottom: none !important;
+    line-height: normal !important;
+}
+
+div.group\/section-header *,
+[class*="section-header"] * {
+    color: #000000 !important;
+    stroke: #000000 !important;
+    border-bottom: none !important;
+}
+
+/* Project Folders in Sidebar */
+button[data-testid="project-header"] {
+    margin-top: 4px !important;
+    color: #000000 !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 13.5px !important;
+}
+
+button[data-testid="project-header"] * {
+    color: #000000 !important;
+    stroke: #000000 !important;
+}
+
+/* Timestamps in Sidebar Conversation Rows */
+.agy-sidebar-row span.tabular-nums,
+[data-testid="sidebar-split"] span[class*="tabular-nums"] {
+    font-family: 'Space Mono', 'JetBrains Mono', monospace !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #555555 !important;
+    letter-spacing: -0.02em !important;
+    font-variant-numeric: normal !important;
+}
+
+.agy-sidebar-row.bg-sidebar-secondary span.tabular-nums {
+    color: #000000 !important;
+    font-weight: 900 !important;
+}
+
+/* Split Pane Resizer Handles - Thin 1.5px Neubrutalist Divider */
+div[class*="bg-border"][class*="w-[1px]"],
+div[class*="bg-border"][class*="cursor-col-resize"],
+div.cursor-col-resize > div {
+    background-color: #000000 !important;
+    width: 1.5px !important;
+    opacity: 1 !important;
+}
+
+/* ==========================================================================
+   4. CONVERSATION FEED & MESSAGE CONTAINERS
+   ========================================================================== */
+main,
+[data-testid="conversation-view"],
+[data-testid="autoscroll-viewport"],
+div.browser-hole-opaque {
+    background-color: #F4EEDD !important;
+    color: #000000 !important;
+}
+
+/* Ensure ALL Feed text is jet black and ultra-legible with comfortable line-height */
+p,
+span,
+li,
+div.leading-relaxed,
+[data-testid="conversation-view"] p,
+[data-testid="conversation-view"] span,
+[data-testid="conversation-view"] li {
+    color: #000000 !important;
+    font-weight: 600 !important;
+    line-height: 1.75 !important;
+}
+
+/* High contrast utility colors */
+.text-green-500, .text-green-600 {
+    color: #008037 !important;
+    font-weight: 800 !important;
+}
+.text-red-500, .text-red-600 {
+    color: #D90429 !important;
+    font-weight: 800 !important;
+}
+.text-yellow-500, .text-yellow-600 {
+    color: #B28900 !important;
+    font-weight: 800 !important;
+}
+.text-blue-500, .text-blue-600 {
+    color: #0055FF !important;
+    font-weight: 800 !important;
+}
+.text-muted-foreground {
+    color: #222222 !important;
+    font-weight: 600 !important;
+}
+
+/* Headings in markdown (strictly scoped to content/prose) */
+.prose h1, .prose h2, .prose h3, .prose h4,
+[data-testid="message-content"] h1, [data-testid="message-content"] h2, [data-testid="message-content"] h3, [data-testid="message-content"] h4,
+article h1, article h2, article h3, article h4,
+.markdown h1, .markdown h2, .markdown h3, .markdown h4 {
+    color: #000000 !important;
+    font-family: 'Space Grotesk', Impact, sans-serif !important;
+    font-weight: 900 !important;
+    letter-spacing: -0.02em !important;
+}
+
+.prose h1, [data-testid="message-content"] h1, article h1, .markdown h1 {
+    font-size: 1.5rem !important;
+    border-bottom: 3.5px solid #000000 !important;
+    padding-bottom: 6px !important;
+    margin-top: 18px !important;
+}
+
+.prose h2, [data-testid="message-content"] h2, article h2, .markdown h2 {
+    font-size: 1.25rem !important;
+    border-bottom: 2.5px solid #000000 !important;
+    padding-bottom: 4px !important;
+    margin-top: 14px !important;
+}
+
+.prose h3, [data-testid="message-content"] h3, article h3, .markdown h3 {
+    font-size: 1.1rem !important;
+    margin-top: 12px !important;
+}
+
+/* Markdown hyperlinks (Strictly scoped to content prose, never sidebar) */
+div.prose a,
+div.leading-relaxed a,
+div[data-testid="conversation-view"] div.leading-relaxed a {
+    color: #0055FF !important;
+    text-decoration: underline !important;
+    text-underline-offset: 3px !important;
+    text-decoration-thickness: 2px !important;
+    font-weight: 800 !important;
+}
+
+div.prose a:hover,
+div.leading-relaxed a:hover {
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+}
+
+/* ==========================================================================
+   5. AUTHENTIC USER SPEECH BUBBLE (Crisp White + 3.5px Black Border + Tail)
+   ========================================================================== */
+div[role="article"][aria-label="User message"],
+div[data-testid="user-input-step"] {
+    display: flex !important;
+    justify-content: flex-end !important;
+    width: 100% !important;
+    padding: 6px 12px 14px 12px !important;
+    overflow: visible !important;
+}
+
+.agy-user-bubble,
+div[data-testid="user-message-bubble"] {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    border: 3.5px solid #000000 !important;
+    border-radius: 18px !important;
+    box-shadow: 5px 5px 0px #000000 !important;
+    padding: 12px 20px !important;
+    max-width: 82% !important;
+    position: relative !important;
+    overflow: visible !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+}
+
+/* User Bubble Text styling */
+.agy-user-bubble *,
+div[data-testid="user-message-bubble"] * {
+    color: #000000 !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    line-height: 1.45 !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+}
+
+/* Comic Speech Bubble Pointer Tail (Pointing down-right) */
+.agy-user-bubble::after,
+div[data-testid="user-message-bubble"]::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -14px !important;
+    right: 24px !important;
+    border-width: 14px 14px 0 0 !important;
+    border-style: solid !important;
+    border-color: #000000 transparent !important;
+    display: block !important;
+    width: 0 !important;
+}
+
+.agy-user-bubble::before,
+div[data-testid="user-message-bubble"]::before {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -8px !important;
+    right: 27px !important;
+    border-width: 10px 10px 0 0 !important;
+    border-style: solid !important;
+    border-color: #FFFFFF transparent !important;
+    display: block !important;
+    width: 0 !important;
+    z-index: 2 !important;
+}
+
+/* ==========================================================================
+   6. AGENT TURNS & THOUGHT / STEP BOXES (Crisp White Panels with Black Borders)
+   ========================================================================== */
+/* Assistant message container */
+div[role="article"][aria-label="Agent response"] {
+    background-color: #FFFFFF !important;
+    border: 3.5px solid #000000 !important;
+    border-radius: 18px !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+    padding: 18px 22px !important;
+    margin: 12px 0 24px 0 !important;
+    color: #000000 !important;
+    position: relative !important;
+}
+
+/* Agent Header Badge */
+div[role="article"][aria-label="Agent response"]::before {
+    content: "⚡ AGENT TRANSMISSION" !important;
+    display: inline-block !important;
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    padding: 2px 8px !important;
+    border-radius: 6px !important;
+    font-family: 'Space Grotesk', Impact, sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 11px !important;
+    letter-spacing: 0.05em !important;
+    margin-bottom: 12px !important;
+}
+
+/* When Agent response is actively generating (has sibling agent-loading) */
+div[role="article"][aria-label="Agent response"]:has(~ [data-testid="agent-loading"]),
+div[role="article"][aria-label="Agent response"]:has(+ [data-testid="agent-loading"]) {
+    border-bottom: none !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 4px !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+}
+
+/* Sibling agent-loading seamlessly completes the bottom of Agent transmission container */
+div[role="article"][aria-label="Agent response"] ~ [data-testid="agent-loading"],
+div[data-turn-content] > [data-testid="agent-loading"] {
+    background-color: #FFFFFF !important;
+    border-left: 3.5px solid #000000 !important;
+    border-right: 3.5px solid #000000 !important;
+    border-bottom: 3.5px solid #000000 !important;
+    border-top: none !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 18px !important;
+    border-bottom-right-radius: 18px !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+    padding: 0 22px 18px 22px !important;
+    margin-top: -4px !important;
+    margin-bottom: 24px !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Text styling for "Working" inside container */
+div[data-testid="agent-loading"] span,
+div[data-testid="agent-loading"] .animate-shimmer-text {
+    color: #000000 !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 13.5px !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* "Worked for Xm" Collapsible Step Pill */
+[data-testid="worked-for-collapsible"],
+button:has([data-testid="worked-for-collapsible"]) {
+    background-color: #EBE5D5 !important;
+    border: 2px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    border-radius: 8px !important;
+    padding: 6px 12px !important;
+    font-weight: 800 !important;
+    color: #000000 !important;
+    margin-bottom: 10px !important;
+    transition: all 0.08s ease !important;
+}
+
+[data-testid="worked-for-collapsible"] * {
+    color: #000000 !important;
+    font-weight: 800 !important;
+}
+
+[data-testid="worked-for-collapsible"]:hover {
+    background-color: #FFE600 !important;
+    transform: translate(1px, 1px) !important;
+    box-shadow: 1px 1px 0px #000000 !important;
+}
+
+/* Inline code tags in text: prevents overlapping and broken line wrapping */
+code:not(pre code) {
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+    border: 1px solid #000000 !important;
+    border-radius: 4px !important;
+    font-family: 'Space Mono', monospace !important;
+    font-weight: 700 !important;
+    font-size: 0.84em !important;
+    padding: 1px 4px !important;
+    margin: 1px 2px !important;
+    display: inline !important;
+    box-decoration-break: clone !important;
+    -webkit-box-decoration-break: clone !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    line-height: 1.25 !important;
+    vertical-align: baseline !important;
+}
+
+/* Code blocks (Terminal Output) */
+pre {
+    background-color: #141414 !important;
+    border: 3.5px solid #000000 !important;
+    box-shadow: 5px 5px 0px #000000 !important;
+    border-radius: 12px !important;
+    padding: 14px 18px !important;
+    margin: 14px 0 !important;
+    color: #00D26A !important;
+    font-family: 'Space Mono', monospace !important;
+}
+
+pre code {
+    background: transparent !important;
+    color: #00D26A !important;
+    font-family: 'Space Mono', monospace !important;
+    font-size: 13px !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+/* ==========================================================================
+   QUEUED MESSAGES CARD (COMIC NEUBRUTALISM REDESIGN)
+   ========================================================================== */
+[data-testid="queued-messages-card"],
+div[role="region"][aria-label="Queued messages"] {
+    background-color: #FFFFFF !important;
+    background: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+    box-shadow: 4px 4px 0px #000000 !important;
+    border-radius: 16px !important;
+    padding: 12px 16px !important;
+    margin: 8px 4px 12px 2px !important;
+    width: calc(100% - 8px) !important;
+    max-width: calc(100% - 8px) !important;
+    box-sizing: border-box !important;
+    max-height: 320px !important;
+    color: #000000 !important;
+    opacity: 1 !important;
+}
+
+/* Header: Title & Badges */
+[data-testid="queued-messages-card"] > div:first-child {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding-bottom: 8px !important;
+    border-bottom: 1.5px solid #000000 !important;
+}
+
+[data-testid="queued-messages-card"] span.shrink-0:first-child {
+    font-family: 'Space Grotesk', Impact, sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 13.5px !important;
+    color: #000000 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.03em !important;
+}
+
+/* Counter Badge */
+[data-testid="queued-messages-card"] span[class*="bg-secondary"] {
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+    border: 1.5px solid #000000 !important;
+    box-shadow: 1.5px 1.5px 0px #000000 !important;
+    border-radius: 6px !important;
+    font-family: 'Space Mono', monospace !important;
+    font-weight: 900 !important;
+    font-size: 11px !important;
+    padding: 2px 7px !important;
+    line-height: normal !important;
+}
+
+/* Subtitle description */
+[data-testid="queued-messages-card"] span.text-muted-foreground {
+    color: #555555 !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Expand / Collapse Button */
+button[data-testid="queued-messages-expand-button"] {
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+    border: 1.5px solid #000000 !important;
+    box-shadow: 1.5px 1.5px 0px #000000 !important;
+    border-radius: 6px !important;
+    width: 24px !important;
+    height: 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: transform 0.08s ease, box-shadow 0.08s ease !important;
+}
+
+button[data-testid="queued-messages-expand-button"]:hover {
+    background-color: #FFF066 !important;
+    transform: translate(1px, 1px) !important;
+    box-shadow: 0.5px 0.5px 0px #000000 !important;
+}
+
+button[data-testid="queued-messages-expand-button"] svg {
+    color: #000000 !important;
+    stroke: #000000 !important;
+    stroke-width: 1 !important;
+}
+
+/* Queued Message Item Row */
+[data-testid="queued-messages-card"] div.flex-row.items-center.justify-between {
+    background-color: #F8F5EC !important;
+    border: 2px solid #000000 !important;
+    box-shadow: 2.5px 2.5px 0px #000000 !important;
+    border-radius: 10px !important;
+    padding: 8px 12px !important;
+    margin-top: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    gap: 12px !important;
+    transition: transform 0.08s ease, box-shadow 0.08s ease !important;
+}
+
+[data-testid="queued-messages-card"] div.flex-row.items-center.justify-between:hover {
+    box-shadow: 3.5px 3.5px 0px #000000 !important;
+    transform: translate(-1px, -1px) !important;
+}
+
+/* Thumbnail Image Attachment */
+[data-testid="queued-messages-card"] button:has(> img),
+[data-testid="queued-messages-card"] button.w-6.h-6 {
+    width: 32px !important;
+    height: 32px !important;
+    border: 1.5px solid #000000 !important;
+    box-shadow: 1.5px 1.5px 0px #000000 !important;
+    border-radius: 6px !important;
+    background-color: #FFFFFF !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+}
+
+/* Message Text */
+[data-testid="queued-messages-card"] [data-quotable="true"],
+[data-testid="queued-messages-card"] div.whitespace-pre-wrap {
+    color: #000000 !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 13.5px !important;
+    line-height: 1.4 !important;
+}
+
+/* Action Buttons Container */
+[data-testid="queued-decorators"] {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+/* Common Action Button Base */
+[data-testid="queued-decorators"] button {
+    width: 28px !important;
+    height: 28px !important;
+    border: 1.5px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: transform 0.08s ease, box-shadow 0.08s ease !important;
+}
+
+[data-testid="queued-decorators"] button:hover {
+    transform: translate(1px, 1px) !important;
+    box-shadow: 1px 1px 0px #000000 !important;
+}
+
+/* 1. Send Now Button (First) */
+[data-testid="queued-decorators"] button:nth-child(1) {
+    background-color: #00D26A !important;
+    border-radius: 50% !important;
+}
+
+[data-testid="queued-decorators"] button:nth-child(1):hover {
+    background-color: #34E885 !important;
+}
+
+[data-testid="queued-decorators"] button:nth-child(1) svg {
+    color: #000000 !important;
+    stroke: #000000 !important;
+    stroke-width: 1.5 !important;
+}
+
+/* 2. Edit Button (Second) */
+[data-testid="queued-decorators"] button:nth-child(2) {
+    background-color: #FFE600 !important;
+}
+
+[data-testid="queued-decorators"] button:nth-child(2):hover {
+    background-color: #FFF066 !important;
+}
+
+[data-testid="queued-decorators"] button:nth-child(2) svg {
+    color: #000000 !important;
+    stroke: #000000 !important;
+}
+
+/* 3. Delete Button (Third) */
+[data-testid="queued-decorators"] button:nth-child(3) {
+    background-color: #FF3B30 !important;
+}
+
+[data-testid="queued-decorators"] button:nth-child(3):hover {
+    background-color: #FF5A52 !important;
+}
+
+[data-testid="queued-decorators"] button:nth-child(3) svg {
+    color: #FFFFFF !important;
+    stroke: #FFFFFF !important;
+}
+
+/* ==========================================================================
+   7. COMPOSER (Single Clean Comic Card + Uniform 8px Spacing + Yellow Voice Pill)
+   ========================================================================== */
+/* Eliminate outer wrapper double border */
+div[data-testid="agent-input-box"] {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Single clean elevated Neubrutalist composer container */
+div.surface-composer {
+    background-color: #FFFFFF !important;
+    border: 3.5px solid #000000 !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+    border-radius: 20px !important;
+    padding: 2px !important;
+    overflow: visible !important;
+    margin: 8px 16px 16px 16px !important;
+}
+
+div.surface-composer-card {
+    background-color: #FFFFFF !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 8px 12px !important;
+    overflow: visible !important;
+}
+
+/* Media & Attachment Container - remove dividing line above text box */
+div.surface-composer-card div.border-b,
+div.surface-composer-card div[class*="border-b"],
+div.surface-composer-card div:has(> [data-testid="input-attachment"]),
+div.surface-composer div.border-b,
+div.surface-composer hr {
+    border-top: none !important;
+    border-bottom: none !important;
+    padding-bottom: 6px !important;
+}
+
+/* Attachment previews in composer */
+div[data-testid="input-attachment"] {
+    border: 2px solid #000000 !important;
+    border-radius: 8px !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    background-color: #FFFFFF !important;
+    overflow: hidden !important;
+}
+
+div[data-testid="input-attachment"] button[data-testid="input-attachment-remove"] {
+    background-color: #FF3B30 !important;
+    color: #FFFFFF !important;
+    border: 1.5px solid #000000 !important;
+    box-shadow: 1px 1px 0px #000000 !important;
+    border-radius: 9999px !important;
+    width: 18px !important;
+    height: 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+    transition: transform 0.08s ease !important;
+}
+
+div[data-testid="input-attachment"] button[data-testid="input-attachment-remove"]:hover {
+    transform: scale(1.1) !important;
+}
+
+/* Inner input text area */
+textarea,
+div[contenteditable="true"] {
+    background-color: #F4EEDD !important;
+    border: 2px solid #000000 !important;
+    border-radius: 12px !important;
+    color: #000000 !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    line-height: 24px !important;
+    padding: 8px 12px !important;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.08) !important;
+    outline: none !important;
+}
+
+textarea::placeholder,
+div[contenteditable="true"]::placeholder {
+    color: #555555 !important;
+    font-weight: 600 !important;
+}
+
+/* Align floating placeholder exactly with insertion caret */
+div.relative.w-full > p.pointer-events-none.absolute,
+div[data-testid="agent-input-box"] p.pointer-events-none.absolute {
+    left: 14px !important;
+    top: 10px !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: 24px !important;
+    color: #555555 !important;
+    opacity: 0.7 !important;
+}
+
+/* --- COMPOSER FOOTER & UNIFORM 8px BUTTON SPACING ARCHITECTURE --- */
+.agy-composer-footer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 4px 2px 2px 2px !important;
+}
+
+/* Left button cluster ([+] & Model selector) */
+.agy-composer-footer > div:first-child {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+/* Right button cluster (Turbo, Mic, Voice Pill, Cancel/Send) */
+.agy-composer-footer > div:last-child,
+.agy-composer-footer > div:last-child > div {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+}
+
+/* Add context (+) Button: clean tactile comic button */
+button[aria-label="Add context"] {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    border-radius: 8px !important;
+    width: 28px !important;
+    height: 28px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    transition: all 0.08s ease !important;
+}
+
+button[aria-label="Add context"]:hover {
+    background-color: #FFE600 !important;
+    transform: translate(1px, 1px) !important;
+    box-shadow: 1px 1px 0px #000000 !important;
+}
+
+button[aria-label="Add context"] svg {
+    color: #000000 !important;
+    fill: #000000 !important;
+}
+
+/* Model Selector Button */
+button[aria-label^="Select model"] {
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    box-shadow: 2.5px 2.5px 0px #000000 !important;
+    border-radius: 10px !important;
+    font-weight: 800 !important;
+    font-size: 12px !important;
+    margin: 0 !important;
+    transition: all 0.08s ease !important;
+}
+
+button[aria-label^="Select model"] * {
+    color: #000000 !important;
+    font-weight: 800 !important;
+}
+
+button[aria-label^="Select model"]:hover {
+    background-color: #FFD000 !important;
+    transform: translate(1px, 1px) !important;
+    box-shadow: 1.5px 1.5px 0px #000000 !important;
+}
+
+/* Turbo / Permissions Selector Button */
+button[aria-label*="permissions preset"] {
+    background-color: #FF3B30 !important;
+    color: #FFFFFF !important;
+    border: 2px solid #000000 !important;
+    box-shadow: 2.5px 2.5px 0px #000000 !important;
+    border-radius: 10px !important;
+    font-weight: 800 !important;
+    font-size: 12px !important;
+    margin: 0 !important;
+    transition: all 0.08s ease !important;
+}
+
+button[aria-label*="permissions preset"] * {
+    color: #FFFFFF !important;
+    font-weight: 800 !important;
+}
+
+/* Record Voice Memo Button */
+button[aria-label="Record voice memo"] {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    border-radius: 8px !important;
+    width: 28px !important;
+    height: 28px !important;
+    margin: 0 !important;
+    transition: all 0.08s ease !important;
+}
+
+button[aria-label="Record voice memo"] * {
+    color: #000000 !important;
+    fill: #000000 !important;
+}
+
+button[aria-label="Record voice memo"]:hover {
+    background-color: #FFE600 !important;
+    transform: translate(1px, 1px) !important;
+    box-shadow: 1px 1px 0px #000000 !important;
+}
+
+/* Voice Mode Button & Live Pill (Fixing Blacked-Out Voice Controls) */
+[data-testid="voice-live-pill"],
+span:has(> button[data-testid="voice-start-button"]) {
+    background-color: #FFE600 !important;
+    background: #FFE600 !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    border-radius: 9999px !important;
+    height: 28px !important;
+    margin: 0 !important;
+    transition: all 0.08s ease !important;
+}
+
+[data-testid="voice-live-pill"] *,
+[data-testid="voice-start-button"] *,
+span:has(> button[data-testid="voice-start-button"]) * {
+    color: #000000 !important;
+    fill: #000000 !important;
+    stroke: #000000 !important;
+}
+
+[data-testid="voice-live-pill"]:hover,
+button[data-testid="voice-start-button"]:hover {
+    background-color: #FFD000 !important;
+    transform: translate(1px, 1px) !important;
+    box-shadow: 1px 1px 0px #000000 !important;
+}
+
+/* Cancel / Send Buttons in Composer */
+.surface-composer button[aria-label*="Cancel"],
+.surface-composer button[aria-label*="send" i],
+.surface-composer button[type="submit"],
+.surface-composer [data-testid="input-cancel-button"] {
+    background-color: #FF3B30 !important;
+    color: #FFFFFF !important;
+    border: 2px solid #000000 !important;
+    box-shadow: 2.5px 2.5px 0px #000000 !important;
+    border-radius: 10px !important;
+    font-weight: 900 !important;
+    margin: 0 !important;
+    transition: all 0.08s ease !important;
+}
+
+.surface-composer button[aria-label*="send" i] {
+    background-color: #00D26A !important;
+    color: #000000 !important;
+}
+
+/* ==========================================================================
+   8. RIGHT AUXILIARY PANEL & TABS (Artifacts, Sidecars & Monaco Diff)
+   ========================================================================== */
+div[data-side-panel-open="true"],
+div[data-aux-pane-open="true"],
+div[data-testid="aux-pane-split"] > div:last-child {
+    background-color: #F4EEDD !important;
+    border-left: 1.5px solid #000000 !important;
+    color: #000000 !important;
+}
+
+/* Artifact Header Bar */
+div[data-side-panel-open="true"] header,
+div[data-aux-pane-open="true"] header {
+    background-color: #EBE5D5 !important;
+    border-bottom: 3.5px solid #000000 !important;
+    color: #000000 !important;
+    font-weight: 900 !important;
+}
+
+/* Aux Panel Tab Buttons */
+button.agy-aux-tab {
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+    transition: all 0.08s ease !important;
+}
+
+/* Inactive Aux Tabs */
+button.agy-aux-tab:not(.bg-secondary) {
+    background-color: transparent !important;
+    color: #333333 !important;
+    border: 1.5px solid transparent !important;
+}
+
+button.agy-aux-tab:not(.bg-secondary) * {
+    color: #333333 !important;
+}
+
+button.agy-aux-tab:not(.bg-secondary):hover {
+    background-color: rgba(255, 230, 0, 0.4) !important;
+    color: #000000 !important;
+    border: 1.5px solid #000000 !important;
+}
+
+/* ACTIVE Aux Tab */
+button.agy-aux-tab.bg-secondary {
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+    border: 2.5px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    font-weight: 900 !important;
+}
+
+button.agy-aux-tab.bg-secondary * {
+    color: #000000 !important;
+    font-weight: 900 !important;
+}
+
+/* Artifact Card / Document Surface */
+div[data-side-panel-open="true"] div.prose,
+div[data-side-panel-open="true"] div[class*="prose"] {
+    background-color: #FFFFFF !important;
+    border: 3.5px solid #000000 !important;
+    border-radius: 18px !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+    padding: 24px !important;
+    margin: 16px !important;
+    color: #000000 !important;
+}
+
+div[data-side-panel-open="true"] div.prose * {
+    color: #000000 !important;
+}
+
+/* Tables: Remove outer wrapper container border artifacts */
+div:has(> table),
+div:has(> .md-table-el),
+div.my-4:has(table) {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 12px 0 !important;
+    border-radius: 0 !important;
+    overflow-x: auto !important;
+}
+
+table,
+.md-table-el {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    border: 2.5px solid #000000 !important;
+    box-shadow: 4px 4px 0px #000000 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    background-color: #FFFFFF !important;
+    margin: 0 !important;
+}
+
+th {
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+    border: 1.5px solid #000000 !important;
+    padding: 8px 12px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+}
+
+td {
+    border: 1.5px solid #000000 !important;
+    color: #000000 !important;
+    padding: 8px 12px !important;
+    font-weight: 600 !important;
+    background-color: #FFFFFF !important;
+}
+
+tr:nth-child(even) td {
+    background-color: #FDFBF7 !important;
+}
+
+/* Monaco Code Editor / Diff High Contrast */
+.monaco-editor,
+.monaco-diff-editor {
+    border: 3px solid #000000 !important;
+    border-radius: 12px !important;
+    box-shadow: 4px 4px 0px #000000 !important;
+}
+
+.monaco-diff-editor .line-insert {
+    background-color: rgba(0, 210, 106, 0.3) !important;
+}
+
+.monaco-diff-editor .line-delete {
+    background-color: rgba(255, 59, 48, 0.3) !important;
+}
+
+/* ==========================================================================
+   9. MODALS, SETTINGS & CUSTOMIZATION DIALOGS (With Active Tab Highlights)
+   ========================================================================== */
+div[role="dialog"],
+div[data-testid="settings-modal"] {
+    background-color: #F4EEDD !important;
+    border: 4px solid #000000 !important;
+    border-radius: 20px !important;
+    box-shadow: 10px 10px 0px #000000 !important;
+    color: #000000 !important;
+}
+
+div[role="dialog"] * {
+    color: #000000 !important;
+}
+
+/* Dialog Header with Hazard Caution Bar */
+div[role="dialog"] header,
+div[role="dialog"] div[class*="dialog-header"] {
+    background: repeating-linear-gradient(
+        45deg,
+        #FFE600,
+        #FFE600 14px,
+        #000000 14px,
+        #000000 28px
+    ) !important;
+    padding: 12px 18px !important;
+    border-bottom: 3.5px solid #000000 !important;
+    border-radius: 16px 16px 0 0 !important;
+}
+
+div[role="dialog"] header h2,
+div[role="dialog"] header span {
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+    border: 2.5px solid #000000 !important;
+    padding: 4px 12px !important;
+    border-radius: 8px !important;
+    font-weight: 900 !important;
+    font-family: 'Space Grotesk', Impact, sans-serif !important;
+}
+
+/* Settings Modal Sidebar Tabs (Scoped to aside/nav to avoid hijacking settings controls) */
+div[role="dialog"] aside button:not(.bg-sidebar-secondary),
+div[role="dialog"] nav button:not(.bg-sidebar-secondary),
+.settings-modal-container aside button:not(.bg-sidebar-secondary) {
+    background-color: transparent !important;
+    border: 2px solid transparent !important;
+    color: #333333 !important;
+    font-weight: 700 !important;
+}
+
+div[role="dialog"] aside button:not(.bg-sidebar-secondary):hover,
+div[role="dialog"] nav button:not(.bg-sidebar-secondary):hover,
+.settings-modal-container aside button:not(.bg-sidebar-secondary):hover {
+    background-color: rgba(255, 230, 0, 0.35) !important;
+    border: 2px solid #000000 !important;
+    border-radius: 8px !important;
+    color: #000000 !important;
+}
+
+/* Active tab inside Settings Modal */
+div[role="dialog"] aside button.bg-sidebar-secondary,
+div[role="dialog"] nav button.bg-sidebar-secondary,
+.settings-modal-container aside button.bg-sidebar-secondary {
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+    border: 2.5px solid #000000 !important;
+    box-shadow: 3px 3px 0px #000000 !important;
+    border-radius: 10px !important;
+    font-weight: 900 !important;
+}
+
+/* ==========================================================================
+   Segmented Controls & Toggle Groups (Settings & Modals)
+   ========================================================================== */
+div[data-slot="toggle-group"] {
+    background-color: #F4EEDD !important; /* Retro comic cream track */
+    border: 2.5px solid #000000 !important;
+    box-shadow: 3px 3px 0px #000000 !important;
+    border-radius: 12px !important;
+    padding: 3px !important;
+    gap: 4px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    height: auto !important;
+}
+
+/* Individual Toggle Items */
+div[data-slot="toggle-group"] button {
+    background-color: transparent !important;
+    border: 2px solid transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+    border-radius: 8px !important;
+    color: #000000 !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    padding: 4px 12px !important;
+    height: 28px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.1s ease !important;
+    text-decoration: none !important;
+}
+
+div[data-slot="toggle-group"] button:hover:not([data-pressed]):not([aria-pressed="true"]):not([data-state="on"]) {
+    background-color: rgba(0, 0, 0, 0.08) !important;
+    color: #000000 !important;
+}
+
+/* Active / Selected Toggle Item */
+div[data-slot="toggle-group"] button[data-pressed],
+div[data-slot="toggle-group"] button[aria-pressed="true"],
+div[data-slot="toggle-group"] button[data-state="on"] {
+    background-color: #FFE600 !important; /* Electric comic yellow */
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    font-weight: 800 !important;
+    transform: translate(-1px, -1px) !important;
+}
+
+div[data-slot="toggle-group"] button[data-pressed] *,
+div[data-slot="toggle-group"] button[aria-pressed="true"] *,
+div[data-slot="toggle-group"] button[data-state="on"] * {
+    color: #000000 !important;
+    fill: #000000 !important;
+    stroke: #000000 !important;
+}
+
+/* ==========================================================================
+   Tactile Comic Toggle Switches
+   ========================================================================== */
+button[role="switch"] {
+    background-color: #E2DEC9 !important; /* Retro cream track when OFF */
+    border: 2.5px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    border-radius: 9999px !important;
+    width: 48px !important;
+    height: 26px !important;
+    padding: 0 !important;
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    cursor: pointer !important;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+button[role="switch"]:hover {
+    box-shadow: 2.5px 2.5px 0px #000000 !important;
+    transform: translate(-0.5px, -0.5px) !important;
+}
+
+button[role="switch"] span {
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 9999px !important;
+    background-color: #000000 !important; /* Solid black thumb when OFF */
+    border: 1.5px solid #000000 !important;
+    box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2) !important;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s ease !important;
+}
+
+/* Active / Checked Switch */
+button[role="switch"][aria-checked="true"],
+button[role="switch"].bg-primary[aria-checked="true"] {
+    background-color: #00D26A !important; /* Vibrant comic green track when ON */
+}
+
+button[role="switch"][aria-checked="true"] span {
+    background-color: #FFFFFF !important; /* Crisp white thumb when ON */
+    border: 2px solid #000000 !important;
+    box-shadow: 1.5px 1.5px 0px #000000 !important;
+}
+
+/* ==========================================================================
+   Overview Panel & Section Headers & Badges
+   ========================================================================== */
+div[data-testid="overview-panel-host-gutter"],
+.animate-overview-panel,
+div[role="dialog"][aria-label="Overview"] {
+    background-color: #FFFFFF !important;
+    border: 3.5px solid #000000 !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+}
+
+/* Overview Panel Section Header Labels (Subagents, Background Tasks, Artifacts) */
+div[data-testid="overview-panel"] span.text-xs.opacity-50,
+div[data-testid="overview-panel"] button:has(span.agy-hover-label) span,
+div[data-testid="overview-panel-host-gutter"] span.text-xs.opacity-50,
+.animate-overview-panel span.agy-hover-label {
+    opacity: 1 !important;
+    color: #000000 !important;
+    font-weight: 800 !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    letter-spacing: 0.02em !important;
+}
+
+/* Counter Badges: Bright Comic Yellow with Crisp Black Text */
+div[data-testid="overview-panel"] span.bg-border.rounded-full,
+div[data-testid="overview-panel-host-gutter"] span.bg-border.rounded-full,
+.animate-overview-panel span.bg-border.rounded-full,
+span.text-\[10px\].bg-border.rounded-full {
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+    border: 1.5px solid #000000 !important;
+    box-shadow: 1.5px 1.5px 0px #000000 !important;
+    opacity: 1 !important;
+    font-weight: 900 !important;
+    font-size: 11px !important;
+    padding: 1.5px 6px !important;
+    line-height: 1 !important;
+    border-radius: 9999px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Dividing lines between sections in Overview */
+div[data-testid="overview-panel"] div.border-b,
+div[data-testid="overview-panel-host-gutter"] div.border-b,
+.animate-overview-panel div.border-b {
+    border-color: #000000 !important;
+    border-bottom-width: 1.5px !important;
+}
+
+/* Settings Cards inside Modal */
+div[role="dialog"] div.border.rounded-lg,
+div[role="dialog"] div[class*="card"] {
+    background-color: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+    border-radius: 14px !important;
+    box-shadow: 4px 4px 0px #000000 !important;
+    padding: 14px !important;
+    margin: 8px 0 !important;
+}
+
+/* Modal Close Button */
+div[role="dialog"] button[aria-label*="close" i],
+div[role="dialog"] button:has(svg.lucide-x) {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    border: 2.5px solid #000000 !important;
+    border-radius: 8px !important;
+    box-shadow: 3px 3px 0px #000000 !important;
+    transition: all 0.08s ease !important;
+}
+
+div[role="dialog"] button[aria-label*="close" i]:hover,
+div[role="dialog"] button:has(svg.lucide-x):hover {
+    background-color: #FF3B30 !important;
+    color: #FFFFFF !important;
+    transform: translate(1px, 1px) !important;
+    box-shadow: 1px 1px 0px #000000 !important;
+}
+
+/* ==========================================================================
+   10. SCROLLBARS (Comic Neubrutalism Style)
+   ========================================================================== */
+::-webkit-scrollbar {
+    width: 10px !important;
+    height: 10px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: #F4EEDD !important;
+    border-left: 2px solid #000000 !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #FFE600 !important;
+    border: 2px solid #000000 !important;
+    border-radius: 4px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #FFD000 !important;
+}
+
+/* ==========================================================================
+   11. TOOLTIPS, POPOVERS & POPUP MENUS (Maximum Legibility Comic Badges)
+   ========================================================================== */
+/* Tooltip Bubble (High Contrast Comic Yellow Tag) */
+[role="tooltip"],
+.compact-tooltip,
+[data-radix-tooltip-content],
+div[data-side][role="tooltip"],
+div[data-testid*="tooltip"] {
+    background-color: #FFE600 !important;
+    background: #FFE600 !important;
+    color: #000000 !important;
+    border: 2.5px solid #000000 !important;
+    box-shadow: 3px 3px 0px #000000 !important;
+    border-radius: 8px !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+    padding: 4px 8px !important;
+    opacity: 1 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    z-index: 9999999 !important;
+}
+
+[role="tooltip"] *,
+.compact-tooltip *,
+[data-radix-tooltip-content] * {
+    color: #000000 !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 12px !important;
+}
+
+/* Tooltip Little Arrow (if any) */
+[role="tooltip"] svg,
+.compact-tooltip svg,
+[data-radix-tooltip-content] svg {
+    fill: #000000 !important;
+    color: #000000 !important;
+}
+
+/* Slash command dummy cursor anchor: NEVER render as a box or pill */
+#typeahead-menu,
+[role="listbox"]:empty,
+div:has(> #typeahead-menu):empty {
+    display: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Slash command popup menu (Lexical bottom-full listbox) */
+div.bottom-full[role="listbox"],
+div.bottom-full.bg-card {
+    background-color: #FFFFFF !important;
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    border: 3px solid #000000 !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    padding: 6px !important;
+    z-index: 1000 !important;
+}
+
+div.bottom-full[role="listbox"] * {
+    color: #000000 !important;
+}
+
+div.bottom-full[role="listbox"] [role="option"],
+div.bottom-full[role="listbox"] [role="menuitem"],
+div.bottom-full[role="listbox"] li {
+    border-radius: 8px !important;
+    padding: 6px 10px !important;
+    margin: 2px 0 !important;
+    color: #000000 !important;
+    font-weight: 700 !important;
+    transition: all 0.08s ease !important;
+}
+
+div.bottom-full[role="listbox"] [aria-selected="true"],
+div.bottom-full[role="listbox"] [data-highlighted],
+div.bottom-full[role="listbox"] .bg-accent,
+div.bottom-full[role="listbox"] .bg-muted,
+div.bottom-full[role="listbox"] [role="option"]:hover {
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+    border: 1.5px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    transform: translate(1px, 1px) !important;
+}
+
+div.bottom-full[role="listbox"] [aria-selected="true"] *,
+div.bottom-full[role="listbox"] [data-highlighted] *,
+div.bottom-full[role="listbox"] [role="option"]:hover * {
+    color: #000000 !important;
+    font-weight: 800 !important;
+}
+
+/* Popup Menus, Overlays, Dropdowns & Action Bars */
+[role="menu"],
+[role="listbox"]:not(#typeahead-menu):not(:empty),
+[data-radix-menu-content],
+[data-radix-dropdown-menu-content],
+.agy-overlay,
+div.surface-glass:not([role="tooltip"]) {
+    background-color: #FFFFFF !important;
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    border: 3px solid #000000 !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+    border-radius: 14px !important;
+    padding: 8px 6px !important;
+    min-width: 320px !important;
+    max-width: 440px !important;
+    opacity: 1 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    z-index: 9999999 !important;
+}
+
+/* Model Selector & Dropdown Panels */
+[data-testid="model-selector-panel"] {
+    padding: 2px !important;
+    overflow: visible !important;
+}
+
+/* Menu items inside popups */
+[role="menuitem"],
+[role="option"],
+.agy-overlay-item,
+div.agy-overlay button,
+div.surface-glass button {
+    color: #000000 !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    padding: 6px 10px !important;
+    border-radius: 8px !important;
+    border: 1.5px solid transparent !important;
+    width: calc(100% - 6px) !important;
+    margin: 2px 3px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    transition: all 0.08s ease !important;
+}
+
+[role="menuitem"] *,
+[role="option"] *,
+.agy-overlay-item *,
+div.agy-overlay button *,
+div.surface-glass button * {
+    color: #000000 !important;
+    stroke: #000000 !important;
+    font-weight: 700 !important;
+}
+
+[role="menuitem"]:hover,
+[role="option"]:hover,
+[role="menuitem"][data-highlighted],
+.agy-overlay-item[data-highlighted],
+.agy-overlay-item:hover,
+div.agy-overlay button:hover,
+div.surface-glass button:hover {
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    transform: none !important;
+}
+
+/* Notice & Unavailable Model Badges */
+.agy-overlay-item div.rounded-full,
+[role="menuitem"] div.rounded-full {
+    opacity: 1 !important;
+    border: 1.5px solid #000000 !important;
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+    font-weight: 800 !important;
+    padding: 2px 7px !important;
+    margin-left: auto !important;
+    flex-shrink: 0 !important;
+}
+
+/* Popover Content (e.g. Radix Popovers, Context Pickers) */
+[data-radix-popover-content],
+div[class*="popover-content"] {
+    background-color: #FFFFFF !important;
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    border: 3.5px solid #000000 !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+    border-radius: 16px !important;
+    padding: 12px !important;
+    opacity: 1 !important;
+    backdrop-filter: none !important;
+    z-index: 9999999 !important;
+}
+
+[data-radix-popover-content] * {
+    color: #000000 !important;
+}
+
+/* ==========================================================================
+   TURN CARDS: ARTIFACT CARDS & FILE CHANGES DIFF CARDS (COMIC THEME)
+   ========================================================================== */
+
+/* Artifact Card Container */
+[data-testid="artifact-card"],
+div.artifact-card {
+    background-color: #FFFFFF !important;
+    border: 2px solid #000000 !important;
+    box-shadow: 3.5px 3.5px 0px #000000 !important;
+    border-radius: 14px !important;
+    padding: 14px 18px !important;
+    margin: 10px 0 !important;
+    gap: 8px !important;
+    transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+
+[data-testid="artifact-card"]:hover {
+    box-shadow: 4.5px 4.5px 0px #000000 !important;
+    transform: translate(-1px, -1px) !important;
+}
+
+[data-testid="artifact-card-header"] {
+    gap: 6px !important;
+    width: 100% !important;
+}
+
+[data-testid="artifact-card-header"] button {
+    color: #000000 !important;
+    font-weight: 800 !important;
+    font-size: 14.5px !important;
+    letter-spacing: -0.01em !important;
+    margin-bottom: 2px !important;
+}
+
+[data-testid="artifact-card-header"] button svg {
+    color: #000000 !important;
+    stroke: #000000 !important;
+}
+
+[data-testid="artifact-card-header"] span.line-clamp-3,
+[data-testid="artifact-card"] p,
+[data-testid="artifact-card"] span.text-secondary-foreground {
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+    color: #374151 !important;
+    font-weight: 500 !important;
+}
+
+/* Changed Files Card */
+[data-testid="changed-files-card"] {
+    margin: 8px 0 12px 0 !important;
+}
+
+[data-testid="changed-files-card-header"],
+div.files-changed-header {
+    background-color: #FFFFFF !important;
+    border: 2px solid #000000 !important;
+    box-shadow: 3.5px 3.5px 0px #000000 !important;
+    border-radius: 12px !important;
+    padding: 10px 16px !important;
+    gap: 10px !important;
+    transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+
+[data-testid="changed-files-card-header"]:hover {
+    box-shadow: 4.5px 4.5px 0px #000000 !important;
+    transform: translate(-1px, -1px) !important;
+}
+
+/* File count text */
+[data-testid="changed-files-card-header"] span.text-secondary-foreground {
+    color: #000000 !important;
+    font-weight: 700 !important;
+    font-size: 13.5px !important;
+}
+
+/* Clean Inline Green +Diff and Red -Diff indicators (matching UI font flow) */
+span.text-green-500,
+.text-green-500 {
+    color: #00873E !important;
+    background: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 13.5px !important;
+    letter-spacing: -0.01em !important;
+    display: inline !important;
+}
+
+span.text-red-500,
+.text-red-500 {
+    color: #D90429 !important;
+    background: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 13.5px !important;
+    letter-spacing: -0.01em !important;
+    display: inline !important;
+    margin-left: 4px !important;
+}
+
+/* Review Button */
+button[data-testid="changed-files-card-review"],
+button.review-button {
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+    border: 1.5px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    border-radius: 8px !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 12.5px !important;
+    padding: 4px 12px !important;
+    gap: 5px !important;
+    cursor: pointer !important;
+    transition: transform 0.08s ease, box-shadow 0.08s ease !important;
+}
+
+button[data-testid="changed-files-card-review"]:hover,
+button.review-button:hover {
+    background-color: #FFF066 !important;
+    box-shadow: 2.5px 2.5px 0px #000000 !important;
+    transform: translate(-0.5px, -0.5px) !important;
+}
+
+button[data-testid="changed-files-card-review"] *,
+button.review-button * {
+    color: #000000 !important;
+    stroke: #000000 !important;
+    font-weight: 800 !important;
+}
+
