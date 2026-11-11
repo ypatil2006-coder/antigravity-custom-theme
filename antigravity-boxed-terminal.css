@@ -1062,11 +1062,11 @@ button[data-testid="voice-start-button"]:hover {
     box-shadow: 1px 1px 0px #000000 !important;
 }
 
-/* Cancel / Send Buttons */
-button[aria-label*="Cancel"],
-button[aria-label*="send" i],
-button[type="submit"],
-[data-testid="input-cancel-button"] {
+/* Cancel / Send Buttons in Composer */
+.surface-composer button[aria-label*="Cancel"],
+.surface-composer button[aria-label*="send" i],
+.surface-composer button[type="submit"],
+.surface-composer [data-testid="input-cancel-button"] {
     background-color: #FF3B30 !important;
     color: #FFFFFF !important;
     border: 2px solid #000000 !important;
@@ -1077,7 +1077,7 @@ button[type="submit"],
     transition: all 0.08s ease !important;
 }
 
-button[aria-label*="send" i] {
+.surface-composer button[aria-label*="send" i] {
     background-color: #00D26A !important;
     color: #000000 !important;
 }
@@ -1261,15 +1261,19 @@ div[role="dialog"] header span {
     font-family: 'Space Grotesk', Impact, sans-serif !important;
 }
 
-/* Settings Modal Sidebar Tabs */
-div[role="dialog"] button:not(.bg-sidebar-secondary) {
+/* Settings Modal Sidebar Tabs (Scoped to aside/nav to avoid hijacking settings controls) */
+div[role="dialog"] aside button:not(.bg-sidebar-secondary),
+div[role="dialog"] nav button:not(.bg-sidebar-secondary),
+.settings-modal-container aside button:not(.bg-sidebar-secondary) {
     background-color: transparent !important;
     border: 2px solid transparent !important;
     color: #333333 !important;
     font-weight: 700 !important;
 }
 
-div[role="dialog"] button:not(.bg-sidebar-secondary):hover {
+div[role="dialog"] aside button:not(.bg-sidebar-secondary):hover,
+div[role="dialog"] nav button:not(.bg-sidebar-secondary):hover,
+.settings-modal-container aside button:not(.bg-sidebar-secondary):hover {
     background-color: rgba(255, 230, 0, 0.35) !important;
     border: 2px solid #000000 !important;
     border-radius: 8px !important;
@@ -1277,13 +1281,175 @@ div[role="dialog"] button:not(.bg-sidebar-secondary):hover {
 }
 
 /* Active tab inside Settings Modal */
-div[role="dialog"] button.bg-sidebar-secondary {
+div[role="dialog"] aside button.bg-sidebar-secondary,
+div[role="dialog"] nav button.bg-sidebar-secondary,
+.settings-modal-container aside button.bg-sidebar-secondary {
     background-color: #FFE600 !important;
     color: #000000 !important;
     border: 2.5px solid #000000 !important;
     box-shadow: 3px 3px 0px #000000 !important;
     border-radius: 10px !important;
     font-weight: 900 !important;
+}
+
+/* ==========================================================================
+   Segmented Controls & Toggle Groups (Settings & Modals)
+   ========================================================================== */
+div[data-slot="toggle-group"] {
+    background-color: #F4EEDD !important; /* Retro comic cream track */
+    border: 2.5px solid #000000 !important;
+    box-shadow: 3px 3px 0px #000000 !important;
+    border-radius: 12px !important;
+    padding: 3px !important;
+    gap: 4px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    height: auto !important;
+}
+
+/* Individual Toggle Items */
+div[data-slot="toggle-group"] button {
+    background-color: transparent !important;
+    border: 2px solid transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+    border-radius: 8px !important;
+    color: #000000 !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    padding: 4px 12px !important;
+    height: 28px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.1s ease !important;
+    text-decoration: none !important;
+}
+
+div[data-slot="toggle-group"] button:hover:not([data-pressed]):not([aria-pressed="true"]):not([data-state="on"]) {
+    background-color: rgba(0, 0, 0, 0.08) !important;
+    color: #000000 !important;
+}
+
+/* Active / Selected Toggle Item */
+div[data-slot="toggle-group"] button[data-pressed],
+div[data-slot="toggle-group"] button[aria-pressed="true"],
+div[data-slot="toggle-group"] button[data-state="on"] {
+    background-color: #FFE600 !important; /* Electric comic yellow */
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    font-weight: 800 !important;
+    transform: translate(-1px, -1px) !important;
+}
+
+div[data-slot="toggle-group"] button[data-pressed] *,
+div[data-slot="toggle-group"] button[aria-pressed="true"] *,
+div[data-slot="toggle-group"] button[data-state="on"] * {
+    color: #000000 !important;
+    fill: #000000 !important;
+    stroke: #000000 !important;
+}
+
+/* ==========================================================================
+   Tactile Comic Toggle Switches
+   ========================================================================== */
+button[role="switch"] {
+    background-color: #E2DEC9 !important; /* Retro cream track when OFF */
+    border: 2.5px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    border-radius: 9999px !important;
+    width: 48px !important;
+    height: 26px !important;
+    padding: 0 !important;
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    cursor: pointer !important;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+button[role="switch"]:hover {
+    box-shadow: 2.5px 2.5px 0px #000000 !important;
+    transform: translate(-0.5px, -0.5px) !important;
+}
+
+button[role="switch"] span {
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 9999px !important;
+    background-color: #000000 !important; /* Solid black thumb when OFF */
+    border: 1.5px solid #000000 !important;
+    box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2) !important;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s ease !important;
+}
+
+/* Active / Checked Switch */
+button[role="switch"][aria-checked="true"],
+button[role="switch"].bg-primary[aria-checked="true"] {
+    background-color: #00D26A !important; /* Vibrant comic green track when ON */
+}
+
+button[role="switch"][aria-checked="true"] span {
+    background-color: #FFFFFF !important; /* Crisp white thumb when ON */
+    border: 2px solid #000000 !important;
+    box-shadow: 1.5px 1.5px 0px #000000 !important;
+}
+
+/* ==========================================================================
+   Overview Panel & Section Headers & Badges
+   ========================================================================== */
+div[data-testid="overview-panel-host-gutter"],
+.animate-overview-panel,
+div[role="dialog"][aria-label="Overview"] {
+    background-color: #FFFFFF !important;
+    border: 3.5px solid #000000 !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+}
+
+/* Overview Panel Section Header Labels (Subagents, Background Tasks, Artifacts) */
+div[data-testid="overview-panel"] span.text-xs.opacity-50,
+div[data-testid="overview-panel"] button:has(span.agy-hover-label) span,
+div[data-testid="overview-panel-host-gutter"] span.text-xs.opacity-50,
+.animate-overview-panel span.agy-hover-label {
+    opacity: 1 !important;
+    color: #000000 !important;
+    font-weight: 800 !important;
+    font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+    letter-spacing: 0.02em !important;
+}
+
+/* Counter Badges: Bright Comic Yellow with Crisp Black Text */
+div[data-testid="overview-panel"] span.bg-border.rounded-full,
+div[data-testid="overview-panel-host-gutter"] span.bg-border.rounded-full,
+.animate-overview-panel span.bg-border.rounded-full,
+span.text-\[10px\].bg-border.rounded-full {
+    background-color: #FFE600 !important;
+    color: #000000 !important;
+    border: 1.5px solid #000000 !important;
+    box-shadow: 1.5px 1.5px 0px #000000 !important;
+    opacity: 1 !important;
+    font-weight: 900 !important;
+    font-size: 11px !important;
+    padding: 1.5px 6px !important;
+    line-height: 1 !important;
+    border-radius: 9999px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Dividing lines between sections in Overview */
+div[data-testid="overview-panel"] div.border-b,
+div[data-testid="overview-panel-host-gutter"] div.border-b,
+.animate-overview-panel div.border-b {
+    border-color: #000000 !important;
+    border-bottom-width: 1.5px !important;
 }
 
 /* Settings Cards inside Modal */
