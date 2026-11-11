@@ -3948,15 +3948,12 @@ function getInjectionPayload() {
 
       // Attach Sidebar Button (Self-Healing)
       function attachBtn() {
+        let b = document.getElementById("antigravity-skills-nav-btn");
         const settingsBtn = document.querySelector('[data-testid="settings-button"]');
         if (!settingsBtn || !settingsBtn.parentElement) return;
 
-        let b = document.getElementById("antigravity-skills-nav-btn");
-        if (b) {
+        if (b && b.isConnected) {
           if (b.parentElement === settingsBtn.parentElement) {
-            if (b.nextElementSibling !== settingsBtn) {
-              settingsBtn.parentElement.insertBefore(b, settingsBtn);
-            }
             return;
           }
           b.remove();
@@ -3984,17 +3981,26 @@ function getInjectionPayload() {
       }
       attachBtn();
 
+      let __attachRaf = false;
+      const debouncedAttach = () => {
+        if (__attachRaf) return;
+        __attachRaf = true;
+        requestAnimationFrame(() => {
+          __attachRaf = false;
+          const b = document.getElementById("antigravity-skills-nav-btn");
+          if (!b || !b.isConnected) {
+            attachBtn();
+          }
+        });
+      };
+
       if (!window.__antigravity_skills_observer) {
-        window.__antigravity_skills_observer = new MutationObserver(() => {
-          attachBtn();
-        });
-        window.__antigravity_skills_observer.observe(document.body || document.documentElement, {
+        window.__antigravity_skills_observer = new MutationObserver(debouncedAttach);
+        const sidebarNav = document.querySelector('div[role="navigation"], aside, div.bg-sidebar');
+        window.__antigravity_skills_observer.observe(sidebarNav || document.body, {
           childList: true,
-          subtree: true
+          subtree: false
         });
-      }
-      if (!window.__ag_skills_btn_timer) {
-        window.__ag_skills_btn_timer = setInterval(attachBtn, 1000);
       }
 
       // Universal Terminal Font & Geometry Sync Enforcer (16px, JetBrainsMono Nerd Font)
@@ -4418,36 +4424,12 @@ function setupPageConnection(page, payload) {
   if (activeWsConnections.has(page.id)) {
     const existingWs = activeWsConnections.get(page.id);
     if (existingWs && existingWs.readyState === WebSocket.OPEN) {
-      const currentThemeCss = getThemeCss();
-      const heartbeatExpr = `(() => {
-        let reinjected = false;
-        if (!document.getElementById("antigravity-skills-drawer") || !document.getElementById("antigravity-skills-nav-btn")) {
-          ${payload}
-          return "Re-injected full payload via heartbeat";
-        }
-        const expectedCss = ${JSON.stringify(currentThemeCss)};
-        if (expectedCss) {
-          let themeEl = document.getElementById("antigravity-boxed-theme-style");
-          if (!themeEl) {
-            themeEl = document.createElement("style");
-            themeEl.id = "antigravity-boxed-theme-style";
-            (document.head || document.documentElement).appendChild(themeEl);
-            themeEl.textContent = expectedCss;
-            reinjected = true;
-          } else if (themeEl.textContent !== expectedCss) {
-            themeEl.textContent = expectedCss;
-            reinjected = true;
-          }
-        }
-        if (window.__enforceTerminalFont) {
-          window.__enforceTerminalFont(16);
-        }
-        return reinjected ? "Re-injected boxed theme" : "OK";
-      })()`;
+      // Lightweight 1-line check: only send heavy payload if page was refreshed or navigated
+      const lightCheck = `Boolean(document.getElementById("antigravity-skills-drawer") && document.getElementById("antigravity-skills-nav-btn"))`;
       existingWs.send(JSON.stringify({
-        id: 999,
+        id: 998,
         method: 'Runtime.evaluate',
-        params: { expression: heartbeatExpr, returnByValue: true }
+        params: { expression: lightCheck, returnByValue: true }
       }));
       return;
     }
@@ -4475,6 +4457,13 @@ function setupPageConnection(page, payload) {
     ws.onmessage = (event) => {
       try {
         const msg = JSON.parse(event.data);
+        if (msg.id === 998 && msg.result && msg.result.result && msg.result.result.value === false) {
+          ws.send(JSON.stringify({
+            id: 5,
+            method: 'Runtime.evaluate',
+            params: { expression: payload, returnByValue: true }
+          }));
+        }
         if (msg.method === 'Page.frameNavigated' || msg.method === 'Page.loadEventFired' || msg.method === 'Page.domContentEventFired') {
           ws.send(JSON.stringify({
             id: 5,

@@ -2560,3 +2560,77 @@ button.review-button * {
 #antigravity-skills-drawer .ag-drawer-footer a:hover {
     color: #D97706 !important;
 }
+
+/* ==========================================================================
+   PERFORMANCE & BUTTERY SMOOTH 120HZ COMPOSITING ENGINES
+   ========================================================================== */
+
+/* 1. Global Hardware-Accelerated Text & Subpixel Geometry */
+*, *::before, *::after {
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    text-rendering: optimizeLegibility !important;
+}
+
+/* 2. Hardware Composited Viewports & Momentum Scrolling */
+[data-testid="autoscroll-viewport"],
+[data-testid="conversation-list-sidebar"],
+#antigravity-skills-drawer .ag-drawer-content,
+div.bg-sidebar .overflow-y-auto,
+.overflow-y-auto {
+    scroll-behavior: smooth !important;
+    overscroll-behavior-y: contain !important;
+    will-change: scroll-position !important;
+    contain: content !important;
+}
+
+/* 3. Content-Visibility: Skip offscreen DOM layout & paint for instant 120fps scrolling */
+.agy-sidebar-row {
+    content-visibility: auto !important;
+    contain-intrinsic-size: 0 38px !important;
+}
+
+#antigravity-skills-drawer .ag-skill-card {
+    content-visibility: auto !important;
+    contain-intrinsic-size: 0 76px !important;
+}
+
+[data-testid="model-selector-panel"] [role="menuitem"],
+[data-testid="model-selector-panel"] [role="option"],
+div.agy-overlay [role="menuitem"] {
+    content-visibility: auto !important;
+    contain-intrinsic-size: 0 42px !important;
+}
+
+/* 4. GPU Layer Backing for Heavy Neubrutalism Shadows & Borders */
+.ag-category-box,
+.ag-skill-card,
+.agy-overlay,
+div.surface-glass,
+button.agy-button,
+#antigravity-skills-nav-btn,
+[data-testid="model-selector-panel"],
+div[role="dialog"] {
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+}
+
+/* 5. Zero Input Latency & Clean Hover Pacing */
+button,
+[role="button"],
+input,
+textarea,
+[data-lexical-editor="true"] {
+    touch-action: manipulation !important;
+}
+
+/* Smooth Scrollbar Track Pacing */
+::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 9999px !important;
+}
