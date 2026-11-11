@@ -20,26 +20,66 @@ import urllib.request
 from pathlib import Path
 
 # Paths
+REAL_HOME = Path(os.environ.get("REAL_HOME", "/home/yash"))
 THEME_DIR = Path(__file__).resolve().parent
 CATALOG_FILE = THEME_DIR / "skills_catalog.json"
 DAEMON_FILE = THEME_DIR / "skills_drawer_daemon.js"
 PATCH_FILE = THEME_DIR / "patch_app_asar.py"
 SKILLS_DIR = Path.home() / ".agents/skills"
 GEMINI_SKILLS_DIR = Path.home() / ".gemini/config/skills"
-PROFILES_DIR = Path.home() / ".config/Antigravity-Profiles"
+PROFILES_DIR = REAL_HOME / ".config/Antigravity-Profiles"
 
-# Domain Category Matcher Rules
+# Hackathon Speed Matrix Category Matcher Rules (with Cross-Listing Support)
 CATEGORY_RULES = [
-    ("🧊 3D Modeling & Motion Video", ["blender", "3d", "model", "render", "shader", "hyperframes", "video", "motion", "mesh", "texture"]),
-    ("🤖 AI APIs & Agent Systems", ["gemini-api", "gemini-live", "claude-council", "council", "multimodal", "omni-flash", "antigravity-sdk", "subagent", "brainstorming"]),
-    ("🧪 Testing & Browser Automation", ["playwright", "test-driven", "systematic-debugging", "memory-leak", "cdp-daemon", "browser", "chrome-devtools", "a11y", "lcp", "webapp-testing", "troubleshooting"]),
-    ("💻 Development & Architecture", ["roblox", "luau", "firebase", "react", "vercel", "mcp-builder", "chrome-extension", "android", "coding-standards", "security-best-practices"]),
-    ("🎨 UI/UX & Frontend Design", ["banner-design", "brand", "canvas-design", "design-system", "frontend-design", "gsap", "stitch", "slides", "ui-animation", "ui-ux-pro-max", "web-design-guidelines", "design"]),
-    ("⚡ Workflow & Productivity", ["git-commit", "pptimize", "deadlocked", "docx", "pdf", "pptx", "xlsx", "gcalendar", "gdocs", "gdrive", "ponytail", "token-optimizer", "prd", "plan", "superpowers", "find-skills", "skill-creator", "agy-customizations", "antigravity_guide", "automation", "run-workflow", "skills-manager"]),
+    ("💡 1. Ideate & Spec", [
+        "autoskill", "auto", "brainstorming", "claude-council", "executing-plans", "grill-me", 
+        "prd", "subagent-driven-development", "using-superpowers", "writing-plans",
+        "diagram-design", "anatomy", "generative-ui", "generative_ui", "plan", "council", "superpower",
+        "obsidian", "obsidian-", "json-canvas", "knap", "defuddle"
+    ]),
+    ("🎨 2. Frontend, UI & Motion", [
+        "stitch", "frontend-design", "design", "ui-ux-pro-max", "generative-ui", "generative_ui",
+        "gsap", "ui-animation", "hyperframes", "shaders", "blender", "brand", "web-design-guidelines", "ui-plugin-navigation",
+        "diagram-design", "anatomy", "diagram", "ui-"
+    ]),
+    ("⚡ 3. Fullstack, AI & APIs", [
+        "devrelay", "devrelay-", "gemini-api-dev", "gemini-live-api-dev", "gemini-omni-flash-api", "firebase",
+        "vercel", "flutter", "dart", "google-maps-platform", "chrome-extensions",
+        "mcp-builder", "coding-standards", "security-best-practices", "gcloud",
+        "google-antigravity-sdk", "android-cli", "gemini-", "antigravity-sdk", "react", "mcp", "rea",
+        "trader", "trader-skill", "finance", "stock", "portfolio", "trading"
+    ]),
+    ("🪲 4. Quick Debug & QA", [
+        "ponytail", "systematic-debugging", "chrome-devtools", "playwright",
+        "test-driven-development", "verification-before-completion",
+        "rea", "reverse-engineer-anything", "reverse-engineering", "decompil",
+        "debugging", "devtools", "test", "verification"
+    ]),
+    ("🏆 5. Pitch, Demo & Launch", [
+        "devrelay", "devrelay-", "linkedin", "brag", "slides", "hyperframes", "design", "diagram-design", "anatomy", "gsap", "gemini-omni-flash-api",
+        "docx", "pptx", "xlsx", "pdf", "gcalendar", "gdocs", "gdrive", "gslides",
+        "git-commit", "commit", "presentation", "sheet", "doc", "launch", "video"
+    ]),
+    ("🎮 Game Dev & 3D (Separate)", [
+        "godot", "gamedev", "roblox", "blender", "shaders", "pptimize", "deadlocked",
+        "shader-dev", "game", "3d", "shader", "glsl", "render", "mesh"
+    ]),
+    ("⚙️ Agent & System Tools", [
+        "autoskill", "auto", "automation", "browser", "cdp-daemon-automation", "token-optimizer",
+        "skills-manager", "skill-creator", "agy-customizations", "antigravity-guide", "antigravity_guide",
+        "plugin", "find-skills", "migrate-workflows", "permissioned-github", "run-workflow",
+        "chrome-devtools", "gcloud", "firebase", "android-cli", "git-commit",
+        "rea", "reverse-engineer-anything", "trader", "trader-skill",
+        "workflow", "daemon", "skill", "customization", "guide"
+    ]),
 ]
 
 def parse_skill_file(skill_path: Path):
     name = skill_path.parent.name
+    if name == "skills":
+        name = skill_path.parent.parent.name
+        if name.endswith("-plugin"):
+            name = name.replace("-plugin", "")
     desc = ""
     tags = []
     try:
@@ -50,11 +90,12 @@ def parse_skill_file(skill_path: Path):
             lines = front.splitlines()
             for idx, line in enumerate(lines):
                 if line.startswith("name:"):
-                    name = line.split(":", 1)[1].strip().strip('"').strip("'")
+                    raw_name = line.split(":", 1)[1].strip().strip('"').strip("'")
+                    if raw_name:
+                        name = raw_name
                 elif line.startswith("description:"):
                     val = line.split(":", 1)[1].strip()
                     if val in [">", ">-", "|", "|-", ""]:
-                        # Multi-line block
                         desc_parts = []
                         for nxt in lines[idx + 1:]:
                             if re.match(r"^[a-zA-Z0-9_-]+:", nxt):
@@ -76,7 +117,7 @@ def parse_skill_file(skill_path: Path):
     if not desc or desc in [">", ">-", "|"]:
         desc = f"Antigravity agent capability for {name}."
 
-    clean_name = skill_path.parent.name
+    clean_name = name.replace("_", "-")
     tags = [t.lower() for t in clean_name.split("-") if len(t) > 1]
     tags.append("skill")
     return clean_name, name, desc, tags
@@ -84,19 +125,28 @@ def parse_skill_file(skill_path: Path):
 def scan_all_skills():
     search_dirs = [
         SKILLS_DIR,
+        GEMINI_SKILLS_DIR,
+        Path("/home/yash/.agents/skills"),
+        Path("/home/yash/.gemini/config/skills"),
+        Path("/home/yash/.gemini/config/plugins"),
+        Path("/home/yash/.gemini/antigravity/builtin/skills"),
+        Path("/home/yash/.gemini/antigravity-cli/builtin/skills"),
         Path.home() / ".gemini/config/plugins",
+        Path.home() / ".gemini/antigravity/builtin/skills",
         Path.home() / ".gemini/antigravity-cli/builtin/skills",
+        Path.home() / ".gemini/antigravity-Account-1/builtin/skills",
+        Path.home() / ".config/Antigravity-Profiles/Account-1/HOME/.agents/skills",
     ]
     all_skills = {}
     for d in search_dirs:
         if not d.exists():
             continue
         for p in d.rglob("SKILL.md"):
-            if "modules/" in str(p) or "references/" in str(p):
+            if any(x in str(p) for x in ["modules/", "references/", "disabled_plugins/", "plugins_backup", "asar_extracted"]):
                 continue
-            folder_name = p.parent.name
-            if folder_name not in all_skills:
-                all_skills[folder_name] = p
+            clean_key, disp_name, desc, tags = parse_skill_file(p)
+            if clean_key not in all_skills:
+                all_skills[clean_key] = (p, disp_name, desc, tags)
     return all_skills
 
 def build_categorized_database():
@@ -104,32 +154,41 @@ def build_categorized_database():
     categorized = {cat: [] for cat, _ in CATEGORY_RULES}
     categorized["📦 Other Utilities"] = []
 
-    for folder_name, path in sorted(all_skills.items()):
-        clean_key, disp_name, desc, tags = parse_skill_file(path)
+    for clean_key, (path, disp_name, desc, tags) in sorted(all_skills.items()):
         item = {
             "name": disp_name,
-            "command": f"/{folder_name}",
+            "command": f"/{clean_key}",
             "desc": desc,
             "tags": tags,
             "path": str(path)
         }
 
-        matched = False
-        for cat, kws in CATEGORY_RULES:
-            if folder_name in kws or any(k in folder_name for k in kws):
-                categorized[cat].append(item)
-                matched = True
-                break
+        matched_cats = set()
 
-        if not matched:
-            haystack = (disp_name + " " + desc + " " + folder_name).lower()
+        # 1. Exact keyword/identifier match across ALL categories (allows intentional duplicate cross-listing)
+        for cat, kws in CATEGORY_RULES:
+            if clean_key in kws or clean_key.replace("-", "_") in kws:
+                categorized[cat].append(item)
+                matched_cats.add(cat)
+
+        # 2. Substring keyword match if not matched by exact keyword in any category
+        if not matched_cats:
+            for cat, kws in CATEGORY_RULES:
+                if any(k in clean_key for k in kws):
+                    categorized[cat].append(item)
+                    matched_cats.add(cat)
+                    break
+
+        # 3. Haystack search fallback if still not matched
+        if not matched_cats:
+            haystack = (disp_name + " " + desc + " " + clean_key).lower()
             for cat, kws in CATEGORY_RULES:
                 if any(k in haystack for k in kws):
                     categorized[cat].append(item)
-                    matched = True
+                    matched_cats.add(cat)
                     break
 
-        if not matched:
+        if not matched_cats:
             categorized["📦 Other Utilities"].append(item)
 
     database = []
@@ -164,8 +223,8 @@ def cmd_sync(args):
     if DAEMON_FILE.exists():
         text = DAEMON_FILE.read_text(encoding="utf-8")
         clean_db_str = json.dumps(db, indent=2)
-        pattern = r"const SKILLS_DATABASE = \[.*?\];\n\nfunction getInjectionPayload"
-        new_text = re.sub(pattern, lambda _: f"const SKILLS_DATABASE = {clean_db_str};\n\nfunction getInjectionPayload", text, flags=re.DOTALL)
+        pattern = r"const SKILLS_DATABASE = \[.*?\];\n\nfunction getThemeCss"
+        new_text = re.sub(pattern, lambda _: f"const SKILLS_DATABASE = {clean_db_str};\n\nfunction getThemeCss", text, flags=re.DOTALL)
         DAEMON_FILE.write_text(new_text, encoding="utf-8")
         print(f"[✓] Updated database in {DAEMON_FILE.name}")
 
@@ -180,43 +239,49 @@ def cmd_sync(args):
 
 def live_refresh():
     try:
-        import asyncio
-        import websockets
-
-        ports = []
-        for pf in [Path.home() / ".config/Antigravity-Profiles/Account-1/DevToolsActivePort", Path("/tmp/antigravity-cdp-port")]:
-            if pf.exists():
-                val = pf.read_text().splitlines()[0].strip()
-                if val.isdigit():
-                    ports.append(int(val))
-
-        async def _inject(url, code):
-            async with websockets.connect(url) as ws:
-                msg = {"id": 100, "method": "Runtime.evaluate", "params": {"expression": code, "returnByValue": True}}
-                await ws.send(json.dumps(msg))
-                await asyncio.sleep(0.1)
-
-        # Extract payload
-        d_text = DAEMON_FILE.read_text(encoding="utf-8")
-        m = re.search(r"function getInjectionPayload\(\) \{\s+const skillsJson = JSON.stringify\(SKILLS_DATABASE\);\s+return `\s+(.*?)\s+`;\s+\}", d_text, re.DOTALL)
-        if not m:
-            return
-
-        db_json = CATALOG_FILE.read_text(encoding="utf-8")
-        payload = m.group(1).replace("${skillsJson}", db_json)
-
-        for port in ports:
-            try:
-                res = urllib.request.urlopen(f"http://127.0.0.1:{port}/json", timeout=0.8)
-                targets = json.loads(res.read().decode())
-                pages = [t for t in targets if t.get("type") == "page"]
-                for page in pages:
-                    print(f"[✓] Live Antigravity instance detected on port {port}. Refreshing Skills Hub UI...")
-                    asyncio.run(_inject(page["webSocketDebuggerUrl"], payload))
-            except Exception:
-                pass
-    except Exception:
-        pass
+        node_script = """
+        const { getInjectionPayload } = require('./skills_drawer_daemon.js');
+        const fs = require('fs');
+        const candidateFiles = [
+          '/home/yash/.config/Antigravity-Profiles/Account-1/DevToolsActivePort',
+          '/home/yash/.config/Antigravity-Profiles/Account-2/DevToolsActivePort',
+          '/home/yash/.config/Antigravity-Profiles/Account-3/DevToolsActivePort',
+          '/home/yash/.config/Antigravity-Profiles/Account-4/DevToolsActivePort',
+          '/home/yash/.config/Antigravity-Profiles/Account-5/DevToolsActivePort',
+          '/home/yash/.config/Antigravity-Profiles/Account-6/DevToolsActivePort',
+          '/home/yash/.config/Antigravity/DevToolsActivePort',
+          '/tmp/antigravity-cdp-port'
+        ];
+        async function run() {
+          const payload = getInjectionPayload();
+          for (const f of candidateFiles) {
+            if (!fs.existsSync(f)) continue;
+            const port = fs.readFileSync(f, 'utf8').split('\\n')[0].trim();
+            if (!port || isNaN(port)) continue;
+            try {
+              const res = await fetch(`http://127.0.0.1:${port}/json`);
+              const targets = await res.json();
+              const pages = targets.filter(t => t.type === 'page');
+              for (const p of pages) {
+                const ws = new WebSocket(p.webSocketDebuggerUrl);
+                await new Promise((resolve) => {
+                  ws.onopen = () => {
+                    ws.send(JSON.stringify({ id: 100, method: 'Runtime.evaluate', params: { expression: payload, returnByValue: true } }));
+                    setTimeout(() => { ws.close(); resolve(); }, 150);
+                  };
+                  ws.onerror = () => resolve();
+                });
+                console.log(`[✓] Live Skills Hub refreshed on port ${port}`);
+              }
+            } catch (e) {}
+          }
+        }
+        run();
+        """
+        subprocess.run(["node", "-e", node_script], cwd=str(THEME_DIR), check=False)
+        subprocess.run(["systemctl", "--user", "restart", "antigravity-skills-hub.service"], check=False)
+    except Exception as err:
+        print(f"[!] Live refresh warning: {err}")
 
 def cmd_import(args):
     source = args.source.strip()
@@ -274,19 +339,30 @@ def cmd_import(args):
     print(f"\n🎉 Successfully imported '{name}'! Available as /{name} in Antigravity.")
 
 def setup_symlinks(name: str, target_dir: Path):
-    GEMINI_SKILLS_DIR.mkdir(parents=True, exist_ok=True)
-    symlink_path = GEMINI_SKILLS_DIR / name
-    if symlink_path.is_symlink() or symlink_path.exists():
-        symlink_path.unlink()
-    symlink_path.symlink_to(target_dir)
-
+    target_dir = target_dir.resolve()
+    dest_dirs = [
+        GEMINI_SKILLS_DIR,
+        REAL_HOME / ".gemini/config/skills",
+        REAL_HOME / ".agents/skills"
+    ]
     for prof in PROFILES_DIR.glob("Account-*"):
-        agents_dir = prof / "HOME/.agents/skills"
-        agents_dir.mkdir(parents=True, exist_ok=True)
-        prof_symlink = agents_dir / name
-        if prof_symlink.is_symlink() or prof_symlink.exists():
-            prof_symlink.unlink()
-        prof_symlink.symlink_to(target_dir)
+        dest_dirs.append(prof / "HOME/.agents/skills")
+        dest_dirs.append(prof / "HOME/.gemini/config/skills")
+
+    for dest in dest_dirs:
+        if not dest.exists():
+            try: dest.mkdir(parents=True, exist_ok=True)
+            except Exception: continue
+        symlink_path = dest / name
+        try:
+            if symlink_path.resolve() != target_dir:
+                if symlink_path.is_symlink() or symlink_path.is_file():
+                    symlink_path.unlink()
+                elif symlink_path.is_dir():
+                    shutil.rmtree(symlink_path)
+                symlink_path.symlink_to(target_dir)
+        except Exception:
+            pass
 
 def cmd_club(args):
     suite_name = args.suite_name
@@ -302,6 +378,10 @@ def cmd_club(args):
         s_path = SKILLS_DIR / s_name
         if not s_path.exists():
             s_path = GEMINI_SKILLS_DIR / s_name
+        if not s_path.exists():
+            s_path = REAL_HOME / ".agents/skills" / s_name
+        if not s_path.exists():
+            s_path = REAL_HOME / ".gemini/config/skills" / s_name
         if not s_path.exists():
             print(f"Warning: Skill '{s_name}' not found, skipping.")
             continue
@@ -322,25 +402,66 @@ def cmd_club(args):
         if orig_skill.exists() and not guide_md.exists():
             orig_skill.rename(guide_md)
 
-        _, dname, desc, _ = parse_skill_file(guide_md)
-        module_info.append((s_name, dname, desc))
+        # Extract markdown body (strip YAML frontmatter)
+        body = ""
+        guide_file = guide_md if guide_md.exists() else orig_skill
+        if guide_file.exists():
+            raw_text = guide_file.read_text(encoding="utf-8", errors="ignore")
+            if raw_text.startswith("---"):
+                parts = raw_text.split("---", 2)
+                if len(parts) >= 3:
+                    body = parts[2].strip()
+                else:
+                    body = raw_text.strip()
+            else:
+                body = raw_text.strip()
 
-        if (SKILLS_DIR / s_name).is_dir() and s_name != suite_name:
-            shutil.rmtree(SKILLS_DIR / s_name)
-        if (GEMINI_SKILLS_DIR / s_name).is_symlink():
-            (GEMINI_SKILLS_DIR / s_name).unlink()
+        _, dname, desc, _ = parse_skill_file(guide_file)
+        module_info.append((s_name, dname, desc, body))
 
-    modules_table = "\n".join([f"| `/{suite_name}:{s[0]}` | **{s[1]}** | {s[2][:80]}... | [`modules/{s[0]}/guide.md`](modules/{s[0]}/guide.md) |" for s in module_info])
+        # Clean up loose child folders and symlinks across all known directories
+        cleanup_dirs = [
+            SKILLS_DIR,
+            GEMINI_SKILLS_DIR,
+            REAL_HOME / ".agents/skills",
+            REAL_HOME / ".gemini/config/skills"
+        ]
+        for prof in PROFILES_DIR.glob("Account-*"):
+            cleanup_dirs.append(prof / "HOME/.agents/skills")
+            cleanup_dirs.append(prof / "HOME/.gemini/config/skills")
+            cleanup_dirs.append(prof / "HOME/.claude/skills")
+
+        for c_dir in cleanup_dirs:
+            p = c_dir / s_name
+            if p.exists() and s_name != suite_name:
+                try:
+                    if p.is_symlink() or p.is_file():
+                        p.unlink()
+                    elif p.is_dir():
+                        shutil.rmtree(p)
+                except Exception:
+                    pass
+
+    modules_table = "\n".join([f"| `/{suite_name}:{s[0]}` | **{s[1]}** | {s[2][:80]}... | [`guide.md`](file://{suite_dir.resolve()}/modules/{s[0]}/guide.md) |" for s in module_info])
     master_desc = f"Unified {suite_name.capitalize()} Master Suite consolidating: {', '.join([s[0] for s in module_info])}."
+
+    sections = []
+    for s_name, dname, desc, body in module_info:
+        sections.append(f"## 📦 Module: {dname} (`/{suite_name}:{s_name}`)\n\n> **Focus:** {desc}  \n> **Dedicated Module:** `modules/{s_name}/guide.md`\n\n{body}")
+
+    combined_sections = "\n\n---\n\n".join(sections)
 
     master_skill_content = f"""---
 name: {suite_name}
-description: {master_desc}
+description: >-
+  {master_desc}
 ---
 
-# {suite_name.upper()} MASTER SKILL SUITE
+# {suite_name.upper()} UNIFIED MASTER SUITE
 
-This consolidated master skill unifies all `{suite_name}` sub-capabilities into a single high-efficiency entry point.
+This consolidated master skill unifies all `{suite_name}` sub-capabilities into a self-contained, fully detailed engineering standard.
+
+---
 
 ## 🧭 Capabilities & Sub-Modules
 
@@ -348,12 +469,13 @@ This consolidated master skill unifies all `{suite_name}` sub-capabilities into 
 | :--- | :--- | :--- | :--- |
 {modules_table}
 
-## ⚡ Execution Protocol
-When invoked as `/{suite_name}` or `/{suite_name}:<subcommand>`, inspect the corresponding guide in `modules/<sub-command>/guide.md` and adhere strictly to its rules.
+---
+
+{combined_sections}
 """
     (suite_dir / "SKILL.md").write_text(master_skill_content, encoding="utf-8")
     setup_symlinks(suite_name, suite_dir)
-    print(f"[✓] Created master suite {suite_name} with {len(module_info)} modules.")
+    print(f"[✓] Created self-contained master suite {suite_name} with {len(module_info)} embedded modules.")
 
     cmd_sync(argparse.Namespace(repack=False))
     print(f"\n🎉 Successfully consolidated into /{suite_name}!")

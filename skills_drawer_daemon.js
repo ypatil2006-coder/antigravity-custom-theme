@@ -31,6 +31,61 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/anatomy/SKILL.md"
       },
       {
+        "name": "auto",
+        "command": "/auto",
+        "desc": "Autonomous Multi-Skill Selector & Orchestrator. Strictly analyzes the user prompt and project context, searches and cross-references the entire available skills catalog, automatically selects and activates the exact skill or combination of skills required for the task, reads their full instructions, and enforces their standards without skipping. Triggers on: /autoskill, /auto, autoskill, auto, \\\"auto select skills\\\", \\\"choose skills\\\", \\\"run auto\\\".",
+        "tags": [
+          "auto",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/auto/SKILL.md"
+      },
+      {
+        "name": "bigquery-graph-author",
+        "command": "/bigquery-graph-author",
+        "desc": "Provides an end-to-end journey for authoring a BigQuery property graph from your tables or from a model document/diagram (an ER diagram, an ontology, a semantic model): dataset discovery, candidate relationships verified against the data, a readable plan, and `CREATE PROPERTY GRAPH` DDL with schema best practices and semantic measures/dimensions, plus an opt-in verification suite for the landed graph. Use when creating or replacing a property graph, authoring a graph from a dataset or a document, or verifying relationships or suspicious edge counts. Don't use for querying an existing graph, for non-BigQuery graph databases, or for drawing/rendering diagrams.",
+        "tags": [
+          "bigquery",
+          "graph",
+          "author",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigquery-graph-author/SKILL.md"
+      },
+      {
+        "name": "bigquery-observability",
+        "command": "/bigquery-observability",
+        "desc": "Provides data-retrieval best practices, tool selection guidance, and performant SQL query syntax for BigQuery telemetry across INFORMATION_SCHEMA, Cloud Monitoring, and the REST API. Use when the telemetry to fetch is already known, selecting telemetry tools, writing performant INFORMATION_SCHEMA queries, retrieving telemetry for diagnosing single-job performance bottlenecks, investigating slot contention, job concurrency and queue latency, analyzing reservation capacity, utilization and autoscaling saturation, or auditing capacity-based and on-demand compute and storage resource billable usage. Don't use for root-cause diagnosis or symptom troubleshooting when the cause is unknown (use bigquery-troubleshooting first), or for writing or optimizing business logic SQL (use bigquery-optimization).",
+        "tags": [
+          "bigquery",
+          "observability",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigquery-observability/SKILL.md"
+      },
+      {
+        "name": "bigquery-optimization",
+        "command": "/bigquery-optimization",
+        "desc": "Provides workflows to optimize BigQuery environments (capacity planning, editions), storage assets (partitioning, clustering, storage lifecycles, billing models), and SQL queries. Use when optimizing cost, modeling Edition migrations, rightsizing reservations, evaluating logical vs. physical storage, designing table partitioning/clustering, generating table DDL, migrating unpartitioned tables, managing partition expiration, optimizing individual SQL queries, or evaluating acceleration structures (search indexes, materialized views, BI Engine). Do not use for raw usage reporting (use bigquery-observability), query execution plan analysis, error troubleshooting, or diagnosing why a specific job was slow (use bigquery-troubleshooting).",
+        "tags": [
+          "bigquery",
+          "optimization",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigquery-optimization/SKILL.md"
+      },
+      {
+        "name": "bigquery-troubleshooting",
+        "command": "/bigquery-troubleshooting",
+        "desc": "Provides diagnostic workflows and step-by-step root-cause analysis procedures for actively broken, failing, or slow BigQuery jobs, execution graph and query plan stage bottlenecks, system performance issues, or unexpectedly expensive workloads. Use when interpreting symptoms, isolating bottlenecks, diagnosing cost spikes (on-demand query spend, capacity slot autoscaling, storage growth), execution graph stages or substep variables, identifying root causes, and determining remediation steps. Don't use for writing or optimizing SQL, proactive capacity planning, or storage layout design (use bigquery-optimization), or when the user already knows which telemetry they want and just needs the query (use bigquery-observability).",
+        "tags": [
+          "bigquery",
+          "troubleshooting",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigquery-troubleshooting/SKILL.md"
+      },
+      {
         "name": "brainstorming",
         "command": "/brainstorming",
         "desc": "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation.",
@@ -39,6 +94,17 @@ const SKILLS_DATABASE = [
           "skill"
         ],
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/brainstorming/SKILL.md"
+      },
+      {
+        "name": "cheminformatics-physics",
+        "command": "/cheminformatics-physics",
+        "desc": "Simulates 3D molecular physics, conformer ensembles, and CADD workflows: pH-dependent ligand and receptor protonation, ETKDGv3 3D conformer generation, dihedral/relaxed PES torsion scans, AutoDock Vina/smina docking, conformational ligand strain energy, PROTAC/macrocycle 3D geometry, and OpenMM molecular dynamics.",
+        "tags": [
+          "cheminformatics",
+          "physics",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/cheminformatics_physics/SKILL.md"
       },
       {
         "name": "claude-council",
@@ -52,6 +118,17 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/claude-council/SKILL.md"
       },
       {
+        "name": "data-autocleaning",
+        "command": "/data-autocleaning",
+        "desc": "Automated data quality and transformation capabilities for Dataform/dbt/BigQuery",
+        "tags": [
+          "data",
+          "autocleaning",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/data-autocleaning/SKILL.md"
+      },
+      {
         "name": "diagram-design",
         "command": "/diagram-design",
         "desc": "Design architecture diagrams, flowcharts, sequence diagrams, and system maps with .drawio, Mermaid, and Excalidraw support. Triggers on /diagram-design.",
@@ -63,6 +140,18 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/diagram-design/SKILL.md"
       },
       {
+        "name": "embl-ebi-ols",
+        "command": "/embl-ebi-ols",
+        "desc": "Query and search the EMBL-EBI Ontology Lookup Service (OLS) for biomedical ontology terms, definitions, and hierarchies across 250+ ontologies (e.g., GO, DOID, HP). Use when the user asks to search for terms, retrieve details, navigate hierarchies (parents, children, ancestors), look up properties and individuals, get autocomplete suggestions, or access ontology metadata and statistics.",
+        "tags": [
+          "embl",
+          "ebi",
+          "ols",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/embl_ebi_ols/SKILL.md"
+      },
+      {
         "name": "executing-plans",
         "command": "/executing-plans",
         "desc": "Use when you have a written implementation plan to execute in a separate session with review checkpoints",
@@ -72,6 +161,30 @@ const SKILLS_DATABASE = [
           "skill"
         ],
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/executing-plans/SKILL.md"
+      },
+      {
+        "name": "gcp-dataflow",
+        "command": "/gcp-dataflow",
+        "desc": "Guides writing, packaging, executing, and troubleshooting Apache Beam pipelines on Dataflow. Use when creating new pipelines, configuring Flex Templates, or analyzing performance of Dataflow jobs. Capabilities include Java/Python/Go setup, Cloud Build integration, and deep diagnostic analysis of job health and autoscaling. Use when: - Creating an Apache Beam Dataflow pipeline. - Creating a Google Dataflow Flex Template. - Using an existing Google Dataflow Template. - Debugging Dataflow pipeline - Troubleshooting Dataflow pipeline - Analyzing Performance of Dataflow pipeline. Key capabilities: Java/Python/Go project setup, Flex Templates (with Cloud Build), and diagnostics for streaming job health, bottlenecks, and autoscaling. Do NOT use for: - General GCP resource management unrelated to Dataflow. - Issues with other GCP services (e.g., GCE, GCS, BigQuery) unless directly impacting Dataflow pipeline execution. - Pipeline technologies other than Apache Beam on Dataflow.",
+        "tags": [
+          "gcp",
+          "dataflow",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-dataflow/SKILL.md"
+      },
+      {
+        "name": "gcp-pipeline-resource-provisioning",
+        "command": "/gcp-pipeline-resource-provisioning",
+        "desc": "Automates declarative resource creation and provisioning for data pipelines, supporting BigQuery, Dataform, Dataproc, BigQuery Data Transfer Service (DTS), and other resources. It manages environment-specific configurations (dev, staging, prod) through a deployment.yaml file. Use when: - Modifying or creating deployment.yaml for deployment settings. - Resolving environment-specific variables (e.g., Project IDs, Regions) for deployment. - Provisioning supported infrastructure like BigQuery datasets/tables, Dataform resources, or DTS resources via deployment.yaml. Do not use when: - Resources already exist. - Managing resources not supported by `gcloud beta orchestration-pipelines resource-types list`. - Managing general cloud infrastructure (VMs, networks, Kubernetes, IAM policies), which are better suited for Terraform. - Infrastructure spans multiple cloud providers (AWS, Azure, etc.). - Already uses Terraform for the target resources.",
+        "tags": [
+          "gcp",
+          "pipeline",
+          "resource",
+          "provisioning",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-pipeline-resource-provisioning/SKILL.md"
       },
       {
         "name": "generative_ui",
@@ -96,6 +209,28 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/grill-me/SKILL.md"
       },
       {
+        "name": "modern-web-guidance",
+        "command": "/modern-web-guidance",
+        "desc": "Search tool for modern web development best practices. MANDATORY: Execute FIRST for all HTML/CSS and clientside JS tasks. Do NOT skip \u2014 web APIs evolve rapidly and training weights contain obsolete patterns. Trigger immediately for: modals/dialogs/popovers, tables, dark mode, anchor positioning, container queries, view transitions, scroll-driven animations, parallax/reveals, forms, validation, autofill, accessibility, custom selects, scrollbars, CWV (LCP, INP, CLS), content-visibility, fetch priority, image optimization, security, passkeys, HTML sanitization, web components, dates/timezones, built-in AI, WebAssembly, standard HTML/CSS/DOM in frameworks, etc. DO NOT trigger for: backend (SQL, ORMs, API routes), infra/scripts (CI/CD, Docker, Actions, Python/Go, Git), or tooling/trivial (Vite, tsconfig, ESLint, tests, copy/renames, 3P docs), etc.",
+        "tags": [
+          "modern",
+          "web",
+          "guidance",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/modern-web-guidance-plugin/skills/modern-web-guidance/SKILL.md"
+      },
+      {
+        "name": "obsidian",
+        "command": "/obsidian",
+        "desc": "Unified Obsidian Master Suite consolidating: obsidian-markdown, obsidian-bases, json-canvas, obsidian-cli, defuddle, knap.",
+        "tags": [
+          "obsidian",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/obsidian/SKILL.md"
+      },
+      {
         "name": "prd",
         "command": "/prd",
         "desc": "Generate high-quality Product Requirements Documents (PRDs) for software systems and AI-powered features. Includes executive summaries, user stories, technical specifications, and risk analysis.",
@@ -104,6 +239,17 @@ const SKILLS_DATABASE = [
           "skill"
         ],
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/prd/SKILL.md"
+      },
+      {
+        "name": "schema-mapping",
+        "command": "/schema-mapping",
+        "desc": "Guides the process of analyzing, mapping, and documenting transformations between source and target schemas for any database, data warehouse, or data platform. Focuses exclusively on creating a high-fidelity mapping plan (Mapping Manifesto). Used when initiating an ETL, ELT, or data integration task with schema mapping specification for multiple tables (i.e. more than 3 tables) before writing code. Do NOT use this skill for basic SQL generation without mapping requirements, or when the user already has a complete mapping specification.",
+        "tags": [
+          "schema",
+          "mapping",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/schema-mapping/SKILL.md"
       },
       {
         "name": "subagent-driven-development",
@@ -155,6 +301,17 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/anatomy/SKILL.md"
       },
       {
+        "name": "bigtable-basics",
+        "command": "/bigtable-basics",
+        "desc": "Provisions instances and tables, designs performant schemas, and queries data in Bigtable. Use when designing Bigtable row keys, configuring column families, writing SQL queries or client library code (Java, Go, Python) for Bigtable, or diagnosing performance/hotspotting issues. Also use when provisioning Bigtable clusters using gcloud or cbt CLIs. Don't use for generic Cloud SQL administration.",
+        "tags": [
+          "bigtable",
+          "basics",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigtable-basics/SKILL.md"
+      },
+      {
         "name": "blender",
         "command": "/blender",
         "desc": "Complete 3D modeling, texturing, lighting, rendering, and export pipeline in Blender. Use whenever asked to create, model, texture, shade, light, render 3D assets/scenes, weapons, hard-surface props, or export to GLB/FBX/OBJ/STL.",
@@ -177,7 +334,7 @@ const SKILLS_DATABASE = [
       {
         "name": "design",
         "command": "/design",
-        "desc": "Comprehensive Master Design Suite: brand identity, UI design tokens, component specifications, logo generation, corporate identity programs (CIP), banner design (social, ads, web, print), canvas visual art (.png/.pdf), and technical diagram design (architecture, flowcharts, schemas).",
+        "desc": "Comprehensive Master Design Suite consolidating design-system, banner-design, canvas-design, and diagram-design. Covers brand identity, design tokens, component specifications, logo generation, social and ad banner graphics, visual canvas art (.png/.pdf), and technical system architecture diagrams (.drawio, Mermaid, Excalidraw).",
         "tags": [
           "design",
           "skill"
@@ -218,9 +375,23 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.gemini/antigravity/builtin/skills/generative_ui/SKILL.md"
       },
       {
+        "name": "google-cloud-storage-bucket-architect",
+        "command": "/google-cloud-storage-bucket-architect",
+        "desc": "Creates Cloud Storage (Google Cloud Storage, or GCS) buckets. Analyzes the workload (sensitive data, media hosting, ingestion, web hosting, archiving, backup, logging, analytics, AI/ML, or general-purpose), validates project-level security settings, and designs a secure-by-default, cost-effective configuration (location, storage class, uniform bucket-level access, public access prevention, soft delete, lifecycle) before creating it. Use whenever a user wants to create, make, set up, provision, or spin up a bucket, or needs object storage for an app, service, pipeline, or dataset \u2014 even a \\\"simple\\\" or \\\"default\\\" bucket, or when bucket creation is one step in a larger workflow. Outputs or executes the creation via gcloud, the JSON/REST API, Terraform, or SDK client libraries (C++, Java, Python, Go). Don't use for anything other than creating new buckets \u2014 for uploads, downloads, access changes, or reconfiguring existing buckets, use google-cloud-storage-basics.",
+        "tags": [
+          "google",
+          "cloud",
+          "storage",
+          "bucket",
+          "architect",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/google-cloud-storage-bucket-architect/SKILL.md"
+      },
+      {
         "name": "gsap",
         "command": "/gsap",
-        "desc": "Unified Gsap Master Suite consolidating: gsap-core, gsap-framer-scroll-animation.",
+        "desc": "Unified Gsap Master Suite consolidating: gsap-core, gsap-framer-scroll-animation. Complete animation standard covering GSAP core tweens, timelines, easing, staggers, ScrollTrigger (pinning, scrubbing, snapping), and Framer Motion / Motion v12 scroll animations.",
         "tags": [
           "gsap",
           "skill"
@@ -230,7 +401,7 @@ const SKILLS_DATABASE = [
       {
         "name": "hyperframes",
         "command": "/hyperframes",
-        "desc": "Mandatory entry point: read this first for any request to make, create, edit, animate, or render a video, animation, or motion graphic, including a promo, explainer, captioned clip, title card, overlay, slideshow or interactive deck, Remotion port, or any HyperFrames HTML composition. Also use it to inspect, diagnose, validate, preview, publish, or batch-render an existing HyperFrames project. Inputs may be a website URL, GitHub PR, Figma design or URL, text or brief, existing footage, or music. It resumes project state, captures intent when applicable, selects and installs the owning workflow, and routes domain capabilities. HyperFrames is the default output framework unless the user explicitly chooses another framework for the deliverable or asks only to record a browser session.",
+        "desc": "Mandatory entry point: read this first for any request to make, create, edit, animate, or render a video, animation, or motion graphic, including a promo, explainer, captioned clip, title card, overlay, slideshow or interactive deck, Remotion port, or any HyperFrames HTML composition.",
         "tags": [
           "hyperframes",
           "skill"
@@ -322,6 +493,19 @@ const SKILLS_DATABASE = [
     "category": "\u26a1 3. Fullstack, AI & APIs",
     "skills": [
       {
+        "name": "accidental-data-loss-prevention",
+        "command": "/accidental-data-loss-prevention",
+        "desc": "**STOP AND VERIFY**: Before running any command or tool that results in irreversible data loss, you MUST obtain explicit user consent. When in doubt, ask. It is better to wait for confirmation than to accidentally delete production data or critical project assets. Use this for: - SQL: DROP TABLE/VIEW/SCHEMA/DATABASE, TRUNCATE, or broad DELETE (missing WHERE or using 1=1). - Cloud Storage: gsutil rm or gcloud storage rm targeting production data or critical buckets. - Infrastructure: gcloud projects delete, deleting Spanner/BigQuery/Dataproc resources, deleting secrets, or KMS key destruction.",
+        "tags": [
+          "accidental",
+          "data",
+          "loss",
+          "prevention",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/accidental-data-loss-prevention/SKILL.md"
+      },
+      {
         "name": "android-cli",
         "command": "/android-cli",
         "desc": "Provides instructions for installing and using the `android` CLI. The `android` command-line tool is a critical tool for Android development and helps you create new Android projects, run Android apps on devices, manage and interact with Android virtual devices (including screenshots and UI inspection), manage Android SDK components, look up official Android documentation, and discover and install official Android skills.",
@@ -331,6 +515,65 @@ const SKILLS_DATABASE = [
           "skill"
         ],
         "path": "/home/yash/.gemini/config/plugins/android-cli-plugin/skills/SKILL.md"
+      },
+      {
+        "name": "android-device-hub",
+        "command": "/android-device-hub",
+        "desc": "Instructions for working with the Android Device Hub sidecar, which lists, starts, stops, creates and removes Android Virtual Devices (AVDs), lists physical devices connected to adb, and lets the user mirror and control any of them (video, touch, keyboard, mouse wheel) in the Device Hub pane. Also explains how to inspect and interact with the screen the user is mirroring, with `android layout`, `android screen` and `adb`.",
+        "tags": [
+          "android",
+          "device",
+          "hub",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/android-cli-plugin/skills/device-hub/SKILL.md"
+      },
+      {
+        "name": "bigquery-ai-ml",
+        "command": "/bigquery-ai-ml",
+        "desc": "Leverages BigQuery's built-in machine learning and GenAI capabilities for advanced data analytics. Use when you need to write SQL queries that perform time-series forecasting, predict values, detect outliers or anomalies, find key drivers, perform semantic search or vector search, classify text, calculate similarity, summarize content, translate language, evaluate models, filter by semantic conditions, measure the causal effect of an intervention, compute correlations between columns, generate descriptive statistics and table distribution profiles, detect change points or structural breaks, extract trend or seasonality components, or leverage generative AI capabilities in BigQuery. Do not use for general BigQuery dataset, table, or job management requests.",
+        "tags": [
+          "bigquery",
+          "ai",
+          "ml",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigquery-ai-ml/SKILL.md"
+      },
+      {
+        "name": "bigquery-graph-query",
+        "command": "/bigquery-graph-query",
+        "desc": "Provides guidelines and best practices for querying BigQuery property graphs and semantic graphs: native GQL (Graph Query Language) pattern matching, multi-hop and variable-length paths, aggregation, top-N, path extraction, output formatting (graph visualization with TO_JSON vs tabular), GRAPH_TABLE relational SQL integration, and semantic graph querying via the GRAPH_EXPAND TVF with starting-node view selection and AGG() measures. Also covers hybrid semantic search, combining `VECTOR_SEARCH` candidate generation with graph traversal when a node carries an embedding-backed property. Use when querying graph topology, node/edge connections, paths, or semantic measures over an existing BigQuery graph. Don't use for Cypher or non-BigQuery graph databases, or for creating/modifying a graph schema.",
+        "tags": [
+          "bigquery",
+          "graph",
+          "query",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigquery-graph-query/SKILL.md"
+      },
+      {
+        "name": "building-data-apps",
+        "command": "/building-data-apps",
+        "desc": "Build modern data apps, dashboards, and interactive reports using either React + Vite or Streamlit. Includes optional Gemini Data Analytics chat integration for an AI powered \\\"chat with your data\\\" experience. Relevant when any of the following conditions are true: 1. User explicitly requests to build a data dashboard, data application, or visualization UI, and the UI pulls data from a GCP database (defaulting to BigQuery unless otherwise specified). 2. You need to generate a frontend web application to interact with, query, and visualize data from GCP data sources. 3. User wants to build a \\\"chat with your data\\\" experience or integrate the Gemini Data Analytics chat API into a web interface. Do NOT use when any of the following conditions are true: 1. The request is for building backend-only services. 2. The request is for simple CLI scripts or command-line applications. 3. The web application is not data-centric or does not involve visualizing/querying data from GCP sources.",
+        "tags": [
+          "building",
+          "data",
+          "apps",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/building-data-apps/SKILL.md"
+      },
+      {
+        "name": "cheminformatics-reactions",
+        "command": "/cheminformatics-reactions",
+        "desc": "Proposes and models organic reactions, retrosynthesis, multi-step synthesis routes, intramolecular cyclizations, and reaction SMARTS: checks experimental precedents first, validates atom conservation, prochirality (pro-R/pro-S, Re/Si), topicity, 1H/13C NMR equivalence, and stereogenesis, and renders 2D curved-arrow mechanisms.",
+        "tags": [
+          "cheminformatics",
+          "reactions",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/cheminformatics_reactions/SKILL.md"
       },
       {
         "name": "chrome-extensions",
@@ -344,6 +587,30 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.gemini/config/plugins/modern-web-guidance-plugin/skills/chrome-extensions/SKILL.md"
       },
       {
+        "name": "clinical-trials-database",
+        "command": "/clinical-trials-database",
+        "desc": "Query ClinicalTrials.gov via APIv2. Use when you want to search for trials by condition, drug, location, status, or phase; retrieve trial details by NCT ID; check eligibility/inclusion criteria; count trials across conditions or time periods; identify a sponsor's trial portfolio; find recruiting trials for patient matching.",
+        "tags": [
+          "clinical",
+          "trials",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/clinical_trials_database/SKILL.md"
+      },
+      {
+        "name": "cloud-databases-onboarding",
+        "command": "/cloud-databases-onboarding",
+        "desc": "Guides users through discovering their database requirements, recommends a Google Cloud database product or migration destination based on a recommendation matrix, and assists in database creation. Use when a user asks 'What database service should I use?', 'Help me pick a database', asks which Google Cloud database to migrate or onboard a workload to, or wants to create a new database on Google Cloud. Don't use for general Google Cloud maintenance, managing existing databases, or troubleshooting active Database Migration Service (DMS) jobs.",
+        "tags": [
+          "cloud",
+          "databases",
+          "onboarding",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/cloud-databases-onboarding/SKILL.md"
+      },
+      {
         "name": "coding-standards",
         "command": "/coding-standards",
         "desc": "Baseline cross-project coding conventions for naming, readability, immutability, and code-quality review. Use detailed frontend or backend skills for framework-specific patterns. Use when reviewing code quality or naming with no framework-specific skill that applies.",
@@ -355,14 +622,219 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/coding-standards/SKILL.md"
       },
       {
-        "name": "dart",
-        "command": "/dart",
-        "desc": "Unified Dart 3 Programming Master Suite. Covers pattern matching, static analysis, unit testing, test mocks, package conflicts, primary constructors, FFI assets, ffigen, CLI app architecture, coverage, and effective documentation.",
+        "name": "dak-setup",
+        "command": "/dak-setup",
+        "desc": "Configures (or reconfigures) the Google Cloud Data Agent Kit (DAK) plugin by checking gcloud and ADC credentials, collecting the GCP project ID, region, and services, and running its bundled `dak-setup` script. Use this proactively and without waiting to be asked whenever a SessionStart hook or any other system/context message reports that the Data Agent Kit plugin is not configured, is missing configuration, or needs to be reconfigured. Also use it whenever the user mentions setting up, configuring, reconfiguring, or changing the project, region, or service integrations for the Data Agent Kit or DAK plugin \u2014 even if they phrase it casually, like \\\"dak isn't working\\\" or \\\"I want to enable more GCP service integrations\\\".",
         "tags": [
-          "dart",
+          "dak",
+          "setup",
           "skill"
         ],
-        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart/SKILL.md"
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/dak-setup/SKILL.md"
+      },
+      {
+        "name": "dart-add-unit-test",
+        "command": "/dart-add-unit-test",
+        "desc": "Write and organize unit tests for functions, methods, and classes using `package:test`. Use when creating new logic or fixing bugs to ensure code remains correct and regression-free.",
+        "tags": [
+          "dart",
+          "add",
+          "unit",
+          "test",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-add-unit-test/SKILL.md"
+      },
+      {
+        "name": "dart-build-cli-app",
+        "command": "/dart-build-cli-app",
+        "desc": "Architectural patterns, entrypoint structure, exit codes, stream routing, and subprocess spawning for Dart command-line interface (CLI) applications. Use when building CLI tools, console utilities, scripts, argument parsing with `package:args` (ArgParser or CommandRunner), handling exit codes, configuring executables in pubspec.yaml, spawning Dart subprocesses, or compiling native CLI binaries. Don't use for Flutter UI widgets, web applications, or standalone HTTP backend servers.",
+        "tags": [
+          "dart",
+          "build",
+          "cli",
+          "app",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-build-cli-app/SKILL.md"
+      },
+      {
+        "name": "dart-collect-coverage",
+        "command": "/dart-collect-coverage",
+        "desc": "Collect coverage using the coverage packge and create an LCOV report",
+        "tags": [
+          "dart",
+          "collect",
+          "coverage",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-collect-coverage/SKILL.md"
+      },
+      {
+        "name": "dart-fix-runtime-errors",
+        "command": "/dart-fix-runtime-errors",
+        "desc": "Uses get_runtime_errors and lsp to fetch an active stack trace, locate the failing line, apply a fix, and verify resolution via hot_reload.",
+        "tags": [
+          "dart",
+          "fix",
+          "runtime",
+          "errors",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-fix-runtime-errors/SKILL.md"
+      },
+      {
+        "name": "dart-generate-test-mocks",
+        "command": "/dart-generate-test-mocks",
+        "desc": "Define and generate mock objects for external dependencies using `package:mockito` and `build_runner`. Use when unit testing classes that depend on complex external services like APIs or databases.",
+        "tags": [
+          "dart",
+          "generate",
+          "test",
+          "mocks",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-generate-test-mocks/SKILL.md"
+      },
+      {
+        "name": "dart-migrate-to-checks-package",
+        "command": "/dart-migrate-to-checks-package",
+        "desc": "Replace the usage of `expect` and similar functions from `package:matcher` to `package:checks` equivalents.",
+        "tags": [
+          "dart",
+          "migrate",
+          "to",
+          "checks",
+          "package",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-migrate-to-checks-package/SKILL.md"
+      },
+      {
+        "name": "dart-resolve-package-conflicts",
+        "command": "/dart-resolve-package-conflicts",
+        "desc": "Workflow for fixing package version conflicts. Use this when `pub get` fails due to incompatible package versions.",
+        "tags": [
+          "dart",
+          "resolve",
+          "package",
+          "conflicts",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-resolve-package-conflicts/SKILL.md"
+      },
+      {
+        "name": "dart-run-static-analysis",
+        "command": "/dart-run-static-analysis",
+        "desc": "Execute `dart analyze` to identify warnings and errors, and use `dart fix --apply` to automatically resolve mechanical lint issues. Use during development to ensure code quality and before committing changes.",
+        "tags": [
+          "dart",
+          "run",
+          "static",
+          "analysis",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-run-static-analysis/SKILL.md"
+      },
+      {
+        "name": "dart-setup-ffi-assets",
+        "command": "/dart-setup-ffi-assets",
+        "desc": "Guides agents in compiling and packaging C/C++ source code into dynamic or static libraries (Code Assets) using Dart's Native Assets hook system (via hook/build.dart and hook/link.dart utilizing package:hooks and package:native_toolchain_c). Use when a user asks to: 'setup native assets', 'compile C/C++ source code', 'bundle dynamic libraries', 'build native C code', 'link native assets', 'implement build.dart or link.dart hooks', or 'integrate C/C++ interop in Dart/Flutter'. Helps agents avoid manual toolchain orchestration and configures secure hash-validated binary downloads or advanced linker tree-shaking with package:record_use mapping.",
+        "tags": [
+          "dart",
+          "setup",
+          "ffi",
+          "assets",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-setup-ffi-assets/SKILL.md"
+      },
+      {
+        "name": "dart-use-doc-examples",
+        "command": "/dart-use-doc-examples",
+        "desc": "How to inject external code examples into Dartdoc using the {@example} directive, and how to filter those files using #hide, #region, and #endregion tags.",
+        "tags": [
+          "dart",
+          "use",
+          "doc",
+          "examples",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-use-doc-examples/SKILL.md"
+      },
+      {
+        "name": "dart-use-ffigen",
+        "command": "/dart-use-ffigen",
+        "desc": "Guide agents to use `package:ffigen` to automatically generate FFI bindings instead of writing them manually. Use this skill when a task involves writing new FFI bindings, extending C/Objective-C/Swift integrations, or replacing hand-crafted `dart:ffi` setups.",
+        "tags": [
+          "dart",
+          "use",
+          "ffigen",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-use-ffigen/SKILL.md"
+      },
+      {
+        "name": "dart-use-path-package",
+        "command": "/dart-use-path-package",
+        "desc": "Cross-platform file and directory path manipulation, segment splitting, extension extraction, and context conversion using `package:path` and `package:file`. Use when writing, inspecting, joining, splitting, or refactoring file paths, directory names, or extensions, or replacing raw string path operations (`.split('/')`, `'$dir/$file'`, `.endsWith('.ext')`, `.replaceAll('\\\\', '/')`). Don't use for HTTP network URI routing, database query strings, or non-path string processing.",
+        "tags": [
+          "dart",
+          "use",
+          "path",
+          "package",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-use-path-package/SKILL.md"
+      },
+      {
+        "name": "dart-use-pattern-matching",
+        "command": "/dart-use-pattern-matching",
+        "desc": "Applies Dart 3 pattern matching, switch expressions, and destructuring idiomatically to validate data schemas, handle algebraic data types, and decompose control flow. Use when refactoring complex if-else chains, parsing polymorphic JSON or API responses, destructuring Lists, URI/path segments, String.split() tokens, Records, or Maps, or enforcing exhaustiveness on sealed classes. Don't use for simple boolean conditions, single-variable type promotion (use `is`), or basic collection filtering.",
+        "tags": [
+          "dart",
+          "use",
+          "pattern",
+          "matching",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-use-pattern-matching/SKILL.md"
+      },
+      {
+        "name": "dart-use-primary-constructors",
+        "command": "/dart-use-primary-constructors",
+        "desc": "Help users write syntactically and semantically correct primary constructors in Dart, and migrate/use the new constructor syntax, empty-body semicolon syntax, in-body initializer list syntax, and abbreviated concise constructor syntax.",
+        "tags": [
+          "dart",
+          "use",
+          "primary",
+          "constructors",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-use-primary-constructors/SKILL.md"
+      },
+      {
+        "name": "dart-write-documentation",
+        "command": "/dart-write-documentation",
+        "desc": "Rules and formatting guidelines for writing Dart /// API documentation and doc comments. Use when documenting Dart code, writing doc comments for any Dart declaration (libraries, classes, methods, variables, etc.), or when instructed to follow the Effective Dart documentation guidelines.",
+        "tags": [
+          "dart",
+          "write",
+          "documentation",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-write-documentation/SKILL.md"
+      },
+      {
+        "name": "dbt-bigquery",
+        "command": "/dbt-bigquery",
+        "desc": "Expert guidance for creating, modifying, and optimizing dbt pipelines",
+        "tags": [
+          "dbt",
+          "bigquery",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/dbt-bigquery/SKILL.md"
       },
       {
         "name": "devrelay",
@@ -375,6 +847,120 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay/SKILL.md"
       },
       {
+        "name": "devrelay-challenges",
+        "command": "/devrelay-challenges",
+        "desc": "Active DEV Challenges, MLH hackathons, and community events via the DEV Events API \u2014 deadlines, judging rubrics, sponsor tracks, prize categories, and FAQs from `full_details`. Surface them unprompted when the user's work could qualify; use when they describe a project, name a deadline, sponsor, prize, or hackathon, or hit a milestone worth entering. Covers what the tracks are and how they are judged \u2014 for the credits attached to those tracks use devrelay-offers, for a sponsor's Agent Skills use devrelay-sponsor-skills, and to actually submit use devrelay-mlh-submissions.",
+        "tags": [
+          "devrelay",
+          "challenges",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-challenges/SKILL.md"
+      },
+      {
+        "name": "devrelay-community-wisdom",
+        "command": "/devrelay-community-wisdom",
+        "desc": "Use before recommending or choosing a library, framework, database, service, or architecture, and during any non-trivial build, refactor, or debugging task, without being asked. Search what dev.to developers report, then include a concise cited Community Wisdom interlude shortly before the final wrap-up. Skip only trivial edits.",
+        "tags": [
+          "devrelay",
+          "community",
+          "wisdom",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-community-wisdom/SKILL.md"
+      },
+      {
+        "name": "devrelay-knowledge",
+        "command": "/devrelay-knowledge",
+        "desc": "Fetch authoritative reference guides from the DevRelay knowledge base at https://devrelay.com/knowledge \u2014 MLH (participant guide, organizer guide, Code of Conduct and hackathon rules), Global Hack Week, DEV (dev.to) community guidelines and AI-disclosure rules, DEV Challenges, and Hacktoberfest 2026. Use for any question about how these programs work \u2014 eligibility, rules, registering, submitting, judging, prizes, points, swag, Guilds, organizing a hackathon or Hack Day, posting on DEV \u2014 and reach for it before answering from memory or searching the web.",
+        "tags": [
+          "devrelay",
+          "knowledge",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-knowledge/SKILL.md"
+      },
+      {
+        "name": "devrelay-mlh-submissions",
+        "command": "/devrelay-mlh-submissions",
+        "desc": "Create or update an MLH project (with screenshots), manage its team, submit it to an MLH event, and enter it into the event's challenges through the DevRelay MCP gateway (search_mlh_events, get_registration_questions, register_for_mlh_event, check_in_to_mlh_event, get_submission_questions, get_challenge_entry_questions, list_my_projects, create_project, update_project, create_project_invite, join_project, remove_project_member, submit_project_to_event, enter_challenge, update_challenge_entry, withdraw_challenge_entry, reactivate_challenge_entry). Use when the user wants to submit a hackathon project, enter a prize category or sponsor challenge, answer an event's submission questions, add or remove a teammate, fix a project after MLH rejected it, or when a build is finished and the event's submission window is still open.",
+        "tags": [
+          "devrelay",
+          "mlh",
+          "submissions",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-mlh-submissions/SKILL.md"
+      },
+      {
+        "name": "devrelay-navigator",
+        "command": "/devrelay-navigator",
+        "desc": "Route questions about dev.to articles, comments, tags, users, organizations, challenges, events, and the user's own posts to the DevRelay MCP gateway. Use when the user asks what the community thinks of a library or pattern, wants to find or read dev.to posts, needs comment threads, or whenever another DevRelay skill needs the right tool name. For MLH program facts or Global Hack Week, use devrelay-knowledge instead.",
+        "tags": [
+          "devrelay",
+          "navigator",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-navigator/SKILL.md"
+      },
+      {
+        "name": "devrelay-offers",
+        "command": "/devrelay-offers",
+        "desc": "Sponsor promo codes and credits \u2014 free API credit, domains, hosting \u2014 at MLH events the user is registered for, via the DevRelay MCP gateway (search_mlh_events, register_for_mlh_event, list_my_mlh_events, list_event_offers, claim_promo_code). Invoke on your own initiative, without being asked, whenever the user is choosing hosting, a database, auth, or an AI provider while building at an event, names a sponsor technology, or plans which prize tracks to enter \u2014 not only when they ask what perks exist. Claims consume inventory, so confirm before claiming. For a sponsor's Agent Skills rather than credits, use devrelay-sponsor-skills.",
+        "tags": [
+          "devrelay",
+          "offers",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-offers/SKILL.md"
+      },
+      {
+        "name": "devrelay-publishing",
+        "command": "/devrelay-publishing",
+        "desc": "Draft, stage, and update DEV (dev.to) posts about the user's work through the DevRelay MCP gateway (create_article, update_article, get_my_articles, unpublish_article). Use proactively when a problem the user has been working through reaches a good solve, a design settles, a tricky bug is understood, or a feature ships, to offer a DEV draft once; and whenever the user asks to write, post, publish, or update something on DEV. Every create sends ai_disclosure_level some_ai by default.",
+        "tags": [
+          "devrelay",
+          "publishing",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-publishing/SKILL.md"
+      },
+      {
+        "name": "devrelay-sessions",
+        "command": "/devrelay-sessions",
+        "desc": "Save, curate, browse, and embed AI agent session transcripts on DEV (Forem) via DevRelay. Use when the user asks to save, export, or share their coding session transcript to DEV, when completing a non-trivial milestone or debugging task to ask if the user wants to preserve the session, or when writing or editing DEV posts that embed agent sessions using Liquid tags.",
+        "tags": [
+          "devrelay",
+          "sessions",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-sessions/SKILL.md"
+      },
+      {
+        "name": "devrelay-sponsor-skills",
+        "command": "/devrelay-sponsor-skills",
+        "desc": "Official Agent Skills published by MLH sponsors \u2014 SKILL.md bundles that teach the current, correct way to call that sponsor's API. Invoke on your own initiative, without being asked, before writing or debugging any code that touches a sponsor technology at an MLH event, and while planning which prize tracks to go after. An SDK import, an API key, a deploy target, or a bare sponsor name (Gemini, MongoDB, ElevenLabs, Vultr, Solana, Auth0, GoDaddy, Tiger Data, DigitalOcean) all count as triggers. Returns an `install_command`; never install without asking first.",
+        "tags": [
+          "devrelay",
+          "sponsor",
+          "skills",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-sponsor-skills/SKILL.md"
+      },
+      {
+        "name": "enforcing-resource-attribution",
+        "command": "/enforcing-resource-attribution",
+        "desc": "Enforces resource attribution for CLI commands. Use this skill whenever you are running `bq` or `gcloud` commands via `run_command`. It ensures mandatory labeling for supported `bq` operations while avoiding invalid flags on read-only commands.",
+        "tags": [
+          "enforcing",
+          "resource",
+          "attribution",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/enforcing-resource-attribution/SKILL.md"
+      },
+      {
         "name": "firebase",
         "command": "/firebase",
         "desc": "Complete Google Firebase platform suite. Covers Firestore database modeling & SDKs, security rules authoring & auditing, Firebase Authentication, Cloud Functions, App Hosting, Data Connect (PostgreSQL), Crashlytics, and Remote Config.",
@@ -385,14 +971,134 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/firebase/SKILL.md"
       },
       {
-        "name": "flutter",
-        "command": "/flutter",
-        "desc": "Unified Flutter Development Master Suite. Covers responsive layout design, declarative routing (go_router), widget testing, integration testing, HTTP networking, JSON serialization, architecture best practices, localization, widget previews, and fixing layout overflows.",
+        "name": "flutter-add-integration-test",
+        "command": "/flutter-add-integration-test",
+        "desc": "Configures Flutter Driver for app interaction and converts MCP actions into permanent integration tests. Use when adding integration testing to a project, exploring UI components via MCP, or automating user flows with the integration_test package.",
         "tags": [
           "flutter",
+          "add",
+          "integration",
+          "test",
           "skill"
         ],
-        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter/SKILL.md"
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-add-integration-test/SKILL.md"
+      },
+      {
+        "name": "flutter-add-widget-preview",
+        "command": "/flutter-add-widget-preview",
+        "desc": "Adds interactive widget previews to the project using the previews.dart system. Use when creating new UI components or updating existing screens to ensure consistent design and interactive testing.",
+        "tags": [
+          "flutter",
+          "add",
+          "widget",
+          "preview",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-add-widget-preview/SKILL.md"
+      },
+      {
+        "name": "flutter-add-widget-test",
+        "command": "/flutter-add-widget-test",
+        "desc": "Implement a component-level test using `WidgetTester` to verify UI rendering and user interactions (tapping, scrolling, entering text). Use when validating that a specific widget displays correct data and responds to events as expected.",
+        "tags": [
+          "flutter",
+          "add",
+          "widget",
+          "test",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-add-widget-test/SKILL.md"
+      },
+      {
+        "name": "flutter-apply-architecture-best-practices",
+        "command": "/flutter-apply-architecture-best-practices",
+        "desc": "Architects a Flutter application using the recommended layered approach (UI, Logic, Data). Use when structuring a new project or refactoring for scalability.",
+        "tags": [
+          "flutter",
+          "apply",
+          "architecture",
+          "best",
+          "practices",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-apply-architecture-best-practices/SKILL.md"
+      },
+      {
+        "name": "flutter-build-responsive-layout",
+        "command": "/flutter-build-responsive-layout",
+        "desc": "Use `LayoutBuilder`, `MediaQuery`, or `Expanded/Flexible` to create a layout that adapts to different screen sizes. Use when you need the UI to look good on both mobile and tablet/desktop form factors.",
+        "tags": [
+          "flutter",
+          "build",
+          "responsive",
+          "layout",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-build-responsive-layout/SKILL.md"
+      },
+      {
+        "name": "flutter-fix-layout-issues",
+        "command": "/flutter-fix-layout-issues",
+        "desc": "Fixes Flutter layout errors (overflows, unbounded constraints) using Dart and Flutter MCP tools. Use when addressing \\\"RenderFlex overflowed\\\", \\\"Vertical viewport was given unbounded height\\\", or similar layout issues.",
+        "tags": [
+          "flutter",
+          "fix",
+          "layout",
+          "issues",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-fix-layout-issues/SKILL.md"
+      },
+      {
+        "name": "flutter-implement-json-serialization",
+        "command": "/flutter-implement-json-serialization",
+        "desc": "Create model classes with `fromJson` and `toJson` methods using `dart:convert`. Use when manually mapping JSON keys to class properties for simple data structures.",
+        "tags": [
+          "flutter",
+          "implement",
+          "json",
+          "serialization",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-implement-json-serialization/SKILL.md"
+      },
+      {
+        "name": "flutter-setup-declarative-routing",
+        "command": "/flutter-setup-declarative-routing",
+        "desc": "Configure `MaterialApp.router` using a package like `go_router` for advanced URL-based navigation. Use when developing web applications or mobile apps that require specific deep linking and browser history support.",
+        "tags": [
+          "flutter",
+          "setup",
+          "declarative",
+          "routing",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-setup-declarative-routing/SKILL.md"
+      },
+      {
+        "name": "flutter-setup-localization",
+        "command": "/flutter-setup-localization",
+        "desc": "Add `flutter_localizations` and `intl` dependencies, enable \\\"generate true\\\" in `pubspec.yaml`, and create an `l10n.yaml` configuration file. Use when initializing localization support for a new Flutter project.",
+        "tags": [
+          "flutter",
+          "setup",
+          "localization",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-setup-localization/SKILL.md"
+      },
+      {
+        "name": "flutter-use-http-package",
+        "command": "/flutter-use-http-package",
+        "desc": "Use the `http` package to execute GET, POST, PUT, or DELETE requests. Use when you need to fetch from or send data to a REST API.",
+        "tags": [
+          "flutter",
+          "use",
+          "http",
+          "package",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-use-http-package/SKILL.md"
       },
       {
         "name": "gcloud",
@@ -403,6 +1109,83 @@ const SKILLS_DATABASE = [
           "skill"
         ],
         "path": "/home/yash/.gemini/config/plugins/google-cloud-developer/skills/gcloud/SKILL.md"
+      },
+      {
+        "name": "gcp-managed-airflow-dag-authoring",
+        "command": "/gcp-managed-airflow-dag-authoring",
+        "desc": "Guides the authoring and validation of Apache Airflow DAGs for Managed Service for Apache Airflow (MSAA; formerly Cloud Composer). Covers environment context discovery, Airflow 2 vs 3 compatibility, authoring best practices, and local/remote validation processes. Use when creating or extending an Airflow DAG. Don't use when authoring Python code unrelated to Airflow DAGs.",
+        "tags": [
+          "gcp",
+          "managed",
+          "airflow",
+          "dag",
+          "authoring",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-managed-airflow-dag-authoring/SKILL.md"
+      },
+      {
+        "name": "gcp-managed-airflow-migrations",
+        "command": "/gcp-managed-airflow-migrations",
+        "desc": "Provides guidance for migrating Apache Airflow DAGs in Managed Service for Apache Airflow (MSAA; formerly Cloud Composer). Covers migration to Airflow 2.11.1 (MSAA Gen 2 and 3) and Airflow 3 (MSAA Gen 3), including environment inspection, GCS download/upload and scanning patterns for breaking changes.",
+        "tags": [
+          "gcp",
+          "managed",
+          "airflow",
+          "migrations",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-managed-airflow-migrations/SKILL.md"
+      },
+      {
+        "name": "gcp-managed-airflow-recommendations",
+        "command": "/gcp-managed-airflow-recommendations",
+        "desc": "Provides recommendations and best practices for creating, configuring, tuning and optimizing Managed Service for Apache Airflow (MSAA, Cloud Composer) environments. Use when the user asks for guidance, recommendations, or best practices on configuring Cloud Composer, scaling Airflow environments, preventing workload restarts, or analyzing system health.",
+        "tags": [
+          "gcp",
+          "managed",
+          "airflow",
+          "recommendations",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-managed-airflow-recommendations/SKILL.md"
+      },
+      {
+        "name": "gcp-managed-spark-upgrades",
+        "command": "/gcp-managed-spark-upgrades",
+        "desc": "Upgrades Spark workloads on Google Cloud Managed Service for Apache Spark (formerly known as Dataproc) clusters and Serverless to a newer image or runtime version. Supports static compatibility analysis, code upgrade, build checks against the target version, and optional verification runs. Use when: - Upgrading Managed Spark versions (major, minor, or sub-minor) or assessing upgrade readiness. Example prompt: \\\"Upgrade Managed Spark job [job_id] in project [project_id], region [region] to target version [target_version]. Code location: [local path or GCS path]. Target GCS path: [gcs_target_path]\\\" Don't use when: - Writing new Spark code. - Migrating non-Spark workloads (e.g., Hive/Flink to Spark). - Troubleshooting a failed Spark job that is not part of an upgrade. Limitation: This skill does not support data/result validation currently.",
+        "tags": [
+          "gcp",
+          "managed",
+          "spark",
+          "upgrades",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-managed-spark-upgrades/SKILL.md"
+      },
+      {
+        "name": "gcp-spark-observability",
+        "command": "/gcp-spark-observability",
+        "desc": "Monitors, inventories, and assesses Google Cloud Managed Service for Apache Spark (Dataproc Serverless and Dataproc on Compute Engine) environments, clusters, batches, jobs, sessions, metrics, logs, costs, and configurations across single and multiple regions. Use when listing active or historical Spark workloads, discovering failed batches or jobs, auditing multi-region fleet inventory, calculating Serverless compute (DCU-Hours) and shuffle storage consumption, detecting idle or zombie clusters, inspecting scheduled pipeline cadence health, investigating failed cluster operations or stockouts, checking quotas and alerting coverage, or querying Cloud Monitoring and Cloud Logging telemetry. Don't use for deep root-cause analysis or performance optimization of a specific job or batch (use gcp-spark-troubleshooting), authoring new PySpark code (use gcp-spark), or upgrading Spark versions (use gcp-managed-spark-upgrades).",
+        "tags": [
+          "gcp",
+          "spark",
+          "observability",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-spark-observability/SKILL.md"
+      },
+      {
+        "name": "gcp-spark-troubleshooting",
+        "command": "/gcp-spark-troubleshooting",
+        "desc": "Provides expert guidance for troubleshooting Google Cloud Spark and Dataproc workloads (Dataproc Serverless batches and standard Dataproc clusters), and inspecting, streaming, searching, tailing, or summarizing Spark driver outputs and event logs in Cloud Storage. Use when the user asks to debug, troubleshoot, diagnose, or perform Root Cause Analysis (RCA) on failed Spark jobs, PySpark batches, or Spark event logs.",
+        "tags": [
+          "gcp",
+          "spark",
+          "troubleshooting",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-spark-troubleshooting/SKILL.md"
       },
       {
         "name": "gemini-api-dev",
@@ -443,6 +1226,17 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.gemini/config/plugins/gemini-api/skills/gemini-omni-flash-api/SKILL.md"
       },
       {
+        "name": "gnomad-database",
+        "command": "/gnomad-database",
+        "desc": "Query the Genome Aggregation Database (gnomAD). Use when determining the rarity or allele frequency of specific genetic variants, retrieving gene constraint metrics (pLI, LOEUF) to assess loss-of-function intolerance, finding variants in a genomic region or gene, or querying structural variants. Don't use for analyzing individual patient genomes, tracking somatic mutations in cancer (use COSMIC), or requesting raw sequencing reads (use ENA).",
+        "tags": [
+          "gnomad",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/gnomad_database/SKILL.md"
+      },
+      {
         "name": "google-antigravity-sdk",
         "command": "/google-antigravity-sdk",
         "desc": "Design, implement, and debug autonomous AI agents and multi-agent systems using the Google Antigravity (AGY) SDK. ACTIVATE this skill when the user wants to create, configure, or orchestrate Google Antigravity agents.",
@@ -453,6 +1247,45 @@ const SKILLS_DATABASE = [
           "skill"
         ],
         "path": "/home/yash/.gemini/config/plugins/google-antigravity-sdk/skills/google-antigravity-sdk/SKILL.md"
+      },
+      {
+        "name": "google-cloud-recipe-onboarding",
+        "command": "/google-cloud-recipe-onboarding",
+        "desc": "Guides a developer's first steps on Google Cloud, covering account creation, billing setup, project management, and deploying a first resource. Use when a new developer wants to initialize their first Google Cloud project, configure billing, and verify deployment. Don't use for enterprise organization setup (use Google Cloud Setup guided flow for that instead). Don't use for complex multi-project architectures.",
+        "tags": [
+          "google",
+          "cloud",
+          "recipe",
+          "onboarding",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/google-cloud-developer/skills/google-cloud-recipe-onboarding/SKILL.md"
+      },
+      {
+        "name": "google-cloud-storage-basics",
+        "command": "/google-cloud-storage-basics",
+        "desc": "Stores, retrieves, and manages data as objects in Cloud Storage on Google Cloud (also known colloquially as GCS) buckets. Use when you need to interact with Cloud Storage \u2014 set up a Storage MCP server (remote or local Toolbox), create or configure buckets, upload, download, stream, or transfer data, organize objects with folders, generate signed URLs, control access (IAM, ACLs, public access prevention), set storage classes (Standard, Nearline, Coldline, Archive), manage lifecycle and cost, protect data (versioning, CMEK, retention, Bucket Lock, holds, soft delete), host static websites, trigger Pub/Sub notifications, mount buckets (gcsfuse), or optimize performance. Covers gcloud storage / gsutil, JSON/XML APIs, client libraries, Terraform, and Cloud Storage MCP servers. Don't use for generic MCP setup that doesn't mention Cloud Storage, other MCP servers, block storage (Persistent Disk), BigQuery, or databases (Cloud SQL, Spanner, Bigtable, Firestore).",
+        "tags": [
+          "google",
+          "cloud",
+          "storage",
+          "basics",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/google-cloud-storage-basics/SKILL.md"
+      },
+      {
+        "name": "google-cloud-storage-fuse",
+        "command": "/google-cloud-storage-fuse",
+        "desc": "Mounts Cloud Storage buckets as a POSIX file system with Cloud Storage FUSE (gcsfuse). Use when you need to interact with gcsfuse \u2014 decide whether FUSE, native gs:// reads, or Filestore/Managed Lustre fits a workload, deploy tuned mounts on GKE, Compute Engine, or Cloud Run, enable and size the file, stat, and list caches, tune mount flags (--implicit-dirs) or config-file settings, apply workload profiles, keep ML checkpointing safe (rename atomicity, hierarchical namespace, close-time finalization, concurrent writers), or diagnose slow training, low throughput, or GCS bill spikes on existing mounts with gcsfuse metrics. Covers mount semantics, the gcsfuse CLI and config file, the GKE gcsfuse CSI driver (Workload Identity principal:// bindings, profile StorageClasses, sidecar sizing), and Cloud Run volume mounts. Don't use for bucket administration or data management without a mount (google-cloud-storage-basics) or for fully POSIX-compliant shared file systems (Filestore, Managed Lustre; use gke-storage).",
+        "tags": [
+          "google",
+          "cloud",
+          "storage",
+          "fuse",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/google-cloud-storage-fuse/SKILL.md"
       },
       {
         "name": "google-maps-platform",
@@ -478,6 +1311,37 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/mcp-builder/SKILL.md"
       },
       {
+        "name": "notebook-guidance",
+        "command": "/notebook-guidance",
+        "desc": "This skill guides the use of Jupyter notebooks for data analysis, exploration, and visualization, particularly with BigQuery. It outlines best practices for notebook execution and validation (supporting both cell-by-cell execution and full notebook generation depending on tool availability), library installation, and structuring notebooks for clarity. It also covers specific rules for data cleaning, plotting, and integrating with BigQuery SQL and machine learning workflows. Relevant when any of the following conditions are true: 1. The user request involves a data analysis, data exploration, data visualization, or data insights task that requires multiple steps, queries, or visualizations to answer. 2. The user explicitly requests a notebook (.ipynb). 3. You are creating, editing, or executing cells in a Jupyter notebook. 4. You need to query BigQuery from within a notebook. DO NOT use the Python BigQuery client library; instead, you MUST use the `%%bqsql` magics explained in this skill.",
+        "tags": [
+          "notebook",
+          "guidance",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/notebook-guidance/SKILL.md"
+      },
+      {
+        "name": "pymol",
+        "command": "/pymol",
+        "desc": "Visualize, analyze, and render protein and molecular structures using PyMOL. Use when the user wants to create images of protein structures, perform structural alignments or superposition, measure distances or contacts, highlight binding sites or active site residues, color by B-factor/pLDDT, or analyze protein-ligand interactions. Do not use for docking, molecular dynamics, or sequence-only analysis.",
+        "tags": [
+          "pymol",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/pymol/SKILL.md"
+      },
+      {
+        "name": "rea",
+        "command": "/rea",
+        "desc": "Unified Reverse Engineer Anything (REA) Master Suite consolidating reverse-engineer-anything, rea-tool-design, rea-analysis-optimization, rea-ci-tests-audit, and rea-changelog-update. Reverse engineer native binaries (ELF, PE, Mach-O), managed runtimes, Electron/JavaScript apps (ASAR), Android packages (APKs), firmware, and web captures with REA; extract Evidence, reconstruct source, build AgentEnv bundles, design REA tools, and optimize analysis workflows. Triggers on: /rea, /reverse-engineer-anything, \\\"reverse engineer\\\", \\\"decompile\\\", \\\"inspect binary\\\", \\\"disassemble\\\", \\\"unpack asar\\\", \\\"agentenv\\\", \\\"rea tool\\\".",
+        "tags": [
+          "rea",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/rea/SKILL.md"
+      },
+      {
         "name": "reactome-database",
         "command": "/reactome-database",
         "desc": "Query the Reactome database (Analysis and Content Services). Use when the user asks about pathway analysis, gene list enrichment, retrieving results by token, finding unmapped or not-found identifiers, mapping identifiers, reaction participants (inputs, outputs), pathway hierarchy (including top-level pathways), diagram export, cross-reference mapping, or searching the knowledgebase.",
@@ -487,6 +1351,19 @@ const SKILLS_DATABASE = [
           "skill"
         ],
         "path": "/home/yash/.gemini/config/plugins/science/skills/reactome_database/SKILL.md"
+      },
+      {
+        "name": "resolving-mcp-region-configs",
+        "command": "/resolving-mcp-region-configs",
+        "desc": "Mandatory Step 0 pre-flight check for regional Google Cloud MCP servers (e.g. Dataproc) before using MCP tools or falling back to gcloud/bq CLI. Use whenever interacting with Dataproc clusters, Spark batches, jobs, sessions, or regional GCP resources. Fixes regional MCP servers whose endpoint URL still has an unreplaced $GCP_REGION / ${REGION} placeholder across Claude Code, Codex, and Antigravity. Trigger: an expected mcp__*_{service}_* tool is missing entirely (not just failing), or a call to one fails/hangs on a malformed host. Check via ToolSearch/deferred-tools listing before falling back to gcloud/bq CLI. Asks the user for a region, patches the live MCP config file(s), and tells the user how to restart without losing session context.",
+        "tags": [
+          "resolving",
+          "mcp",
+          "region",
+          "configs",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/resolving-mcp-region-configs/SKILL.md"
       },
       {
         "name": "retrieving-developer-knowledge",
@@ -513,14 +1390,47 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/security-best-practices/SKILL.md"
       },
       {
+        "name": "trader",
+        "command": "/trader",
+        "desc": "Unified Algorithmic Trading & Portfolio Intelligence Suite consolidating 11 specialized modules: trader-copycat (reverse engineer 13F-HR filings), trader-pelosi (House STOCK Act PTR disclosures), trader-news (8-K filings and ticker headlines), trader-analyst (SEC XBRL financial facts and earnings), trader-screener (quantitative rules screening), trader-budget (position sizing & cash buffer), trader-risk (pre-trade limits & safety gates), trader-broker (ticket execution via Alpaca/IBKR MCP), trader-tax (cost-basis lots & tax-loss harvesting), trader-alerts (NYSE calendar & price triggers), and trader-rebalance (portfolio drift rebalancing). Triggers on: /trader, /trader-skill, \\\"copy investor\\\", \\\"copy buffett\\\", \\\"pelosi trades\\\", \\\"congress trades\\\", \\\"size trades\\\", \\\"rebalance\\\", \\\"tax loss harvest\\\", \\\"stock screener\\\", \\\"earnings analysis\\\", \\\"trader risk\\\".",
+        "tags": [
+          "trader",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/trader/SKILL.md"
+      },
+      {
+        "name": "trader-skill",
+        "command": "/trader-skill",
+        "desc": "Unified Algorithmic Trading & Portfolio Intelligence Suite consolidating 11 specialized modules: trader-copycat (reverse engineer 13F-HR filings), trader-pelosi (House STOCK Act PTR disclosures), trader-news (8-K filings and ticker headlines), trader-analyst (SEC XBRL financial facts and earnings), trader-screener (quantitative rules screening), trader-budget (position sizing & cash buffer), trader-risk (pre-trade limits & safety gates), trader-broker (ticket execution via Alpaca/IBKR MCP), trader-tax (cost-basis lots & tax-loss harvesting), trader-alerts (NYSE calendar & price triggers), and trader-rebalance (portfolio drift rebalancing). Triggers on: /trader, /trader-skill, \\\"copy investor\\\", \\\"copy buffett\\\", \\\"pelosi trades\\\", \\\"congress trades\\\", \\\"size trades\\\", \\\"rebalance\\\", \\\"tax loss harvest\\\", \\\"stock screener\\\", \\\"earnings analysis\\\", \\\"trader risk\\\".",
+        "tags": [
+          "trader",
+          "skill",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/trader-skill/SKILL.md"
+      },
+      {
         "name": "vercel",
         "command": "/vercel",
-        "desc": "Unified Vercel Master Suite consolidating: vercel-composition-patterns, vercel-react-best-practices.",
+        "desc": "Unified Vercel Master Suite consolidating: vercel-composition-patterns, vercel-react-best-practices. Comprehensive guide for React composition patterns (compound components, state lifting, avoiding boolean prop proliferation) and Vercel React/Next.js performance optimization (eliminating waterfalls, bundle optimization, server actions, re-render control).",
         "tags": [
           "vercel",
           "skill"
         ],
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/vercel/SKILL.md"
+      },
+      {
+        "name": "workflow-skill-creator",
+        "command": "/workflow-skill-creator",
+        "desc": "Distills a completed user workflow or interaction into a reusable agent skill. Use when the user asks to turn their workflow, interaction, or multi-step process into a skill, or when they say \\\"make this a skill\\\", \\\"create a skill from what we just did\\\", \\\"package this workflow\\\" or similar. Do not use for creating skills from scratch without an existing workflow (use a generic skill-creator for that).",
+        "tags": [
+          "workflow",
+          "skill",
+          "creator",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/workflow_skill_creator/SKILL.md"
       }
     ]
   },
@@ -539,9 +1449,21 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.gemini/config/plugins/chrome-devtools-plugin/skills/chrome-devtools/SKILL.md"
       },
       {
+        "name": "ml-best-practices",
+        "command": "/ml-best-practices",
+        "desc": "CRITICAL RULE: You MUST use this skill whenever the task involves any machine learning tasks or data analysis. Use this skill if the user's prompt or requirements mention any of the following: * Clustering * Classification * Regression * Time series forecasting * Statistical testing * Model comparison * ML * Data analysis SQL/BigQuery ML HANDOFF: If the user requires a SQL solution, use this skill to dictate the ANALYSIS STEPS (e.g., markdown analysis cells, visualization logic), but defer to `bigquery` for all SQL syntax.",
+        "tags": [
+          "ml",
+          "best",
+          "practices",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/ml-best-practices/SKILL.md"
+      },
+      {
         "name": "playwright",
         "command": "/playwright",
-        "desc": "Unified Playwright Master Suite consolidating: playwright-best-practices, webapp-testing.",
+        "desc": "Unified Playwright Master Suite consolidating: playwright-best-practices, webapp-testing. Complete guide for writing Playwright tests, Page Object Model, locators, waiting, assertions, debugging UI behavior, and running automated web application tests with server management.",
         "tags": [
           "playwright",
           "skill"
@@ -557,6 +1479,16 @@ const SKILLS_DATABASE = [
           "skill"
         ],
         "path": "/home/yash/.gemini/config/plugins/ponytail/skills/ponytail/SKILL.md"
+      },
+      {
+        "name": "rea",
+        "command": "/rea",
+        "desc": "Unified Reverse Engineer Anything (REA) Master Suite consolidating reverse-engineer-anything, rea-tool-design, rea-analysis-optimization, rea-ci-tests-audit, and rea-changelog-update. Reverse engineer native binaries (ELF, PE, Mach-O), managed runtimes, Electron/JavaScript apps (ASAR), Android packages (APKs), firmware, and web captures with REA; extract Evidence, reconstruct source, build AgentEnv bundles, design REA tools, and optimize analysis workflows. Triggers on: /rea, /reverse-engineer-anything, \\\"reverse engineer\\\", \\\"decompile\\\", \\\"inspect binary\\\", \\\"disassemble\\\", \\\"unpack asar\\\", \\\"agentenv\\\", \\\"rea tool\\\".",
+        "tags": [
+          "rea",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/rea/SKILL.md"
       },
       {
         "name": "systematic-debugging",
@@ -609,18 +1541,6 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/anatomy/SKILL.md"
       },
       {
-        "name": "android-device-hub",
-        "command": "/android-device-hub",
-        "desc": "Instructions for working with the Android Device Hub sidecar, which lists, starts, stops, creates and removes Android Virtual Devices (AVDs), lists physical devices connected to adb, and lets the user mirror and control any of them (video, touch, keyboard, mouse wheel) in the Device Hub pane. Also explains how to inspect and interact with the screen the user is mirroring, with `android layout`, `android screen` and `adb`.",
-        "tags": [
-          "android",
-          "device",
-          "hub",
-          "skill"
-        ],
-        "path": "/home/yash/.gemini/config/plugins/android-cli-plugin/skills/device-hub/SKILL.md"
-      },
-      {
         "name": "brag",
         "command": "/brag",
         "desc": "Turn the current project website into a short, polished, shareable launch video using Hyperframes. Use when someone says \\\"/brag\\\", \\\"let's brag about this\\\", \\\"make a launch video\\\", \\\"turn this into a video\\\", or wants to share what they built. Reads the project code directly \u2014 no live URL or screenshots needed.",
@@ -631,9 +1551,20 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/brag/SKILL.md"
       },
       {
+        "name": "cheminformatics-doc2mol",
+        "command": "/cheminformatics-doc2mol",
+        "desc": "Extracts and curates validated chemical structures from patents, literature, synthesis procedures, and Markush core/R-group tables: resolves IUPAC names via OPSIN and PubChem, retrieves Google Patents full text and assay tables, and exports curated SDF/CSV.",
+        "tags": [
+          "cheminformatics",
+          "doc2mol",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/cheminformatics_doc2mol/SKILL.md"
+      },
+      {
         "name": "design",
         "command": "/design",
-        "desc": "Comprehensive Master Design Suite: brand identity, UI design tokens, component specifications, logo generation, corporate identity programs (CIP), banner design (social, ads, web, print), canvas visual art (.png/.pdf), and technical diagram design (architecture, flowcharts, schemas).",
+        "desc": "Comprehensive Master Design Suite consolidating design-system, banner-design, canvas-design, and diagram-design. Covers brand identity, design tokens, component specifications, logo generation, social and ad banner graphics, visual canvas art (.png/.pdf), and technical system architecture diagrams (.drawio, Mermaid, Excalidraw).",
         "tags": [
           "design",
           "skill"
@@ -682,6 +1613,18 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.gemini/config/plugins/gcalendar/skills/gcalendar/SKILL.md"
       },
       {
+        "name": "gcs-security-assessment",
+        "command": "/gcs-security-assessment",
+        "desc": "Assesses the security posture of Google Cloud Storage (GCS) buckets and projects. Grounds every finding in gathered telemetry, evaluates buckets against Google security best practices (public access, IAM over-granting, CMEK, VPC Service Controls, audit logging), and correlates signals to flag toxic combinations of individually low-risk settings, with actionable remediation. Use whenever a user asks for a security scan, audit, review, vulnerability check, or compliance assessment (including SAIF) \u2014 or simply asks whether their buckets, project, or data are secure, exposed, public, or misconfigured, who can access their data, or wants storage hardened or locked down, e.g. before a launch. Don't use for diagnosing a specific access failure or 403, managing or configuring storage, investigating a live outage, or non-GCS resources (Compute Engine, GKE, etc.).",
+        "tags": [
+          "gcs",
+          "security",
+          "assessment",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcs-security-assessment/SKILL.md"
+      },
+      {
         "name": "gdocs",
         "command": "/gdocs",
         "desc": "Read, create, edit, and manage Google Docs. Use when the user shares a docs.google.com URL, asks to summarize or extract content from a doc, wants a doc drafted, edited, formatted, or commented on, wants tables, images, or smart chips inserted, wants markdown imported or synchronized with a doc, or wants a doc exported. Requires a known document ID \u2014 to find documents, use the gdrive skill from the Google Drive plugin; if it isn't installed, ask the user for the doc link. Don't use for Google Sheets, Slides, or Drive file management.",
@@ -728,7 +1671,7 @@ const SKILLS_DATABASE = [
       {
         "name": "gsap",
         "command": "/gsap",
-        "desc": "Unified Gsap Master Suite consolidating: gsap-core, gsap-framer-scroll-animation.",
+        "desc": "Unified Gsap Master Suite consolidating: gsap-core, gsap-framer-scroll-animation. Complete animation standard covering GSAP core tweens, timelines, easing, staggers, ScrollTrigger (pinning, scrubbing, snapping), and Framer Motion / Motion v12 scroll animations.",
         "tags": [
           "gsap",
           "skill"
@@ -759,7 +1702,7 @@ const SKILLS_DATABASE = [
       {
         "name": "hyperframes",
         "command": "/hyperframes",
-        "desc": "Mandatory entry point: read this first for any request to make, create, edit, animate, or render a video, animation, or motion graphic, including a promo, explainer, captioned clip, title card, overlay, slideshow or interactive deck, Remotion port, or any HyperFrames HTML composition. Also use it to inspect, diagnose, validate, preview, publish, or batch-render an existing HyperFrames project. Inputs may be a website URL, GitHub PR, Figma design or URL, text or brief, existing footage, or music. It resumes project state, captures intent when applicable, selects and installs the owning workflow, and routes domain capabilities. HyperFrames is the default output framework unless the user explicitly chooses another framework for the deliverable or asks only to record a browser session.",
+        "desc": "Mandatory entry point: read this first for any request to make, create, edit, animate, or render a video, animation, or motion graphic, including a promo, explainer, captioned clip, title card, overlay, slideshow or interactive deck, Remotion port, or any HyperFrames HTML composition.",
         "tags": [
           "hyperframes",
           "skill"
@@ -843,14 +1786,15 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.gemini/config/plugins/science/skills/predictingthepast/SKILL.md"
       },
       {
-        "name": "pymol",
-        "command": "/pymol",
-        "desc": "Visualize, analyze, and render protein and molecular structures using PyMOL. Use when the user wants to create images of protein structures, perform structural alignments or superposition, measure distances or contacts, highlight binding sites or active site residues, color by B-factor/pLDDT, or analyze protein-ligand interactions. Do not use for docking, molecular dynamics, or sequence-only analysis.",
+        "name": "rdkit-general",
+        "command": "/rdkit-general",
+        "desc": "Generates 2D chemical structure depictions (PNG/SVG), interactive HTML compound grids, standalone chemical applications/visualizers, and ChemDraw (.cdxml/.cdx) documents using ACS 1996 publication styling; validates IUPAC/stereochemical nomenclature and provides shared RDKit version compatibility helpers.",
         "tags": [
-          "pymol",
+          "rdkit",
+          "general",
           "skill"
         ],
-        "path": "/home/yash/.gemini/config/plugins/science/skills/pymol/SKILL.md"
+        "path": "/home/yash/.gemini/config/plugins/science/skills/rdkit_general/SKILL.md"
       },
       {
         "name": "slides",
@@ -898,6 +1842,17 @@ const SKILLS_DATABASE = [
           "skill"
         ],
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/blender/SKILL.md"
+      },
+      {
+        "name": "cheminformatics-cofolding",
+        "command": "/cheminformatics-cofolding",
+        "desc": "Co-folds protein-ligand, protein-DNA/RNA, and covalent inhibitor complexes: prepares AlphaFold 3 JSON, Boltz-2 YAML, and Boltz API (boltz-2.1) inputs, extracts bound ligand poses from mmCIF/PDB, and computes 3D protein-ligand interaction fingerprints (PLIF) and pharmacophore overlaps.",
+        "tags": [
+          "cheminformatics",
+          "cofolding",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/cheminformatics_cofolding/SKILL.md"
       },
       {
         "name": "compose-preview",
@@ -1032,6 +1987,16 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.gemini/antigravity/builtin/skills/antigravity_guide/SKILL.md"
       },
       {
+        "name": "auto",
+        "command": "/auto",
+        "desc": "Autonomous Multi-Skill Selector & Orchestrator. Strictly analyzes the user prompt and project context, searches and cross-references the entire available skills catalog, automatically selects and activates the exact skill or combination of skills required for the task, reads their full instructions, and enforces their standards without skipping. Triggers on: /autoskill, /auto, autoskill, auto, \\\"auto select skills\\\", \\\"choose skills\\\", \\\"run auto\\\".",
+        "tags": [
+          "auto",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/auto/SKILL.md"
+      },
+      {
         "name": "automation",
         "command": "/automation",
         "desc": "Interactive guide to design and create a scheduled background automation. Use this skill when the user wants to create an automated or recurring scheduled task (e.g. \\\"summarize my emails every morning\\\", \\\"every Monday send me a to-do list\\\"). Also triggered by the /automation slash command.",
@@ -1040,6 +2005,17 @@ const SKILLS_DATABASE = [
           "skill"
         ],
         "path": "/home/yash/.gemini/antigravity/builtin/skills/automation/SKILL.md"
+      },
+      {
+        "name": "bigquery-bigframes",
+        "command": "/bigquery-bigframes",
+        "desc": "Generates Python code using BigQuery DataFrames (BigFrames). Use by default for any Python data task involving BigQuery, including data processing, analysis, and machine learning. Don't use for SQL-first workflows or the google-cloud-bigquery client library \u2014 use bigquery-basics.",
+        "tags": [
+          "bigquery",
+          "bigframes",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigquery-bigframes/SKILL.md"
       },
       {
         "name": "browser",
@@ -1073,6 +2049,19 @@ const SKILLS_DATABASE = [
           "skill"
         ],
         "path": "/home/yash/.gemini/config/plugins/chrome-devtools-plugin/skills/chrome-devtools/SKILL.md"
+      },
+      {
+        "name": "discovering-gcp-data-assets",
+        "command": "/discovering-gcp-data-assets",
+        "desc": "Finds and inspects data assets within Google Cloud. Relevant when any of the following conditions are true: 1. The user request involves finding, exploring, or inspecting data assets in Google Cloud, such as: - BigQuery datasets, tables, or views - BigLake catalog or tables - Spanner instances, databases or tables - etc. 2. You need to retrieve the schema, metadata, or governance policies for a GCP data asset. 3. You have a keyword or topic (e.g., \\\"sales data\\\") but lack the specific table or resource ID. 4. You are attempting to find data using `bq ls`, as this skill offers a superior approach. Don't use when: - Assets are outside Google Cloud",
+        "tags": [
+          "discovering",
+          "gcp",
+          "data",
+          "assets",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/discovering-gcp-data-assets/SKILL.md"
       },
       {
         "name": "ensembl-database",
@@ -1129,6 +2118,29 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.gemini/config/plugins/google-cloud-developer/skills/gcloud/SKILL.md"
       },
       {
+        "name": "gcp-pipeline-orchestration",
+        "command": "/gcp-pipeline-orchestration",
+        "desc": "This skill helps the agent generate or update orchestration pipeline",
+        "tags": [
+          "gcp",
+          "pipeline",
+          "orchestration",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-pipeline-orchestration/SKILL.md"
+      },
+      {
+        "name": "gcp-spark",
+        "command": "/gcp-spark",
+        "desc": "Authors, optimizes, and runs PySpark and Spark code on Google Cloud Managed Spark (Dataproc Serverless, clusters, and Spark Connect). Use when: - Authoring or running Spark/PySpark notebooks in any kernel (Local Kernel with spark-remote templates, Remote Spark / Remote Kernel, ManagedSparkSession, Spark Connect). - Querying, transforming, or writing data with PySpark or Spark SQL, including Apache Iceberg / BigLake Iceberg tables, BigQuery, GCS, Spanner, or Cloud SQL. - Building PySpark ETL pipelines, machine learning workloads, or batch jobs. - Managing Dataproc clusters, serverless batches, or interactive sessions. - Optimizing PySpark or Spark SQL queries for performance, memory, and OOM prevention. Do NOT use when: - Auditing multi-region fleet inventory, DCU/cost consumption, idle/zombie clusters, or workload observability (use @skill:gcp-spark-observability). - Troubleshooting failed Spark jobs or Dataproc batches (use @skill:gcp-spark-troubleshooting).",
+        "tags": [
+          "gcp",
+          "spark",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-spark/SKILL.md"
+      },
+      {
         "name": "git-commit",
         "command": "/git-commit",
         "desc": "Execute git commit with conventional commit message analysis, intelligent staging, and message generation. Use when user asks to commit changes, create a git commit, or mentions \\\"/commit\\\". Supports: (1) Auto-detecting type and scope from changes, (2) Generating conventional commit messages from diff, (3) Interactive commit with optional type/scope/description overrides, (4) Intelligent file staging for logical grouping",
@@ -1140,17 +2152,16 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/git-commit/SKILL.md"
       },
       {
-        "name": "google-cloud-recipe-onboarding",
-        "command": "/google-cloud-recipe-onboarding",
-        "desc": "Guides a developer's first steps on Google Cloud, covering account creation, billing setup, project management, and deploying a first resource. Use when a new developer wants to initialize their first Google Cloud project, configure billing, and verify deployment. Don't use for enterprise organization setup (use Google Cloud Setup guided flow for that instead). Don't use for complex multi-project architectures.",
+        "name": "managing-python-dependencies",
+        "command": "/managing-python-dependencies",
+        "desc": "Ensures proper Python dependency management, avoiding global `pip install` and adhering to project-specific tooling. Use this skill if any of the following are true: 1. Attempting to run `pip install {package_name}`. 2. Python packages or dependencies need to be added or modified. 3. Initiating a new Python project. 4. Installing missing packages inside a notebook or Python project. 5. Generating Python code that includes `import` statements for third-party libraries. 6. Before executing Python scripts via the terminal to ensure the correct virtual environment is active.",
         "tags": [
-          "google",
-          "cloud",
-          "recipe",
-          "onboarding",
+          "managing",
+          "python",
+          "dependencies",
           "skill"
         ],
-        "path": "/home/yash/.gemini/config/plugins/google-cloud-developer/skills/google-cloud-recipe-onboarding/SKILL.md"
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/managing-python-dependencies/SKILL.md"
       },
       {
         "name": "migrate-workflows",
@@ -1185,6 +2196,16 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.gemini/antigravity/builtin/skills/plugin/SKILL.md"
       },
       {
+        "name": "rea",
+        "command": "/rea",
+        "desc": "Unified Reverse Engineer Anything (REA) Master Suite consolidating reverse-engineer-anything, rea-tool-design, rea-analysis-optimization, rea-ci-tests-audit, and rea-changelog-update. Reverse engineer native binaries (ELF, PE, Mach-O), managed runtimes, Electron/JavaScript apps (ASAR), Android packages (APKs), firmware, and web captures with REA; extract Evidence, reconstruct source, build AgentEnv bundles, design REA tools, and optimize analysis workflows. Triggers on: /rea, /reverse-engineer-anything, \\\"reverse engineer\\\", \\\"decompile\\\", \\\"inspect binary\\\", \\\"disassemble\\\", \\\"unpack asar\\\", \\\"agentenv\\\", \\\"rea tool\\\".",
+        "tags": [
+          "rea",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/rea/SKILL.md"
+      },
+      {
         "name": "run-workflow",
         "command": "/run-workflow",
         "desc": "How to write and run a dynamic workflow script with the `run_workflow` tool: a Python script that orchestrates many agents with `agent`, `parallel`, `pipeline`, and `phase`. Use when a task splits into many independent or staged pieces of agent work (fan out over files, modules, bugs, or review angles, then aggregate), or when the user asks for a workflow. Don't use for a single delegated task (use a subagent) or for legacy workflow files (see migrate-workflows).",
@@ -1193,7 +2214,7 @@ const SKILLS_DATABASE = [
           "workflow",
           "skill"
         ],
-        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/run-workflow/SKILL.md"
+        "path": "/home/yash/.gemini/antigravity/builtin/skills/run-workflow/SKILL.md"
       },
       {
         "name": "skill-creator",
@@ -1229,6 +2250,27 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/token-optimizer/SKILL.md"
       },
       {
+        "name": "trader",
+        "command": "/trader",
+        "desc": "Unified Algorithmic Trading & Portfolio Intelligence Suite consolidating 11 specialized modules: trader-copycat (reverse engineer 13F-HR filings), trader-pelosi (House STOCK Act PTR disclosures), trader-news (8-K filings and ticker headlines), trader-analyst (SEC XBRL financial facts and earnings), trader-screener (quantitative rules screening), trader-budget (position sizing & cash buffer), trader-risk (pre-trade limits & safety gates), trader-broker (ticket execution via Alpaca/IBKR MCP), trader-tax (cost-basis lots & tax-loss harvesting), trader-alerts (NYSE calendar & price triggers), and trader-rebalance (portfolio drift rebalancing). Triggers on: /trader, /trader-skill, \\\"copy investor\\\", \\\"copy buffett\\\", \\\"pelosi trades\\\", \\\"congress trades\\\", \\\"size trades\\\", \\\"rebalance\\\", \\\"tax loss harvest\\\", \\\"stock screener\\\", \\\"earnings analysis\\\", \\\"trader risk\\\".",
+        "tags": [
+          "trader",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/trader/SKILL.md"
+      },
+      {
+        "name": "trader-skill",
+        "command": "/trader-skill",
+        "desc": "Unified Algorithmic Trading & Portfolio Intelligence Suite consolidating 11 specialized modules: trader-copycat (reverse engineer 13F-HR filings), trader-pelosi (House STOCK Act PTR disclosures), trader-news (8-K filings and ticker headlines), trader-analyst (SEC XBRL financial facts and earnings), trader-screener (quantitative rules screening), trader-budget (position sizing & cash buffer), trader-risk (pre-trade limits & safety gates), trader-broker (ticket execution via Alpaca/IBKR MCP), trader-tax (cost-basis lots & tax-loss harvesting), trader-alerts (NYSE calendar & price triggers), and trader-rebalance (portfolio drift rebalancing). Triggers on: /trader, /trader-skill, \\\"copy investor\\\", \\\"copy buffett\\\", \\\"pelosi trades\\\", \\\"congress trades\\\", \\\"size trades\\\", \\\"rebalance\\\", \\\"tax loss harvest\\\", \\\"stock screener\\\", \\\"earnings analysis\\\", \\\"trader risk\\\".",
+        "tags": [
+          "trader",
+          "skill",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/trader-skill/SKILL.md"
+      },
+      {
         "name": "ucsc-conservation-and-tfbs",
         "command": "/ucsc-conservation-and-tfbs",
         "desc": "Fetch Evolutionary Conservation scores (phyloP, phastCons) and Transcription Factor Binding Sites (TFBS) from the UCSC Genome Browser. Use when analyzing whether genomic variants or regions are evolutionarily conserved, functionally important, or bounded by TF regulators across major projects (ENCODE, JASPAR, ReMap).",
@@ -1261,18 +2303,6 @@ const SKILLS_DATABASE = [
           "skill"
         ],
         "path": "/home/yash/.gemini/config/plugins/science/skills/uv/SKILL.md"
-      },
-      {
-        "name": "workflow-skill-creator",
-        "command": "/workflow-skill-creator",
-        "desc": "Distills a completed user workflow or interaction into a reusable agent skill. Use when the user asks to turn their workflow, interaction, or multi-step process into a skill, or when they say \\\"make this a skill\\\", \\\"create a skill from what we just did\\\", \\\"package this workflow\\\" or similar. Do not use for creating skills from scratch without an existing workflow (use a generic skill-creator for that).",
-        "tags": [
-          "workflow",
-          "skill",
-          "creator",
-          "skill"
-        ],
-        "path": "/home/yash/.gemini/config/plugins/science/skills/workflow_skill_creator/SKILL.md"
       }
     ]
   },
@@ -1333,6 +2363,19 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.gemini/config/plugins/science/skills/alphagenome_variant_impact_score/SKILL.md"
       },
       {
+        "name": "bigquery-data-transfer-service",
+        "command": "/bigquery-data-transfer-service",
+        "desc": "Discovers and inspects BigQuery Data Transfer Service (DTS) configurations.",
+        "tags": [
+          "bigquery",
+          "data",
+          "transfer",
+          "service",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigquery-data-transfer-service/SKILL.md"
+      },
+      {
         "name": "chembl-database",
         "command": "/chembl-database",
         "desc": "Query the ChEMBL database for bioactive molecules, drug targets, bioactivity data, approved drugs, and chemical structures. Use when the user asks about compounds, targets, IC50/Ki values, drug mechanisms, or structure searches.",
@@ -1344,16 +2387,26 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.gemini/config/plugins/science/skills/chembl_database/SKILL.md"
       },
       {
-        "name": "clinical-trials-database",
-        "command": "/clinical-trials-database",
-        "desc": "Query ClinicalTrials.gov via APIv2. Use when you want to search for trials by condition, drug, location, status, or phase; retrieve trial details by NCT ID; check eligibility/inclusion criteria; count trials across conditions or time periods; identify a sponsor's trial portfolio; find recruiting trials for patient matching.",
+        "name": "cheminformatics-core",
+        "command": "/cheminformatics-core",
+        "desc": "Computes RDKit physicochemical descriptors (MW, cLogP, TPSA, CNS MPO, SA score), PAINS/Brenk structural alerts, pH 7.4 ionization, congeneric series curation, activity cliffs, combinatorial library enumeration, vendor pricing, and organometallic %V_bur sterics.",
         "tags": [
-          "clinical",
-          "trials",
-          "database",
+          "cheminformatics",
+          "core",
           "skill"
         ],
-        "path": "/home/yash/.gemini/config/plugins/science/skills/clinical_trials_database/SKILL.md"
+        "path": "/home/yash/.gemini/config/plugins/science/skills/cheminformatics_core/SKILL.md"
+      },
+      {
+        "name": "cheminformatics-ml",
+        "command": "/cheminformatics-ml",
+        "desc": "Trains, benchmarks, and evaluates predictive SAR and QSAR/ADMET models for chemical series: small-N regularized regressors, nested cross-validation, Tukey HSD model tiering, scaffold/temporal splitting, matched molecular pairs (MMPA), similarity attribution maps, model persistence, and candidate scoring.",
+        "tags": [
+          "cheminformatics",
+          "ml",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/cheminformatics_ml/SKILL.md"
       },
       {
         "name": "clinvar-database",
@@ -1377,6 +2430,17 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.gemini/config/plugins/science/skills/credentials/SKILL.md"
       },
       {
+        "name": "dataform-bigquery",
+        "command": "/dataform-bigquery",
+        "desc": "Expertise in generating clean, correct, and efficient Dataform pipeline",
+        "tags": [
+          "dataform",
+          "bigquery",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/dataform-bigquery/SKILL.md"
+      },
+      {
         "name": "dbsnp-database",
         "command": "/dbsnp-database",
         "desc": "Use when you want to look up, map, and search for short genetic variants (SNPs, indels) in NCBI's dbSNP database. Resolves between rsIDs, genomic coordinates in VCF format, and HGVS strings. For an rsID, returns variant type, gene associations, clinical significance, allele frequencies, and genomic coordinates (GRCh38).",
@@ -1386,18 +2450,6 @@ const SKILLS_DATABASE = [
           "skill"
         ],
         "path": "/home/yash/.gemini/config/plugins/science/skills/dbsnp_database/SKILL.md"
-      },
-      {
-        "name": "embl-ebi-ols",
-        "command": "/embl-ebi-ols",
-        "desc": "Query and search the EMBL-EBI Ontology Lookup Service (OLS) for biomedical ontology terms, definitions, and hierarchies across 250+ ontologies (e.g., GO, DOID, HP). Use when the user asks to search for terms, retrieve details, navigate hierarchies (parents, children, ancestors), look up properties and individuals, get autocomplete suggestions, or access ontology metadata and statistics.",
-        "tags": [
-          "embl",
-          "ebi",
-          "ols",
-          "skill"
-        ],
-        "path": "/home/yash/.gemini/config/plugins/science/skills/embl_ebi_ols/SKILL.md"
       },
       {
         "name": "encode-ccres-database",
@@ -1412,15 +2464,40 @@ const SKILLS_DATABASE = [
         "path": "/home/yash/.gemini/config/plugins/science/skills/encode_ccres_database/SKILL.md"
       },
       {
-        "name": "gnomad-database",
-        "command": "/gnomad-database",
-        "desc": "Query the Genome Aggregation Database (gnomAD). Use when determining the rarity or allele frequency of specific genetic variants, retrieving gene constraint metrics (pLI, LOEUF) to assess loss-of-function intolerance, finding variants in a genomic region or gene, or querying structural variants. Don't use for analyzing individual patient genomes, tracking somatic mutations in cancer (use COSMIC), or requesting raw sequencing reads (use ENA).",
+        "name": "federate-lakehouse-catalog",
+        "command": "/federate-lakehouse-catalog",
+        "desc": "Sets up Google Cloud Lakehouse federated catalogs to remote Iceberg REST Catalogs. Currently supported catalogs: Databricks Unity, AWS Glue. Supported clouds hosting those catalogs: GCP, AWS. The primary use case is connecting to remote data to query it from GCP engines (BigQuery, Spark). Examples of when to use this: \\\"federate my lakehouse catalog to databricks\\\", \\\"query data in databricks\\\", \\\"query data in s3\\\", \\\"connect to aws glue\\\". Do NOT use for direct remote database SQL execution (e.g., Databricks SQL) or managing remote clusters and infrastructure (e.g., Databricks clusters, AWS Glue jobs).",
         "tags": [
-          "gnomad",
-          "database",
+          "federate",
+          "lakehouse",
+          "catalog",
           "skill"
         ],
-        "path": "/home/yash/.gemini/config/plugins/science/skills/gnomad_database/SKILL.md"
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/federate-lakehouse-catalog/SKILL.md"
+      },
+      {
+        "name": "gcp-composer-troubleshooting",
+        "command": "/gcp-composer-troubleshooting",
+        "desc": "Provides expert guidance for troubleshooting Cloud Composer (Apache",
+        "tags": [
+          "gcp",
+          "composer",
+          "troubleshooting",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-composer-troubleshooting/SKILL.md"
+      },
+      {
+        "name": "gcp-data-pipelines",
+        "command": "/gcp-data-pipelines",
+        "desc": "Primary entry point for building, managing, and orchestrating data pipelines",
+        "tags": [
+          "gcp",
+          "data",
+          "pipelines",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-data-pipelines/SKILL.md"
       },
       {
         "name": "google-cloud-recipe-auth",
@@ -1504,18 +2581,6 @@ const SKILLS_DATABASE = [
           "skill"
         ],
         "path": "/home/yash/.gemini/config/plugins/science/skills/literature_search_biorxiv/SKILL.md"
-      },
-      {
-        "name": "modern-web-guidance",
-        "command": "/modern-web-guidance",
-        "desc": "Search tool for modern web development best practices, Web APIs, CSS/DOM, layout, performance, and accessibility.",
-        "tags": [
-          "modern",
-          "web",
-          "guidance",
-          "skill"
-        ],
-        "path": "/home/yash/.gemini/config/plugins/modern-web-guidance-plugin/skills/modern-web-guidance/SKILL.md"
       },
       {
         "name": "ncbi-sequence-fetch",
@@ -1626,8 +2691,11 @@ const SKILLS_DATABASE = [
 
 function getThemeCss() {
   const candidateThemeFiles = [
-    '/home/yash/Projects/antigravity-custom-theme/antigravity-boxed-terminal.css',
-    '/home/yash/.gemini/antigravity/antigravity-boxed-terminal.css'
+    '/home/yash/Projects/antigravity-comic-theme/theme.css',
+    '/home/yash/Projects/antigravity-custom-theme/theme.css',
+    '/home/yash/.config/Antigravity/themes/antigravity-comic-theme.css',
+    '/home/yash/.config/Antigravity-Profiles/themes/antigravity-comic-theme.css',
+    '/home/yash/Projects/antigravity-custom-theme/antigravity-boxed-terminal.css'
   ];
   for (const f of candidateThemeFiles) {
     try {
@@ -1646,14 +2714,35 @@ function getInjectionPayload() {
   return `
 (() => {
       const skillsData = ${skillsJson};
-      const themeCss = ${JSON.stringify(themeCss)};
+      let themeCss = ${JSON.stringify(themeCss)};
 
-      // 0. Ensure Boxed Terminal Theme Style is active across all instances
+      // 0. Ensure Comic Neubrutalism Theme Style is active across all instances
+      try {
+        if (typeof require === 'function') {
+          const _fs = require('fs');
+          const _candidates = [
+            '/home/yash/Projects/antigravity-comic-theme/theme.css',
+            '/home/yash/Projects/antigravity-custom-theme/theme.css',
+            '/home/yash/.config/Antigravity/themes/antigravity-comic-theme.css',
+            '/home/yash/.config/Antigravity-Profiles/themes/antigravity-comic-theme.css'
+          ];
+          for (const _f of _candidates) {
+            if (_fs.existsSync(_f)) {
+              const _c = _fs.readFileSync(_f, 'utf8');
+              if (_c && _c.length > 500) {
+                themeCss = _c;
+                break;
+              }
+            }
+          }
+        }
+      } catch (_) {}
+
       if (themeCss) {
-        let themeEl = document.getElementById("antigravity-boxed-theme-style");
+        let themeEl = document.getElementById("antigravity-comic-theme-style") || document.getElementById("antigravity-boxed-theme-style");
         if (!themeEl) {
           themeEl = document.createElement("style");
-          themeEl.id = "antigravity-boxed-theme-style";
+          themeEl.id = "antigravity-comic-theme-style";
           (document.head || document.documentElement).appendChild(themeEl);
         }
         if (themeEl.textContent !== themeCss) {
@@ -1761,18 +2850,32 @@ function getInjectionPayload() {
         }
         #antigravity-skills-nav-btn {
           cursor: pointer;
-          transition: all 0.15s ease;
+          transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s ease !important;
+          background: #FFFFFF !important;
+          border: 2px solid #000000 !important;
+          border-radius: 8px !important;
+          box-shadow: 2px 2px 0px #000000 !important;
+          color: #000000 !important;
+          font-weight: 800 !important;
+          margin: 4px 6px !important;
         }
+        #antigravity-skills-nav-btn:hover,
         #antigravity-skills-nav-btn.active {
-          background: rgba(255, 255, 255, 0.08) !important;
-          color: #fff !important;
+          background: #FFE600 !important;
+          color: #000000 !important;
+          transform: translate(1px, 1px) !important;
+          box-shadow: 1px 1px 0px #000000 !important;
+        }
+        #antigravity-skills-nav-btn svg {
+          color: #000000 !important;
+          stroke: #000000 !important;
         }
         #antigravity-skills-backdrop {
           position: fixed;
           inset: 0;
-          background: rgba(0, 0, 0, 0.5);
-          backdrop-filter: blur(4px);
-          -webkit-backdrop-filter: blur(4px);
+          background: rgba(0, 0, 0, 0.45);
+          backdrop-filter: blur(2px);
+          -webkit-backdrop-filter: blur(2px);
           z-index: 999990;
           opacity: 0;
           pointer-events: none;
@@ -1788,13 +2891,11 @@ function getInjectionPayload() {
           right: 0;
           bottom: 0;
           height: 100vh;
-          width: 480px;
+          width: 500px;
           max-width: 90vw;
-          background: rgba(var(--ag-surface-rgb, 41, 35, 20), 0.88);
-          backdrop-filter: blur(28px) saturate(180%);
-          -webkit-backdrop-filter: blur(28px) saturate(180%);
-          border-left: 1.5px solid var(--primary, #e4be67);
-          box-shadow: -12px 0 45px rgba(0, 0, 0, 0.75), inset 1px 0 0 rgba(255, 255, 255, 0.08);
+          background: #F4EEDD !important;
+          border-left: 3.5px solid #000000 !important;
+          box-shadow: -8px 0px 0px #000000 !important;
           z-index: 999995;
           display: flex;
           flex-direction: column;
@@ -1803,8 +2904,8 @@ function getInjectionPayload() {
           pointer-events: none !important;
           visibility: hidden !important;
           opacity: 0 !important;
-          color: var(--foreground, #f3f2f2);
-          font-family: var(--font-mono, "JetBrainsMono Nerd Font", monospace);
+          color: #000000 !important;
+          font-family: var(--font-sans, "Google Sans", system-ui, -apple-system, sans-serif) !important;
           box-sizing: border-box;
         }
         #antigravity-skills-drawer.open {
@@ -1815,21 +2916,23 @@ function getInjectionPayload() {
         }
         .ag-drawer-header {
           padding: 14px 18px;
-          border-bottom: 1px solid rgba(var(--ag-primary-rgb, 228, 190, 103), 0.25);
+          border-bottom: 3px solid #000000 !important;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          background: rgba(0, 0, 0, 0.25);
+          background: #FFE600 !important;
           flex-shrink: 0;
         }
         .ag-drawer-title {
-          font-size: 14px;
-          font-weight: 700;
+          font-size: 15px;
+          font-weight: 900;
           display: flex;
           align-items: center;
           gap: 8px;
-          color: var(--primary, #e4be67);
-          font-family: var(--font-mono, "JetBrainsMono Nerd Font", monospace);
+          color: #000000 !important;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          font-family: var(--font-sans, "Google Sans", system-ui, sans-serif);
         }
         .ag-drawer-header-actions {
           display: flex;
@@ -1837,169 +2940,242 @@ function getInjectionPayload() {
           gap: 8px;
         }
         .ag-drawer-action-btn {
-          background: rgba(var(--ag-primary-rgb, 228, 190, 103), 0.08);
-          border: 1px solid rgba(var(--ag-primary-rgb, 228, 190, 103), 0.25);
-          color: var(--foreground, #f3f2f2);
+          background: #FFFFFF !important;
+          border: 2px solid #000000 !important;
+          box-shadow: 2px 2px 0px #000000 !important;
+          color: #000000 !important;
           border-radius: 6px;
           padding: 4px 10px;
           font-size: 11px;
-          font-weight: 500;
+          font-weight: 800;
           display: flex;
           align-items: center;
           gap: 5px;
           cursor: pointer;
           transition: all 0.15s ease;
-          font-family: var(--font-mono, "JetBrainsMono Nerd Font", monospace);
+          font-family: var(--font-mono, monospace);
         }
         .ag-drawer-action-btn:hover {
-          background: rgba(var(--ag-primary-rgb, 228, 190, 103), 0.2);
-          border-color: var(--primary, #e4be67);
-          color: var(--primary, #e4be67);
+          background: #FFE600 !important;
+          transform: translate(1px, 1px);
+          box-shadow: 1px 1px 0px #000000 !important;
         }
         .ag-drawer-close-btn {
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          color: var(--muted-foreground, #b6b4af);
+          background: #FFFFFF !important;
+          border: 2.5px solid #000000 !important;
+          box-shadow: 2.5px 2.5px 0px #000000 !important;
+          color: #000000 !important;
           border-radius: 6px;
-          width: 28px;
-          height: 28px;
+          width: 32px;
+          height: 32px;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
+          font-size: 14px;
+          font-weight: 900;
           transition: all 0.15s ease;
         }
         .ag-drawer-close-btn:hover {
-          background: rgba(var(--ag-primary-rgb, 228, 190, 103), 0.2);
-          border-color: var(--primary, #e4be67);
-          color: var(--primary, #e4be67);
+          background: #FF4444 !important;
+          color: #FFFFFF !important;
+          transform: translate(1px, 1px);
+          box-shadow: 1.5px 1.5px 0px #000000 !important;
         }
         .ag-drawer-search-wrap {
-          padding: 12px 18px;
-          border-bottom: 1px solid rgba(var(--ag-primary-rgb, 228, 190, 103), 0.15);
-          background: rgba(0, 0, 0, 0.15);
+          padding: 14px 18px;
+          border-bottom: 3px solid #000000 !important;
+          background: #EBE5D5 !important;
           flex-shrink: 0;
         }
         .ag-drawer-search {
           width: 100%;
-          background: rgba(0, 0, 0, 0.45);
-          border: 1px solid rgba(var(--ag-outline-rgb, 115, 108, 94), 0.4);
-          border-radius: 6px;
-          padding: 8px 12px;
-          color: var(--foreground, #f3f2f2);
-          font-size: 12px;
+          background: #FFFFFF !important;
+          border: 2.5px solid #000000 !important;
+          border-radius: 8px;
+          box-shadow: 3px 3px 0px #000000 !important;
+          padding: 9px 14px;
+          color: #000000 !important;
+          font-size: 13px;
+          font-weight: 600;
           outline: none;
           box-sizing: border-box;
-          font-family: var(--font-mono, "JetBrainsMono Nerd Font", monospace);
+          font-family: var(--font-sans, "Google Sans", system-ui, sans-serif);
           transition: all 0.2s ease;
         }
+        .ag-drawer-search::placeholder {
+          color: #666666 !important;
+        }
         .ag-drawer-search:focus {
-          border-color: var(--primary, #e4be67);
-          box-shadow: 0 0 10px rgba(var(--ag-primary-rgb, 228, 190, 103), 0.3);
+          border-color: #000000 !important;
+          box-shadow: 4px 4px 0px #000000 !important;
         }
         .ag-drawer-content {
           flex: 1 1 auto;
           overflow-y: auto !important;
           overflow-x: hidden !important;
-          padding: 12px 16px;
+          padding: 14px 18px;
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: 12px;
+          background: #F4EEDD !important;
           scrollbar-width: thin !important;
-          scrollbar-color: rgba(var(--ag-primary-rgb, 228, 190, 103), 0.4) transparent !important;
+          scrollbar-color: #000000 #EBE5D5 !important;
         }
         .ag-drawer-content::-webkit-scrollbar {
           display: block !important;
-          width: 6px !important;
+          width: 8px !important;
         }
         .ag-drawer-content::-webkit-scrollbar-track {
-          background: transparent !important;
+          background: #EBE5D5 !important;
+          border-left: 2px solid #000000 !important;
         }
         .ag-drawer-content::-webkit-scrollbar-thumb {
-          background: rgba(var(--ag-primary-rgb, 228, 190, 103), 0.4) !important;
-          border-radius: 9999px !important;
+          background: #FFE600 !important;
+          border: 2px solid #000000 !important;
+          border-radius: 4px !important;
         }
         .ag-drawer-content::-webkit-scrollbar-thumb:hover {
-          background: var(--primary, #e4be67) !important;
+          background: #000000 !important;
         }
         .ag-category-box {
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          border: 3px solid #000000 !important;
           border-radius: 8px;
+          box-shadow: 3.5px 3.5px 0px #000000 !important;
           overflow: hidden;
-          background: rgba(0, 0, 0, 0.2);
+          background: #FFFFFF !important;
           flex-shrink: 0 !important;
           min-height: max-content !important;
+          margin-bottom: 4px;
         }
         .ag-category-header {
-          padding: 10px 14px;
+          padding: 11px 14px;
           display: flex;
           align-items: center;
           justify-content: space-between;
           cursor: pointer;
           user-select: none;
-          font-size: 12px;
-          font-weight: 600;
-          color: var(--foreground, #f3f2f2);
-          background: rgba(var(--ag-surface-variant-rgb, 69, 58, 33), 0.3);
-          font-family: var(--font-mono, "JetBrainsMono Nerd Font", monospace);
-          border-bottom: 1px solid transparent;
+          font-size: 13px;
+          font-weight: 900;
+          color: #000000 !important;
+          background: #FFFFFF !important;
+          font-family: var(--font-sans, "Google Sans", system-ui, sans-serif);
+          border-bottom: 2.5px solid transparent;
+          transition: background 0.15s ease;
         }
         .ag-category-header:hover {
-          background: rgba(var(--ag-surface-variant-rgb, 69, 58, 33), 0.5);
-          color: #fff;
+          background: #FFF9D2 !important;
         }
         .ag-category-box.open .ag-category-header {
-          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+          background: #FFE600 !important;
+          border-bottom: 2.5px solid #000000 !important;
         }
         .ag-category-chevron {
           transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
           display: inline-block;
-          color: var(--primary, #e4be67);
+          color: #000000 !important;
+          font-weight: 900;
+          font-size: 14px;
         }
         .ag-category-box.open .ag-category-chevron {
           transform: rotate(180deg);
         }
         .ag-category-body {
           display: none;
-          padding: 8px 10px 12px 10px;
+          padding: 12px 12px 14px 12px;
           flex-direction: column;
-          gap: 8px;
-          background: rgba(0, 0, 0, 0.15);
+          gap: 10px;
+          background: #F8F5EC !important;
         }
         .ag-category-box.open .ag-category-body {
           display: flex;
         }
         .ag-skill-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.07);
+          background: #FFFFFF !important;
+          border: 2px solid #000000 !important;
           border-radius: 6px;
+          box-shadow: 2px 2px 0px #000000 !important;
           padding: 10px 12px;
           display: flex;
           flex-direction: column;
           gap: 6px;
-          transition: border-color 0.15s ease, background 0.15s ease;
+          transition: all 0.15s ease;
+          cursor: pointer;
+          user-select: none;
+          position: relative;
         }
         .ag-skill-card:hover {
-          border-color: rgba(var(--ag-primary-rgb, 228, 190, 103), 0.35);
-          background: rgba(var(--ag-surface-variant-rgb, 69, 58, 33), 0.25);
+          border-color: #000000 !important;
+          background: #FFFDF5 !important;
+          transform: translate(-1px, -1px);
+          box-shadow: 3px 3px 0px #000000 !important;
+        }
+        .ag-skill-card.selected {
+          border-color: #000000 !important;
+          background: #FFF8C5 !important;
+          box-shadow: 3px 3px 0px #000000 !important;
         }
         .ag-skill-top {
           display: flex;
           align-items: center;
           justify-content: space-between;
+          gap: 8px;
+        }
+        .ag-skill-top-left {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          min-width: 0;
+          flex: 1;
+        }
+        .ag-skill-checkbox {
+          appearance: none;
+          -webkit-appearance: none;
+          width: 17px;
+          height: 17px;
+          border: 2px solid #000000 !important;
+          border-radius: 4px;
+          background: #FFFFFF !important;
+          cursor: pointer;
+          display: inline-grid;
+          place-content: center;
+          margin: 0;
+          transition: all 0.15s ease;
+          flex-shrink: 0;
+        }
+        .ag-skill-checkbox:hover {
+          background: #FFF9D2 !important;
+        }
+        .ag-skill-checkbox:checked,
+        .ag-skill-card.selected .ag-skill-checkbox {
+          background: #FFE600 !important;
+          border-color: #000000 !important;
+        }
+        .ag-skill-checkbox:checked::after,
+        .ag-skill-card.selected .ag-skill-checkbox::after {
+          content: "";
+          width: 4px;
+          height: 8px;
+          border: solid #000000;
+          border-width: 0 2.5px 2.5px 0;
+          transform: rotate(45deg);
+          margin-top: -2px;
         }
         .ag-skill-name {
-          font-family: var(--font-mono, "JetBrainsMono Nerd Font", monospace);
+          font-family: var(--font-mono, monospace);
           font-size: 13px;
-          font-weight: 700;
-          color: var(--primary, #e4be67);
+          font-weight: 800;
+          color: #000000 !important;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .ag-skill-usage-badge {
           font-size: 10px;
-          font-weight: 700;
-          color: var(--primary, #e4be67);
-          background: rgba(var(--ag-primary-rgb, 228, 190, 103), 0.15);
-          border: 1px solid rgba(var(--ag-primary-rgb, 228, 190, 103), 0.35);
+          font-weight: 800;
+          color: #000000 !important;
+          background: #FFE600 !important;
+          border: 1.5px solid #000000 !important;
           border-radius: 9999px;
           padding: 1px 6px;
           display: inline-flex;
@@ -2007,28 +3183,34 @@ function getInjectionPayload() {
           gap: 2px;
           white-space: nowrap;
           user-select: none;
-          font-family: var(--font-mono, "JetBrainsMono Nerd Font", monospace);
+          font-family: var(--font-mono, monospace);
+          flex-shrink: 0;
         }
         .ag-skill-use-btn {
-          background: var(--primary, #e4be67);
-          color: #101010;
-          border: none;
-          border-radius: 4px;
+          background: #FFE600 !important;
+          color: #000000 !important;
+          border: 2px solid #000000 !important;
+          box-shadow: 2px 2px 0px #000000 !important;
+          border-radius: 5px;
           padding: 3px 10px;
           font-size: 11px;
-          font-weight: 700;
+          font-weight: 900;
           cursor: pointer;
           transition: all 0.15s ease;
-          font-family: var(--font-mono, "JetBrainsMono Nerd Font", monospace);
+          font-family: var(--font-mono, monospace);
+          flex-shrink: 0;
         }
         .ag-skill-use-btn:hover {
-          opacity: 0.9;
-          transform: scale(1.03);
+          background: #000000 !important;
+          color: #FFE600 !important;
+          transform: translate(1px, 1px);
+          box-shadow: 1px 1px 0px #000000 !important;
         }
         .ag-skill-desc {
           font-size: 11.5px;
-          color: var(--muted-foreground, #b6b4af);
+          color: #333333 !important;
           line-height: 1.45;
+          font-weight: 500;
         }
         .ag-skill-tags {
           display: flex;
@@ -2037,34 +3219,255 @@ function getInjectionPayload() {
         }
         .ag-skill-tag {
           font-size: 10px;
-          color: var(--primary, #e4be67);
-          background: rgba(var(--ag-primary-rgb, 228, 190, 103), 0.08);
-          border: 1px solid rgba(var(--ag-primary-rgb, 228, 190, 103), 0.15);
-          padding: 1px 5px;
+          color: #000000 !important;
+          background: #EBE5D5 !important;
+          border: 1px solid #000000 !important;
+          padding: 1px 6px;
           border-radius: 4px;
-          font-family: var(--font-mono, "JetBrainsMono Nerd Font", monospace);
+          font-family: var(--font-mono, monospace);
+          font-weight: 700;
         }
-        .ag-drawer-footer {
-          padding: 10px 16px;
-          border-top: 1px solid rgba(var(--ag-primary-rgb, 228, 190, 103), 0.15);
+
+        /* Header Multi-Select Pill */
+        .ag-drawer-header-pill {
+          background: #FFFFFF !important;
+          border: 2px solid #000000 !important;
+          box-shadow: 2px 2px 0px #000000 !important;
+          color: #000000 !important;
+          border-radius: 9999px;
+          padding: 2px 10px;
           font-size: 11px;
-          color: var(--muted-foreground, #b6b4af);
+          font-weight: 800;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          font-family: var(--font-mono, monospace);
+        }
+
+        /* Search Filter Subbar */
+        .ag-drawer-filter-bar {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          background: rgba(0, 0, 0, 0.35);
+          margin-top: 10px;
+          font-size: 12px;
+          font-weight: 800;
+          color: #222222 !important;
+        }
+        .ag-filter-btn {
+          background: #FFFFFF !important;
+          border: 2px solid #000000 !important;
+          box-shadow: 1.5px 1.5px 0px #000000 !important;
+          color: #000000 !important;
+          border-radius: 5px;
+          padding: 2px 9px;
+          font-size: 11px;
+          font-weight: 800;
+          cursor: pointer;
+          transition: all 0.15s ease;
+          font-family: var(--font-mono, monospace);
+        }
+        .ag-filter-btn:hover {
+          background: #FFE600 !important;
+          transform: translate(1px, 1px);
+          box-shadow: 1px 1px 0px #000000 !important;
+        }
+
+        /* Category Header Multi-Select */
+        .ag-category-header-title {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          min-width: 0;
+        }
+        .ag-category-header-right {
+          display: flex;
+          align-items: center;
+          gap: 8px;
           flex-shrink: 0;
-          font-family: var(--font-mono, "JetBrainsMono Nerd Font", monospace);
+        }
+        .ag-category-select-btn {
+          background: #FFFFFF !important;
+          border: 1.5px solid #000000 !important;
+          box-shadow: 1px 1px 0px #000000 !important;
+          color: #000000 !important;
+          border-radius: 4px;
+          padding: 2px 8px;
+          font-size: 10px;
+          font-weight: 800;
+          cursor: pointer;
+          font-family: var(--font-mono, monospace);
+          transition: all 0.15s ease;
+        }
+        .ag-category-select-btn:hover {
+          background: #000000 !important;
+          color: #FFE600 !important;
+        }
+        .ag-category-badge {
+          background: #000000 !important;
+          color: #FFE600 !important;
+          border: 1.5px solid #000000 !important;
+          font-size: 10px;
+          font-weight: 900;
+          border-radius: 9999px;
+          padding: 1px 7px;
+          line-height: 14px;
+        }
+
+        /* Sticky Multi-Select Dock */
+        .ag-drawer-selection-bar {
+          position: sticky;
+          bottom: 0;
+          background: #FFE600 !important;
+          border-top: 3px solid #000000 !important;
+          box-shadow: 0 -4px 0px #000000 !important;
+          padding: 12px 18px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          z-index: 100;
+          flex-shrink: 0;
+        }
+        .ag-selection-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .ag-selection-pill {
+          font-size: 13px;
+          font-weight: 900;
+          color: #000000 !important;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+        .ag-selection-count-circle {
+          background: #000000 !important;
+          color: #FFE600 !important;
+          border-radius: 9999px;
+          min-width: 20px;
+          height: 20px;
+          padding: 0 6px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 11px;
+          font-weight: 900;
+        }
+        .ag-selection-clear-btn {
+          background: transparent;
+          border: none;
+          color: #000000 !important;
+          font-size: 11px;
+          font-weight: 800;
+          cursor: pointer;
+          text-decoration: underline;
+          padding: 0;
+          font-family: var(--font-mono, monospace);
+        }
+        .ag-selection-clear-btn:hover {
+          color: #FF0000 !important;
+        }
+        .ag-selection-chips-scroll {
+          display: flex;
+          gap: 6px;
+          overflow-x: auto;
+          padding-bottom: 4px;
+          scrollbar-width: thin;
+        }
+        .ag-selection-chips-scroll::-webkit-scrollbar {
+          height: 4px;
+        }
+        .ag-selection-chips-scroll::-webkit-scrollbar-thumb {
+          background: #000000 !important;
+          border-radius: 4px;
+        }
+        .ag-selection-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: #FFFFFF !important;
+          border: 2px solid #000000 !important;
+          box-shadow: 1.5px 1.5px 0px #000000 !important;
+          color: #000000 !important;
+          font-size: 11px;
+          font-weight: 800;
+          padding: 2px 8px;
+          border-radius: 5px;
+          white-space: nowrap;
+        }
+        .ag-chip-remove {
+          cursor: pointer;
+          color: #000000 !important;
+          font-size: 13px;
+          font-weight: 900;
+          line-height: 1;
+          display: inline-block;
+          padding: 0 1px;
+        }
+        .ag-chip-remove:hover {
+          color: #FF0000 !important;
+        }
+        .ag-selection-actions {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .ag-selection-btn {
+          font-family: var(--font-mono, monospace);
+          font-size: 12px;
+          font-weight: 900;
+          border-radius: 6px;
+          padding: 8px 14px;
+          cursor: pointer;
+          transition: all 0.15s ease;
+        }
+        .ag-btn-copy {
+          background: #FFFFFF !important;
+          border: 2.5px solid #000000 !important;
+          box-shadow: 2.5px 2.5px 0px #000000 !important;
+          color: #000000 !important;
+          flex: 1;
+        }
+        .ag-btn-copy:hover {
+          background: #F4EEDD !important;
+          transform: translate(1px, 1px);
+          box-shadow: 1.5px 1.5px 0px #000000 !important;
+        }
+        .ag-btn-insert {
+          background: #000000 !important;
+          border: 2.5px solid #000000 !important;
+          box-shadow: 2.5px 2.5px 0px #FFFFFF, 2.5px 2.5px 0 2.5px #000000 !important;
+          color: #FFE600 !important;
+          flex: 2;
+        }
+        .ag-btn-insert:hover {
+          background: #222222 !important;
+          color: #FFFFFF !important;
+          transform: translate(1px, 1px);
+        }
+        .ag-drawer-footer {
+          padding: 12px 18px;
+          border-top: 3px solid #000000 !important;
+          font-size: 11px;
+          font-weight: 800;
+          color: #222222 !important;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: #EBE5D5 !important;
+          flex-shrink: 0;
+          font-family: var(--font-mono, monospace);
         }
         .ag-drawer-footer a {
-          color: var(--primary, #e4be67);
-          text-decoration: none;
-          font-family: var(--font-mono, "JetBrainsMono Nerd Font", monospace);
-          font-weight: 700;
+          color: #000000 !important;
+          text-decoration: underline !important;
+          font-family: var(--font-mono, monospace);
+          font-weight: 900;
           cursor: pointer;
         }
         .ag-drawer-footer a:hover {
-          text-decoration: underline;
+          color: #D97706 !important;
         }
       \`;
 
@@ -2088,13 +3491,22 @@ function getInjectionPayload() {
               <span>Skills & Commands Hub</span>
             </div>
             <div class="ag-drawer-header-actions">
+              <span class="ag-drawer-header-pill" id="ag-drawer-header-pill" style="display: none;">0 selected</span>
               <button class="ag-drawer-close-btn" id="ag-drawer-close-btn" title="Close (Esc)">✕</button>
             </div>
           </div>
           <div class="ag-drawer-search-wrap">
             <input type="text" class="ag-drawer-search" id="ag-drawer-search" placeholder="Search skills, commands, keywords..." />
+            <div class="ag-drawer-filter-bar">
+              <span id="ag-visible-count">All skills</span>
+              <div style="display: flex; gap: 6px;">
+                <button class="ag-filter-btn" id="ag-select-visible-btn" type="button" title="Select / deselect all visible matching skills">Select all</button>
+                <button class="ag-filter-btn" id="ag-clear-selection-btn" type="button" title="Deselect all skills" style="display: none;">Clear (0)</button>
+              </div>
+            </div>
           </div>
           <div class="ag-drawer-content" id="ag-drawer-content"></div>
+          <div class="ag-drawer-selection-bar" id="ag-drawer-selection-bar" style="display: none;"></div>
           <div class="ag-drawer-footer">
             <span>Import / consolidate skills:</span>
             <a id="ag-footer-agent-link">/skills-manager ↳</a>
@@ -2102,6 +3514,10 @@ function getInjectionPayload() {
         \`;
         document.body.appendChild(drawer);
       }
+
+      // Multi-Select State
+      const selectedSkills = new Set();
+      let currentVisibleSkills = [];
 
       // Usage tracking helpers
       function getUsageMap() {
@@ -2123,6 +3539,165 @@ function getInjectionPayload() {
         } catch (_) {}
       }
 
+      function updateCategoryBadges() {
+        document.querySelectorAll(".ag-category-box").forEach(box => {
+          const catIdx = Number(box.dataset.catIdx);
+          const cat = skillsData[catIdx];
+          if (!cat) return;
+          const cards = box.querySelectorAll(".ag-skill-card");
+          const selectedCards = box.querySelectorAll(".ag-skill-card.selected");
+          const count = selectedCards.length;
+
+          const titleEl = box.querySelector(".ag-category-header-title");
+          if (titleEl) {
+            let badge = titleEl.querySelector(".ag-category-badge");
+            if (count > 0) {
+              if (!badge) {
+                badge = document.createElement("span");
+                badge.className = "ag-category-badge";
+                titleEl.appendChild(badge);
+              }
+              badge.textContent = count;
+            } else if (badge) {
+              badge.remove();
+            }
+          }
+
+          const btn = box.querySelector(".ag-category-select-btn");
+          if (btn) {
+            btn.textContent = (cards.length > 0 && count === cards.length) ? "Deselect all" : "Select all";
+          }
+        });
+      }
+
+      function syncCardState(cmd) {
+        const isSelected = selectedSkills.has(cmd);
+        document.querySelectorAll(\`.ag-skill-card[data-cmd="\${cmd}"]\`).forEach(card => {
+          card.classList.toggle("selected", isSelected);
+          const cb = card.querySelector(".ag-skill-checkbox");
+          if (cb) cb.checked = isSelected;
+        });
+      }
+
+      function syncAllCards() {
+        document.querySelectorAll(".ag-skill-card").forEach(card => {
+          const cmd = card.dataset.cmd;
+          const isSelected = selectedSkills.has(cmd);
+          card.classList.toggle("selected", isSelected);
+          const cb = card.querySelector(".ag-skill-checkbox");
+          if (cb) cb.checked = isSelected;
+        });
+        updateCategoryBadges();
+      }
+
+      function updateSelectionBar() {
+        const bar = document.getElementById("ag-drawer-selection-bar");
+        const pill = document.getElementById("ag-drawer-header-pill");
+        const clearFilterBtn = document.getElementById("ag-clear-selection-btn");
+        const count = selectedSkills.size;
+
+        if (count === 0) {
+          if (bar) bar.style.display = "none";
+          if (pill) pill.style.display = "none";
+          if (clearFilterBtn) clearFilterBtn.style.display = "none";
+          return;
+        }
+
+        if (pill) {
+          pill.style.display = "inline-flex";
+          pill.textContent = \`\${count} selected\`;
+        }
+        if (clearFilterBtn) {
+          clearFilterBtn.style.display = "inline-block";
+          clearFilterBtn.textContent = \`Clear (\${count})\`;
+        }
+
+        if (!bar) return;
+        bar.style.display = "flex";
+        bar.innerHTML = \`
+          <div class="ag-selection-top">
+            <div class="ag-selection-pill">
+              <span class="ag-selection-count-circle">\${count}</span>
+              <span>skill\${count > 1 ? "s" : ""} selected</span>
+            </div>
+            <button class="ag-selection-clear-btn" id="ag-selection-clear-btn" title="Deselect all">Clear all</button>
+          </div>
+          <div class="ag-selection-chips-scroll" id="ag-selection-chips-scroll">
+            \${Array.from(selectedSkills).map(cmd => \`
+              <span class="ag-selection-chip" data-cmd="\${cmd}">
+                \${cmd}
+                <span class="ag-chip-remove" data-remove="\${cmd}" title="Remove \${cmd}">×</span>
+              </span>
+            \`).join("")}
+          </div>
+          <div class="ag-selection-actions">
+            <button class="ag-selection-btn ag-btn-copy" id="ag-selection-copy-btn" title="Copy combined commands to clipboard">
+              📋 Copy
+            </button>
+            <button class="ag-selection-btn ag-btn-insert" id="ag-selection-insert-btn" title="Insert selected commands into chat input">
+              Insert Selected (\${count}) ↳
+            </button>
+          </div>
+        \`;
+
+        const clearBtn = bar.querySelector("#ag-selection-clear-btn");
+        if (clearBtn) {
+          clearBtn.onclick = () => {
+            selectedSkills.clear();
+            syncAllCards();
+            updateSelectionBar();
+          };
+        }
+
+        bar.querySelectorAll(".ag-chip-remove").forEach(rm => {
+          rm.onclick = (e) => {
+            e.stopPropagation();
+            const cmd = rm.getAttribute("data-remove");
+            if (cmd) {
+              selectedSkills.delete(cmd);
+              syncCardState(cmd);
+              updateCategoryBadges();
+              updateSelectionBar();
+            }
+          };
+        });
+
+        const copyBtn = bar.querySelector("#ag-selection-copy-btn");
+        if (copyBtn) {
+          copyBtn.onclick = () => {
+            const text = Array.from(selectedSkills).join(" ");
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(text).catch(() => {});
+            }
+            copyBtn.textContent = "✓ Copied!";
+            setTimeout(() => {
+              if (copyBtn) copyBtn.textContent = "📋 Copy";
+            }, 1500);
+          };
+        }
+
+        const insertBtn = bar.querySelector("#ag-selection-insert-btn");
+        if (insertBtn) {
+          insertBtn.onclick = () => {
+            const list = Array.from(selectedSkills);
+            const textToInsert = list.join(" ") + " ";
+            list.forEach(cmd => recordSkillUsage(cmd));
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(textToInsert.trim()).catch(() => {});
+            }
+            const editor = document.querySelector('[data-lexical-editor="true"]') || document.querySelector('[aria-label="Message input"]');
+            if (editor) {
+              editor.focus();
+              editor.dispatchEvent(new InputEvent("beforeinput", { bubbles: true, cancelable: true, inputType: "insertText", data: textToInsert }));
+              toggleDrawer(false);
+            }
+            selectedSkills.clear();
+            syncAllCards();
+            updateSelectionBar();
+          };
+        }
+      }
+
       function toggleDrawer(open) {
         const d = document.getElementById("antigravity-skills-drawer");
         const b = document.getElementById("antigravity-skills-backdrop");
@@ -2133,6 +3708,7 @@ function getInjectionPayload() {
         if (shouldOpen) {
           const s = document.getElementById("ag-drawer-search");
           renderSkills(s ? s.value : "");
+          updateSelectionBar();
           d.classList.add("open");
           if (b) b.classList.add("open");
           if (btn) btn.classList.add("active");
@@ -2199,11 +3775,16 @@ function getInjectionPayload() {
         const q = filterText.trim().toLowerCase();
         const usageMap = getUsageMap();
 
+        currentVisibleSkills = [];
         let visibleCount = 0;
-        skillsData.forEach(cat => {
+        let totalCount = 0;
+
+        skillsData.forEach((cat, catIdx) => {
+          totalCount += cat.skills.length;
           let matches = cat.skills.filter(s => !q || s.name.toLowerCase().includes(q) || s.command.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q) || (s.tags && s.tags.some(t => t.toLowerCase().includes(q))));
           if (matches.length === 0) return;
           visibleCount++;
+          matches.forEach(m => currentVisibleSkills.push(m));
 
           // Sort within this category by usage count descending, then alphabetically by name
           matches.sort((a, b) => {
@@ -2218,8 +3799,45 @@ function getInjectionPayload() {
           const box = document.createElement("div");
           const isOpen = Boolean(q);
           box.className = isOpen ? "ag-category-box open" : "ag-category-box";
-          box.innerHTML = \`<div class="ag-category-header"><span>\${cat.category}</span><span class="ag-category-chevron">▾</span></div>\`;
-          box.querySelector(".ag-category-header").onclick = () => box.classList.toggle("open");
+          box.dataset.catIdx = catIdx;
+
+          const selectedInCat = matches.filter(s => selectedSkills.has(s.command)).length;
+          const catBadgeHtml = selectedInCat > 0 ? \`<span class="ag-category-badge">\${selectedInCat}</span>\` : "";
+
+          box.innerHTML = \`
+            <div class="ag-category-header">
+              <div class="ag-category-header-title">
+                <span>\${cat.category}</span>
+                \${catBadgeHtml}
+              </div>
+              <div class="ag-category-header-right">
+                <button class="ag-category-select-btn" type="button" title="Toggle selection for all skills in this category">
+                  \${selectedInCat === matches.length && matches.length > 0 ? "Deselect all" : "Select all"}
+                </button>
+                <span class="ag-category-chevron">▾</span>
+              </div>
+            </div>
+          \`;
+
+          box.querySelector(".ag-category-header").onclick = (e) => {
+            if (e.target.closest(".ag-category-select-btn")) return;
+            box.classList.toggle("open");
+          };
+
+          const selectAllBtn = box.querySelector(".ag-category-select-btn");
+          if (selectAllBtn) {
+            selectAllBtn.onclick = (e) => {
+              e.stopPropagation();
+              const allSelected = matches.length > 0 && matches.every(s => selectedSkills.has(s.command));
+              if (allSelected) {
+                matches.forEach(s => selectedSkills.delete(s.command));
+              } else {
+                matches.forEach(s => selectedSkills.add(s.command));
+              }
+              syncAllCards();
+              updateSelectionBar();
+            };
+          }
 
           const body = document.createElement("div");
           body.className = "ag-category-body";
@@ -2228,22 +3846,40 @@ function getInjectionPayload() {
             const badgeHtml = count > 0 
               ? \`<span class="ag-skill-usage-badge" title="Used \${count} times">★ \${count}</span>\` 
               : "";
+            const isSelected = selectedSkills.has(s.command);
 
             const card = document.createElement("div");
-            card.className = "ag-skill-card";
+            card.className = isSelected ? "ag-skill-card selected" : "ag-skill-card";
+            card.dataset.cmd = s.command;
             card.innerHTML = \`
               <div class="ag-skill-top">
-                <div style="display: flex; align-items: center; gap: 6px;">
+                <div class="ag-skill-top-left">
+                  <input type="checkbox" class="ag-skill-checkbox" \${isSelected ? "checked" : ""} aria-label="Select \${s.command}" />
                   <span class="ag-skill-name">\${s.command}</span>
                   \${badgeHtml}
                 </div>
-                <button class="ag-skill-use-btn">Use ↳</button>
+                <button class="ag-skill-use-btn" title="Use only this skill immediately">Use ↳</button>
               </div>
               <div class="ag-skill-desc">\${s.desc}</div>
               <div class="ag-skill-tags">
                 \${(s.tags || []).map(t => \`<span class="ag-skill-tag">#\${t}</span>\`).join("")}
               </div>
             \`;
+
+            card.onclick = (e) => {
+              if (e.target.closest(".ag-skill-use-btn")) return;
+              const nextSelected = !selectedSkills.has(s.command);
+              if (nextSelected) {
+                selectedSkills.add(s.command);
+              } else {
+                selectedSkills.delete(s.command);
+              }
+              card.classList.toggle("selected", nextSelected);
+              const cb = card.querySelector(".ag-skill-checkbox");
+              if (cb) cb.checked = nextSelected;
+              updateCategoryBadges();
+              updateSelectionBar();
+            };
 
             card.querySelector(".ag-skill-use-btn").onclick = (e) => {
               e.stopPropagation();
@@ -2264,12 +3900,17 @@ function getInjectionPayload() {
           container.appendChild(box);
         });
 
+        const visibleCountEl = document.getElementById("ag-visible-count");
+        if (visibleCountEl) {
+          visibleCountEl.textContent = q ? \`\${currentVisibleSkills.length} matches\` : \`\${totalCount} skills\`;
+        }
+
         if (visibleCount === 0) {
           container.innerHTML = \`
-            <div style="text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.4);">
-              <div style="font-size: 24px; margin-bottom: 8px;">🔍</div>
-              <div style="font-size: 13px; font-weight: 600;">No matching skills found</div>
-              <div style="font-size: 11px; margin-top: 6px;">Import any skill from GitHub or local path with: <code>/skills-manager import &lt;url&gt;</code></div>
+            <div style="text-align: center; padding: 32px 20px; color: #333333; background: #FFFFFF; border: 2.5px solid #000000; border-radius: 8px; box-shadow: 3px 3px 0px #000000; margin: 8px 4px;">
+              <div style="font-size: 28px; margin-bottom: 8px;">🔍</div>
+              <div style="font-size: 14px; font-weight: 800; color: #000000;">No matching skills found</div>
+              <div style="font-size: 11.5px; margin-top: 8px; color: #333333; font-weight: 600;">Import any skill from GitHub or local path with: <code style="background: #FFE600; color: #000000; padding: 2px 6px; border: 1.5px solid #000000; border-radius: 4px; font-weight: 800;">/skills-manager import &lt;url&gt;</code></div>
             </div>
           \`;
         }
@@ -2279,6 +3920,30 @@ function getInjectionPayload() {
       const searchInput = document.getElementById("ag-drawer-search");
       if (searchInput) {
         searchInput.oninput = (e) => renderSkills(e.target.value);
+      }
+
+      const selectVisibleBtn = document.getElementById("ag-select-visible-btn");
+      if (selectVisibleBtn) {
+        selectVisibleBtn.onclick = () => {
+          if (currentVisibleSkills.length === 0) return;
+          const allSelected = currentVisibleSkills.length > 0 && currentVisibleSkills.every(s => selectedSkills.has(s.command));
+          if (allSelected) {
+            currentVisibleSkills.forEach(s => selectedSkills.delete(s.command));
+          } else {
+            currentVisibleSkills.forEach(s => selectedSkills.add(s.command));
+          }
+          syncAllCards();
+          updateSelectionBar();
+        };
+      }
+
+      const clearSelectionBtn = document.getElementById("ag-clear-selection-btn");
+      if (clearSelectionBtn) {
+        clearSelectionBtn.onclick = () => {
+          selectedSkills.clear();
+          syncAllCards();
+          updateSelectionBar();
+        };
       }
 
       // Attach Sidebar Button (Self-Healing)
@@ -2302,13 +3967,13 @@ function getInjectionPayload() {
         b.id = "antigravity-skills-nav-btn";
         b.setAttribute("role", "button");
         b.tabIndex = 0;
-        b.className = "flex-grow flex items-center gap-1.5 group px-2 py-1 rounded-lg cursor-pointer h-8 min-w-0 bg-transparent hover:bg-sidebar-muted text-secondary-foreground";
+        b.className = "flex-grow flex items-center gap-1.5 group px-2 py-1 rounded-lg cursor-pointer h-8 min-w-0";
         b.innerHTML = \`
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" style="color: var(--primary, #e4be67);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0">
             <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
           </svg>
-          <span class="select-none truncate text-sm font-normal">Skills Hub</span>
-          <span style="margin-left: auto; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 9999px; background: rgba(var(--ag-primary-rgb, 228, 190, 103), 0.15); color: var(--primary, #e4be67); border: 1px solid rgba(var(--ag-primary-rgb, 228, 190, 103), 0.3);">/cmd</span>
+          <span class="select-none truncate text-sm font-extrabold text-black">Skills Hub</span>
+          <span style="margin-left: auto; font-size: 10px; font-weight: 900; padding: 1px 6px; border-radius: 9999px; background: #FFE600; color: #000000; border: 1.5px solid #000000;">/cmd</span>
         \`;
         b.onclick = (e) => {
           e.preventDefault();

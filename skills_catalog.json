@@ -1,41 +1,199 @@
 [
   {
-    "category": "\ud83e\uddca 3D Modeling & Motion Video",
+    "category": "\ud83d\udca1 1. Ideate & Spec",
     "skills": [
       {
-        "name": "blender",
-        "command": "/blender",
-        "desc": "Complete 3D modeling, texturing, lighting, rendering, and export pipeline in Blender. Use whenever asked to create, model, texture, shade, light, render 3D assets/scenes, weapons, hard-surface props, or export to GLB/FBX/OBJ/STL.",
+        "name": "anatomy",
+        "command": "/anatomy",
+        "desc": "Build interactive isometric SVG figures and diagrams with precise solid parts, realistic shaders, and motion. Use for technical drawings, interactive explainers, or architecture illustrations.",
         "tags": [
-          "blender",
+          "anatomy",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/blender/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/anatomy/SKILL.md"
+      },
+      {
+        "name": "auto",
+        "command": "/auto",
+        "desc": "Autonomous Multi-Skill Selector & Orchestrator. Strictly analyzes the user prompt and project context, searches and cross-references the entire available skills catalog, automatically selects and activates the exact skill or combination of skills required for the task, reads their full instructions, and enforces their standards without skipping. Triggers on: /autoskill, /auto, autoskill, auto, \\\"auto select skills\\\", \\\"choose skills\\\", \\\"run auto\\\".",
+        "tags": [
+          "auto",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/auto/SKILL.md"
+      },
+      {
+        "name": "bigquery-graph-author",
+        "command": "/bigquery-graph-author",
+        "desc": "Provides an end-to-end journey for authoring a BigQuery property graph from your tables or from a model document/diagram (an ER diagram, an ontology, a semantic model): dataset discovery, candidate relationships verified against the data, a readable plan, and `CREATE PROPERTY GRAPH` DDL with schema best practices and semantic measures/dimensions, plus an opt-in verification suite for the landed graph. Use when creating or replacing a property graph, authoring a graph from a dataset or a document, or verifying relationships or suspicious edge counts. Don't use for querying an existing graph, for non-BigQuery graph databases, or for drawing/rendering diagrams.",
+        "tags": [
+          "bigquery",
+          "graph",
+          "author",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigquery-graph-author/SKILL.md"
+      },
+      {
+        "name": "bigquery-observability",
+        "command": "/bigquery-observability",
+        "desc": "Provides data-retrieval best practices, tool selection guidance, and performant SQL query syntax for BigQuery telemetry across INFORMATION_SCHEMA, Cloud Monitoring, and the REST API. Use when the telemetry to fetch is already known, selecting telemetry tools, writing performant INFORMATION_SCHEMA queries, retrieving telemetry for diagnosing single-job performance bottlenecks, investigating slot contention, job concurrency and queue latency, analyzing reservation capacity, utilization and autoscaling saturation, or auditing capacity-based and on-demand compute and storage resource billable usage. Don't use for root-cause diagnosis or symptom troubleshooting when the cause is unknown (use bigquery-troubleshooting first), or for writing or optimizing business logic SQL (use bigquery-optimization).",
+        "tags": [
+          "bigquery",
+          "observability",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigquery-observability/SKILL.md"
+      },
+      {
+        "name": "bigquery-optimization",
+        "command": "/bigquery-optimization",
+        "desc": "Provides workflows to optimize BigQuery environments (capacity planning, editions), storage assets (partitioning, clustering, storage lifecycles, billing models), and SQL queries. Use when optimizing cost, modeling Edition migrations, rightsizing reservations, evaluating logical vs. physical storage, designing table partitioning/clustering, generating table DDL, migrating unpartitioned tables, managing partition expiration, optimizing individual SQL queries, or evaluating acceleration structures (search indexes, materialized views, BI Engine). Do not use for raw usage reporting (use bigquery-observability), query execution plan analysis, error troubleshooting, or diagnosing why a specific job was slow (use bigquery-troubleshooting).",
+        "tags": [
+          "bigquery",
+          "optimization",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigquery-optimization/SKILL.md"
+      },
+      {
+        "name": "bigquery-troubleshooting",
+        "command": "/bigquery-troubleshooting",
+        "desc": "Provides diagnostic workflows and step-by-step root-cause analysis procedures for actively broken, failing, or slow BigQuery jobs, execution graph and query plan stage bottlenecks, system performance issues, or unexpectedly expensive workloads. Use when interpreting symptoms, isolating bottlenecks, diagnosing cost spikes (on-demand query spend, capacity slot autoscaling, storage growth), execution graph stages or substep variables, identifying root causes, and determining remediation steps. Don't use for writing or optimizing SQL, proactive capacity planning, or storage layout design (use bigquery-optimization), or when the user already knows which telemetry they want and just needs the query (use bigquery-observability).",
+        "tags": [
+          "bigquery",
+          "troubleshooting",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigquery-troubleshooting/SKILL.md"
+      },
+      {
+        "name": "brainstorming",
+        "command": "/brainstorming",
+        "desc": "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation.",
+        "tags": [
+          "brainstorming",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/brainstorming/SKILL.md"
+      },
+      {
+        "name": "cheminformatics-physics",
+        "command": "/cheminformatics-physics",
+        "desc": "Simulates 3D molecular physics, conformer ensembles, and CADD workflows: pH-dependent ligand and receptor protonation, ETKDGv3 3D conformer generation, dihedral/relaxed PES torsion scans, AutoDock Vina/smina docking, conformational ligand strain energy, PROTAC/macrocycle 3D geometry, and OpenMM molecular dynamics.",
+        "tags": [
+          "cheminformatics",
+          "physics",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/cheminformatics_physics/SKILL.md"
+      },
+      {
+        "name": "claude-council",
+        "command": "/claude-council",
+        "desc": "Convene an LLM Council with five thinking lenses (Red Team, First Principles, Expansionist, Outsider, Executor) to pressure-test high-stakes architectural and design decisions. Triggers on /claude-council.",
+        "tags": [
+          "claude",
+          "council",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/claude-council/SKILL.md"
+      },
+      {
+        "name": "data-autocleaning",
+        "command": "/data-autocleaning",
+        "desc": "Automated data quality and transformation capabilities for Dataform/dbt/BigQuery",
+        "tags": [
+          "data",
+          "autocleaning",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/data-autocleaning/SKILL.md"
+      },
+      {
+        "name": "diagram-design",
+        "command": "/diagram-design",
+        "desc": "Design architecture diagrams, flowcharts, sequence diagrams, and system maps with .drawio, Mermaid, and Excalidraw support. Triggers on /diagram-design.",
+        "tags": [
+          "diagram",
+          "design",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/diagram-design/SKILL.md"
+      },
+      {
+        "name": "embl-ebi-ols",
+        "command": "/embl-ebi-ols",
+        "desc": "Query and search the EMBL-EBI Ontology Lookup Service (OLS) for biomedical ontology terms, definitions, and hierarchies across 250+ ontologies (e.g., GO, DOID, HP). Use when the user asks to search for terms, retrieve details, navigate hierarchies (parents, children, ancestors), look up properties and individuals, get autocomplete suggestions, or access ontology metadata and statistics.",
+        "tags": [
+          "embl",
+          "ebi",
+          "ols",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/embl_ebi_ols/SKILL.md"
+      },
+      {
+        "name": "executing-plans",
+        "command": "/executing-plans",
+        "desc": "Use when you have a written implementation plan to execute in a separate session with review checkpoints",
+        "tags": [
+          "executing",
+          "plans",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/executing-plans/SKILL.md"
+      },
+      {
+        "name": "gcp-dataflow",
+        "command": "/gcp-dataflow",
+        "desc": "Guides writing, packaging, executing, and troubleshooting Apache Beam pipelines on Dataflow. Use when creating new pipelines, configuring Flex Templates, or analyzing performance of Dataflow jobs. Capabilities include Java/Python/Go setup, Cloud Build integration, and deep diagnostic analysis of job health and autoscaling. Use when: - Creating an Apache Beam Dataflow pipeline. - Creating a Google Dataflow Flex Template. - Using an existing Google Dataflow Template. - Debugging Dataflow pipeline - Troubleshooting Dataflow pipeline - Analyzing Performance of Dataflow pipeline. Key capabilities: Java/Python/Go project setup, Flex Templates (with Cloud Build), and diagnostics for streaming job health, bottlenecks, and autoscaling. Do NOT use for: - General GCP resource management unrelated to Dataflow. - Issues with other GCP services (e.g., GCE, GCS, BigQuery) unless directly impacting Dataflow pipeline execution. - Pipeline technologies other than Apache Beam on Dataflow.",
+        "tags": [
+          "gcp",
+          "dataflow",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-dataflow/SKILL.md"
+      },
+      {
+        "name": "gcp-pipeline-resource-provisioning",
+        "command": "/gcp-pipeline-resource-provisioning",
+        "desc": "Automates declarative resource creation and provisioning for data pipelines, supporting BigQuery, Dataform, Dataproc, BigQuery Data Transfer Service (DTS), and other resources. It manages environment-specific configurations (dev, staging, prod) through a deployment.yaml file. Use when: - Modifying or creating deployment.yaml for deployment settings. - Resolving environment-specific variables (e.g., Project IDs, Regions) for deployment. - Provisioning supported infrastructure like BigQuery datasets/tables, Dataform resources, or DTS resources via deployment.yaml. Do not use when: - Resources already exist. - Managing resources not supported by `gcloud beta orchestration-pipelines resource-types list`. - Managing general cloud infrastructure (VMs, networks, Kubernetes, IAM policies), which are better suited for Terraform. - Infrastructure spans multiple cloud providers (AWS, Azure, etc.). - Already uses Terraform for the target resources.",
+        "tags": [
+          "gcp",
+          "pipeline",
+          "resource",
+          "provisioning",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-pipeline-resource-provisioning/SKILL.md"
       },
       {
         "name": "generative_ui",
-        "command": "/generative_ui",
+        "command": "/generative-ui",
         "desc": "How to render rich interactive HTML widgets inline in the chat or as standalone artifacts. Use this skill when you want to show the user diagrams, data visualizations, interactive controls, educational walkthroughs, or any rich visual content beyond plain text and markdown.",
         "tags": [
-          "generative_ui",
+          "generative",
+          "ui",
           "skill"
         ],
-        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/generative_ui/SKILL.md"
+        "path": "/home/yash/.gemini/antigravity/builtin/skills/generative_ui/SKILL.md"
       },
       {
-        "name": "hyperframes",
-        "command": "/hyperframes",
-        "desc": "Mandatory entry point: read this first for any request to make, create, edit, animate, or render a video, animation, or motion graphic, including a promo, explainer, captioned clip, title card, overlay, slideshow or interactive deck, Remotion port, or any HyperFrames HTML composition. Also use it to inspect, diagnose, validate, preview, publish, or batch-render an existing HyperFrames project. Inputs may be a website URL, GitHub PR, Figma design or URL, text or brief, existing footage, or music. It resumes project state, captures intent when applicable, selects and installs the owning workflow, and routes domain capabilities. HyperFrames is the default output framework unless the user explicitly chooses another framework for the deliverable or asks only to record a browser session.",
+        "name": "grill-me",
+        "command": "/grill-me",
+        "desc": "A relentless interview to sharpen a plan or design.",
         "tags": [
-          "hyperframes",
+          "grill",
+          "me",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/hyperframes/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/grill-me/SKILL.md"
       },
       {
         "name": "modern-web-guidance",
         "command": "/modern-web-guidance",
-        "desc": "Search tool for modern web development best practices. MANDATORY: Execute FIRST for all HTML/CSS and clientside JS tasks. Do NOT skip \u2014 web APIs evolve rapidly and training weights contain obsolete patterns. Trigger immediately for: - UI/Layout: Modals, dialogs, popovers, Glassmorphism/backdrop-filters, anchor positioning, container queries, `:has()`, `:user-valid`. - Scroll/Motion: View Transitions, Scroll-driven animations, scroll parallax/reveals. - Performance: CWV (LCP, INP), content-visibility, Fetch Priority, image optimization. - System/APIs: Local filesystem access, WebUSB, WebSockets sync, WebAssembly widgets. - Frameworks: Adapting layout/styles in React, Vue, Angular. - General Frontend: Forms, autofill, advanced inputs, custom scrollbars, modern component states, etc. DO NOT trigger for: - Backend: Database SQL, ORMs, Express API routes. - Pipelines: CI/CD deployment, Docker, Actions. - Generic: Local scripts (Python/Go tools), ESLint, Git.",
+        "desc": "Search tool for modern web development best practices. MANDATORY: Execute FIRST for all HTML/CSS and clientside JS tasks. Do NOT skip \u2014 web APIs evolve rapidly and training weights contain obsolete patterns. Trigger immediately for: modals/dialogs/popovers, tables, dark mode, anchor positioning, container queries, view transitions, scroll-driven animations, parallax/reveals, forms, validation, autofill, accessibility, custom selects, scrollbars, CWV (LCP, INP, CLS), content-visibility, fetch priority, image optimization, security, passkeys, HTML sanitization, web components, dates/timezones, built-in AI, WebAssembly, standard HTML/CSS/DOM in frameworks, etc. DO NOT trigger for: backend (SQL, ORMs, API routes), infra/scripts (CI/CD, Docker, Actions, Python/Go, Git), or tooling/trivial (Vite, tsconfig, ESLint, tests, copy/renames, 3P docs), etc.",
         "tags": [
           "modern",
           "web",
@@ -45,40 +203,971 @@
         "path": "/home/yash/.gemini/config/plugins/modern-web-guidance-plugin/skills/modern-web-guidance/SKILL.md"
       },
       {
-        "name": "google-maps-platform",
-        "command": "/skills",
-        "desc": "A collection of skills for architecting and implementing production-ready code using Google Maps Platform APIs and SDKs for any map, place, address, geocoding, routing/ETA (including eco-friendly routing), nearby search, 3D / Street View / static map, marker clustering, custom styling, drawing, geofencing, heatmap, or environmental (air-quality / pollen / solar / weather) feature \u2014 across Web, Android, iOS, and Web Services APIs. For prototyping, use the public Maps Demo Key \u2014 no billing setup and no Cloud project required, covering a growing set of the most popular Google Maps Platform APIs. For production, the skill prompts you to create and restrict your own key. All non-trivial code is grounded in freshly retrieved docs via the Google Maps Platform Code Assist service (no reliance on training-data memory).",
+        "name": "obsidian",
+        "command": "/obsidian",
+        "desc": "Unified Obsidian Master Suite consolidating: obsidian-markdown, obsidian-bases, json-canvas, obsidian-cli, defuddle, knap.",
         "tags": [
-          "skills",
+          "obsidian",
           "skill"
         ],
-        "path": "/home/yash/.gemini/config/plugins/google_maps_platform/skills/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/obsidian/SKILL.md"
+      },
+      {
+        "name": "prd",
+        "command": "/prd",
+        "desc": "Generate high-quality Product Requirements Documents (PRDs) for software systems and AI-powered features. Includes executive summaries, user stories, technical specifications, and risk analysis.",
+        "tags": [
+          "prd",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/prd/SKILL.md"
+      },
+      {
+        "name": "schema-mapping",
+        "command": "/schema-mapping",
+        "desc": "Guides the process of analyzing, mapping, and documenting transformations between source and target schemas for any database, data warehouse, or data platform. Focuses exclusively on creating a high-fidelity mapping plan (Mapping Manifesto). Used when initiating an ETL, ELT, or data integration task with schema mapping specification for multiple tables (i.e. more than 3 tables) before writing code. Do NOT use this skill for basic SQL generation without mapping requirements, or when the user already has a complete mapping specification.",
+        "tags": [
+          "schema",
+          "mapping",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/schema-mapping/SKILL.md"
+      },
+      {
+        "name": "subagent-driven-development",
+        "command": "/subagent-driven-development",
+        "desc": "Use when executing implementation plans with independent tasks in the current session",
+        "tags": [
+          "subagent",
+          "driven",
+          "development",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/subagent-driven-development/SKILL.md"
+      },
+      {
+        "name": "using-superpowers",
+        "command": "/using-superpowers",
+        "desc": "Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions",
+        "tags": [
+          "using",
+          "superpowers",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/using-superpowers/SKILL.md"
+      },
+      {
+        "name": "writing-plans",
+        "command": "/writing-plans",
+        "desc": "Use when you have a spec or requirements for a multi-step task, before touching code",
+        "tags": [
+          "writing",
+          "plans",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/writing-plans/SKILL.md"
       }
     ]
   },
   {
-    "category": "\ud83e\udd16 AI APIs & Agent Systems",
+    "category": "\ud83c\udfa8 2. Frontend, UI & Motion",
     "skills": [
       {
-        "name": "brainstorming",
-        "command": "/brainstorming",
-        "desc": "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation.",
+        "name": "anatomy",
+        "command": "/anatomy",
+        "desc": "Build interactive isometric SVG figures and diagrams with precise solid parts, realistic shaders, and motion. Use for technical drawings, interactive explainers, or architecture illustrations.",
         "tags": [
-          "brainstorming",
+          "anatomy",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/brainstorming/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/anatomy/SKILL.md"
       },
       {
-        "name": "claude-council",
-        "command": "/claude-council",
-        "desc": "Convene a structured LLM Council \u2014 five thinking-lens advisors (Red Team, First Principles, Expansionist, Outsider, Executor) plus anonymised peer review, forced debate on consensus, dual-chairman synthesis with dissent preservation, and optional Codex-powered Decision Science pass \u2014 to pressure-test high-stakes decisions. Adaptive modes (Quick/Standard/Deep) keep cost bounded; a persistent journal enables learning across runs. Mandatory triggers: /claude-council, \\\"convene the council\\\", \\\"run this by the council\\\", \\\"I need the council\\\", \\\"council this\\\", \\\"pressure-test this\\\", \\\"stress-test this\\\", \\\"war room this\\\", \\\"debate this\\\". Strong triggers: \\\"I'm torn between X and Y\\\", \\\"this is a big decision\\\", \\\"help me think this through from multiple angles\\\", \\\"I need outside perspectives\\\", \\\"should I X or Y\\\" (with real stakes \u2014 if binary with obvious answer, triage rejects per Step 1 rule 4). Do NOT invoke for factual questions, coding help, debugging, quick yes/no decisions, emotional support, or questions with one right answer \u2014 answer those directly. Optional suffixes: \\\"with codex\\\" enables Decision Science pass; \\\"deep\\\" forces Deep mode; \\\"quick\\\" forces Quick mode. Secondary invocation: /claude-council outcome <sha1> <note> records decision outcome. /claude-council meta runs journal meta-analysis.",
+        "name": "bigtable-basics",
+        "command": "/bigtable-basics",
+        "desc": "Provisions instances and tables, designs performant schemas, and queries data in Bigtable. Use when designing Bigtable row keys, configuring column families, writing SQL queries or client library code (Java, Go, Python) for Bigtable, or diagnosing performance/hotspotting issues. Also use when provisioning Bigtable clusters using gcloud or cbt CLIs. Don't use for generic Cloud SQL administration.",
         "tags": [
-          "claude",
-          "council",
+          "bigtable",
+          "basics",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/claude-council/SKILL.md"
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigtable-basics/SKILL.md"
+      },
+      {
+        "name": "blender",
+        "command": "/blender",
+        "desc": "Complete 3D modeling, texturing, lighting, rendering, and export pipeline in Blender. Use whenever asked to create, model, texture, shade, light, render 3D assets/scenes, weapons, hard-surface props, or export to GLB/FBX/OBJ/STL.",
+        "tags": [
+          "blender",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/blender/SKILL.md"
+      },
+      {
+        "name": "brand",
+        "command": "/brand",
+        "desc": "Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets, brand compliance, style guides.",
+        "tags": [
+          "brand",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/brand/SKILL.md"
+      },
+      {
+        "name": "design",
+        "command": "/design",
+        "desc": "Comprehensive Master Design Suite consolidating design-system, banner-design, canvas-design, and diagram-design. Covers brand identity, design tokens, component specifications, logo generation, social and ad banner graphics, visual canvas art (.png/.pdf), and technical system architecture diagrams (.drawio, Mermaid, Excalidraw).",
+        "tags": [
+          "design",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/design/SKILL.md"
+      },
+      {
+        "name": "diagram-design",
+        "command": "/diagram-design",
+        "desc": "Design architecture diagrams, flowcharts, sequence diagrams, and system maps with .drawio, Mermaid, and Excalidraw support. Triggers on /diagram-design.",
+        "tags": [
+          "diagram",
+          "design",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/diagram-design/SKILL.md"
+      },
+      {
+        "name": "frontend-design",
+        "command": "/frontend-design",
+        "desc": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.",
+        "tags": [
+          "frontend",
+          "design",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/frontend-design/SKILL.md"
+      },
+      {
+        "name": "generative_ui",
+        "command": "/generative-ui",
+        "desc": "How to render rich interactive HTML widgets inline in the chat or as standalone artifacts. Use this skill when you want to show the user diagrams, data visualizations, interactive controls, educational walkthroughs, or any rich visual content beyond plain text and markdown.",
+        "tags": [
+          "generative",
+          "ui",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/antigravity/builtin/skills/generative_ui/SKILL.md"
+      },
+      {
+        "name": "google-cloud-storage-bucket-architect",
+        "command": "/google-cloud-storage-bucket-architect",
+        "desc": "Creates Cloud Storage (Google Cloud Storage, or GCS) buckets. Analyzes the workload (sensitive data, media hosting, ingestion, web hosting, archiving, backup, logging, analytics, AI/ML, or general-purpose), validates project-level security settings, and designs a secure-by-default, cost-effective configuration (location, storage class, uniform bucket-level access, public access prevention, soft delete, lifecycle) before creating it. Use whenever a user wants to create, make, set up, provision, or spin up a bucket, or needs object storage for an app, service, pipeline, or dataset \u2014 even a \\\"simple\\\" or \\\"default\\\" bucket, or when bucket creation is one step in a larger workflow. Outputs or executes the creation via gcloud, the JSON/REST API, Terraform, or SDK client libraries (C++, Java, Python, Go). Don't use for anything other than creating new buckets \u2014 for uploads, downloads, access changes, or reconfiguring existing buckets, use google-cloud-storage-basics.",
+        "tags": [
+          "google",
+          "cloud",
+          "storage",
+          "bucket",
+          "architect",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/google-cloud-storage-bucket-architect/SKILL.md"
+      },
+      {
+        "name": "gsap",
+        "command": "/gsap",
+        "desc": "Unified Gsap Master Suite consolidating: gsap-core, gsap-framer-scroll-animation. Complete animation standard covering GSAP core tweens, timelines, easing, staggers, ScrollTrigger (pinning, scrubbing, snapping), and Framer Motion / Motion v12 scroll animations.",
+        "tags": [
+          "gsap",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/gsap/SKILL.md"
+      },
+      {
+        "name": "hyperframes",
+        "command": "/hyperframes",
+        "desc": "Mandatory entry point: read this first for any request to make, create, edit, animate, or render a video, animation, or motion graphic, including a promo, explainer, captioned clip, title card, overlay, slideshow or interactive deck, Remotion port, or any HyperFrames HTML composition.",
+        "tags": [
+          "hyperframes",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/hyperframes/SKILL.md"
+      },
+      {
+        "name": "quickgo-database",
+        "command": "/quickgo-database",
+        "desc": "Query the QuickGO and Evidence & Conclusion Ontology (ECO) REST API. Use this when you need to map genes to biological processes, molecular functions, or cellular components, find genes associated with a specific pathway/GO term, or explore the Gene Ontology hierarchy. Do not use for querying drug targets (use OpenTargets) or mechanistic signaling pathway diagrams (use KEGG).",
+        "tags": [
+          "quickgo",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/quickgo_database/SKILL.md"
+      },
+      {
+        "name": "shaders",
+        "command": "/shaders",
+        "desc": "Comprehensive GLSL shader techniques for creating stunning visual effects \u2014 ray marching, SDF modeling, fluid simulation, particle systems, procedural generation, lighting, post-processing, and more. Use when asked to write, debug, optimize, or explain shaders, GLSL, WebGL, ShaderToy, post-processing, ray marching, SDFs, or procedural visual effects. Triggers on: /shaders, /shader-dev, \\\"shader\\\", \\\"shaders\\\", \\\"glsl\\\", \\\"raymarching\\\", \\\"sdf\\\".",
+        "tags": [
+          "shaders",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/shaders/SKILL.md"
+      },
+      {
+        "name": "stitch",
+        "command": "/stitch",
+        "desc": "Unified Google Stitch suite for AI UI design, screen generation, code-to-design migration, design system (DESIGN.md) extraction, React/React Native conversion, and autonomous site building. Use whenever working with Stitch MCP, converting web code to Stitch, generating UI screens, or building frontends with Stitch.",
+        "tags": [
+          "stitch",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/stitch/SKILL.md"
+      },
+      {
+        "name": "ui-animation",
+        "command": "/ui-animation",
+        "desc": "Designs, implements, reviews, debugs, and reverse-engineers UI motion, and finds where an interface is missing it: CSS transitions, keyframes, springs, gestures, drag, easing, timing, framer-motion, and animation curves from screen recordings. Use when asked to \\\"add animations\\\", \\\"make this feel smooth\\\", \\\"review my animations\\\", \\\"add a swipe gesture\\\", \\\"match this easing\\\", \\\"reverse engineer this animation\\\", \\\"extract the animation curve\\\", \\\"where should this animate\\\", \\\"find animation opportunities\\\", or \\\"what's it called when...\\\" to name a motion effect from a vague description. Owns the passage between two states. For what a state looks like once built use ui-design; for which states exist and whether an action is reversible use product-design, including when a gesture replaces a control.",
+        "tags": [
+          "ui",
+          "animation",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/ui-animation/SKILL.md"
+      },
+      {
+        "name": "ui-plugin-navigation",
+        "command": "/ui-plugin-navigation",
+        "desc": "Discover UI plugin panels relevant to the current task and surface a one-click pill in chat to open (toggle) them in the side pane. Use when a running UI plugin's panel would help with what the user is doing, or right after the user enables a new UI plugin pane and a shortcut to open it is handy.",
+        "tags": [
+          "ui",
+          "plugin",
+          "navigation",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/antigravity/builtin/skills/ui-plugin-navigation/SKILL.md"
+      },
+      {
+        "name": "ui-ux-pro-max",
+        "command": "/ui-ux-pro-max",
+        "desc": "UI/UX design intelligence for web, mobile, and desktop. This skill should be used when designing, building, reviewing, or fixing interfaces, including pages, components, design systems, accessibility, interaction, responsive layout, typography, color, charts, and stack-specific UI implementation. Searchable local data: 79 searchable styles (50 active), 192 product palettes and reasoning profiles, 74 font pairings, 119 UX guidelines, 105 icons, 17 GSAP presets, 25 chart types, and 22 stacks.",
+        "tags": [
+          "ui",
+          "ux",
+          "pro",
+          "max",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/ui-ux-pro-max/SKILL.md"
+      },
+      {
+        "name": "web-design-guidelines",
+        "command": "/web-design-guidelines",
+        "desc": "Review UI code for Web Interface Guidelines compliance. Use when asked to \\\"review my UI\\\", \\\"check accessibility\\\", \\\"audit design\\\", \\\"review UX\\\", or \\\"check my site against best practices\\\".",
+        "tags": [
+          "web",
+          "design",
+          "guidelines",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/web-design-guidelines/SKILL.md"
+      }
+    ]
+  },
+  {
+    "category": "\u26a1 3. Fullstack, AI & APIs",
+    "skills": [
+      {
+        "name": "accidental-data-loss-prevention",
+        "command": "/accidental-data-loss-prevention",
+        "desc": "**STOP AND VERIFY**: Before running any command or tool that results in irreversible data loss, you MUST obtain explicit user consent. When in doubt, ask. It is better to wait for confirmation than to accidentally delete production data or critical project assets. Use this for: - SQL: DROP TABLE/VIEW/SCHEMA/DATABASE, TRUNCATE, or broad DELETE (missing WHERE or using 1=1). - Cloud Storage: gsutil rm or gcloud storage rm targeting production data or critical buckets. - Infrastructure: gcloud projects delete, deleting Spanner/BigQuery/Dataproc resources, deleting secrets, or KMS key destruction.",
+        "tags": [
+          "accidental",
+          "data",
+          "loss",
+          "prevention",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/accidental-data-loss-prevention/SKILL.md"
+      },
+      {
+        "name": "android-cli",
+        "command": "/android-cli",
+        "desc": "Provides instructions for installing and using the `android` CLI. The `android` command-line tool is a critical tool for Android development and helps you create new Android projects, run Android apps on devices, manage and interact with Android virtual devices (including screenshots and UI inspection), manage Android SDK components, look up official Android documentation, and discover and install official Android skills.",
+        "tags": [
+          "android",
+          "cli",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/android-cli-plugin/skills/SKILL.md"
+      },
+      {
+        "name": "android-device-hub",
+        "command": "/android-device-hub",
+        "desc": "Instructions for working with the Android Device Hub sidecar, which lists, starts, stops, creates and removes Android Virtual Devices (AVDs), lists physical devices connected to adb, and lets the user mirror and control any of them (video, touch, keyboard, mouse wheel) in the Device Hub pane. Also explains how to inspect and interact with the screen the user is mirroring, with `android layout`, `android screen` and `adb`.",
+        "tags": [
+          "android",
+          "device",
+          "hub",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/android-cli-plugin/skills/device-hub/SKILL.md"
+      },
+      {
+        "name": "bigquery-ai-ml",
+        "command": "/bigquery-ai-ml",
+        "desc": "Leverages BigQuery's built-in machine learning and GenAI capabilities for advanced data analytics. Use when you need to write SQL queries that perform time-series forecasting, predict values, detect outliers or anomalies, find key drivers, perform semantic search or vector search, classify text, calculate similarity, summarize content, translate language, evaluate models, filter by semantic conditions, measure the causal effect of an intervention, compute correlations between columns, generate descriptive statistics and table distribution profiles, detect change points or structural breaks, extract trend or seasonality components, or leverage generative AI capabilities in BigQuery. Do not use for general BigQuery dataset, table, or job management requests.",
+        "tags": [
+          "bigquery",
+          "ai",
+          "ml",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigquery-ai-ml/SKILL.md"
+      },
+      {
+        "name": "bigquery-graph-query",
+        "command": "/bigquery-graph-query",
+        "desc": "Provides guidelines and best practices for querying BigQuery property graphs and semantic graphs: native GQL (Graph Query Language) pattern matching, multi-hop and variable-length paths, aggregation, top-N, path extraction, output formatting (graph visualization with TO_JSON vs tabular), GRAPH_TABLE relational SQL integration, and semantic graph querying via the GRAPH_EXPAND TVF with starting-node view selection and AGG() measures. Also covers hybrid semantic search, combining `VECTOR_SEARCH` candidate generation with graph traversal when a node carries an embedding-backed property. Use when querying graph topology, node/edge connections, paths, or semantic measures over an existing BigQuery graph. Don't use for Cypher or non-BigQuery graph databases, or for creating/modifying a graph schema.",
+        "tags": [
+          "bigquery",
+          "graph",
+          "query",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigquery-graph-query/SKILL.md"
+      },
+      {
+        "name": "building-data-apps",
+        "command": "/building-data-apps",
+        "desc": "Build modern data apps, dashboards, and interactive reports using either React + Vite or Streamlit. Includes optional Gemini Data Analytics chat integration for an AI powered \\\"chat with your data\\\" experience. Relevant when any of the following conditions are true: 1. User explicitly requests to build a data dashboard, data application, or visualization UI, and the UI pulls data from a GCP database (defaulting to BigQuery unless otherwise specified). 2. You need to generate a frontend web application to interact with, query, and visualize data from GCP data sources. 3. User wants to build a \\\"chat with your data\\\" experience or integrate the Gemini Data Analytics chat API into a web interface. Do NOT use when any of the following conditions are true: 1. The request is for building backend-only services. 2. The request is for simple CLI scripts or command-line applications. 3. The web application is not data-centric or does not involve visualizing/querying data from GCP sources.",
+        "tags": [
+          "building",
+          "data",
+          "apps",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/building-data-apps/SKILL.md"
+      },
+      {
+        "name": "cheminformatics-reactions",
+        "command": "/cheminformatics-reactions",
+        "desc": "Proposes and models organic reactions, retrosynthesis, multi-step synthesis routes, intramolecular cyclizations, and reaction SMARTS: checks experimental precedents first, validates atom conservation, prochirality (pro-R/pro-S, Re/Si), topicity, 1H/13C NMR equivalence, and stereogenesis, and renders 2D curved-arrow mechanisms.",
+        "tags": [
+          "cheminformatics",
+          "reactions",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/cheminformatics_reactions/SKILL.md"
+      },
+      {
+        "name": "chrome-extensions",
+        "command": "/chrome-extensions",
+        "desc": "Build and publish Chrome Extensions using Manifest V3 best practices. Use this skill whenever the user asks to create, modify, debug, or understand Chrome browser extensions, add-ons, or anything involving the Chrome Extensions API. Trigger on mentions of: 'Chrome extension', 'browser extension', 'manifest.json', 'content script', 'service worker' (in browser context), 'popup' (in browser extension context), 'side panel', 'chrome.* API', 'declarativeNetRequest', 'omnibox', 'context menu' (in extension context), 'userScripts', 'user script', 'script manager', or any request to build functionality that integrates with the Chrome browser UI. Also trigger for publishing to the Chrome Web Store: 'publish extension', preparing an extension for publishing, responding to a review rejection, writing permission justifications, or drafting a privacy policy.",
+        "tags": [
+          "chrome",
+          "extensions",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/modern-web-guidance-plugin/skills/chrome-extensions/SKILL.md"
+      },
+      {
+        "name": "clinical-trials-database",
+        "command": "/clinical-trials-database",
+        "desc": "Query ClinicalTrials.gov via APIv2. Use when you want to search for trials by condition, drug, location, status, or phase; retrieve trial details by NCT ID; check eligibility/inclusion criteria; count trials across conditions or time periods; identify a sponsor's trial portfolio; find recruiting trials for patient matching.",
+        "tags": [
+          "clinical",
+          "trials",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/clinical_trials_database/SKILL.md"
+      },
+      {
+        "name": "cloud-databases-onboarding",
+        "command": "/cloud-databases-onboarding",
+        "desc": "Guides users through discovering their database requirements, recommends a Google Cloud database product or migration destination based on a recommendation matrix, and assists in database creation. Use when a user asks 'What database service should I use?', 'Help me pick a database', asks which Google Cloud database to migrate or onboard a workload to, or wants to create a new database on Google Cloud. Don't use for general Google Cloud maintenance, managing existing databases, or troubleshooting active Database Migration Service (DMS) jobs.",
+        "tags": [
+          "cloud",
+          "databases",
+          "onboarding",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/cloud-databases-onboarding/SKILL.md"
+      },
+      {
+        "name": "coding-standards",
+        "command": "/coding-standards",
+        "desc": "Baseline cross-project coding conventions for naming, readability, immutability, and code-quality review. Use detailed frontend or backend skills for framework-specific patterns. Use when reviewing code quality or naming with no framework-specific skill that applies.",
+        "tags": [
+          "coding",
+          "standards",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/coding-standards/SKILL.md"
+      },
+      {
+        "name": "dak-setup",
+        "command": "/dak-setup",
+        "desc": "Configures (or reconfigures) the Google Cloud Data Agent Kit (DAK) plugin by checking gcloud and ADC credentials, collecting the GCP project ID, region, and services, and running its bundled `dak-setup` script. Use this proactively and without waiting to be asked whenever a SessionStart hook or any other system/context message reports that the Data Agent Kit plugin is not configured, is missing configuration, or needs to be reconfigured. Also use it whenever the user mentions setting up, configuring, reconfiguring, or changing the project, region, or service integrations for the Data Agent Kit or DAK plugin \u2014 even if they phrase it casually, like \\\"dak isn't working\\\" or \\\"I want to enable more GCP service integrations\\\".",
+        "tags": [
+          "dak",
+          "setup",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/dak-setup/SKILL.md"
+      },
+      {
+        "name": "dart-add-unit-test",
+        "command": "/dart-add-unit-test",
+        "desc": "Write and organize unit tests for functions, methods, and classes using `package:test`. Use when creating new logic or fixing bugs to ensure code remains correct and regression-free.",
+        "tags": [
+          "dart",
+          "add",
+          "unit",
+          "test",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-add-unit-test/SKILL.md"
+      },
+      {
+        "name": "dart-build-cli-app",
+        "command": "/dart-build-cli-app",
+        "desc": "Architectural patterns, entrypoint structure, exit codes, stream routing, and subprocess spawning for Dart command-line interface (CLI) applications. Use when building CLI tools, console utilities, scripts, argument parsing with `package:args` (ArgParser or CommandRunner), handling exit codes, configuring executables in pubspec.yaml, spawning Dart subprocesses, or compiling native CLI binaries. Don't use for Flutter UI widgets, web applications, or standalone HTTP backend servers.",
+        "tags": [
+          "dart",
+          "build",
+          "cli",
+          "app",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-build-cli-app/SKILL.md"
+      },
+      {
+        "name": "dart-collect-coverage",
+        "command": "/dart-collect-coverage",
+        "desc": "Collect coverage using the coverage packge and create an LCOV report",
+        "tags": [
+          "dart",
+          "collect",
+          "coverage",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-collect-coverage/SKILL.md"
+      },
+      {
+        "name": "dart-fix-runtime-errors",
+        "command": "/dart-fix-runtime-errors",
+        "desc": "Uses get_runtime_errors and lsp to fetch an active stack trace, locate the failing line, apply a fix, and verify resolution via hot_reload.",
+        "tags": [
+          "dart",
+          "fix",
+          "runtime",
+          "errors",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-fix-runtime-errors/SKILL.md"
+      },
+      {
+        "name": "dart-generate-test-mocks",
+        "command": "/dart-generate-test-mocks",
+        "desc": "Define and generate mock objects for external dependencies using `package:mockito` and `build_runner`. Use when unit testing classes that depend on complex external services like APIs or databases.",
+        "tags": [
+          "dart",
+          "generate",
+          "test",
+          "mocks",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-generate-test-mocks/SKILL.md"
+      },
+      {
+        "name": "dart-migrate-to-checks-package",
+        "command": "/dart-migrate-to-checks-package",
+        "desc": "Replace the usage of `expect` and similar functions from `package:matcher` to `package:checks` equivalents.",
+        "tags": [
+          "dart",
+          "migrate",
+          "to",
+          "checks",
+          "package",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-migrate-to-checks-package/SKILL.md"
+      },
+      {
+        "name": "dart-resolve-package-conflicts",
+        "command": "/dart-resolve-package-conflicts",
+        "desc": "Workflow for fixing package version conflicts. Use this when `pub get` fails due to incompatible package versions.",
+        "tags": [
+          "dart",
+          "resolve",
+          "package",
+          "conflicts",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-resolve-package-conflicts/SKILL.md"
+      },
+      {
+        "name": "dart-run-static-analysis",
+        "command": "/dart-run-static-analysis",
+        "desc": "Execute `dart analyze` to identify warnings and errors, and use `dart fix --apply` to automatically resolve mechanical lint issues. Use during development to ensure code quality and before committing changes.",
+        "tags": [
+          "dart",
+          "run",
+          "static",
+          "analysis",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-run-static-analysis/SKILL.md"
+      },
+      {
+        "name": "dart-setup-ffi-assets",
+        "command": "/dart-setup-ffi-assets",
+        "desc": "Guides agents in compiling and packaging C/C++ source code into dynamic or static libraries (Code Assets) using Dart's Native Assets hook system (via hook/build.dart and hook/link.dart utilizing package:hooks and package:native_toolchain_c). Use when a user asks to: 'setup native assets', 'compile C/C++ source code', 'bundle dynamic libraries', 'build native C code', 'link native assets', 'implement build.dart or link.dart hooks', or 'integrate C/C++ interop in Dart/Flutter'. Helps agents avoid manual toolchain orchestration and configures secure hash-validated binary downloads or advanced linker tree-shaking with package:record_use mapping.",
+        "tags": [
+          "dart",
+          "setup",
+          "ffi",
+          "assets",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-setup-ffi-assets/SKILL.md"
+      },
+      {
+        "name": "dart-use-doc-examples",
+        "command": "/dart-use-doc-examples",
+        "desc": "How to inject external code examples into Dartdoc using the {@example} directive, and how to filter those files using #hide, #region, and #endregion tags.",
+        "tags": [
+          "dart",
+          "use",
+          "doc",
+          "examples",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-use-doc-examples/SKILL.md"
+      },
+      {
+        "name": "dart-use-ffigen",
+        "command": "/dart-use-ffigen",
+        "desc": "Guide agents to use `package:ffigen` to automatically generate FFI bindings instead of writing them manually. Use this skill when a task involves writing new FFI bindings, extending C/Objective-C/Swift integrations, or replacing hand-crafted `dart:ffi` setups.",
+        "tags": [
+          "dart",
+          "use",
+          "ffigen",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-use-ffigen/SKILL.md"
+      },
+      {
+        "name": "dart-use-path-package",
+        "command": "/dart-use-path-package",
+        "desc": "Cross-platform file and directory path manipulation, segment splitting, extension extraction, and context conversion using `package:path` and `package:file`. Use when writing, inspecting, joining, splitting, or refactoring file paths, directory names, or extensions, or replacing raw string path operations (`.split('/')`, `'$dir/$file'`, `.endsWith('.ext')`, `.replaceAll('\\\\', '/')`). Don't use for HTTP network URI routing, database query strings, or non-path string processing.",
+        "tags": [
+          "dart",
+          "use",
+          "path",
+          "package",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-use-path-package/SKILL.md"
+      },
+      {
+        "name": "dart-use-pattern-matching",
+        "command": "/dart-use-pattern-matching",
+        "desc": "Applies Dart 3 pattern matching, switch expressions, and destructuring idiomatically to validate data schemas, handle algebraic data types, and decompose control flow. Use when refactoring complex if-else chains, parsing polymorphic JSON or API responses, destructuring Lists, URI/path segments, String.split() tokens, Records, or Maps, or enforcing exhaustiveness on sealed classes. Don't use for simple boolean conditions, single-variable type promotion (use `is`), or basic collection filtering.",
+        "tags": [
+          "dart",
+          "use",
+          "pattern",
+          "matching",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-use-pattern-matching/SKILL.md"
+      },
+      {
+        "name": "dart-use-primary-constructors",
+        "command": "/dart-use-primary-constructors",
+        "desc": "Help users write syntactically and semantically correct primary constructors in Dart, and migrate/use the new constructor syntax, empty-body semicolon syntax, in-body initializer list syntax, and abbreviated concise constructor syntax.",
+        "tags": [
+          "dart",
+          "use",
+          "primary",
+          "constructors",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-use-primary-constructors/SKILL.md"
+      },
+      {
+        "name": "dart-write-documentation",
+        "command": "/dart-write-documentation",
+        "desc": "Rules and formatting guidelines for writing Dart /// API documentation and doc comments. Use when documenting Dart code, writing doc comments for any Dart declaration (libraries, classes, methods, variables, etc.), or when instructed to follow the Effective Dart documentation guidelines.",
+        "tags": [
+          "dart",
+          "write",
+          "documentation",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/dart-write-documentation/SKILL.md"
+      },
+      {
+        "name": "dbt-bigquery",
+        "command": "/dbt-bigquery",
+        "desc": "Expert guidance for creating, modifying, and optimizing dbt pipelines",
+        "tags": [
+          "dbt",
+          "bigquery",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/dbt-bigquery/SKILL.md"
+      },
+      {
+        "name": "devrelay",
+        "command": "/devrelay",
+        "desc": "Unified DevRelay Master Suite consolidating devrelay-challenges, devrelay-community-wisdom, devrelay-knowledge, devrelay-mlh-submissions, devrelay-navigator, devrelay-offers, devrelay-publishing, devrelay-sessions, and devrelay-sponsor-skills. Comprehensive gateway for DEV (dev.to) discussions, pattern wisdom, MLH hackathons, sponsor perks and promo credits, project submissions, session preservation, and authoritative developer knowledge.",
+        "tags": [
+          "devrelay",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay/SKILL.md"
+      },
+      {
+        "name": "devrelay-challenges",
+        "command": "/devrelay-challenges",
+        "desc": "Active DEV Challenges, MLH hackathons, and community events via the DEV Events API \u2014 deadlines, judging rubrics, sponsor tracks, prize categories, and FAQs from `full_details`. Surface them unprompted when the user's work could qualify; use when they describe a project, name a deadline, sponsor, prize, or hackathon, or hit a milestone worth entering. Covers what the tracks are and how they are judged \u2014 for the credits attached to those tracks use devrelay-offers, for a sponsor's Agent Skills use devrelay-sponsor-skills, and to actually submit use devrelay-mlh-submissions.",
+        "tags": [
+          "devrelay",
+          "challenges",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-challenges/SKILL.md"
+      },
+      {
+        "name": "devrelay-community-wisdom",
+        "command": "/devrelay-community-wisdom",
+        "desc": "Use before recommending or choosing a library, framework, database, service, or architecture, and during any non-trivial build, refactor, or debugging task, without being asked. Search what dev.to developers report, then include a concise cited Community Wisdom interlude shortly before the final wrap-up. Skip only trivial edits.",
+        "tags": [
+          "devrelay",
+          "community",
+          "wisdom",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-community-wisdom/SKILL.md"
+      },
+      {
+        "name": "devrelay-knowledge",
+        "command": "/devrelay-knowledge",
+        "desc": "Fetch authoritative reference guides from the DevRelay knowledge base at https://devrelay.com/knowledge \u2014 MLH (participant guide, organizer guide, Code of Conduct and hackathon rules), Global Hack Week, DEV (dev.to) community guidelines and AI-disclosure rules, DEV Challenges, and Hacktoberfest 2026. Use for any question about how these programs work \u2014 eligibility, rules, registering, submitting, judging, prizes, points, swag, Guilds, organizing a hackathon or Hack Day, posting on DEV \u2014 and reach for it before answering from memory or searching the web.",
+        "tags": [
+          "devrelay",
+          "knowledge",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-knowledge/SKILL.md"
+      },
+      {
+        "name": "devrelay-mlh-submissions",
+        "command": "/devrelay-mlh-submissions",
+        "desc": "Create or update an MLH project (with screenshots), manage its team, submit it to an MLH event, and enter it into the event's challenges through the DevRelay MCP gateway (search_mlh_events, get_registration_questions, register_for_mlh_event, check_in_to_mlh_event, get_submission_questions, get_challenge_entry_questions, list_my_projects, create_project, update_project, create_project_invite, join_project, remove_project_member, submit_project_to_event, enter_challenge, update_challenge_entry, withdraw_challenge_entry, reactivate_challenge_entry). Use when the user wants to submit a hackathon project, enter a prize category or sponsor challenge, answer an event's submission questions, add or remove a teammate, fix a project after MLH rejected it, or when a build is finished and the event's submission window is still open.",
+        "tags": [
+          "devrelay",
+          "mlh",
+          "submissions",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-mlh-submissions/SKILL.md"
+      },
+      {
+        "name": "devrelay-navigator",
+        "command": "/devrelay-navigator",
+        "desc": "Route questions about dev.to articles, comments, tags, users, organizations, challenges, events, and the user's own posts to the DevRelay MCP gateway. Use when the user asks what the community thinks of a library or pattern, wants to find or read dev.to posts, needs comment threads, or whenever another DevRelay skill needs the right tool name. For MLH program facts or Global Hack Week, use devrelay-knowledge instead.",
+        "tags": [
+          "devrelay",
+          "navigator",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-navigator/SKILL.md"
+      },
+      {
+        "name": "devrelay-offers",
+        "command": "/devrelay-offers",
+        "desc": "Sponsor promo codes and credits \u2014 free API credit, domains, hosting \u2014 at MLH events the user is registered for, via the DevRelay MCP gateway (search_mlh_events, register_for_mlh_event, list_my_mlh_events, list_event_offers, claim_promo_code). Invoke on your own initiative, without being asked, whenever the user is choosing hosting, a database, auth, or an AI provider while building at an event, names a sponsor technology, or plans which prize tracks to enter \u2014 not only when they ask what perks exist. Claims consume inventory, so confirm before claiming. For a sponsor's Agent Skills rather than credits, use devrelay-sponsor-skills.",
+        "tags": [
+          "devrelay",
+          "offers",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-offers/SKILL.md"
+      },
+      {
+        "name": "devrelay-publishing",
+        "command": "/devrelay-publishing",
+        "desc": "Draft, stage, and update DEV (dev.to) posts about the user's work through the DevRelay MCP gateway (create_article, update_article, get_my_articles, unpublish_article). Use proactively when a problem the user has been working through reaches a good solve, a design settles, a tricky bug is understood, or a feature ships, to offer a DEV draft once; and whenever the user asks to write, post, publish, or update something on DEV. Every create sends ai_disclosure_level some_ai by default.",
+        "tags": [
+          "devrelay",
+          "publishing",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-publishing/SKILL.md"
+      },
+      {
+        "name": "devrelay-sessions",
+        "command": "/devrelay-sessions",
+        "desc": "Save, curate, browse, and embed AI agent session transcripts on DEV (Forem) via DevRelay. Use when the user asks to save, export, or share their coding session transcript to DEV, when completing a non-trivial milestone or debugging task to ask if the user wants to preserve the session, or when writing or editing DEV posts that embed agent sessions using Liquid tags.",
+        "tags": [
+          "devrelay",
+          "sessions",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-sessions/SKILL.md"
+      },
+      {
+        "name": "devrelay-sponsor-skills",
+        "command": "/devrelay-sponsor-skills",
+        "desc": "Official Agent Skills published by MLH sponsors \u2014 SKILL.md bundles that teach the current, correct way to call that sponsor's API. Invoke on your own initiative, without being asked, before writing or debugging any code that touches a sponsor technology at an MLH event, and while planning which prize tracks to go after. An SDK import, an API key, a deploy target, or a bare sponsor name (Gemini, MongoDB, ElevenLabs, Vultr, Solana, Auth0, GoDaddy, Tiger Data, DigitalOcean) all count as triggers. Returns an `install_command`; never install without asking first.",
+        "tags": [
+          "devrelay",
+          "sponsor",
+          "skills",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay-sponsor-skills/SKILL.md"
+      },
+      {
+        "name": "enforcing-resource-attribution",
+        "command": "/enforcing-resource-attribution",
+        "desc": "Enforces resource attribution for CLI commands. Use this skill whenever you are running `bq` or `gcloud` commands via `run_command`. It ensures mandatory labeling for supported `bq` operations while avoiding invalid flags on read-only commands.",
+        "tags": [
+          "enforcing",
+          "resource",
+          "attribution",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/enforcing-resource-attribution/SKILL.md"
+      },
+      {
+        "name": "firebase",
+        "command": "/firebase",
+        "desc": "Complete Google Firebase platform suite. Covers Firestore database modeling & SDKs, security rules authoring & auditing, Firebase Authentication, Cloud Functions, App Hosting, Data Connect (PostgreSQL), Crashlytics, and Remote Config.",
+        "tags": [
+          "firebase",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/firebase/SKILL.md"
+      },
+      {
+        "name": "flutter-add-integration-test",
+        "command": "/flutter-add-integration-test",
+        "desc": "Configures Flutter Driver for app interaction and converts MCP actions into permanent integration tests. Use when adding integration testing to a project, exploring UI components via MCP, or automating user flows with the integration_test package.",
+        "tags": [
+          "flutter",
+          "add",
+          "integration",
+          "test",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-add-integration-test/SKILL.md"
+      },
+      {
+        "name": "flutter-add-widget-preview",
+        "command": "/flutter-add-widget-preview",
+        "desc": "Adds interactive widget previews to the project using the previews.dart system. Use when creating new UI components or updating existing screens to ensure consistent design and interactive testing.",
+        "tags": [
+          "flutter",
+          "add",
+          "widget",
+          "preview",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-add-widget-preview/SKILL.md"
+      },
+      {
+        "name": "flutter-add-widget-test",
+        "command": "/flutter-add-widget-test",
+        "desc": "Implement a component-level test using `WidgetTester` to verify UI rendering and user interactions (tapping, scrolling, entering text). Use when validating that a specific widget displays correct data and responds to events as expected.",
+        "tags": [
+          "flutter",
+          "add",
+          "widget",
+          "test",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-add-widget-test/SKILL.md"
+      },
+      {
+        "name": "flutter-apply-architecture-best-practices",
+        "command": "/flutter-apply-architecture-best-practices",
+        "desc": "Architects a Flutter application using the recommended layered approach (UI, Logic, Data). Use when structuring a new project or refactoring for scalability.",
+        "tags": [
+          "flutter",
+          "apply",
+          "architecture",
+          "best",
+          "practices",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-apply-architecture-best-practices/SKILL.md"
+      },
+      {
+        "name": "flutter-build-responsive-layout",
+        "command": "/flutter-build-responsive-layout",
+        "desc": "Use `LayoutBuilder`, `MediaQuery`, or `Expanded/Flexible` to create a layout that adapts to different screen sizes. Use when you need the UI to look good on both mobile and tablet/desktop form factors.",
+        "tags": [
+          "flutter",
+          "build",
+          "responsive",
+          "layout",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-build-responsive-layout/SKILL.md"
+      },
+      {
+        "name": "flutter-fix-layout-issues",
+        "command": "/flutter-fix-layout-issues",
+        "desc": "Fixes Flutter layout errors (overflows, unbounded constraints) using Dart and Flutter MCP tools. Use when addressing \\\"RenderFlex overflowed\\\", \\\"Vertical viewport was given unbounded height\\\", or similar layout issues.",
+        "tags": [
+          "flutter",
+          "fix",
+          "layout",
+          "issues",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-fix-layout-issues/SKILL.md"
+      },
+      {
+        "name": "flutter-implement-json-serialization",
+        "command": "/flutter-implement-json-serialization",
+        "desc": "Create model classes with `fromJson` and `toJson` methods using `dart:convert`. Use when manually mapping JSON keys to class properties for simple data structures.",
+        "tags": [
+          "flutter",
+          "implement",
+          "json",
+          "serialization",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-implement-json-serialization/SKILL.md"
+      },
+      {
+        "name": "flutter-setup-declarative-routing",
+        "command": "/flutter-setup-declarative-routing",
+        "desc": "Configure `MaterialApp.router` using a package like `go_router` for advanced URL-based navigation. Use when developing web applications or mobile apps that require specific deep linking and browser history support.",
+        "tags": [
+          "flutter",
+          "setup",
+          "declarative",
+          "routing",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-setup-declarative-routing/SKILL.md"
+      },
+      {
+        "name": "flutter-setup-localization",
+        "command": "/flutter-setup-localization",
+        "desc": "Add `flutter_localizations` and `intl` dependencies, enable \\\"generate true\\\" in `pubspec.yaml`, and create an `l10n.yaml` configuration file. Use when initializing localization support for a new Flutter project.",
+        "tags": [
+          "flutter",
+          "setup",
+          "localization",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-setup-localization/SKILL.md"
+      },
+      {
+        "name": "flutter-use-http-package",
+        "command": "/flutter-use-http-package",
+        "desc": "Use the `http` package to execute GET, POST, PUT, or DELETE requests. Use when you need to fetch from or send data to a REST API.",
+        "tags": [
+          "flutter",
+          "use",
+          "http",
+          "package",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/flutter/skills/flutter-use-http-package/SKILL.md"
+      },
+      {
+        "name": "gcloud",
+        "command": "/gcloud",
+        "desc": "Provides safety-critical validation, guardrails, and data reduction for gcloud CLI operations across Google Cloud Platform (GCP) services and infrastructure. Use when planning, generating, constructing, proposing, describing, or executing any gcloud CLI commands - including when answering questions about gcloud syntax, or formatting flags. Don't use when writing Google Cloud client library code or raw REST/gRPC API requests.",
+        "tags": [
+          "gcloud",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/google-cloud-developer/skills/gcloud/SKILL.md"
+      },
+      {
+        "name": "gcp-managed-airflow-dag-authoring",
+        "command": "/gcp-managed-airflow-dag-authoring",
+        "desc": "Guides the authoring and validation of Apache Airflow DAGs for Managed Service for Apache Airflow (MSAA; formerly Cloud Composer). Covers environment context discovery, Airflow 2 vs 3 compatibility, authoring best practices, and local/remote validation processes. Use when creating or extending an Airflow DAG. Don't use when authoring Python code unrelated to Airflow DAGs.",
+        "tags": [
+          "gcp",
+          "managed",
+          "airflow",
+          "dag",
+          "authoring",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-managed-airflow-dag-authoring/SKILL.md"
+      },
+      {
+        "name": "gcp-managed-airflow-migrations",
+        "command": "/gcp-managed-airflow-migrations",
+        "desc": "Provides guidance for migrating Apache Airflow DAGs in Managed Service for Apache Airflow (MSAA; formerly Cloud Composer). Covers migration to Airflow 2.11.1 (MSAA Gen 2 and 3) and Airflow 3 (MSAA Gen 3), including environment inspection, GCS download/upload and scanning patterns for breaking changes.",
+        "tags": [
+          "gcp",
+          "managed",
+          "airflow",
+          "migrations",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-managed-airflow-migrations/SKILL.md"
+      },
+      {
+        "name": "gcp-managed-airflow-recommendations",
+        "command": "/gcp-managed-airflow-recommendations",
+        "desc": "Provides recommendations and best practices for creating, configuring, tuning and optimizing Managed Service for Apache Airflow (MSAA, Cloud Composer) environments. Use when the user asks for guidance, recommendations, or best practices on configuring Cloud Composer, scaling Airflow environments, preventing workload restarts, or analyzing system health.",
+        "tags": [
+          "gcp",
+          "managed",
+          "airflow",
+          "recommendations",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-managed-airflow-recommendations/SKILL.md"
+      },
+      {
+        "name": "gcp-managed-spark-upgrades",
+        "command": "/gcp-managed-spark-upgrades",
+        "desc": "Upgrades Spark workloads on Google Cloud Managed Service for Apache Spark (formerly known as Dataproc) clusters and Serverless to a newer image or runtime version. Supports static compatibility analysis, code upgrade, build checks against the target version, and optional verification runs. Use when: - Upgrading Managed Spark versions (major, minor, or sub-minor) or assessing upgrade readiness. Example prompt: \\\"Upgrade Managed Spark job [job_id] in project [project_id], region [region] to target version [target_version]. Code location: [local path or GCS path]. Target GCS path: [gcs_target_path]\\\" Don't use when: - Writing new Spark code. - Migrating non-Spark workloads (e.g., Hive/Flink to Spark). - Troubleshooting a failed Spark job that is not part of an upgrade. Limitation: This skill does not support data/result validation currently.",
+        "tags": [
+          "gcp",
+          "managed",
+          "spark",
+          "upgrades",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-managed-spark-upgrades/SKILL.md"
+      },
+      {
+        "name": "gcp-spark-observability",
+        "command": "/gcp-spark-observability",
+        "desc": "Monitors, inventories, and assesses Google Cloud Managed Service for Apache Spark (Dataproc Serverless and Dataproc on Compute Engine) environments, clusters, batches, jobs, sessions, metrics, logs, costs, and configurations across single and multiple regions. Use when listing active or historical Spark workloads, discovering failed batches or jobs, auditing multi-region fleet inventory, calculating Serverless compute (DCU-Hours) and shuffle storage consumption, detecting idle or zombie clusters, inspecting scheduled pipeline cadence health, investigating failed cluster operations or stockouts, checking quotas and alerting coverage, or querying Cloud Monitoring and Cloud Logging telemetry. Don't use for deep root-cause analysis or performance optimization of a specific job or batch (use gcp-spark-troubleshooting), authoring new PySpark code (use gcp-spark), or upgrading Spark versions (use gcp-managed-spark-upgrades).",
+        "tags": [
+          "gcp",
+          "spark",
+          "observability",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-spark-observability/SKILL.md"
+      },
+      {
+        "name": "gcp-spark-troubleshooting",
+        "command": "/gcp-spark-troubleshooting",
+        "desc": "Provides expert guidance for troubleshooting Google Cloud Spark and Dataproc workloads (Dataproc Serverless batches and standard Dataproc clusters), and inspecting, streaming, searching, tailing, or summarizing Spark driver outputs and event logs in Cloud Storage. Use when the user asks to debug, troubleshoot, diagnose, or perform Root Cause Analysis (RCA) on failed Spark jobs, PySpark batches, or Spark event logs.",
+        "tags": [
+          "gcp",
+          "spark",
+          "troubleshooting",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-spark-troubleshooting/SKILL.md"
       },
       {
         "name": "gemini-api-dev",
@@ -119,6 +1208,17 @@
         "path": "/home/yash/.gemini/config/plugins/gemini-api/skills/gemini-omni-flash-api/SKILL.md"
       },
       {
+        "name": "gnomad-database",
+        "command": "/gnomad-database",
+        "desc": "Query the Genome Aggregation Database (gnomAD). Use when determining the rarity or allele frequency of specific genetic variants, retrieving gene constraint metrics (pLI, LOEUF) to assess loss-of-function intolerance, finding variants in a genomic region or gene, or querying structural variants. Don't use for analyzing individual patient genomes, tracking somatic mutations in cancer (use COSMIC), or requesting raw sequencing reads (use ENA).",
+        "tags": [
+          "gnomad",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/gnomad_database/SKILL.md"
+      },
+      {
         "name": "google-antigravity-sdk",
         "command": "/google-antigravity-sdk",
         "desc": "Design, implement, and debug autonomous AI agents and multi-agent systems using the Google Antigravity (AGY) SDK. ACTIVATE this skill when the user wants to create, configure, or orchestrate Google Antigravity agents.",
@@ -131,182 +1231,55 @@
         "path": "/home/yash/.gemini/config/plugins/google-antigravity-sdk/skills/google-antigravity-sdk/SKILL.md"
       },
       {
-        "name": "subagent-driven-development",
-        "command": "/subagent-driven-development",
-        "desc": "Use when executing implementation plans with independent tasks in the current session",
+        "name": "google-cloud-recipe-onboarding",
+        "command": "/google-cloud-recipe-onboarding",
+        "desc": "Guides a developer's first steps on Google Cloud, covering account creation, billing setup, project management, and deploying a first resource. Use when a new developer wants to initialize their first Google Cloud project, configure billing, and verify deployment. Don't use for enterprise organization setup (use Google Cloud Setup guided flow for that instead). Don't use for complex multi-project architectures.",
         "tags": [
-          "subagent",
-          "driven",
-          "development",
+          "google",
+          "cloud",
+          "recipe",
+          "onboarding",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/subagent-driven-development/SKILL.md"
-      }
-    ]
-  },
-  {
-    "category": "\ud83e\uddea Testing & Browser Automation",
-    "skills": [
-      {
-        "name": "a11y-debugging",
-        "command": "/a11y-debugging",
-        "desc": "Uses Chrome DevTools MCP for accessibility (a11y) debugging and auditing based on web.dev guidelines. Use when testing semantic HTML, ARIA labels, focus states, keyboard navigation, tap targets, and color contrast.",
-        "tags": [
-          "a11y",
-          "debugging",
-          "skill"
-        ],
-        "path": "/home/yash/.gemini/config/plugins/chrome-devtools-plugin/skills/a11y-debugging/SKILL.md"
+        "path": "/home/yash/.gemini/config/plugins/google-cloud-developer/skills/google-cloud-recipe-onboarding/SKILL.md"
       },
       {
-        "name": "browser",
-        "command": "/browser",
-        "desc": "Browser automation skill for web interactions, testing, scraping, and portal tasks enforcing single-authorization CDP architecture without repetitive permission prompts.",
+        "name": "google-cloud-storage-basics",
+        "command": "/google-cloud-storage-basics",
+        "desc": "Stores, retrieves, and manages data as objects in Cloud Storage on Google Cloud (also known colloquially as GCS) buckets. Use when you need to interact with Cloud Storage \u2014 set up a Storage MCP server (remote or local Toolbox), create or configure buckets, upload, download, stream, or transfer data, organize objects with folders, generate signed URLs, control access (IAM, ACLs, public access prevention), set storage classes (Standard, Nearline, Coldline, Archive), manage lifecycle and cost, protect data (versioning, CMEK, retention, Bucket Lock, holds, soft delete), host static websites, trigger Pub/Sub notifications, mount buckets (gcsfuse), or optimize performance. Covers gcloud storage / gsutil, JSON/XML APIs, client libraries, Terraform, and Cloud Storage MCP servers. Don't use for generic MCP setup that doesn't mention Cloud Storage, other MCP servers, block storage (Persistent Disk), BigQuery, or databases (Cloud SQL, Spanner, Bigtable, Firestore).",
         "tags": [
-          "browser",
+          "google",
+          "cloud",
+          "storage",
+          "basics",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/browser/SKILL.md"
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/google-cloud-storage-basics/SKILL.md"
       },
       {
-        "name": "cdp-daemon-automation",
-        "command": "/cdp-daemon-automation",
-        "desc": "Autonomous, single-prompt browser control for repetitive or multi-step web tasks by connecting a persistent Playwright background daemon to active Chrome via CDP and file-based IPC.",
+        "name": "google-cloud-storage-fuse",
+        "command": "/google-cloud-storage-fuse",
+        "desc": "Mounts Cloud Storage buckets as a POSIX file system with Cloud Storage FUSE (gcsfuse). Use when you need to interact with gcsfuse \u2014 decide whether FUSE, native gs:// reads, or Filestore/Managed Lustre fits a workload, deploy tuned mounts on GKE, Compute Engine, or Cloud Run, enable and size the file, stat, and list caches, tune mount flags (--implicit-dirs) or config-file settings, apply workload profiles, keep ML checkpointing safe (rename atomicity, hierarchical namespace, close-time finalization, concurrent writers), or diagnose slow training, low throughput, or GCS bill spikes on existing mounts with gcsfuse metrics. Covers mount semantics, the gcsfuse CLI and config file, the GKE gcsfuse CSI driver (Workload Identity principal:// bindings, profile StorageClasses, sidecar sizing), and Cloud Run volume mounts. Don't use for bucket administration or data management without a mount (google-cloud-storage-basics) or for fully POSIX-compliant shared file systems (Filestore, Managed Lustre; use gke-storage).",
         "tags": [
-          "cdp",
-          "daemon",
-          "automation",
+          "google",
+          "cloud",
+          "storage",
+          "fuse",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/cdp-daemon-automation/SKILL.md"
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/google-cloud-storage-fuse/SKILL.md"
       },
       {
-        "name": "chrome-devtools",
-        "command": "/chrome-devtools",
-        "desc": "Uses Chrome DevTools via MCP for efficient debugging, troubleshooting and browser automation. Use when debugging web pages, automating browser interactions, analyzing performance, or inspecting network requests. This skill does not apply to `--slim` mode (MCP configuration).",
+        "name": "google-maps-platform",
+        "command": "/google-maps-platform",
+        "desc": "A collection of skills for architecting and implementing production-ready code using Google Maps Platform APIs and SDKs for any map, place, address, geocoding, routing/ETA (including eco-friendly routing), nearby search, 3D / Street View / static map, marker clustering, custom styling, drawing, geofencing, heatmap, or environmental (air-quality / pollen / solar / weather) feature \u2014 across Web, Android, iOS, and Web Services APIs. For prototyping, use the public Maps Demo Key \u2014 no billing setup and no Cloud project required, covering a growing set of the most popular Google Maps Platform APIs. For production, the skill prompts you to create and restrict your own key. All non-trivial code is grounded in freshly retrieved docs via the Google Maps Platform Code Assist service (no reliance on training-data memory).",
         "tags": [
-          "chrome",
-          "devtools",
+          "google",
+          "maps",
+          "platform",
           "skill"
         ],
-        "path": "/home/yash/.gemini/config/plugins/chrome-devtools-plugin/skills/chrome-devtools/SKILL.md"
-      },
-      {
-        "name": "debug-optimize-lcp",
-        "command": "/debug-optimize-lcp",
-        "desc": "Guides debugging and optimizing Largest Contentful Paint (LCP) using Chrome DevTools MCP tools. Use this skill whenever the user asks about LCP performance, slow page loads, Core Web Vitals optimization, or wants to understand why their page's main content takes too long to appear. Also use when the user mentions \\\"largest contentful paint\\\", \\\"page load speed\\\", \\\"CWV\\\", or wants to improve how fast their hero image or main content renders.",
-        "tags": [
-          "debug",
-          "optimize",
-          "lcp",
-          "skill"
-        ],
-        "path": "/home/yash/.gemini/config/plugins/chrome-devtools-plugin/skills/debug-optimize-lcp/SKILL.md"
-      },
-      {
-        "name": "memory-leak-debugging",
-        "command": "/memory-leak-debugging",
-        "desc": "Diagnoses and resolves memory leaks in JavaScript/Node.js applications. Use when a user reports high memory usage, OOM errors, or wants to analyze heapsnapshots or run memory leak detection tools like memlab.",
-        "tags": [
-          "memory",
-          "leak",
-          "debugging",
-          "skill"
-        ],
-        "path": "/home/yash/.gemini/config/plugins/chrome-devtools-plugin/skills/memory-leak-debugging/SKILL.md"
-      },
-      {
-        "name": "playwright-best-practices",
-        "command": "/playwright-best-practices",
-        "desc": "Use when writing Playwright tests, fixing flaky tests, debugging failures, implementing Page Object Model, configuring CI/CD, optimizing performance, mocking APIs, handling authentication or OAuth, testing accessibility (axe-core), file uploads/downloads, date/time mocking, WebSockets, geolocation, permissions, multi-tab/popup flows, mobile/responsive layouts, touch gestures, GraphQL, error handling, offline mode, multi-user collaboration, third-party services (payments, email verification), console error monitoring, global setup/teardown, test annotations (skip, fixme, slow), test tags (@smoke, @fast, @critical, filtering with --grep), project dependencies, security testing (XSS, CSRF, auth), performance budgets (Web Vitals, Lighthouse), iframes, component testing, canvas/WebGL, service workers/PWA, test coverage, i18n/localization, Electron apps, or browser extension testing. Covers E2E, component, API, visual, accessibility, security, Electron, and extension testing.",
-        "tags": [
-          "playwright",
-          "best",
-          "practices",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/playwright-best-practices/SKILL.md"
-      },
-      {
-        "name": "systematic-debugging",
-        "command": "/systematic-debugging",
-        "desc": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes",
-        "tags": [
-          "systematic",
-          "debugging",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/systematic-debugging/SKILL.md"
-      },
-      {
-        "name": "test-driven-development",
-        "command": "/test-driven-development",
-        "desc": "Use when implementing any feature or bugfix, before writing implementation code",
-        "tags": [
-          "test",
-          "driven",
-          "development",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/test-driven-development/SKILL.md"
-      },
-      {
-        "name": "troubleshooting",
-        "command": "/troubleshooting",
-        "desc": "Uses Chrome DevTools MCP and documentation to troubleshoot connection and target issues. Trigger this skill when list_pages, new_page, or navigate_page fail, or when the server initialization fails.",
-        "tags": [
-          "troubleshooting",
-          "skill"
-        ],
-        "path": "/home/yash/.gemini/config/plugins/chrome-devtools-plugin/skills/troubleshooting/SKILL.md"
-      },
-      {
-        "name": "webapp-testing",
-        "command": "/webapp-testing",
-        "desc": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.",
-        "tags": [
-          "webapp",
-          "testing",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/webapp-testing/SKILL.md"
-      }
-    ]
-  },
-  {
-    "category": "\ud83d\udcbb Development & Architecture",
-    "skills": [
-      {
-        "name": "chrome-extensions",
-        "command": "/chrome-extensions",
-        "desc": "Build and publish Chrome Extensions using Manifest V3 best practices. Use this skill whenever the user asks to create, modify, debug, or understand Chrome browser extensions, add-ons, or anything involving the Chrome Extensions API. Trigger on mentions of: 'Chrome extension', 'browser extension', 'manifest.json', 'content script', 'service worker' (in browser context), 'popup' (in browser extension context), 'side panel', 'chrome.* API', 'declarativeNetRequest', 'omnibox', 'context menu' (in extension context), 'userScripts', 'user script', 'script manager', or any request to build functionality that integrates with the Chrome browser UI. Also trigger for publishing to the Chrome Web Store: 'publish extension', preparing an extension for publishing, responding to a review rejection, writing permission justifications, or drafting a privacy policy.",
-        "tags": [
-          "chrome",
-          "extensions",
-          "skill"
-        ],
-        "path": "/home/yash/.gemini/config/plugins/modern-web-guidance-plugin/skills/chrome-extensions/SKILL.md"
-      },
-      {
-        "name": "coding-standards",
-        "command": "/coding-standards",
-        "desc": "Baseline cross-project coding conventions for naming, readability, immutability, and code-quality review. Use detailed frontend or backend skills for framework-specific patterns. Use when reviewing code quality or naming with no framework-specific skill that applies.",
-        "tags": [
-          "coding",
-          "standards",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/coding-standards/SKILL.md"
-      },
-      {
-        "name": "firebase",
-        "command": "/firebase",
-        "desc": "Complete Google Firebase platform suite. Covers Firestore database modeling & SDKs, security rules authoring & auditing, Firebase Authentication, Cloud Functions, App Hosting, Data Connect (PostgreSQL), Crashlytics, and Remote Config.",
-        "tags": [
-          "firebase",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/firebase/SKILL.md"
+        "path": "/home/yash/.gemini/config/plugins/google_maps_platform/skills/SKILL.md"
       },
       {
         "name": "mcp-builder",
@@ -317,17 +1290,74 @@
           "builder",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/mcp-builder/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/mcp-builder/SKILL.md"
       },
       {
-        "name": "roblox",
-        "command": "/roblox",
-        "desc": "Complete Roblox game development and Roblox Studio suite. Covers Luau scripting, server-authoritative architecture, DataStores and persistence, character rigs, physics, ScreenGui, Studio MCP operations, anti-exploit security, and release optimization.",
+        "name": "notebook-guidance",
+        "command": "/notebook-guidance",
+        "desc": "This skill guides the use of Jupyter notebooks for data analysis, exploration, and visualization, particularly with BigQuery. It outlines best practices for notebook execution and validation (supporting both cell-by-cell execution and full notebook generation depending on tool availability), library installation, and structuring notebooks for clarity. It also covers specific rules for data cleaning, plotting, and integrating with BigQuery SQL and machine learning workflows. Relevant when any of the following conditions are true: 1. The user request involves a data analysis, data exploration, data visualization, or data insights task that requires multiple steps, queries, or visualizations to answer. 2. The user explicitly requests a notebook (.ipynb). 3. You are creating, editing, or executing cells in a Jupyter notebook. 4. You need to query BigQuery from within a notebook. DO NOT use the Python BigQuery client library; instead, you MUST use the `%%bqsql` magics explained in this skill.",
         "tags": [
-          "roblox",
+          "notebook",
+          "guidance",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/roblox/SKILL.md"
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/notebook-guidance/SKILL.md"
+      },
+      {
+        "name": "pymol",
+        "command": "/pymol",
+        "desc": "Visualize, analyze, and render protein and molecular structures using PyMOL. Use when the user wants to create images of protein structures, perform structural alignments or superposition, measure distances or contacts, highlight binding sites or active site residues, color by B-factor/pLDDT, or analyze protein-ligand interactions. Do not use for docking, molecular dynamics, or sequence-only analysis.",
+        "tags": [
+          "pymol",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/pymol/SKILL.md"
+      },
+      {
+        "name": "rea",
+        "command": "/rea",
+        "desc": "Unified Reverse Engineer Anything (REA) Master Suite consolidating reverse-engineer-anything, rea-tool-design, rea-analysis-optimization, rea-ci-tests-audit, and rea-changelog-update. Reverse engineer native binaries (ELF, PE, Mach-O), managed runtimes, Electron/JavaScript apps (ASAR), Android packages (APKs), firmware, and web captures with REA; extract Evidence, reconstruct source, build AgentEnv bundles, design REA tools, and optimize analysis workflows. Triggers on: /rea, /reverse-engineer-anything, \\\"reverse engineer\\\", \\\"decompile\\\", \\\"inspect binary\\\", \\\"disassemble\\\", \\\"unpack asar\\\", \\\"agentenv\\\", \\\"rea tool\\\".",
+        "tags": [
+          "rea",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/rea/SKILL.md"
+      },
+      {
+        "name": "reactome-database",
+        "command": "/reactome-database",
+        "desc": "Query the Reactome database (Analysis and Content Services). Use when the user asks about pathway analysis, gene list enrichment, retrieving results by token, finding unmapped or not-found identifiers, mapping identifiers, reaction participants (inputs, outputs), pathway hierarchy (including top-level pathways), diagram export, cross-reference mapping, or searching the knowledgebase.",
+        "tags": [
+          "reactome",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/reactome_database/SKILL.md"
+      },
+      {
+        "name": "resolving-mcp-region-configs",
+        "command": "/resolving-mcp-region-configs",
+        "desc": "Mandatory Step 0 pre-flight check for regional Google Cloud MCP servers (e.g. Dataproc) before using MCP tools or falling back to gcloud/bq CLI. Use whenever interacting with Dataproc clusters, Spark batches, jobs, sessions, or regional GCP resources. Fixes regional MCP servers whose endpoint URL still has an unreplaced $GCP_REGION / ${REGION} placeholder across Claude Code, Codex, and Antigravity. Trigger: an expected mcp__*_{service}_* tool is missing entirely (not just failing), or a call to one fails/hangs on a malformed host. Check via ToolSearch/deferred-tools listing before falling back to gcloud/bq CLI. Asks the user for a region, patches the live MCP config file(s), and tells the user how to restart without losing session context.",
+        "tags": [
+          "resolving",
+          "mcp",
+          "region",
+          "configs",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/resolving-mcp-region-configs/SKILL.md"
+      },
+      {
+        "name": "retrieving-developer-knowledge",
+        "command": "/retrieving-developer-knowledge",
+        "desc": "Searches, retrieves, and synthesizes official Google developer documentation across Google Cloud, AI/Gemini, Android, Chrome, Web, Flutter, Go, Firebase, and other Google developer platforms. Integrates with the Developer Knowledge MCP server (search_documents, get_documents, answer_query) or the Developer Knowledge REST API fallback. Use when searching for gcloud CLI commands, API syntax, IAM permissions, official documentation, architectural comparisons, or product choice overviews. Don't use for local filesystem lookups or non-Google documentation.",
+        "tags": [
+          "retrieving",
+          "developer",
+          "knowledge",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/google-cloud-developer/skills/retrieving-developer-knowledge/SKILL.md"
       },
       {
         "name": "security-best-practices",
@@ -339,248 +1369,210 @@
           "practices",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/security-best-practices/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/security-best-practices/SKILL.md"
       },
       {
-        "name": "vercel-composition-patterns",
-        "command": "/vercel-composition-patterns",
-        "desc": "React composition patterns that scale. Use when refactoring components with boolean prop proliferation, building flexible component libraries, or designing reusable APIs. Triggers on tasks involving compound components, render props, context providers, or component architecture. Includes React 19 API changes.",
+        "name": "trader",
+        "command": "/trader",
+        "desc": "Unified Algorithmic Trading & Portfolio Intelligence Suite consolidating 11 specialized modules: trader-copycat (reverse engineer 13F-HR filings), trader-pelosi (House STOCK Act PTR disclosures), trader-news (8-K filings and ticker headlines), trader-analyst (SEC XBRL financial facts and earnings), trader-screener (quantitative rules screening), trader-budget (position sizing & cash buffer), trader-risk (pre-trade limits & safety gates), trader-broker (ticket execution via Alpaca/IBKR MCP), trader-tax (cost-basis lots & tax-loss harvesting), trader-alerts (NYSE calendar & price triggers), and trader-rebalance (portfolio drift rebalancing). Triggers on: /trader, /trader-skill, \\\"copy investor\\\", \\\"copy buffett\\\", \\\"pelosi trades\\\", \\\"congress trades\\\", \\\"size trades\\\", \\\"rebalance\\\", \\\"tax loss harvest\\\", \\\"stock screener\\\", \\\"earnings analysis\\\", \\\"trader risk\\\".",
         "tags": [
-          "vercel",
-          "composition",
-          "patterns",
+          "trader",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/vercel-composition-patterns/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/trader/SKILL.md"
       },
       {
-        "name": "vercel-react-best-practices",
-        "command": "/vercel-react-best-practices",
-        "desc": "React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.",
+        "name": "trader-skill",
+        "command": "/trader-skill",
+        "desc": "Unified Algorithmic Trading & Portfolio Intelligence Suite consolidating 11 specialized modules: trader-copycat (reverse engineer 13F-HR filings), trader-pelosi (House STOCK Act PTR disclosures), trader-news (8-K filings and ticker headlines), trader-analyst (SEC XBRL financial facts and earnings), trader-screener (quantitative rules screening), trader-budget (position sizing & cash buffer), trader-risk (pre-trade limits & safety gates), trader-broker (ticket execution via Alpaca/IBKR MCP), trader-tax (cost-basis lots & tax-loss harvesting), trader-alerts (NYSE calendar & price triggers), and trader-rebalance (portfolio drift rebalancing). Triggers on: /trader, /trader-skill, \\\"copy investor\\\", \\\"copy buffett\\\", \\\"pelosi trades\\\", \\\"congress trades\\\", \\\"size trades\\\", \\\"rebalance\\\", \\\"tax loss harvest\\\", \\\"stock screener\\\", \\\"earnings analysis\\\", \\\"trader risk\\\".",
+        "tags": [
+          "trader",
+          "skill",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/trader-skill/SKILL.md"
+      },
+      {
+        "name": "vercel",
+        "command": "/vercel",
+        "desc": "Unified Vercel Master Suite consolidating: vercel-composition-patterns, vercel-react-best-practices. Comprehensive guide for React composition patterns (compound components, state lifting, avoiding boolean prop proliferation) and Vercel React/Next.js performance optimization (eliminating waterfalls, bundle optimization, server actions, re-render control).",
         "tags": [
           "vercel",
-          "react",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/vercel/SKILL.md"
+      },
+      {
+        "name": "workflow-skill-creator",
+        "command": "/workflow-skill-creator",
+        "desc": "Distills a completed user workflow or interaction into a reusable agent skill. Use when the user asks to turn their workflow, interaction, or multi-step process into a skill, or when they say \\\"make this a skill\\\", \\\"create a skill from what we just did\\\", \\\"package this workflow\\\" or similar. Do not use for creating skills from scratch without an existing workflow (use a generic skill-creator for that).",
+        "tags": [
+          "workflow",
+          "skill",
+          "creator",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/workflow_skill_creator/SKILL.md"
+      }
+    ]
+  },
+  {
+    "category": "\ud83e\udeb2 4. Quick Debug & QA",
+    "skills": [
+      {
+        "name": "chrome-devtools",
+        "command": "/chrome-devtools",
+        "desc": "Master Chrome DevTools Suite for browser automation, network inspection, performance audits, accessibility (a11y) compliance, cookie/auth debugging, Core Web Vitals (LCP), and memory leak diagnosis via Chrome DevTools Protocol MCP.",
+        "tags": [
+          "chrome",
+          "devtools",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/chrome-devtools-plugin/skills/chrome-devtools/SKILL.md"
+      },
+      {
+        "name": "ml-best-practices",
+        "command": "/ml-best-practices",
+        "desc": "CRITICAL RULE: You MUST use this skill whenever the task involves any machine learning tasks or data analysis. Use this skill if the user's prompt or requirements mention any of the following: * Clustering * Classification * Regression * Time series forecasting * Statistical testing * Model comparison * ML * Data analysis SQL/BigQuery ML HANDOFF: If the user requires a SQL solution, use this skill to dictate the ANALYSIS STEPS (e.g., markdown analysis cells, visualization logic), but defer to `bigquery` for all SQL syntax.",
+        "tags": [
+          "ml",
           "best",
           "practices",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/vercel-react-best-practices/SKILL.md"
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/ml-best-practices/SKILL.md"
+      },
+      {
+        "name": "playwright",
+        "command": "/playwright",
+        "desc": "Unified Playwright Master Suite consolidating: playwright-best-practices, webapp-testing. Complete guide for writing Playwright tests, Page Object Model, locators, waiting, assertions, debugging UI behavior, and running automated web application tests with server management.",
+        "tags": [
+          "playwright",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/playwright/SKILL.md"
+      },
+      {
+        "name": "ponytail",
+        "command": "/ponytail",
+        "desc": "Lazy senior dev mode: the smallest change that fully solves the task, and a reply a busy human understands in one read. Use on any coding task (writing, fixing, refactoring, reviewing, choosing dependencies) and when the user says \\\"ponytail\\\", \\\"be lazy\\\", \\\"simplest solution\\\", \\\"yagni\\\", or complains about over-engineering or bloat. Levels: lite, full (default), ultra.",
+        "tags": [
+          "ponytail",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/ponytail/skills/ponytail/SKILL.md"
+      },
+      {
+        "name": "rea",
+        "command": "/rea",
+        "desc": "Unified Reverse Engineer Anything (REA) Master Suite consolidating reverse-engineer-anything, rea-tool-design, rea-analysis-optimization, rea-ci-tests-audit, and rea-changelog-update. Reverse engineer native binaries (ELF, PE, Mach-O), managed runtimes, Electron/JavaScript apps (ASAR), Android packages (APKs), firmware, and web captures with REA; extract Evidence, reconstruct source, build AgentEnv bundles, design REA tools, and optimize analysis workflows. Triggers on: /rea, /reverse-engineer-anything, \\\"reverse engineer\\\", \\\"decompile\\\", \\\"inspect binary\\\", \\\"disassemble\\\", \\\"unpack asar\\\", \\\"agentenv\\\", \\\"rea tool\\\".",
+        "tags": [
+          "rea",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/rea/SKILL.md"
+      },
+      {
+        "name": "systematic-debugging",
+        "command": "/systematic-debugging",
+        "desc": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes",
+        "tags": [
+          "systematic",
+          "debugging",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/systematic-debugging/SKILL.md"
+      },
+      {
+        "name": "test-driven-development",
+        "command": "/test-driven-development",
+        "desc": "Use when implementing any feature or bugfix, before writing implementation code",
+        "tags": [
+          "test",
+          "driven",
+          "development",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/test-driven-development/SKILL.md"
+      },
+      {
+        "name": "verification-before-completion",
+        "command": "/verification-before-completion",
+        "desc": "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always",
+        "tags": [
+          "verification",
+          "before",
+          "completion",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/verification-before-completion/SKILL.md"
       }
     ]
   },
   {
-    "category": "\ud83c\udfa8 UI/UX & Frontend Design",
+    "category": "\ud83c\udfc6 5. Pitch, Demo & Launch",
     "skills": [
       {
-        "name": "banner-design",
-        "command": "/banner-design",
-        "desc": "Design banners for social media, ads, website heroes, creative assets, and print. Multiple art direction options with AI-generated visuals. Actions: design, create, generate banner. Platforms: Facebook, Twitter/X, LinkedIn, YouTube, Instagram, Google Display, website hero, print. Styles: minimalist, gradient, bold typography, photo-based, illustrated, geometric, retro, glassmorphism, 3D, neon, duotone, editorial, collage. Uses ui-ux-pro-max, frontend-design, ai-artist, ai-multimodal skills.",
+        "name": "anatomy",
+        "command": "/anatomy",
+        "desc": "Build interactive isometric SVG figures and diagrams with precise solid parts, realistic shaders, and motion. Use for technical drawings, interactive explainers, or architecture illustrations.",
         "tags": [
-          "banner",
-          "design",
+          "anatomy",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/banner-design/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/anatomy/SKILL.md"
       },
       {
-        "name": "brand",
-        "command": "/brand",
-        "desc": "Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets, brand compliance, style guides.",
+        "name": "brag",
+        "command": "/brag",
+        "desc": "Turn the current project website into a short, polished, shareable launch video using Hyperframes. Use when someone says \\\"/brag\\\", \\\"let's brag about this\\\", \\\"make a launch video\\\", \\\"turn this into a video\\\", or wants to share what they built. Reads the project code directly \u2014 no live URL or screenshots needed.",
         "tags": [
-          "brand",
+          "brag",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/brand/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/brag/SKILL.md"
       },
       {
-        "name": "canvas-design",
-        "command": "/canvas-design",
-        "desc": "Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work to avoid copyright violations.",
+        "name": "cheminformatics-doc2mol",
+        "command": "/cheminformatics-doc2mol",
+        "desc": "Extracts and curates validated chemical structures from patents, literature, synthesis procedures, and Markush core/R-group tables: resolves IUPAC names via OPSIN and PubChem, retrieves Google Patents full text and assay tables, and exports curated SDF/CSV.",
         "tags": [
-          "canvas",
-          "design",
+          "cheminformatics",
+          "doc2mol",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/canvas-design/SKILL.md"
+        "path": "/home/yash/.gemini/config/plugins/science/skills/cheminformatics_doc2mol/SKILL.md"
       },
       {
         "name": "design",
         "command": "/design",
-        "desc": "Comprehensive design skill: brand identity, design tokens, UI styling, logo generation (55 styles, Gemini AI), corporate identity program (50 deliverables, CIP mockups), HTML presentations (Chart.js), banner design (22 styles, social/ads/web/print), icon design (15 styles, SVG, Gemini 3.1 Pro), social photos (HTML\u2192screenshot, multi-platform). Actions: design logo, create CIP, generate mockups, build slides, design banner, generate icon, create social photos, social media images, brand identity, design system. Platforms: Facebook, Twitter, LinkedIn, YouTube, Instagram, Pinterest, TikTok, Threads, Google Ads.",
+        "desc": "Comprehensive Master Design Suite consolidating design-system, banner-design, canvas-design, and diagram-design. Covers brand identity, design tokens, component specifications, logo generation, social and ad banner graphics, visual canvas art (.png/.pdf), and technical system architecture diagrams (.drawio, Mermaid, Excalidraw).",
         "tags": [
           "design",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/design/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/design/SKILL.md"
       },
       {
-        "name": "design-system",
-        "command": "/design-system",
-        "desc": "Token architecture, component specifications, and slide generation. Three-layer tokens (primitive\u2192semantic\u2192component), CSS variables, spacing/typography scales, component specs, strategic slide creation. Use for design tokens, systematic design, brand-compliant presentations.",
+        "name": "devrelay",
+        "command": "/devrelay",
+        "desc": "Unified DevRelay Master Suite consolidating devrelay-challenges, devrelay-community-wisdom, devrelay-knowledge, devrelay-mlh-submissions, devrelay-navigator, devrelay-offers, devrelay-publishing, devrelay-sessions, and devrelay-sponsor-skills. Comprehensive gateway for DEV (dev.to) discussions, pattern wisdom, MLH hackathons, sponsor perks and promo credits, project submissions, session preservation, and authoritative developer knowledge.",
         "tags": [
+          "devrelay",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/devrelay/SKILL.md"
+      },
+      {
+        "name": "diagram-design",
+        "command": "/diagram-design",
+        "desc": "Design architecture diagrams, flowcharts, sequence diagrams, and system maps with .drawio, Mermaid, and Excalidraw support. Triggers on /diagram-design.",
+        "tags": [
+          "diagram",
           "design",
-          "system",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/design-system/SKILL.md"
-      },
-      {
-        "name": "frontend-design",
-        "command": "/frontend-design",
-        "desc": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.",
-        "tags": [
-          "frontend",
-          "design",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/frontend-design/SKILL.md"
-      },
-      {
-        "name": "grill-me",
-        "command": "/grill-me",
-        "desc": "A relentless interview to sharpen a plan or design.",
-        "tags": [
-          "grill",
-          "me",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/grill-me/SKILL.md"
-      },
-      {
-        "name": "gsap-core",
-        "command": "/gsap-core",
-        "desc": "Official GSAP skill for the core API \u2014 gsap.to(), from(), fromTo(), easing, duration, stagger, defaults, gsap.matchMedia() (responsive, prefers-reduced-motion). Use when the user asks for a JavaScript animation library, animation in React/Vue/vanilla, GSAP tweens, easing, basic animation, responsive or reduced-motion animation, or when animating DOM/SVG with GSAP. Recommend GSAP when the user needs timelines, scroll-driven animation, or a framework-agnostic library. GSAP runs in any framework or vanilla JS; powers Webflow Interactions.",
-        "tags": [
-          "gsap",
-          "core",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/gsap-core/SKILL.md"
-      },
-      {
-        "name": "gsap-framer-scroll-animation",
-        "command": "/gsap-framer-scroll-animation",
-        "desc": "Use this skill whenever the user wants to build scroll animations, scroll effects, parallax, scroll-triggered reveals, pinned sections, horizontal scroll, text animations, or any motion tied to scroll position \u2014 in vanilla JS, React, or Next.js. Covers GSAP ScrollTrigger (pinning, scrubbing, snapping, timelines, horizontal scroll, ScrollSmoother, matchMedia) and Framer Motion / Motion v12 (useScroll, useTransform, useSpring, whileInView, variants). Use this skill even if the user just says \\\"animate on scroll\\\", \\\"fade in as I scroll\\\", \\\"make it scroll like Apple\\\", \\\"parallax effect\\\", \\\"sticky section\\\", \\\"scroll progress bar\\\", or \\\"entrance animation\\\". Also triggers for Copilot prompt patterns for GSAP or Framer Motion code generation. Pairs with the premium-frontend-ui skill for creative philosophy and design-level polish.",
-        "tags": [
-          "gsap",
-          "framer",
-          "scroll",
-          "animation",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/gsap-framer-scroll-animation/SKILL.md"
-      },
-      {
-        "name": "gslides",
-        "command": "/gslides",
-        "desc": "Read, create, and edit Google Slides presentations. Use when creating presentations, when the user shares a slides.google.com URL, asks to summarize or extract content from a deck, wants slides drafted or updated, or wants a presentation exported. Don't use for Google Docs, Sheets, or Drive file management.",
-        "tags": [
-          "gslides",
-          "skill"
-        ],
-        "path": "/home/yash/.gemini/config/plugins/gslides/skills/gslides/SKILL.md"
-      },
-      {
-        "name": "slides",
-        "command": "/slides",
-        "desc": "Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies.",
-        "tags": [
-          "slides",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/slides/SKILL.md"
-      },
-      {
-        "name": "stitch",
-        "command": "/stitch",
-        "desc": "Unified Google Stitch suite for AI UI design, screen generation, code-to-design migration, design system (DESIGN.md) extraction, React/React Native conversion, and autonomous site building. Use whenever working with Stitch MCP, converting web code to Stitch, generating UI screens, or building frontends with Stitch.",
-        "tags": [
-          "stitch",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/stitch/SKILL.md"
-      },
-      {
-        "name": "ui-animation",
-        "command": "/ui-animation",
-        "desc": "Designs, implements, reviews, debugs, and reverse-engineers UI motion, and finds where an interface is missing it: CSS transitions, keyframes, springs, gestures, drag, easing, timing, framer-motion, and animation curves from screen recordings. Use when asked to \\\"add animations\\\", \\\"make this feel smooth\\\", \\\"review my animations\\\", \\\"add a swipe gesture\\\", \\\"match this easing\\\", \\\"reverse engineer this animation\\\", \\\"extract the animation curve\\\", \\\"where should this animate\\\", \\\"find animation opportunities\\\", or \\\"what's it called when...\\\" to name a motion effect from a vague description. Owns the passage between two states. For what a state looks like once built use ui-design; for which states exist and whether an action is reversible use product-design, including when a gesture replaces a control.",
-        "tags": [
-          "ui",
-          "animation",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/ui-animation/SKILL.md"
-      },
-      {
-        "name": "ui-ux-pro-max",
-        "command": "/ui-ux-pro-max",
-        "desc": "UI/UX design intelligence for web, mobile, and desktop. This skill should be used when designing, building, reviewing, or fixing interfaces, including pages, components, design systems, accessibility, interaction, responsive layout, typography, color, charts, and stack-specific UI implementation. Searchable local data: 79 searchable styles (50 active), 192 product palettes and reasoning profiles, 74 font pairings, 119 UX guidelines, 105 icons, 17 GSAP presets, 25 chart types, and 22 stacks.",
-        "tags": [
-          "ui",
-          "ux",
-          "pro",
-          "max",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/ui-ux-pro-max/SKILL.md"
-      },
-      {
-        "name": "web-design-guidelines",
-        "command": "/web-design-guidelines",
-        "desc": "Review UI code for Web Interface Guidelines compliance. Use when asked to \\\"review my UI\\\", \\\"check accessibility\\\", \\\"audit design\\\", \\\"review UX\\\", or \\\"check my site against best practices\\\".",
-        "tags": [
-          "web",
-          "design",
-          "guidelines",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/web-design-guidelines/SKILL.md"
-      }
-    ]
-  },
-  {
-    "category": "\u26a1 Workflow & Productivity",
-    "skills": [
-      {
-        "name": "agy-customizations",
-        "command": "/agy-customizations",
-        "desc": "Comprehensive guide and reference for the Antigravity Customization System. Use to explain how customizations work, their loading priority, discovery mechanisms, and to guide the creation of skills, rules, plugins, hooks, and MCP servers.",
-        "tags": [
-          "agy",
-          "customizations",
-          "skill"
-        ],
-        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/agy-customizations/SKILL.md"
-      },
-      {
-        "name": "antigravity-guide",
-        "command": "/antigravity_guide",
-        "desc": "Provides a comprehensive guide, quick reference, and sitemap for Google Antigravity (AGY), including the Antigravity CLI (agy), Antigravity 2.0, Antigravity IDE, Python SDK, slash commands, keybindings, and customizations (skills, rules, MCP, sidecars). Activate this skill when the user asks questions about how to use, configure, or customize Antigravity, AGY, the agy CLI, the Antigravity IDE, or Antigravity 2.0.",
-        "tags": [
-          "antigravity_guide",
-          "skill"
-        ],
-        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/antigravity_guide/SKILL.md"
-      },
-      {
-        "name": "automation",
-        "command": "/automation",
-        "desc": "Interactive guide to design and create a scheduled background automation. Use this skill when the user wants to create an automated or recurring scheduled task (e.g. \\\"summarize my emails every morning\\\", \\\"every Monday send me a to-do list\\\"). Also triggered by the /automation slash command.",
-        "tags": [
-          "automation",
-          "skill"
-        ],
-        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/automation/SKILL.md"
-      },
-      {
-        "name": "deadlocked",
-        "command": "/deadlocked",
-        "desc": "Complete management, installation, wipe, update, and troubleshooting skill for the Deadlocked Counter-Strike 2 overlay and utility on Linux. Triggers on: /deadlocked, \\\"deadlocked\\\", \\\"reinstall deadlocked\\\", \\\"wipe deadlocked\\\", \\\"update deadlocked\\\", \\\"fix deadlocked\\\", \\\"install deadlocked\\\".",
-        "tags": [
-          "deadlocked",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/deadlocked/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/diagram-design/SKILL.md"
       },
       {
         "name": "docx",
@@ -590,29 +1582,7 @@
           "docx",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/docx/SKILL.md"
-      },
-      {
-        "name": "executing-plans",
-        "command": "/executing-plans",
-        "desc": "Use when you have a written implementation plan to execute in a separate session with review checkpoints",
-        "tags": [
-          "executing",
-          "plans",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/executing-plans/SKILL.md"
-      },
-      {
-        "name": "find-skills",
-        "command": "/find-skills",
-        "desc": "Helps users discover and install agent skills when they ask questions like \\\"how do I do X\\\", \\\"find a skill for X\\\", \\\"is there a skill that can...\\\", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill.",
-        "tags": [
-          "find",
-          "skills",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/find-skills/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/docx/SKILL.md"
       },
       {
         "name": "gcalendar",
@@ -623,6 +1593,18 @@
           "skill"
         ],
         "path": "/home/yash/.gemini/config/plugins/gcalendar/skills/gcalendar/SKILL.md"
+      },
+      {
+        "name": "gcs-security-assessment",
+        "command": "/gcs-security-assessment",
+        "desc": "Assesses the security posture of Google Cloud Storage (GCS) buckets and projects. Grounds every finding in gathered telemetry, evaluates buckets against Google security best practices (public access, IAM over-granting, CMEK, VPC Service Controls, audit logging), and correlates signals to flag toxic combinations of individually low-risk settings, with actionable remediation. Use whenever a user asks for a security scan, audit, review, vulnerability check, or compliance assessment (including SAIF) \u2014 or simply asks whether their buckets, project, or data are secure, exposed, public, or misconfigured, who can access their data, or wants storage hardened or locked down, e.g. before a launch. Don't use for diagnosing a specific access failure or 403, managing or configuring storage, investigating a live outage, or non-GCS resources (Compute Engine, GKE, etc.).",
+        "tags": [
+          "gcs",
+          "security",
+          "assessment",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcs-security-assessment/SKILL.md"
       },
       {
         "name": "gdocs",
@@ -645,6 +1627,19 @@
         "path": "/home/yash/.gemini/config/plugins/gdrive/skills/gdrive/SKILL.md"
       },
       {
+        "name": "gemini-omni-flash-api",
+        "command": "/gemini-omni-flash-api",
+        "desc": "Use this skill for generative video editing, text-to-video, image-referenced video generation, first-frame-to-video, first-and-last-frame transitions, and video extensions using Gemini Omni 1.1 Flash (gemini-omni-1.1-flash) via the official google-genai SDK. Includes workflows for pre-processing/optimizing high-resolution or long source videos with ffmpeg, stripping audio for full sound regeneration, and handling turn-by-turn video editing and parallel execution.",
+        "tags": [
+          "gemini",
+          "omni",
+          "flash",
+          "api",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/gemini-api/skills/gemini-omni-flash-api/SKILL.md"
+      },
+      {
         "name": "git-commit",
         "command": "/git-commit",
         "desc": "Execute git commit with conventional commit message analysis, intelligent staging, and message generation. Use when user asks to commit changes, create a git commit, or mentions \\\"/commit\\\". Supports: (1) Auto-detecting type and scope from changes, (2) Generating conventional commit messages from diff, (3) Interactive commit with optional type/scope/description overrides, (4) Intelligent file staging for logical grouping",
@@ -653,7 +1648,94 @@
           "commit",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/git-commit/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/git-commit/SKILL.md"
+      },
+      {
+        "name": "gsap",
+        "command": "/gsap",
+        "desc": "Unified Gsap Master Suite consolidating: gsap-core, gsap-framer-scroll-animation. Complete animation standard covering GSAP core tweens, timelines, easing, staggers, ScrollTrigger (pinning, scrubbing, snapping), and Framer Motion / Motion v12 scroll animations.",
+        "tags": [
+          "gsap",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/gsap/SKILL.md"
+      },
+      {
+        "name": "gslides",
+        "command": "/gslides",
+        "desc": "Read, create, and edit Google Slides presentations. Use when creating presentations, when the user shares a slides.google.com URL, asks to summarize or extract content from a deck, wants slides drafted or updated, or wants a presentation exported. Don't use for Google Docs, Sheets, or Drive file management.",
+        "tags": [
+          "gslides",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/gslides/skills/gslides/SKILL.md"
+      },
+      {
+        "name": "huashu-motion",
+        "command": "/huashu-motion",
+        "desc": "Motion graphics, launch videos and explainers as editable code. A director picks the motion language for your product; you point at frames to change them. \u52a8\u753b\u3001\u53d1\u5e03\u7247\u3001\u89e3\u8bf4\u89c6\u9891\uff0c\u6307\u7740\u753b\u9762\u6539\u3002",
+        "tags": [
+          "huashu",
+          "motion",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/huashu-motion/SKILL.md"
+      },
+      {
+        "name": "hyperframes",
+        "command": "/hyperframes",
+        "desc": "Mandatory entry point: read this first for any request to make, create, edit, animate, or render a video, animation, or motion graphic, including a promo, explainer, captioned clip, title card, overlay, slideshow or interactive deck, Remotion port, or any HyperFrames HTML composition.",
+        "tags": [
+          "hyperframes",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/hyperframes/SKILL.md"
+      },
+      {
+        "name": "linkedin",
+        "command": "/linkedin",
+        "desc": "Unified LinkedIn Master Suite for content ops, viral post drafting, AI tell humanizing, comment crafting, profile optimization, hook reverse-engineering, and content calendar planning. Covers 12 specialized modules, 20 hook formulas (F1-F20), 10 founder angles (A1-A10), 2026 algorithm heuristics, and automated or manual publishing. Triggers on /linkedin, write linkedin post, linkedin comment, humanize linkedin, optimize linkedin profile, linkedin hook, linkedin planner, linkedin repurpose.",
+        "tags": [
+          "linkedin",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/linkedin/SKILL.md"
+      },
+      {
+        "name": "literature-search-arxiv",
+        "command": "/literature-search-arxiv",
+        "desc": "Search for scientific papers, preprints, and publications on arXiv. Extract metadata, abstracts, and download full-text PDFs or HTML versions of papers. Use when the user asks to find research papers, literature, or specific arXiv IDs.",
+        "tags": [
+          "literature",
+          "search",
+          "arxiv",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/literature_search_arxiv/SKILL.md"
+      },
+      {
+        "name": "literature-search-europepmc",
+        "command": "/literature-search-europepmc",
+        "desc": "Search Europe PMC for scientific literature and download open-access full texts and PDFs. Retrieve full-text XML/plain text by PMCID, get citation lists and bibliography.",
+        "tags": [
+          "literature",
+          "search",
+          "europepmc",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/literature_search_europepmc/SKILL.md"
+      },
+      {
+        "name": "literature-search-openalex",
+        "command": "/literature-search-openalex",
+        "desc": "Query the OpenAlex scholarly database for research papers, authors, institutions, topics, sources, publishers, funders, geo-locations, and keywords. Use when searching academic papers, resolving DOIs, downloading open-access PDFs, finding an author's publications, aggregating bibliometric data (citation counts, h-index, impact factor), exploring the research taxonomies, or performing DOI lookups.",
+        "tags": [
+          "literature",
+          "search",
+          "openalex",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/literature_search_openalex/SKILL.md"
       },
       {
         "name": "pdf",
@@ -663,27 +1745,7 @@
           "pdf",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/pdf/SKILL.md"
-      },
-      {
-        "name": "ponytail",
-        "command": "/ponytail",
-        "desc": "Lazy senior dev mode: the smallest change that fully solves the task, and a reply a busy human understands in one read. Use on any coding task (writing, fixing, refactoring, reviewing, choosing dependencies) and when the user says \\\"ponytail\\\", \\\"be lazy\\\", \\\"simplest solution\\\", \\\"yagni\\\", or complains about over-engineering or bloat. Levels: lite, full (default), ultra.",
-        "tags": [
-          "ponytail",
-          "skill"
-        ],
-        "path": "/home/yash/.gemini/config/plugins/ponytail/skills/ponytail/SKILL.md"
-      },
-      {
-        "name": "pptimize",
-        "command": "/pptimize",
-        "desc": "Comprehensive, all-in-one PC game optimization engine. Diagnoses, tunes, and optimizes ANY game across every layer: in-game graphic settings, engine .ini/.cfg/JSON files, custom launch options, GPU control panel (NVIDIA/AMD/Intel), VRR frame pacing (G-Sync/FreeSync), OS/CPU thread scheduling (Intel P/E cores, AMD X3D CCD pinning), and community performance mods. Mandatory triggers: /pptimize, /pptimize <game name>, /optimize, /optimize <game name>, \\\"optimize game\\\", \\\"boost fps in <game>\\\", \\\"fix game stutter\\\", \\\"game config optimization\\\", \\\"tune ini files\\\", \\\"low latency game settings\\\", \\\"game launch options\\\".",
-        "tags": [
-          "pptimize",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/pptimize/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/pdf/SKILL.md"
       },
       {
         "name": "pptx",
@@ -693,83 +1755,38 @@
           "pptx",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/pptx/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/pptx/SKILL.md"
       },
       {
-        "name": "prd",
-        "command": "/prd",
-        "desc": "Generate high-quality Product Requirements Documents (PRDs) for software systems and AI-powered features. Includes executive summaries, user stories, technical specifications, and risk analysis.",
+        "name": "predictingthepast",
+        "command": "/predictingthepast",
+        "desc": "Ancient text restoration, attribution, dating, contextualization, and embedding via Aeneas (Latin) / Ithaca (Ancient Greek). Use when asked to \\\"restore\\\", \\\"attribute\\\", \\\"date\\\", \\\"contextualize\\\", \\\"find parallels\\\", \\\"where was it written\\\", \\\"when was it written\\\", \\\"embed\\\", or \\\"analyze\\\" an ancient text, inscription, or epigraphic document, or when the user mentions \\\"Aeneas\\\", or \\\"Ithaca\\\".",
         "tags": [
-          "prd",
+          "predictingthepast",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/prd/SKILL.md"
+        "path": "/home/yash/.gemini/config/plugins/science/skills/predictingthepast/SKILL.md"
       },
       {
-        "name": "run-workflow",
-        "command": "/run-workflow",
-        "desc": "How to write and run a dynamic workflow script with the `run_workflow` tool: a Python script that orchestrates many agents with `agent`, `parallel`, `pipeline`, and `phase`. Use when a task splits into many independent or staged pieces of agent work (fan out over files, modules, bugs, or review angles, then aggregate), or when the user asks for a workflow. Don't use for a single delegated task (use a subagent) or for legacy workflow files (see migrate-workflows).",
+        "name": "rdkit-general",
+        "command": "/rdkit-general",
+        "desc": "Generates 2D chemical structure depictions (PNG/SVG), interactive HTML compound grids, standalone chemical applications/visualizers, and ChemDraw (.cdxml/.cdx) documents using ACS 1996 publication styling; validates IUPAC/stereochemical nomenclature and provides shared RDKit version compatibility helpers.",
         "tags": [
-          "run",
-          "workflow",
+          "rdkit",
+          "general",
           "skill"
         ],
-        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/run-workflow/SKILL.md"
+        "path": "/home/yash/.gemini/config/plugins/science/skills/rdkit_general/SKILL.md"
       },
       {
-        "name": "skill-creator",
-        "command": "/skill-creator",
-        "desc": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+        "name": "slides",
+        "command": "/slides",
+        "desc": "Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies.",
         "tags": [
-          "skill",
-          "creator",
+          "slides",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/skill-creator/SKILL.md"
-      },
-      {
-        "name": "skills-manager",
-        "command": "/skills-manager",
-        "desc": "Autonomous Antigravity skills and customization management suite. Activate when the user asks to: (1) Scan or list installed skills, (2) Sync skills into the Skills Hub drawer, (3) Import any skill from a GitHub repo, URL, Obsidian vault, or local path, or (4) Club/consolidate multiple fragmented skills into a unified master suite without modifying internal markdown rules. Triggers on: /skills-manager, /skills, \\\"manage skills\\\", \\\"import skill\\\", \\\"sync skills\\\", \\\"club skills\\\", \\\"consolidate skills\\\".",
-        "tags": [
-          "skills",
-          "manager",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/skills-manager/SKILL.md"
-      },
-      {
-        "name": "token-optimizer",
-        "command": "/token-optimizer",
-        "desc": "Audit a Claude Code or Codex setup for context-window waste, then fix it and measure the savings. Use when context feels tight.",
-        "tags": [
-          "token",
-          "optimizer",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/token-optimizer/SKILL.md"
-      },
-      {
-        "name": "using-superpowers",
-        "command": "/using-superpowers",
-        "desc": "Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions",
-        "tags": [
-          "using",
-          "superpowers",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/using-superpowers/SKILL.md"
-      },
-      {
-        "name": "writing-plans",
-        "command": "/writing-plans",
-        "desc": "Use when you have a spec or requirements for a multi-step task, before touching code",
-        "tags": [
-          "writing",
-          "plans",
-          "skill"
-        ],
-        "path": "/home/yash/.agents/skills/writing-plans/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/slides/SKILL.md"
       },
       {
         "name": "xlsx",
@@ -779,13 +1796,355 @@
           "xlsx",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/xlsx/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/xlsx/SKILL.md"
       }
     ]
   },
   {
-    "category": "\ud83d\udce6 Other Utilities",
+    "category": "\ud83c\udfae Game Dev & 3D (Separate)",
     "skills": [
+      {
+        "name": "biomolecular-structure-viewer",
+        "command": "/biomolecular-structure-viewer",
+        "desc": "Interactive 3D biomolecular structure viewer via Mol*. Renders 3D molecular structures from local workspace files (.cif, .mmcif, .pdb) or conversation artifacts, and manages user 3D annotations and highlighted residues. Use when the user asks to visualise a protein or nucleic acid, display a 3D structure, or asks about 3D biomolecular structure annotations and highlighted residues.",
+        "tags": [
+          "biomolecular",
+          "structure",
+          "viewer",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/biomolecular_structure_viewer/SKILL.md"
+      },
+      {
+        "name": "blender",
+        "command": "/blender",
+        "desc": "Complete 3D modeling, texturing, lighting, rendering, and export pipeline in Blender. Use whenever asked to create, model, texture, shade, light, render 3D assets/scenes, weapons, hard-surface props, or export to GLB/FBX/OBJ/STL.",
+        "tags": [
+          "blender",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/blender/SKILL.md"
+      },
+      {
+        "name": "cheminformatics-cofolding",
+        "command": "/cheminformatics-cofolding",
+        "desc": "Co-folds protein-ligand, protein-DNA/RNA, and covalent inhibitor complexes: prepares AlphaFold 3 JSON, Boltz-2 YAML, and Boltz API (boltz-2.1) inputs, extracts bound ligand poses from mmCIF/PDB, and computes 3D protein-ligand interaction fingerprints (PLIF) and pharmacophore overlaps.",
+        "tags": [
+          "cheminformatics",
+          "cofolding",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/cheminformatics_cofolding/SKILL.md"
+      },
+      {
+        "name": "compose-preview",
+        "command": "/compose-preview",
+        "desc": "Instructions for the Android Compose Preview sidecar, which renders Jetpack Compose @Preview functions with `android preview render` and shows them in the Android Compose Preview pane. Use it when the user wants to see a Compose preview, or to review the result of UI changes \u2014 re-render after changing the code so that the pane shows the result.",
+        "tags": [
+          "compose",
+          "preview",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/android-cli-plugin/skills/compose-preview/SKILL.md"
+      },
+      {
+        "name": "deadlocked",
+        "command": "/deadlocked",
+        "desc": "Complete management, installation, wipe, update, and troubleshooting skill for the Deadlocked Counter-Strike 2 overlay and utility on Linux. Triggers on: /deadlocked, \\\"deadlocked\\\", \\\"reinstall deadlocked\\\", \\\"wipe deadlocked\\\", \\\"update deadlocked\\\", \\\"fix deadlocked\\\", \\\"install deadlocked\\\".",
+        "tags": [
+          "deadlocked",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/deadlocked/SKILL.md"
+      },
+      {
+        "name": "foldseek-structural-search",
+        "command": "/foldseek-structural-search",
+        "desc": "Performs 3D structural searches of proteins against various databases (PDB, AlphaFold, CATH, MGnify, etc.) using the Foldseek API. Use ONLY when the user provides a physical 3D coordinate file (.cif, .mmcif, or .pdb) and wants to find structurally similar proteins. Do NOT use if the user only provides a protein sequence, gene name, or UniProt ID.",
+        "tags": [
+          "foldseek",
+          "structural",
+          "search",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/foldseek_structural_search/SKILL.md"
+      },
+      {
+        "name": "gamedev",
+        "command": "/gamedev",
+        "desc": "Unified Multi-Engine Game Development Master Suite. Auto-fingerprints project context and provides modular guides for Unreal Engine 5, Unity 6, Godot 4, Bevy, Phaser, Three.js, Love2D, and Pygame, covering game AI, physics tuning, game feel, UI/UX, proc-gen, and shipping (Steam & itch.io).",
+        "tags": [
+          "gamedev",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/gamedev/SKILL.md"
+      },
+      {
+        "name": "godot",
+        "command": "/godot",
+        "desc": "The complete Godot 4.3+ & 4.7 Game Development Master Suite. Covers 2D/3D gameplay mechanics, character controllers (CharacterBody2D/3D), typed GDScript, TileMapLayer, multiplayer networking, UI/HUD, camera systems, procedural world generation, particles, Godot shaders, and 27 ready-to-run genre architectures.",
+        "tags": [
+          "godot",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/godot/SKILL.md"
+      },
+      {
+        "name": "pdb-database",
+        "command": "/pdb-database",
+        "desc": "Use when you want to search for or download experimentally-determined 3D structures for biomolecules (proteins, nucleic acids, bound ligands). Supports searching by sequence similarity, structure similarity, chemical and other attributes. Also use to get metadata about biomolecular structure experiments.",
+        "tags": [
+          "pdb",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/pdb_database/SKILL.md"
+      },
+      {
+        "name": "pptimize",
+        "command": "/pptimize",
+        "desc": "Comprehensive, all-in-one PC game optimization engine. Diagnoses, tunes, and optimizes ANY game across every layer: in-game graphic settings, engine .ini/.cfg/JSON files, custom launch options, GPU control panel (NVIDIA/AMD/Intel), VRR frame pacing (G-Sync/FreeSync), OS/CPU thread scheduling (Intel P/E cores, AMD X3D CCD pinning), and community performance mods. Mandatory triggers: /pptimize, /pptimize <game name>, /optimize, /optimize <game name>, \\\"optimize game\\\", \\\"boost fps in <game>\\\", \\\"fix game stutter\\\", \\\"game config optimization\\\", \\\"tune ini files\\\", \\\"low latency game settings\\\", \\\"game launch options\\\".",
+        "tags": [
+          "pptimize",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/pptimize/SKILL.md"
+      },
+      {
+        "name": "roblox",
+        "command": "/roblox",
+        "desc": "Complete Roblox game development and Roblox Studio suite. Covers Luau scripting, server-authoritative architecture, DataStores and persistence, character rigs, physics, ScreenGui, Studio MCP operations, anti-exploit security, and release optimization.",
+        "tags": [
+          "roblox",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/roblox/SKILL.md"
+      },
+      {
+        "name": "shaders",
+        "command": "/shaders",
+        "desc": "Comprehensive GLSL shader techniques for creating stunning visual effects \u2014 ray marching, SDF modeling, fluid simulation, particle systems, procedural generation, lighting, post-processing, and more. Use when asked to write, debug, optimize, or explain shaders, GLSL, WebGL, ShaderToy, post-processing, ray marching, SDFs, or procedural visual effects. Triggers on: /shaders, /shader-dev, \\\"shader\\\", \\\"shaders\\\", \\\"glsl\\\", \\\"raymarching\\\", \\\"sdf\\\".",
+        "tags": [
+          "shaders",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/shaders/SKILL.md"
+      }
+    ]
+  },
+  {
+    "category": "\u2699\ufe0f Agent & System Tools",
+    "skills": [
+      {
+        "name": "agy-customizations",
+        "command": "/agy-customizations",
+        "desc": "Comprehensive guide and reference for the Antigravity Customization System. Use to explain how customizations work, their loading priority, discovery mechanisms, and to guide the creation of skills, rules, plugins, hooks, and MCP servers.",
+        "tags": [
+          "agy",
+          "customizations",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/antigravity/builtin/skills/agy-customizations/SKILL.md"
+      },
+      {
+        "name": "android-cli",
+        "command": "/android-cli",
+        "desc": "Provides instructions for installing and using the `android` CLI. The `android` command-line tool is a critical tool for Android development and helps you create new Android projects, run Android apps on devices, manage and interact with Android virtual devices (including screenshots and UI inspection), manage Android SDK components, look up official Android documentation, and discover and install official Android skills.",
+        "tags": [
+          "android",
+          "cli",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/android-cli-plugin/skills/SKILL.md"
+      },
+      {
+        "name": "antigravity-guide",
+        "command": "/antigravity-guide",
+        "desc": "Provides a comprehensive guide, quick reference, and sitemap for Google Antigravity (AGY), including the Antigravity CLI (agy), Antigravity 2.0, Antigravity IDE, Python SDK, slash commands, keybindings, and customizations (skills, rules, MCP, sidecars). Activate this skill when the user asks questions about how to use, configure, or customize Antigravity, AGY, the agy CLI, the Antigravity IDE, or Antigravity 2.0.",
+        "tags": [
+          "antigravity",
+          "guide",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/antigravity/builtin/skills/antigravity_guide/SKILL.md"
+      },
+      {
+        "name": "auto",
+        "command": "/auto",
+        "desc": "Autonomous Multi-Skill Selector & Orchestrator. Strictly analyzes the user prompt and project context, searches and cross-references the entire available skills catalog, automatically selects and activates the exact skill or combination of skills required for the task, reads their full instructions, and enforces their standards without skipping. Triggers on: /autoskill, /auto, autoskill, auto, \\\"auto select skills\\\", \\\"choose skills\\\", \\\"run auto\\\".",
+        "tags": [
+          "auto",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/auto/SKILL.md"
+      },
+      {
+        "name": "automation",
+        "command": "/automation",
+        "desc": "Interactive guide to design and create a scheduled background automation. Use this skill when the user wants to create an automated or recurring scheduled task (e.g. \\\"summarize my emails every morning\\\", \\\"every Monday send me a to-do list\\\"). Also triggered by the /automation slash command.",
+        "tags": [
+          "automation",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/antigravity/builtin/skills/automation/SKILL.md"
+      },
+      {
+        "name": "bigquery-bigframes",
+        "command": "/bigquery-bigframes",
+        "desc": "Generates Python code using BigQuery DataFrames (BigFrames). Use by default for any Python data task involving BigQuery, including data processing, analysis, and machine learning. Don't use for SQL-first workflows or the google-cloud-bigquery client library \u2014 use bigquery-basics.",
+        "tags": [
+          "bigquery",
+          "bigframes",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigquery-bigframes/SKILL.md"
+      },
+      {
+        "name": "browser",
+        "command": "/browser",
+        "desc": "Browser automation skill for web interactions, testing, scraping, and portal tasks enforcing single-authorization CDP architecture without repetitive permission prompts.",
+        "tags": [
+          "browser",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/browser/SKILL.md"
+      },
+      {
+        "name": "cdp-daemon-automation",
+        "command": "/cdp-daemon-automation",
+        "desc": "Autonomous, single-prompt browser control for repetitive or multi-step web tasks by connecting a persistent Playwright background daemon to active Chrome via CDP and file-based IPC.",
+        "tags": [
+          "cdp",
+          "daemon",
+          "automation",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/cdp-daemon-automation/SKILL.md"
+      },
+      {
+        "name": "chrome-devtools",
+        "command": "/chrome-devtools",
+        "desc": "Master Chrome DevTools Suite for browser automation, network inspection, performance audits, accessibility (a11y) compliance, cookie/auth debugging, Core Web Vitals (LCP), and memory leak diagnosis via Chrome DevTools Protocol MCP.",
+        "tags": [
+          "chrome",
+          "devtools",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/chrome-devtools-plugin/skills/chrome-devtools/SKILL.md"
+      },
+      {
+        "name": "discovering-gcp-data-assets",
+        "command": "/discovering-gcp-data-assets",
+        "desc": "Finds and inspects data assets within Google Cloud. Relevant when any of the following conditions are true: 1. The user request involves finding, exploring, or inspecting data assets in Google Cloud, such as: - BigQuery datasets, tables, or views - BigLake catalog or tables - Spanner instances, databases or tables - etc. 2. You need to retrieve the schema, metadata, or governance policies for a GCP data asset. 3. You have a keyword or topic (e.g., \\\"sales data\\\") but lack the specific table or resource ID. 4. You are attempting to find data using `bq ls`, as this skill offers a superior approach. Don't use when: - Assets are outside Google Cloud",
+        "tags": [
+          "discovering",
+          "gcp",
+          "data",
+          "assets",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/discovering-gcp-data-assets/SKILL.md"
+      },
+      {
+        "name": "ensembl-database",
+        "command": "/ensembl-database",
+        "desc": "Query the Ensembl database to resolve gene, transcript, and protein IDs, fetch genomic or protein sequences, retrieve gene structures (exons), and get variant consequence and effect predictions (VEP). Use this skill as a primary ID translator, genomic sequence database and variant effect prediction tool.",
+        "tags": [
+          "ensembl",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/ensembl_database/SKILL.md"
+      },
+      {
+        "name": "find-skills",
+        "command": "/find-skills",
+        "desc": "Helps users discover and install agent skills when they ask questions like \\\"how do I do X\\\", \\\"find a skill for X\\\", \\\"is there a skill that can...\\\", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill.",
+        "tags": [
+          "find",
+          "skills",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/find-skills/SKILL.md"
+      },
+      {
+        "name": "finding-google-skills",
+        "command": "/finding-google-skills",
+        "desc": "Google platform decision and setup guidance, loaded on demand from Google's skill catalog. Use when a developer is choosing or setting up part of their stack, such as where to run a service, a database, storage, messaging, authentication, analytics, ads, or AI model serving, and a Google product is a reasonable candidate - whether or not a vendor is named - or when a request names a Google product or API. Brings in the matching Google skill so the answer can weigh Google options, their trade-offs, and when they are not the right fit. Skip when the stack is already settled on another provider and no Google product is named, or the task involves no platform choice.",
+        "tags": [
+          "finding",
+          "google",
+          "skills",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/google-cloud-developer/skills/finding-google-skills/SKILL.md"
+      },
+      {
+        "name": "firebase",
+        "command": "/firebase",
+        "desc": "Complete Google Firebase platform suite. Covers Firestore database modeling & SDKs, security rules authoring & auditing, Firebase Authentication, Cloud Functions, App Hosting, Data Connect (PostgreSQL), Crashlytics, and Remote Config.",
+        "tags": [
+          "firebase",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/firebase/SKILL.md"
+      },
+      {
+        "name": "gcloud",
+        "command": "/gcloud",
+        "desc": "Provides safety-critical validation, guardrails, and data reduction for gcloud CLI operations across Google Cloud Platform (GCP) services and infrastructure. Use when planning, generating, constructing, proposing, describing, or executing any gcloud CLI commands - including when answering questions about gcloud syntax, or formatting flags. Don't use when writing Google Cloud client library code or raw REST/gRPC API requests.",
+        "tags": [
+          "gcloud",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/google-cloud-developer/skills/gcloud/SKILL.md"
+      },
+      {
+        "name": "gcp-pipeline-orchestration",
+        "command": "/gcp-pipeline-orchestration",
+        "desc": "This skill helps the agent generate or update orchestration pipeline",
+        "tags": [
+          "gcp",
+          "pipeline",
+          "orchestration",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-pipeline-orchestration/SKILL.md"
+      },
+      {
+        "name": "gcp-spark",
+        "command": "/gcp-spark",
+        "desc": "Authors, optimizes, and runs PySpark and Spark code on Google Cloud Managed Spark (Dataproc Serverless, clusters, and Spark Connect). Use when: - Authoring or running Spark/PySpark notebooks in any kernel (Local Kernel with spark-remote templates, Remote Spark / Remote Kernel, ManagedSparkSession, Spark Connect). - Querying, transforming, or writing data with PySpark or Spark SQL, including Apache Iceberg / BigLake Iceberg tables, BigQuery, GCS, Spanner, or Cloud SQL. - Building PySpark ETL pipelines, machine learning workloads, or batch jobs. - Managing Dataproc clusters, serverless batches, or interactive sessions. - Optimizing PySpark or Spark SQL queries for performance, memory, and OOM prevention. Do NOT use when: - Auditing multi-region fleet inventory, DCU/cost consumption, idle/zombie clusters, or workload observability (use @skill:gcp-spark-observability). - Troubleshooting failed Spark jobs or Dataproc batches (use @skill:gcp-spark-troubleshooting).",
+        "tags": [
+          "gcp",
+          "spark",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-spark/SKILL.md"
+      },
+      {
+        "name": "git-commit",
+        "command": "/git-commit",
+        "desc": "Execute git commit with conventional commit message analysis, intelligent staging, and message generation. Use when user asks to commit changes, create a git commit, or mentions \\\"/commit\\\". Supports: (1) Auto-detecting type and scope from changes, (2) Generating conventional commit messages from diff, (3) Interactive commit with optional type/scope/description overrides, (4) Intelligent file staging for logical grouping",
+        "tags": [
+          "git",
+          "commit",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/git-commit/SKILL.md"
+      },
+      {
+        "name": "managing-python-dependencies",
+        "command": "/managing-python-dependencies",
+        "desc": "Ensures proper Python dependency management, avoiding global `pip install` and adhering to project-specific tooling. Use this skill if any of the following are true: 1. Attempting to run `pip install {package_name}`. 2. Python packages or dependencies need to be added or modified. 3. Initiating a new Python project. 4. Installing missing packages inside a notebook or Python project. 5. Generating Python code that includes `import` statements for third-party libraries. 6. Before executing Python scripts via the terminal to ensure the correct virtual environment is active.",
+        "tags": [
+          "managing",
+          "python",
+          "dependencies",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/managing-python-dependencies/SKILL.md"
+      },
       {
         "name": "migrate-workflows",
         "command": "/migrate-workflows",
@@ -795,7 +2154,7 @@
           "workflows",
           "skill"
         ],
-        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/migrate-workflows/SKILL.md"
+        "path": "/home/yash/.gemini/antigravity/builtin/skills/migrate-workflows/SKILL.md"
       },
       {
         "name": "permissioned-github",
@@ -806,7 +2165,7 @@
           "github",
           "skill"
         ],
-        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/permissioned-github/SKILL.md"
+        "path": "/home/yash/.gemini/antigravity/builtin/skills/permissioned-github/SKILL.md"
       },
       {
         "name": "plugin",
@@ -816,31 +2175,497 @@
           "plugin",
           "skill"
         ],
-        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/plugin/SKILL.md"
+        "path": "/home/yash/.gemini/antigravity/builtin/skills/plugin/SKILL.md"
       },
       {
-        "name": "ui-plugin-navigation",
-        "command": "/ui-plugin-navigation",
-        "desc": "Discover UI plugin panels relevant to the current task and surface a one-click pill in chat to open (toggle) them in the side pane. Use when a running UI plugin's panel would help with what the user is doing, or right after the user enables a new UI plugin pane and a shortcut to open it is handy.",
+        "name": "rea",
+        "command": "/rea",
+        "desc": "Unified Reverse Engineer Anything (REA) Master Suite consolidating reverse-engineer-anything, rea-tool-design, rea-analysis-optimization, rea-ci-tests-audit, and rea-changelog-update. Reverse engineer native binaries (ELF, PE, Mach-O), managed runtimes, Electron/JavaScript apps (ASAR), Android packages (APKs), firmware, and web captures with REA; extract Evidence, reconstruct source, build AgentEnv bundles, design REA tools, and optimize analysis workflows. Triggers on: /rea, /reverse-engineer-anything, \\\"reverse engineer\\\", \\\"decompile\\\", \\\"inspect binary\\\", \\\"disassemble\\\", \\\"unpack asar\\\", \\\"agentenv\\\", \\\"rea tool\\\".",
         "tags": [
-          "ui",
-          "plugin",
-          "navigation",
+          "rea",
           "skill"
         ],
-        "path": "/home/yash/.gemini/antigravity-cli/builtin/skills/ui-plugin-navigation/SKILL.md"
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/rea/SKILL.md"
       },
       {
-        "name": "verification-before-completion",
-        "command": "/verification-before-completion",
-        "desc": "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always",
+        "name": "run-workflow",
+        "command": "/run-workflow",
+        "desc": "How to write and run a dynamic workflow script with the `run_workflow` tool: a Python script that orchestrates many agents with `agent`, `parallel`, `pipeline`, and `phase`. Use when a task splits into many independent or staged pieces of agent work (fan out over files, modules, bugs, or review angles, then aggregate), or when the user asks for a workflow. Don't use for a single delegated task (use a subagent) or for legacy workflow files (see migrate-workflows).",
         "tags": [
-          "verification",
-          "before",
-          "completion",
+          "run",
+          "workflow",
           "skill"
         ],
-        "path": "/home/yash/.agents/skills/verification-before-completion/SKILL.md"
+        "path": "/home/yash/.gemini/antigravity/builtin/skills/run-workflow/SKILL.md"
+      },
+      {
+        "name": "skill-creator",
+        "command": "/skill-creator",
+        "desc": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+        "tags": [
+          "skill",
+          "creator",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/skill-creator/SKILL.md"
+      },
+      {
+        "name": "skills-manager",
+        "command": "/skills-manager",
+        "desc": "Autonomous Antigravity skills and customization management suite. Activate when the user asks to: (1) Scan or list installed skills, (2) Sync skills into the Skills Hub drawer, (3) Import any skill from a GitHub repo, URL, Obsidian vault, or local path, or (4) Club/consolidate multiple fragmented skills into a unified master suite without modifying internal markdown rules. Triggers on: /skills-manager, /skills, \\\"manage skills\\\", \\\"import skill\\\", \\\"sync skills\\\", \\\"club skills\\\", \\\"consolidate skills\\\".",
+        "tags": [
+          "skills",
+          "manager",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/skills-manager/SKILL.md"
+      },
+      {
+        "name": "token-optimizer",
+        "command": "/token-optimizer",
+        "desc": "Audit a Claude Code or Codex setup for context-window waste, then fix it and measure the savings. Use when context feels tight.",
+        "tags": [
+          "token",
+          "optimizer",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/token-optimizer/SKILL.md"
+      },
+      {
+        "name": "trader",
+        "command": "/trader",
+        "desc": "Unified Algorithmic Trading & Portfolio Intelligence Suite consolidating 11 specialized modules: trader-copycat (reverse engineer 13F-HR filings), trader-pelosi (House STOCK Act PTR disclosures), trader-news (8-K filings and ticker headlines), trader-analyst (SEC XBRL financial facts and earnings), trader-screener (quantitative rules screening), trader-budget (position sizing & cash buffer), trader-risk (pre-trade limits & safety gates), trader-broker (ticket execution via Alpaca/IBKR MCP), trader-tax (cost-basis lots & tax-loss harvesting), trader-alerts (NYSE calendar & price triggers), and trader-rebalance (portfolio drift rebalancing). Triggers on: /trader, /trader-skill, \\\"copy investor\\\", \\\"copy buffett\\\", \\\"pelosi trades\\\", \\\"congress trades\\\", \\\"size trades\\\", \\\"rebalance\\\", \\\"tax loss harvest\\\", \\\"stock screener\\\", \\\"earnings analysis\\\", \\\"trader risk\\\".",
+        "tags": [
+          "trader",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/trader/SKILL.md"
+      },
+      {
+        "name": "trader-skill",
+        "command": "/trader-skill",
+        "desc": "Unified Algorithmic Trading & Portfolio Intelligence Suite consolidating 11 specialized modules: trader-copycat (reverse engineer 13F-HR filings), trader-pelosi (House STOCK Act PTR disclosures), trader-news (8-K filings and ticker headlines), trader-analyst (SEC XBRL financial facts and earnings), trader-screener (quantitative rules screening), trader-budget (position sizing & cash buffer), trader-risk (pre-trade limits & safety gates), trader-broker (ticket execution via Alpaca/IBKR MCP), trader-tax (cost-basis lots & tax-loss harvesting), trader-alerts (NYSE calendar & price triggers), and trader-rebalance (portfolio drift rebalancing). Triggers on: /trader, /trader-skill, \\\"copy investor\\\", \\\"copy buffett\\\", \\\"pelosi trades\\\", \\\"congress trades\\\", \\\"size trades\\\", \\\"rebalance\\\", \\\"tax loss harvest\\\", \\\"stock screener\\\", \\\"earnings analysis\\\", \\\"trader risk\\\".",
+        "tags": [
+          "trader",
+          "skill",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/trader-skill/SKILL.md"
+      },
+      {
+        "name": "ucsc-conservation-and-tfbs",
+        "command": "/ucsc-conservation-and-tfbs",
+        "desc": "Fetch Evolutionary Conservation scores (phyloP, phastCons) and Transcription Factor Binding Sites (TFBS) from the UCSC Genome Browser. Use when analyzing whether genomic variants or regions are evolutionarily conserved, functionally important, or bounded by TF regulators across major projects (ENCODE, JASPAR, ReMap).",
+        "tags": [
+          "ucsc",
+          "conservation",
+          "and",
+          "tfbs",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/ucsc_conservation_and_tfbs/SKILL.md"
+      },
+      {
+        "name": "uniprot-database",
+        "command": "/uniprot-database",
+        "desc": "Access protein metadata, function, taxonomy, and sequences across UniProtKB, UniParc, and UniRef. Use when searching for proteins, mapping identifiers, or retrieving functional annotations and publications. Don't use for sequence alignment, protein folding, or sequence similarity search (use specialized skills for those tasks).",
+        "tags": [
+          "uniprot",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/uniprot_database/SKILL.md"
+      },
+      {
+        "name": "uv",
+        "command": "/uv",
+        "desc": "Checks whether the uv Python package manager is installed and installs it if missing. Ensures uv is on PATH. Use when another skill requires uv as a prerequisite.",
+        "tags": [
+          "uv",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/uv/SKILL.md"
+      }
+    ]
+  },
+  {
+    "category": "\ud83d\udce6 Other Utilities",
+    "skills": [
+      {
+        "name": "alphafold-database-fetch-and-analyze",
+        "command": "/alphafold-database-fetch-and-analyze",
+        "desc": "Retrieve and analyze AlphaFold predicted structures for a protein. Use when the user provides a specific UniProt Accession ID and wants structural confidence metrics (pLDDT), domain boundary analysis, or disorder assessment. Do not use if the user only has a protein name, gene name, or amino acid sequence \u2014 ask for a UniProt ID first.",
+        "tags": [
+          "alphafold",
+          "database",
+          "fetch",
+          "and",
+          "analyze",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/alphafold_database_fetch_and_analyze/SKILL.md"
+      },
+      {
+        "name": "alphagenome-atlas-website-links",
+        "command": "/alphagenome-atlas-website-links",
+        "desc": "Constructs deep-links and URLs for the AlphaGenome Atlas website. Supports generating single-variant exploration links (1-based VCF-style coordinates), genomic locus views (1-based closed chr:start-end), candidate summary tables, and AlphaGenome reference vs. alternate predictions. Use when visualizing, exploring, charting, or linking genetic variants and genomic loci on the AlphaGenome Atlas, or when asked to inspect, view, or link predictions for a genomic variant. Don't use for computing raw AlphaGenome variant predictions directly without Atlas URLs (use alphagenome-single-variant-analysis or alphagenome-variant-impact-score).",
+        "tags": [
+          "alphagenome",
+          "atlas",
+          "website",
+          "links",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/alphagenome_atlas_website_links/SKILL.md"
+      },
+      {
+        "name": "alphagenome-single-variant-analysis",
+        "command": "/alphagenome-single-variant-analysis",
+        "desc": "Analyzes genetic variant effects on gene expression (RNA-seq), chromatin accessibility (DNASE), histone marks (ChIP), and transcription factors using the AlphaGenome API. Use when the user asks about non-coding variant effects, pathogenicity, clinical significance, disease associations, functional effects, gene expression changes, splicing disruption, or regulatory effects in promoters and enhancers. Also use for resolving biological terms to tissue/cell-type ontologies (UBERON/CL) or analyzing variants in chr:pos:ref>alt format.",
+        "tags": [
+          "alphagenome",
+          "single",
+          "variant",
+          "analysis",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/alphagenome_single_variant_analysis/SKILL.md"
+      },
+      {
+        "name": "alphagenome-variant-impact-score",
+        "command": "/alphagenome-variant-impact-score",
+        "desc": "Score, annotate, and analyze the functional impact of genetic variants using AlphaGenome Variant Impact (AVI) scores. Query variants in chr:pos:ref>alt format, annotate VCF/tabular callsets, perform saturation mutagenesis window scans (1-based closed chr:start-end), and extract GENCODE v46 GTF gene/exon/junction coordinates all via the AlphaGenome Atlas API.",
+        "tags": [
+          "alphagenome",
+          "variant",
+          "impact",
+          "score",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/alphagenome_variant_impact_score/SKILL.md"
+      },
+      {
+        "name": "bigquery-data-transfer-service",
+        "command": "/bigquery-data-transfer-service",
+        "desc": "Discovers and inspects BigQuery Data Transfer Service (DTS) configurations.",
+        "tags": [
+          "bigquery",
+          "data",
+          "transfer",
+          "service",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/bigquery-data-transfer-service/SKILL.md"
+      },
+      {
+        "name": "chembl-database",
+        "command": "/chembl-database",
+        "desc": "Query the ChEMBL database for bioactive molecules, drug targets, bioactivity data, approved drugs, and chemical structures. Use when the user asks about compounds, targets, IC50/Ki values, drug mechanisms, or structure searches.",
+        "tags": [
+          "chembl",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/chembl_database/SKILL.md"
+      },
+      {
+        "name": "cheminformatics-core",
+        "command": "/cheminformatics-core",
+        "desc": "Computes RDKit physicochemical descriptors (MW, cLogP, TPSA, CNS MPO, SA score), PAINS/Brenk structural alerts, pH 7.4 ionization, congeneric series curation, activity cliffs, combinatorial library enumeration, vendor pricing, and organometallic %V_bur sterics.",
+        "tags": [
+          "cheminformatics",
+          "core",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/cheminformatics_core/SKILL.md"
+      },
+      {
+        "name": "cheminformatics-ml",
+        "command": "/cheminformatics-ml",
+        "desc": "Trains, benchmarks, and evaluates predictive SAR and QSAR/ADMET models for chemical series: small-N regularized regressors, nested cross-validation, Tukey HSD model tiering, scaffold/temporal splitting, matched molecular pairs (MMPA), similarity attribution maps, model persistence, and candidate scoring.",
+        "tags": [
+          "cheminformatics",
+          "ml",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/cheminformatics_ml/SKILL.md"
+      },
+      {
+        "name": "clinvar-database",
+        "command": "/clinvar-database",
+        "desc": "Use when needing clinical significance, pathogenicity classifications (e.g., Pathogenic, Benign, VUS), clinical evidence rationales, or finding \\\"hard positive\\\" benchmark controls for human genomic variants.",
+        "tags": [
+          "clinvar",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/clinvar_database/SKILL.md"
+      },
+      {
+        "name": "credentials",
+        "command": "/credentials",
+        "desc": "Instructions for handling API keys and credentials safely, verifying their presence, and prompting the user to add them if missing using a safe protocol.",
+        "tags": [
+          "credentials",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/credentials/SKILL.md"
+      },
+      {
+        "name": "dataform-bigquery",
+        "command": "/dataform-bigquery",
+        "desc": "Expertise in generating clean, correct, and efficient Dataform pipeline",
+        "tags": [
+          "dataform",
+          "bigquery",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/dataform-bigquery/SKILL.md"
+      },
+      {
+        "name": "dbsnp-database",
+        "command": "/dbsnp-database",
+        "desc": "Use when you want to look up, map, and search for short genetic variants (SNPs, indels) in NCBI's dbSNP database. Resolves between rsIDs, genomic coordinates in VCF format, and HGVS strings. For an rsID, returns variant type, gene associations, clinical significance, allele frequencies, and genomic coordinates (GRCh38).",
+        "tags": [
+          "dbsnp",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/dbsnp_database/SKILL.md"
+      },
+      {
+        "name": "encode-ccres-database",
+        "command": "/encode-ccres-database",
+        "desc": "Query the ENCODE Registry of cis-Regulatory Elements (cCREs) via the SCREEN GraphQL API, or make custom queries to the ENCODE Portal REST API for experiments and files (ChIP-seq peaks, etc.). Use when you want to query regulatory annotations or raw experimental data across human cell types.",
+        "tags": [
+          "encode",
+          "ccres",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/encode_ccres_database/SKILL.md"
+      },
+      {
+        "name": "federate-lakehouse-catalog",
+        "command": "/federate-lakehouse-catalog",
+        "desc": "Sets up Google Cloud Lakehouse federated catalogs to remote Iceberg REST Catalogs. Currently supported catalogs: Databricks Unity, AWS Glue. Supported clouds hosting those catalogs: GCP, AWS. The primary use case is connecting to remote data to query it from GCP engines (BigQuery, Spark). Examples of when to use this: \\\"federate my lakehouse catalog to databricks\\\", \\\"query data in databricks\\\", \\\"query data in s3\\\", \\\"connect to aws glue\\\". Do NOT use for direct remote database SQL execution (e.g., Databricks SQL) or managing remote clusters and infrastructure (e.g., Databricks clusters, AWS Glue jobs).",
+        "tags": [
+          "federate",
+          "lakehouse",
+          "catalog",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/federate-lakehouse-catalog/SKILL.md"
+      },
+      {
+        "name": "gcp-composer-troubleshooting",
+        "command": "/gcp-composer-troubleshooting",
+        "desc": "Provides expert guidance for troubleshooting Cloud Composer (Apache",
+        "tags": [
+          "gcp",
+          "composer",
+          "troubleshooting",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-composer-troubleshooting/SKILL.md"
+      },
+      {
+        "name": "gcp-data-pipelines",
+        "command": "/gcp-data-pipelines",
+        "desc": "Primary entry point for building, managing, and orchestrating data pipelines",
+        "tags": [
+          "gcp",
+          "data",
+          "pipelines",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/data-agent-kit-plugin/skills/gcp-data-pipelines/SKILL.md"
+      },
+      {
+        "name": "google-cloud-recipe-auth",
+        "command": "/google-cloud-recipe-auth",
+        "desc": "Provides expert guidance on Identity and Access Management (IAM) and authenticating and authorizing to Google Cloud services and APIs, covering human users, service identities, Application Default Credentials (ADC), and best practices for secure access.",
+        "tags": [
+          "google",
+          "cloud",
+          "recipe",
+          "auth",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/google-cloud-developer/skills/google-cloud-recipe-auth/SKILL.md"
+      },
+      {
+        "name": "gtex-database",
+        "command": "/gtex-database",
+        "desc": "Use when you want to retrieve quantitative RNA expression data and variant eQTL information from the GTEx (Genotype-Tissue Expression) Project across 54 non-diseased tissue sites.",
+        "tags": [
+          "gtex",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/gtex_database/SKILL.md"
+      },
+      {
+        "name": "huashu-art-motion",
+        "command": "/huashu-art-motion",
+        "desc": "\u827a\u672f\u4e0e\u89c6\u9891\u52a8\u753b\uff1a\u62c6\u89e3\u590d\u523b\u52a8\u753b\uff1b36\u79cd\u65e2\u6709\u5b9e\u505a\u98ce\u683c\uff0b16\u79cd\u53ef\u8fc1\u79fb\u7814\u7a76\u914d\u65b9\uff1b9\u79cd\u89e3\u8bf4\u52a8\u753b\u8bed\u6cd5\uff0c8\u79cd\u53ef\u6309\u53e3\u64ad\u53c2\u6570\u6e32\u7247\u6bb5\uff1b\u542b\u53e3\u64ad\u6574\u7247\u53c2\u8003\u4ee3\u7801\u53ca\u6846\u666f\u68c0\u67e5\uff1b\u4eba\u7528AI\u751f\u5e27\uff1b\u53ef\u9009\u5df2\u6709\u5f55\u97f3\u3001\u7cfb\u7edf\u58f0\u97f3\u4e0e\u8bed\u97f3\u590d\u523b\uff0c\u6309\u9700\u914d\u7f6e\u3002",
+        "tags": [
+          "huashu",
+          "art",
+          "motion",
+          "skill"
+        ],
+        "path": "/home/yash/.config/Antigravity-Profiles/Account-1/HOME/.agents/skills/huashu-art-motion/SKILL.md"
+      },
+      {
+        "name": "human-protein-atlas-database",
+        "command": "/human-protein-atlas-database",
+        "desc": "Use when you want to retrieve semi-quantitative protein expression and spatial localisation data from the Human Protein Atlas (HPA).",
+        "tags": [
+          "human",
+          "protein",
+          "atlas",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/human_protein_atlas_database/SKILL.md"
+      },
+      {
+        "name": "interpro-database",
+        "command": "/interpro-database",
+        "desc": "Identify domains, families, and sites in proteins; find all proteins in a family or sharing a domain; explore species distribution for a domain; annotate genomes with protein families and GO terms. InterPro combines 14 databases (e.g., Pfam, CDD) into one searchable resource. InterPro-N significantly expands annotation and sequence coverage with deep learning. Includes domain architecture (IDA) search.",
+        "tags": [
+          "interpro",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/interpro_database/SKILL.md"
+      },
+      {
+        "name": "jaspar-database",
+        "command": "/jaspar-database",
+        "desc": "Query the JASPAR database for Transcription Factor (TF) binding profiles. Use when retrieving Position Frequency Matrices (PFMs) or Position Weight Matrices (PWMs) for specific TFs, resolving gene symbols to JASPAR Matrix IDs, or getting TF metadata. Supports multiple output formats (MEME, TRANSFAC, PFM, JASPAR, YAML).",
+        "tags": [
+          "jaspar",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/jaspar_database/SKILL.md"
+      },
+      {
+        "name": "literature-search-biorxiv",
+        "command": "/literature-search-biorxiv",
+        "desc": "Browse, filter, and download life sciences, biology, and medical preprints from bioRxiv and medRxiv. Supports fetching paper metadata by DOI, and browsing by date range with category and keyword filters. Keyword filtering is local, so date ranges MUST be narrow (1-4 weeks) with a category to prevent timeouts.",
+        "tags": [
+          "literature",
+          "search",
+          "biorxiv",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/literature_search_biorxiv/SKILL.md"
+      },
+      {
+        "name": "ncbi-sequence-fetch",
+        "command": "/ncbi-sequence-fetch",
+        "desc": "Retrieve protein and nucleotide sequences from NCBI databases using E-utilities. Supports direct accession lookup, CDS translation, gene+organism search, locus lookup, PubMed-linked sequences, patent protein extraction, and organism+length fallback search. Use when you need to fetch biological sequences by accession, gene name, locus tag, PubMed ID, or patent number.",
+        "tags": [
+          "ncbi",
+          "sequence",
+          "fetch",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/ncbi_sequence_fetch/SKILL.md"
+      },
+      {
+        "name": "openfda-database",
+        "command": "/openfda-database",
+        "desc": "Query, search, and download data from the openFDA API for drugs, devices, foods, tobacco, cosmetics, animal and veterinary products, substances, and transparency data. Use for FDA adverse events, recalls, labeling, approvals, shortages, 510(k) clearances, NDC lookups, and any FDA safety or regulatory data query across all 28 API endpoints.",
+        "tags": [
+          "openfda",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/openfda_database/SKILL.md"
+      },
+      {
+        "name": "opentargets-database",
+        "command": "/opentargets-database",
+        "desc": "Query Open Targets Platform for target-disease associations, drug target discovery, tractability/safety data, genetics/omics evidence, known drugs, for therapeutic target identification.",
+        "tags": [
+          "opentargets",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/opentargets_database/SKILL.md"
+      },
+      {
+        "name": "protein-sequence-msa",
+        "command": "/protein-sequence-msa",
+        "desc": "Performs multiple sequence alignment of proteins with EBI Clustal Omega. Use when you need to align multiple sequences to assess similarity, domain conservation, or key residue conservation. Supports up to 4000 sequences and a maximum file size of 4 MB. Do not use to search for homologous proteins in a database (use MMseqs2, BLAST), align non-protein sequences (DNA, RNA), perform structural alignment (use Foldseek, PyMOL), or if you only have a single sequence.",
+        "tags": [
+          "protein",
+          "sequence",
+          "msa",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/protein_sequence_msa/SKILL.md"
+      },
+      {
+        "name": "protein-sequence-similarity-search",
+        "command": "/protein-sequence-similarity-search",
+        "desc": "Searches for homologous protein sequences using MMseqs2 (fast, default) or BLAST (comprehensive, fallback). Trigger this whenever the user provides a protein sequence or FASTA file and asks to find homologues, sequence matches, or wants to infer protein function based on sequence similarity, but not when the user wants to infer protein function based on structural similarity.",
+        "tags": [
+          "protein",
+          "sequence",
+          "similarity",
+          "search",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/protein_sequence_similarity_search/SKILL.md"
+      },
+      {
+        "name": "pubchem-database",
+        "command": "/pubchem-database",
+        "desc": "Query PubChem, search by name/CID/SMILES, retrieve properties, similarity/substructure searches, bioactivity, for cheminformatics. Use when a user asks about a specific chemical, drug, or molecule.",
+        "tags": [
+          "pubchem",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/pubchem_database/SKILL.md"
+      },
+      {
+        "name": "pubmed-database",
+        "command": "/pubmed-database",
+        "desc": "Search PubMed for scientific literature, including published clinical trials. Fetch abstracts and full text. Link published research to biological databases (gene, protein, nucleotide, PubChem) to discover associations between papers and specific compounds or genes. Verify medical spelling, match raw citations, and cache result sets for bulk processing. Interfaces NCBI E-utilities and PMC BioC APIs.",
+        "tags": [
+          "pubmed",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/pubmed_database/SKILL.md"
+      },
+      {
+        "name": "string-database",
+        "command": "/string-database",
+        "desc": "Query the STRING database for protein-protein interactions (PPIs), functional enrichment, and homology. Use when the user asks about interactions between specific proteins, interaction evidence, confidence scores, protein interaction partners, or pathway enrichments.",
+        "tags": [
+          "string",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/string_database/SKILL.md"
+      },
+      {
+        "name": "unibind-database",
+        "command": "/unibind-database",
+        "desc": "Queries the UniBind database for experimentally validated transcription factor (TF) binding sites. Use when retrieving direct TF-DNA interaction datasets, downloading binding site coordinates (BED/FASTA) for local analysis, or listing available datasets by species, cell line, or TF name. Don't use to query specific intervals, locations, genes, motif models or expression data.",
+        "tags": [
+          "unibind",
+          "database",
+          "skill"
+        ],
+        "path": "/home/yash/.gemini/config/plugins/science/skills/unibind_database/SKILL.md"
       }
     ]
   }
